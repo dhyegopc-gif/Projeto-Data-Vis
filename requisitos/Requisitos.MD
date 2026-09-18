@@ -10,7 +10,9 @@ chave e junção estão em [Contrato_de_dados.md](../modelagem/Contrato_de_dados
 | [R02 — Acúmulo de cartões por etapa do quadro](#r02--acúmulo-de-cartões-por-etapa-do-quadro) | DEPENDE DE UMA DECISÃO DE DEFINIÇÃO |
 | [R03 — Cobertura do próprio registro](#r03--cobertura-do-próprio-registro)                     | IMPLEMENTÁVEL                         |
 
-## R01 — Ritmo de registro ao longo dos dias
+
+
+## R01 — Ritmo de registro ao longo dos dias (PRIORIDADE)
 
 > **IMPLEMENTÁVEL**
 
