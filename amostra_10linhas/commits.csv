@@ -1,0 +1,16 @@
+grupo,commit_id,autor_id,autorado_em,commitado_em,e_merge,linhas_adicionadas,linhas_removidas,linhas_total,titulo,mensagem
+G01,f0c3a54e,[bot],2022-04-08T14:56:14.000-03:00,2022-04-08T14:56:14.000-03:00,0,3158,0,3158,Initial commit,Initial commit
+G01,fb3b1012,[externo],2022-04-08T15:38:59.000-03:00,2022-04-08T15:38:59.000-03:00,0,0,2877,2877,Primeiro Upload,"Primeiro Upload
+
+Primeira carga do Template M2
+"
+G01,45b7e62f,[bot],2022-04-17T23:23:43.000-03:00,2022-04-17T23:23:43.000-03:00,0,104,0,104,Adicionando GitIgnore,Adicionando GitIgnore
+G01,ec653018,[bot],2022-04-17T23:31:52.000-03:00,2022-04-17T23:31:52.000-03:00,0,5,3,8,Update README.md,Update README.md
+G01,ba601797,[bot],2022-04-28T10:00:34.000-03:00,2022-04-28T10:00:34.000-03:00,0,2,0,2,Update README.md,Update README.md
+G01,3f599566,[bot],2022-06-21T14:03:06.000-03:00,2022-06-21T14:03:06.000-03:00,0,64,90,154,:art: update readme.md,:art: update readme.md
+G01,c2501b6b,[externo],2022-06-21T14:24:14.000-03:00,2022-06-21T14:24:14.000-03:00,0,5,140,145,:art: general template update,":art: general template update
+"
+G01,e8484942,[externo],2022-06-21T14:25:16.000-03:00,2022-06-21T14:25:16.000-03:00,0,3,3,6,:art: general template update,":art: general template update
+"
+G01,24f5ad82,[bot],2022-06-21T14:27:02.000-03:00,2022-06-21T14:27:02.000-03:00,0,2,2,4,:art: update readme.md,:art: update readme.md
+G01,4655b125,[bot],2022-06-21T14:27:42.000-03:00,2022-06-21T14:27:42.000-03:00,0,1,1,2,:art: update readme.md,:art: update readme.md
