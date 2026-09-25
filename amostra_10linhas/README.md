@@ -1,13 +1,13 @@
 # amostra_10linhas/
 
-As 10 primeiras linhas de cada CSV da raiz, para leitura rapida e para testar
+As 10 primeiras linhas de cada CSV de [csvs_originais/](../csvs_originais/), para leitura rapida e para testar
 consultas sem carregar os arquivos inteiros.
 
 ```
 py -3 amostra_10linhas/gerar_amostra.py    # regenera as amostras
 ```
 
-Os CSVs da raiz sao abertos somente para leitura — as amostras sao os arquivos
+Os CSVs de `csvs_originais/` sao abertos somente para leitura — as amostras sao os arquivos
 derivados, com o mesmo nome do original.
 
 ## 10 linhas = 10 registros

@@ -1,0 +1,703 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ritmo de registro</title>
+<style>
+:root {
+  --page: #f9f9f7;
+  --surface: #fcfcfb;
+  --ink: #0b0b0b;
+  --ink-2: #52514e;
+  --muted: #6f6d68;
+  --grid: #e1e0d9;
+  --axis: #c3c2b7;
+  --series: #2a78d6;
+  --series-strong: #184f95;
+  --hover: rgba(42, 120, 214, 0.10);
+  --silence: #eeede8;
+  --zero: #9a988f;
+  --border: rgba(11, 11, 11, 0.10);
+  --chip: #f0efec;
+  --focus: #2a78d6;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #0d0d0d;
+    --surface: #1a1a19;
+    --ink: #ffffff;
+    --ink-2: #c3c2b7;
+    --muted: #a3a197;
+    --grid: #2c2c2a;
+    --axis: #383835;
+    --series: #3987e5;
+    --series-strong: #9ec5f4;
+    --hover: rgba(57, 135, 229, 0.16);
+    --silence: #262624;
+    --zero: #77756d;
+    --border: rgba(255, 255, 255, 0.10);
+    --chip: #2c2c2a;
+    --focus: #6da7ec;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d;
+  --surface: #1a1a19;
+  --ink: #ffffff;
+  --ink-2: #c3c2b7;
+  --muted: #a3a197;
+  --grid: #2c2c2a;
+  --axis: #383835;
+  --series: #3987e5;
+  --series-strong: #9ec5f4;
+  --hover: rgba(57, 135, 229, 0.16);
+  --silence: #262624;
+  --zero: #77756d;
+  --border: rgba(255, 255, 255, 0.10);
+  --chip: #2c2c2a;
+  --focus: #6da7ec;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font: 14px/1.5 var(--sans);
+}
+.wrap {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding-inline: 20px;
+  padding-block: 28px 48px;
+  display: grid;
+  gap: 20px;
+}
+@media (max-width: 520px) { .wrap { padding-inline: 16px; } }
+
+header { display: grid; gap: 6px; }
+.eyebrow {
+  font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--muted); margin: 0;
+}
+h1 { font-size: 24px; line-height: 1.25; margin: 0; font-weight: 600; text-wrap: balance; }
+.pergunta { margin: 0; color: var(--ink-2); max-width: 70ch; }
+
+.filtros {
+  display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 20px;
+  padding-block: 12px; border-block: 1px solid var(--border);
+}
+.campo { display: grid; gap: 4px; font-size: 12px; color: var(--ink-2); }
+.campo > span { letter-spacing: 0.02em; }
+select, input[type="date"] {
+  font: inherit; font-size: 14px; color: var(--ink); background: var(--surface);
+  border: 1px solid var(--axis); border-radius: 6px; padding: 5px 8px; min-height: 34px;
+}
+.presets { display: flex; flex-wrap: wrap; gap: 6px; }
+.presets button, .botao {
+  font: inherit; font-size: 13px; color: var(--ink); background: var(--surface);
+  border: 1px solid var(--axis); border-radius: 999px; padding: 5px 12px; min-height: 34px; cursor: pointer;
+}
+.presets button[aria-pressed="true"] { background: var(--ink); color: var(--page); border-color: var(--ink); }
+.presets button:hover, .botao:hover { border-color: var(--ink-2); }
+.presets .nota-sprint { font-size: 12px; color: var(--muted); align-self: center; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+.tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 860px) { .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.tile {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+  padding: 14px 16px; display: grid; gap: 2px; align-content: start;
+}
+.tile .rotulo { font-size: 12px; color: var(--ink-2); }
+.tile .valor { font-size: 28px; font-weight: 600; line-height: 1.2; }
+.tile .sub { font-size: 12px; color: var(--muted); }
+
+.card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+  padding: 16px 18px; display: grid; gap: 10px; min-width: 0;
+}
+.card-topo { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 8px 16px; }
+.card h2 { font-size: 16px; margin: 0; font-weight: 600; }
+.limite { margin: 2px 0 0; font-size: 13px; color: var(--ink-2); }
+.limite strong { font-weight: 600; color: var(--ink); }
+.recorte { margin: 2px 0 0; font-size: 12px; color: var(--muted); }
+.dica { margin: 0; font-size: 12px; color: var(--muted); }
+.rot-marco { font-size: 11px; fill: var(--ink-2); }
+.chave.marco { width: 2px; height: 12px; background: var(--ink-2); border-radius: 0; }
+.silencios .pos { display: block; font-size: 12px; color: var(--muted); }
+.legenda { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12px; color: var(--ink-2); }
+.legenda span { display: inline-flex; align-items: center; gap: 6px; }
+.chave { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+.chave.barra { background: var(--series); }
+.chave.sel { background: var(--series-strong); }
+.chave.zero { height: 3px; background: var(--zero); border-radius: 1px; }
+.chave.silencio { background: var(--silence); border: 1px solid var(--axis); }
+
+.grafico { width: 100%; min-height: 280px; }
+.grafico svg { display: block; width: 100%; overflow: visible; }
+.grafico svg:focus-visible { outline-offset: 4px; border-radius: 4px; }
+.eixo { font-size: 11px; fill: var(--muted); font-variant-numeric: tabular-nums; }
+.rot-silencio { font-size: 11px; fill: var(--ink-2); }
+
+.duas { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+@media (max-width: 900px) { .duas { grid-template-columns: minmax(0, 1fr); } }
+.lateral { display: grid; gap: 20px; }
+
+.rolagem { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th { text-align: left; font-weight: 600; font-size: 12px; color: var(--ink-2); padding: 6px 8px; border-bottom: 1px solid var(--axis); white-space: nowrap; }
+td { padding: 6px 8px; border-bottom: 1px solid var(--grid); vertical-align: top; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+td.hora { font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--ink-2); }
+td.autor { white-space: nowrap; }
+.chip { display: inline-block; font-size: 11px; background: var(--chip); color: var(--ink-2); border-radius: 999px; padding: 1px 8px; margin-left: 4px; }
+.vazio { margin: 0; color: var(--ink-2); }
+.contagem { font-size: 13px; color: var(--ink-2); margin: 0; }
+tr.linha-sel td { background: var(--hover); }
+.tabela-dias td button { font: inherit; color: var(--ink); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+
+.silencios { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+.silencios li { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; border-bottom: 1px solid var(--grid); padding-bottom: 6px; }
+.silencios .dur { font-weight: 600; white-space: nowrap; }
+.silencios .per { color: var(--ink-2); text-align: right; }
+
+.notas {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 28px;
+  border-top: 1px solid var(--border); padding-top: 18px; font-size: 13px; color: var(--ink-2);
+}
+@media (max-width: 760px) { .notas { grid-template-columns: minmax(0, 1fr); } }
+.notas h3 { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin: 0 0 6px; font-weight: 600; }
+.notas p, .notas ul { margin: 0; max-width: 68ch; }
+.notas ul { padding-left: 18px; display: grid; gap: 4px; }
+.notas code { font-size: 12px; }
+
+#tip {
+  position: fixed; z-index: 10; pointer-events: none;
+  background: var(--surface); color: var(--ink); border: 1px solid var(--border);
+  border-radius: 8px; padding: 8px 10px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  font-size: 12px; line-height: 1.4; max-width: 240px;
+}
+#tip .v { font-size: 15px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+#tip .v i { display: inline-block; width: 12px; height: 2px; background: var(--series); }
+#tip .d { color: var(--ink-2); }
+#tip .s { color: var(--muted); margin-top: 2px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (prefers-reduced-motion: no-preference) { .grafico rect, .grafico path { transition: fill 120ms; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">R01 · Ritmo de registro · para a orientação pedagógica</p>
+    <h1 id="titulo">Commits registrados por dia</h1>
+    <p class="pergunta">Em quais dias o registro de trabalho do grupo se concentra, e existe algum silêncio prolongado que mereça uma pergunta na próxima reunião de acompanhamento?</p>
+  </header>
+
+  <section class="filtros" aria-label="Filtros">
+    <label class="campo" for="f-grupo"><span>Grupo</span>
+      <select id="f-grupo"></select>
+    </label>
+    <div class="campo"><span>Período</span>
+      <div class="presets" id="presets" role="group" aria-label="Períodos prontos"></div>
+    </div>
+    <label class="campo" for="f-ini"><span>De</span><input type="date" id="f-ini"></label>
+    <label class="campo" for="f-fim"><span>Até</span><input type="date" id="f-fim"></label>
+    <label class="campo" for="f-limiar"><span>Silêncio a partir de</span>
+      <select id="f-limiar">
+        <option value="2">2 dias seguidos</option>
+        <option value="3" selected>3 dias seguidos</option>
+        <option value="4">4 dias seguidos</option>
+        <option value="5">5 dias seguidos</option>
+        <option value="7">7 dias seguidos</option>
+      </select>
+    </label>
+  </section>
+
+  <section class="tiles" aria-label="Resumo do período">
+    <div class="tile"><span class="rotulo">Commits no período</span><span class="valor" id="t-total">–</span><span class="sub" id="t-total-sub"></span></div>
+    <div class="tile"><span class="rotulo">Dias com pelo menos um commit</span><span class="valor" id="t-dias">–</span><span class="sub" id="t-dias-sub"></span></div>
+    <div class="tile"><span class="rotulo">Maior silêncio</span><span class="valor" id="t-sil">–</span><span class="sub" id="t-sil-sub"></span></div>
+    <div class="tile"><span class="rotulo">Dia com mais commits</span><span class="valor" id="t-pico">–</span><span class="sub" id="t-pico-sub"></span></div>
+  </section>
+
+  <section class="card" aria-labelledby="h-dia">
+    <div class="card-topo">
+      <div>
+        <h2 id="h-dia">Commits por dia</h2>
+        <p class="limite"><strong>Registro de alteração; não mede todo o esforço do grupo.</strong> Um dia sem commit não é um dia sem trabalho.</p>
+        <p class="recorte" id="recorte"></p>
+      </div>
+      <button type="button" class="botao" id="bt-tabela" aria-expanded="false" aria-controls="tabela-dias">Ver como tabela</button>
+    </div>
+    <div class="legenda" aria-hidden="true">
+      <span><i class="chave barra"></i>commits no dia</span>
+      <span><i class="chave sel"></i>dia aberto na lista</span>
+      <span><i class="chave zero"></i>dia sem commit (zero)</span>
+      <span><i class="chave silencio"></i><span id="leg-silencio">silêncio de 3+ dias</span></span>
+      <span><i class="chave marco"></i><span id="leg-marco">fim da última sprint com data</span></span>
+    </div>
+    <div class="grafico" id="grafico"></div>
+    <p class="dica">Clique num dia para ver os commits que formam o total. Pelo teclado: foco no gráfico, setas para andar, Enter para abrir.</p>
+    <div class="rolagem" id="tabela-dias" hidden></div>
+  </section>
+
+  <div class="duas">
+    <section class="card" aria-labelledby="h-lista" aria-live="polite">
+      <div>
+        <h2 id="h-lista">Commits do dia</h2>
+        <p class="contagem" id="lista-sub"></p>
+      </div>
+      <div class="rolagem" id="lista"></div>
+    </section>
+    <div class="lateral">
+      <section class="card" aria-labelledby="h-semana">
+        <div>
+          <h2 id="h-semana">Por dia da semana</h2>
+          <p class="contagem">Soma dos commits do período, por dia da semana.</p>
+        </div>
+        <div class="grafico" id="semana" style="min-height: 0"></div>
+      </section>
+      <section class="card" aria-labelledby="h-sil">
+        <div>
+          <h2 id="h-sil">Silêncios no período</h2>
+          <p class="contagem" id="sil-sub"></p>
+        </div>
+        <ul class="silencios" id="silencios"></ul>
+      </section>
+    </div>
+  </div>
+
+  <footer class="notas">
+    <div>
+      <h3>Nota de origem</h3>
+      <ul id="nota-origem"></ul>
+    </div>
+    <div>
+      <h3>O que ficou fora da contagem</h3>
+      <ul id="nota-recorte"></ul>
+    </div>
+    <div>
+      <h3>Qualidade do registro</h3>
+      <ul id="nota-cobertura"></ul>
+    </div>
+    <div>
+      <h3>O que esta tela não sustenta</h3>
+      <ul>
+        <li>Esforço, dedicação ou horas trabalhadas. Estudo, leitura, reunião e programação em dupla podem não gerar commit nenhum.</li>
+        <li>Comparação entre grupos. Os grupos têm tamanhos diferentes e a contagem não é normalizada, por isso a tela mostra um grupo por vez, cada um na sua escala.</li>
+        <li>Quem trabalhou mais. A unidade de análise é o grupo, e a autoria tem lacunas (ao lado).</li>
+      </ul>
+    </div>
+  </footer>
+</div>
+<div id="tip" role="tooltip" hidden></div>
+
+<script>
+const D = __DADOS__;
+
+const SEMANA = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
+const SENT = new Set(D.sentinelas);
+const NS = "http://www.w3.org/2000/svg";
+const $ = (id) => document.getElementById(id);
+
+const soma = (iso, n) => { const d = new Date(iso + "T00:00:00Z"); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); };
+const dow = (iso) => new Date(iso + "T00:00:00Z").getUTCDay();
+const fmt = (iso) => iso.slice(8, 10) + "/" + iso.slice(5, 7) + "/" + iso.slice(0, 4);
+const fmtC = (iso) => iso.slice(8, 10) + "/" + iso.slice(5, 7);
+const fmtS = (iso) => SEMANA[dow(iso)] + ", " + fmt(iso);
+const num = (n) => n.toLocaleString("pt-BR");
+const plural = (n, um, varios) => num(n) + " " + (n === 1 ? um : varios);
+
+const FIM = D.fim_calendario;
+const FIM_TXT = `fim da ${FIM.sprint} do ${FIM.grupo}`;
+const posFim = (iso) => iso > FIM.data;
+
+const DIAS = [];
+for (let d = D.inicio; d <= D.fim; d = soma(d, 1)) DIAS.push(d);
+
+// grupo -> Map(dia -> commits do dia)
+const MAPA = {};
+for (const g of Object.keys(D.grupos)) MAPA[g] = new Map();
+for (const c of D.commits) {
+  const [g, id, autor, quando, titulo, add, rem] = c;
+  const dia = quando.slice(0, 10);
+  if (!MAPA[g].has(dia)) MAPA[g].set(dia, []);
+  MAPA[g].get(dia).push({ id, autor, quando, titulo, add, rem });
+}
+
+const estado = { grupo: Object.keys(D.grupos)[0], ini: D.inicio, fim: D.fim, preset: "tudo", limiar: 3, sel: null, cursor: null };
+let serie = [];
+
+function el(tag, attrs, pai) {
+  const e = document.createElementNS(NS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (pai) pai.appendChild(e);
+  return e;
+}
+function h(tag, props, filhos) {
+  const e = document.createElement(tag);
+  if (props) for (const k in props) { if (k === "text") e.textContent = props[k]; else if (k === "class") e.className = props[k]; else e.setAttribute(k, props[k]); }
+  if (filhos) for (const f of filhos) if (f) e.appendChild(typeof f === "string" ? document.createTextNode(f) : f);
+  return e;
+}
+
+// ---------- filtros ----------
+function presetsDoGrupo() {
+  const lista = [
+    { id: "tudo", rotulo: "Todo o registro", ini: D.inicio, fim: D.fim },
+    { id: "30", rotulo: "Últimos 30 dias", ini: soma(D.fim, -29), fim: D.fim },
+    { id: "14", rotulo: "Últimos 14 dias", ini: soma(D.fim, -13), fim: D.fim },
+  ];
+  for (const [nome, ini, fim] of D.grupos[estado.grupo].sprints) lista.push({ id: nome, rotulo: nome, ini, fim });
+  return lista;
+}
+function montarPresets() {
+  const caixa = $("presets");
+  caixa.replaceChildren();
+  for (const p of presetsDoGrupo()) {
+    const b = h("button", { type: "button", "aria-pressed": String(estado.preset === p.id), text: p.rotulo });
+    b.addEventListener("click", () => { estado.preset = p.id; estado.ini = p.ini; estado.fim = p.fim; atualizar(); });
+    caixa.appendChild(b);
+  }
+  if (!D.grupos[estado.grupo].sprints.length)
+    caixa.appendChild(h("span", { class: "nota-sprint", text: "Sprints sem datas no registro deste grupo" }));
+}
+function iniciarFiltros() {
+  const sg = $("f-grupo");
+  for (const g of Object.keys(D.grupos)) sg.appendChild(h("option", { value: g, text: g }));
+  sg.addEventListener("change", () => {
+    estado.grupo = sg.value;
+    if (!presetsDoGrupo().some((p) => p.id === estado.preset)) { estado.preset = "tudo"; estado.ini = D.inicio; estado.fim = D.fim; }
+    estado.sel = null;
+    atualizar();
+  });
+  for (const id of ["f-ini", "f-fim"]) {
+    const i = $(id);
+    i.min = D.inicio; i.max = D.fim;
+    i.addEventListener("change", () => {
+      let a = $("f-ini").value || D.inicio, b = $("f-fim").value || D.fim;
+      a = a < D.inicio ? D.inicio : a > D.fim ? D.fim : a;
+      b = b < D.inicio ? D.inicio : b > D.fim ? D.fim : b;
+      if (a > b) [a, b] = [b, a];
+      estado.ini = a; estado.fim = b; estado.preset = null;
+      atualizar();
+    });
+  }
+  $("f-limiar").addEventListener("change", (e) => { estado.limiar = +e.target.value; atualizar(); });
+  $("bt-tabela").addEventListener("click", () => {
+    const t = $("tabela-dias"), abrir = t.hidden;
+    t.hidden = !abrir;
+    $("bt-tabela").setAttribute("aria-expanded", String(abrir));
+    $("bt-tabela").textContent = abrir ? "Ocultar tabela" : "Ver como tabela";
+  });
+}
+
+// ---------- cálculo ----------
+function silenciosDe(s, limiar) {
+  const out = [];
+  let i = 0;
+  while (i < s.length) {
+    if (s[i].n === 0) {
+      let j = i;
+      while (j + 1 < s.length && s[j + 1].n === 0) j++;
+      if (j - i + 1 >= limiar) out.push({ i0: i, i1: j, len: j - i + 1, de: s[i].d, ate: s[j].d });
+      i = j + 1;
+    } else i++;
+  }
+  return out;
+}
+
+// ---------- render ----------
+function atualizar() {
+  const mapa = MAPA[estado.grupo];
+  serie = DIAS.filter((d) => d >= estado.ini && d <= estado.fim).map((d) => ({ d, n: (mapa.get(d) || []).length }));
+  const total = serie.reduce((a, x) => a + x.n, 0);
+  const comCommit = serie.filter((x) => x.n > 0).length;
+  const sil = silenciosDe(serie, estado.limiar);
+  const pico = serie.reduce((a, x) => (x.n > (a ? a.n : 0) ? x : a), null);
+  if (!serie.some((x) => x.d === estado.sel)) estado.sel = pico ? pico.d : serie[0]?.d ?? null;
+
+  $("f-grupo").value = estado.grupo;
+  $("f-ini").value = estado.ini; $("f-fim").value = estado.fim;
+  montarPresets();
+
+  $("titulo").textContent = `Commits registrados por dia, grupo ${estado.grupo}, ${fmt(estado.ini)} a ${fmt(estado.fim)}`;
+
+  $("t-total").textContent = num(total);
+  $("t-total-sub").textContent = comCommit ? `média de ${(total / comCommit).toLocaleString("pt-BR", { maximumFractionDigits: 1 })} nos dias com commit` : "nenhum commit no período";
+  $("t-dias").textContent = `${num(comCommit)} de ${num(serie.length)}`;
+  $("t-dias-sub").textContent = `${plural(serie.length - comCommit, "dia", "dias")} sem nenhum commit`;
+  const maior = sil.slice().sort((a, b) => b.len - a.len)[0];
+  const maiorQualquer = silenciosDe(serie, 1).sort((a, b) => b.len - a.len)[0];
+  if (maiorQualquer) {
+    $("t-sil").textContent = plural(maiorQualquer.len, "dia", "dias");
+    $("t-sil-sub").textContent = (maiorQualquer.len === 1 ? fmtS(maiorQualquer.de) : `de ${fmtS(maiorQualquer.de)} a ${fmtS(maiorQualquer.ate)}`)
+      + (posFim(maiorQualquer.de) ? `, depois do ${FIM_TXT} (${fmtC(FIM.data)})` : "");
+  } else { $("t-sil").textContent = "nenhum"; $("t-sil-sub").textContent = "commit em todos os dias do período"; }
+  $("t-pico").textContent = pico ? num(pico.n) : "–";
+  $("t-pico-sub").textContent = pico ? fmtS(pico.d) : "";
+
+  $("leg-silencio").textContent = `silêncio de ${estado.limiar}+ dias`;
+  $("leg-marco").textContent = `${FIM_TXT} (${fmtC(FIM.data)}), a última sprint com data`;
+  const merges = mergesNoPeriodo();
+  $("recorte").textContent = `Commits autorais: ficam fora ${plural(merges, "commit de merge", "commits de merge")} do grupo neste período e o histórico herdado do repositório-template.`;
+
+  desenharDias(sil);
+  tabelaDias(sil);
+  desenharSemana();
+  listaSilencios(sil);
+  lista();
+  notas(total);
+}
+
+let geo = null;
+function desenharDias(sil) {
+  const caixa = $("grafico");
+  const W = Math.max(caixa.clientWidth, 280), H = 280;
+  const m = { t: 26, r: 8, b: 34, l: 34 };
+  const pw = W - m.l - m.r, ph = H - m.t - m.b, y0 = m.t + ph;
+  const n = serie.length, band = pw / Math.max(n, 1);
+  const bw = Math.max(1.5, Math.min(24, band * 0.72));
+  const max = Math.max(1, ...serie.map((x) => x.n));
+  const passo = [1, 2, 5, 10, 20, 25, 50, 100].find((p) => max / p <= 5) || 100;
+  const topo = Math.ceil(max / passo) * passo;
+  const y = (v) => y0 - (v / topo) * ph;
+
+  const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, height: H, tabindex: "0", role: "application",
+    "aria-label": `Gráfico de colunas: commits por dia do grupo ${estado.grupo}. Use as setas para percorrer os dias e Enter para abrir a lista.` });
+
+  for (const s of sil) {
+    const x = m.l + s.i0 * band, w = s.len * band;
+    el("rect", { x, y: m.t, width: w, height: ph, fill: "var(--silence)" }, svg);
+    if (w >= 38) {
+      const t = el("text", { x: x + w / 2, y: m.t - 8, "text-anchor": "middle", class: "rot-silencio" }, svg);
+      t.textContent = `${s.len} dias`;
+    }
+  }
+  for (let v = 0; v <= topo; v += passo) {
+    el("line", { x1: m.l, x2: W - m.r, y1: y(v), y2: y(v), stroke: v === 0 ? "var(--axis)" : "var(--grid)", "stroke-width": 1 }, svg);
+    const t = el("text", { x: m.l - 6, y: y(v) + 4, "text-anchor": "end", class: "eixo" }, svg);
+    t.textContent = v;
+  }
+  const iFim = serie.findIndex((p) => p.d === FIM.data);
+  if (iFim >= 0) {
+    const xm = m.l + (iFim + 1) * band;
+    el("line", { x1: xm, x2: xm, y1: m.t, y2: y0, stroke: "var(--ink-2)", "stroke-width": 1 }, svg);
+    const direita = xm + 150 < W - m.r;
+    const t = el("text", { x: direita ? xm + 5 : xm - 5, y: m.t + 12, "text-anchor": direita ? "start" : "end", class: "rot-marco" }, svg);
+    t.textContent = `${FIM_TXT} (${fmtC(FIM.data)})`;
+  }
+  const hover = el("rect", { x: 0, y: m.t, width: band, height: ph, fill: "var(--hover)", visibility: "hidden" }, svg);
+
+  const espaco = 46, semanas = Math.max(1, Math.ceil(espaco / (band * 7)));
+  let seg = 0;
+  serie.forEach((p, i) => {
+    const cx = m.l + i * band + band / 2, x = cx - bw / 2;
+    const sel = p.d === estado.sel;
+    if (p.n > 0) {
+      const top = y(p.n), r = Math.min(4, bw / 2, y0 - top);
+      el("path", { d: `M${x},${y0}V${top + r}Q${x},${top} ${x + r},${top}H${x + bw - r}Q${x + bw},${top} ${x + bw},${top + r}V${y0}Z`,
+        fill: sel ? "var(--series-strong)" : "var(--series)" }, svg);
+    } else {
+      el("rect", { x, y: y0 - 3, width: bw, height: 3, rx: 1, fill: sel ? "var(--series-strong)" : "var(--zero)" }, svg);
+    }
+    const rotular = n <= 16 || (dow(p.d) === 1 && seg++ % semanas === 0);
+    if (rotular) {
+      el("line", { x1: cx, x2: cx, y1: y0, y2: y0 + 4, stroke: "var(--axis)" }, svg);
+      const t = el("text", { x: cx, y: y0 + 17, "text-anchor": "middle", class: "eixo" }, svg);
+      t.textContent = fmtC(p.d);
+    }
+    if (sel) {
+      el("path", { d: `M${cx - 4},${y0 + 27}L${cx},${y0 + 22}L${cx + 4},${y0 + 27}Z`, fill: "var(--series-strong)" }, svg);
+    }
+  });
+  const nota = el("text", { x: m.l, y: m.t - 8, class: "eixo" }, svg);
+  nota.textContent = "commits";
+
+  caixa.replaceChildren(svg);
+  geo = { svg, m, band, hover, y0, W };
+
+  const idx = (e) => {
+    const r = svg.getBoundingClientRect(), x = (e.clientX - r.left) * (W / r.width);
+    const i = Math.floor((x - m.l) / band);
+    return i >= 0 && i < serie.length ? i : null;
+  };
+  svg.addEventListener("pointermove", (e) => { const i = idx(e); if (i === null) return esconder(); marcar(i); dica(i, e.clientX, e.clientY); });
+  svg.addEventListener("pointerleave", esconder);
+  svg.addEventListener("click", (e) => { const i = idx(e); if (i !== null) abrir(serie[i].d); });
+  svg.addEventListener("focus", () => { estado.cursor = Math.max(0, serie.findIndex((x) => x.d === estado.sel)); marcar(estado.cursor); dicaNaBarra(estado.cursor); });
+  svg.addEventListener("blur", esconder);
+  svg.addEventListener("keydown", (e) => {
+    let i = estado.cursor ?? 0;
+    if (e.key === "ArrowRight") i = Math.min(serie.length - 1, i + 1);
+    else if (e.key === "ArrowLeft") i = Math.max(0, i - 1);
+    else if (e.key === "Home") i = 0;
+    else if (e.key === "End") i = serie.length - 1;
+    else if (e.key === "Enter" || e.key === " ") { e.preventDefault(); abrir(serie[i].d, true); return; }
+    else if (e.key === "Escape") { esconder(); return; }
+    else return;
+    e.preventDefault(); estado.cursor = i; marcar(i); dicaNaBarra(i);
+  });
+}
+function marcar(i) {
+  estado.cursor = i;
+  geo.hover.setAttribute("x", geo.m.l + i * geo.band);
+  geo.hover.setAttribute("visibility", "visible");
+}
+function esconder() { $("tip").hidden = true; if (geo) geo.hover.setAttribute("visibility", "hidden"); }
+function dica(i, cx, cy) {
+  const p = serie[i], tip = $("tip");
+  const emSil = silenciosDe(serie, estado.limiar).find((s) => i >= s.i0 && i <= s.i1);
+  tip.replaceChildren(...[
+    h("div", { class: "v" }, [h("i"), plural(p.n, "commit", "commits")]),
+    h("div", { class: "d", text: fmtS(p.d) }),
+    emSil ? h("div", { class: "s", text: `dentro de um silêncio de ${emSil.len} dias` }) : null,
+    posFim(p.d) ? h("div", { class: "s", text: `depois do ${FIM_TXT}` }) : null,
+    p.n ? h("div", { class: "s", text: "clique para ver a lista" }) : null,
+  ].filter(Boolean));
+  tip.hidden = false;
+  const r = tip.getBoundingClientRect();
+  let x = cx + 14, yy = cy - r.height - 10;
+  if (x + r.width > window.innerWidth - 8) x = cx - r.width - 14;
+  if (yy < 8) yy = cy + 16;
+  tip.style.left = x + "px"; tip.style.top = yy + "px";
+}
+function dicaNaBarra(i) {
+  const r = geo.svg.getBoundingClientRect(), k = r.width / geo.W;
+  dica(i, r.left + (geo.m.l + (i + 0.5) * geo.band) * k, r.top + geo.m.t * k + 40);
+}
+function abrir(d, doTeclado) {
+  estado.sel = d;
+  const foco = doTeclado ? estado.cursor : null;
+  atualizarSelecao();
+  if (foco !== null) { geo.svg.focus(); estado.cursor = foco; marcar(foco); dicaNaBarra(foco); }
+}
+function atualizarSelecao() {
+  const sil = silenciosDe(serie, estado.limiar);
+  desenharDias(sil);
+  tabelaDias(sil);
+  lista();
+}
+
+function tabelaDias(sil) {
+  const t = h("table", { class: "tabela-dias" });
+  t.appendChild(h("caption", { class: "sr", text: `Commits por dia, grupo ${estado.grupo}` }));
+  t.appendChild(h("thead", null, [h("tr", null, [h("th", { text: "Data" }), h("th", { text: "Dia" }), h("th", { class: "num", text: "Commits" }), h("th", { text: "Observação" })])]));
+  const tb = h("tbody");
+  serie.forEach((p, i) => {
+    const s = sil.find((x) => i >= x.i0 && i <= x.i1);
+    const b = h("button", { type: "button", text: fmt(p.d) });
+    b.addEventListener("click", () => abrir(p.d));
+    const tr = h("tr", p.d === estado.sel ? { class: "linha-sel" } : null, [
+      h("td", null, [b]), h("td", { text: SEMANA[dow(p.d)] }), h("td", { class: "num", text: num(p.n) }),
+      h("td", { text: s ? `silêncio de ${s.len} dias` : "" }),
+    ]);
+    tb.appendChild(tr);
+  });
+  t.appendChild(tb);
+  $("tabela-dias").replaceChildren(t);
+}
+
+function desenharSemana() {
+  const ordem = [1, 2, 3, 4, 5, 6, 0];
+  const tot = Object.fromEntries(ordem.map((d) => [d, 0]));
+  const vezes = Object.fromEntries(ordem.map((d) => [d, 0]));
+  for (const p of serie) { tot[dow(p.d)] += p.n; vezes[dow(p.d)]++; }
+  const total = serie.reduce((a, x) => a + x.n, 0);
+  const caixa = $("semana");
+  const W = Math.max(caixa.clientWidth, 240), linha = 30, H = ordem.length * linha + 4;
+  const l = 34, rTexto = 92, pw = W - l - rTexto;
+  const max = Math.max(1, ...Object.values(tot));
+  const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, height: H, role: "img",
+    "aria-label": "Commits por dia da semana: " + ordem.map((d) => `${SEMANA[d]} ${tot[d]}`).join(", ") });
+  el("line", { x1: l, x2: l, y1: 0, y2: H, stroke: "var(--axis)" }, svg);
+  ordem.forEach((d, k) => {
+    const cy = k * linha + linha / 2 + 2, bh = 14, w = (tot[d] / max) * pw;
+    const t = el("text", { x: l - 8, y: cy + 4, "text-anchor": "end", class: "eixo" }, svg);
+    t.textContent = SEMANA[d];
+    if (w > 0) {
+      const r = Math.min(4, w, bh / 2);
+      el("path", { d: `M${l},${cy - bh / 2}H${l + w - r}Q${l + w},${cy - bh / 2} ${l + w},${cy - bh / 2 + r}V${cy + bh / 2 - r}Q${l + w},${cy + bh / 2} ${l + w - r},${cy + bh / 2}H${l}Z`, fill: "var(--series)" }, svg);
+    }
+    const v = el("text", { x: l + w + 6, y: cy + 4, class: "eixo", fill: "var(--ink-2)" }, svg);
+    v.textContent = `${num(tot[d])}${total ? ` · ${Math.round((100 * tot[d]) / total)}%` : ""}`;
+    const tip = el("title", {}, svg);
+    tip.textContent = `${SEMANA[d]}: ${tot[d]} commits em ${vezes[d]} ${vezes[d] === 1 ? "dia" : "dias"} do período`;
+  });
+  caixa.replaceChildren(svg);
+}
+
+function listaSilencios(sil) {
+  const ul = $("silencios");
+  ul.replaceChildren();
+  $("sil-sub").textContent = `Sequências de ${estado.limiar} ou mais dias seguidos sem commit, da mais longa para a mais curta.`;
+  if (!sil.length) { ul.appendChild(h("li", null, [h("span", { class: "per", text: "Nenhuma sequência desse tamanho no período." })])); return; }
+  for (const s of sil.slice().sort((a, b) => b.len - a.len || (a.de < b.de ? -1 : 1))) {
+    const per = h("span", { class: "per", text: `${fmtS(s.de)} a ${fmtS(s.ate)}` });
+    if (posFim(s.de)) per.appendChild(h("span", { class: "pos", text: `depois do ${FIM_TXT} (${fmtC(FIM.data)})` }));
+    ul.appendChild(h("li", null, [h("span", { class: "dur", text: `${s.len} dias` }), per]));
+  }
+}
+
+function lista() {
+  const caixa = $("lista");
+  if (!estado.sel) { $("h-lista").textContent = "Commits do dia"; $("lista-sub").textContent = ""; caixa.replaceChildren(); return; }
+  const itens = (MAPA[estado.grupo].get(estado.sel) || []).slice().sort((a, b) => (a.quando < b.quando ? -1 : 1));
+  $("h-lista").textContent = `Commits de ${fmtS(estado.sel)}`;
+  if (!itens.length) {
+    $("lista-sub").textContent = `Grupo ${estado.grupo}: nenhum commit registrado.`;
+    caixa.replaceChildren(h("p", { class: "vazio", text: "Nenhum commit neste dia. Um dia sem commit não é um dia sem trabalho: estudo, leitura, reunião e programação em dupla podem não gerar commit." }));
+    return;
+  }
+  const semAutor = itens.filter((c) => SENT.has(c.autor)).length;
+  $("lista-sub").textContent = `Grupo ${estado.grupo}: ${plural(itens.length, "commit", "commits")}, o mesmo total do gráfico.` + (semAutor ? ` ${plural(semAutor, "tem", "têm")} autoria não resolvida.` : "");
+  const t = h("table");
+  t.appendChild(h("thead", null, [h("tr", null, [h("th", { text: "Hora" }), h("th", { text: "Autor" }), h("th", { text: "Título do commit" }), h("th", { class: "num", text: "Linhas +/−" })])]));
+  const tb = h("tbody");
+  for (const c of itens) {
+    const autor = SENT.has(c.autor) ? [c.autor, h("span", { class: "chip", text: "autoria não resolvida" })] : [c.autor];
+    tb.appendChild(h("tr", null, [
+      h("td", { class: "hora", text: c.quando.slice(11, 16) }),
+      h("td", { class: "autor" }, autor),
+      h("td", { text: c.titulo || "(sem título)" }),
+      h("td", { class: "num", text: `+${num(c.add)} −${num(c.rem)}` }),
+    ]));
+  }
+  t.appendChild(tb);
+  caixa.replaceChildren(t);
+}
+
+function mergesNoPeriodo() {
+  return Object.entries(D.grupos[estado.grupo].merges).filter(([d]) => d >= estado.ini && d <= estado.fim).reduce((a, [, n]) => a + n, 0);
+}
+function notas(total) {
+  const g = D.grupos[estado.grupo];
+  const merges = mergesNoPeriodo();
+  const itens = serie.flatMap((p) => MAPA[estado.grupo].get(p.d) || []);
+  const semAutor = itens.filter((c) => SENT.has(c.autor)).length;
+  const pct = itens.length ? Math.round((1000 * semAutor) / itens.length) / 10 : 0;
+  const li = (t) => h("li", { text: t });
+
+  $("nota-origem").replaceChildren(
+    li("Fonte: commits.csv (pasta csvs_originais), carregado em sqlite/dados.db. Consultas equivalentes: t04_cadencia_commits_diaria.sql e Detalhamento_dos_commits.sql."),
+    li(D.extracao ? `Data de extração: ${fmt(D.extracao)}.` : `Data de extração: não registrada nos arquivos. O registro mais recente do conjunto é de ${fmt(D.registro_mais_recente)}, e os arquivos entraram no repositório em ${fmt(D.entrada_repositorio)}.`),
+    li("Fuso: horário de Brasília (America/Sao_Paulo). O dia de cada commit é a data de autoria (autorado_em), convertida do UTC ou do offset original antes de agrupar."),
+    li(`Janela disponível: ${fmt(D.inicio)} a ${fmt(D.fim)}, do primeiro ao último commit dos grupos. Dias sem commit ficam no eixo com valor zero.`),
+  );
+  $("nota-recorte").replaceChildren(
+    li(`${plural(merges, "commit de merge", "commits de merge")} do grupo ${estado.grupo} neste período. Merge junta trabalho já registrado e não representa trabalho autoral.`),
+    li(`${plural(g.herdados, "commit herdado", "commits herdados")} do repositório-template (${fmt(g.herdados_de)} a ${fmt(g.herdados_ate)}), anteriores à criação do grupo em ${fmt(g.criado)}. Não é trabalho do grupo, e é por isso que a janela começa em ${fmt(D.inicio)}.`),
+  );
+  $("nota-cobertura").replaceChildren(
+    li(`${pct.toLocaleString("pt-BR")}% dos ${num(itens.length)} commits deste período têm autoria não resolvida ([externo] ou [bot]). A coluna Autor da lista fica incompleta nesse percentual; a contagem por dia não é afetada.`),
+    li(g.sprints.length ? `As sprints do grupo ${estado.grupo} têm datas, e o período pode ser cortado por sprint.` : `As sprints do grupo ${estado.grupo} não têm datas no registro, então o período não pode ser cortado por sprint (ver R03, cobertura do registro).`),
+    li(`O marco de ${fmt(FIM.data)} é o ${FIM_TXT}, a última sprint com data em todo o conjunto. Depois dele, os grupos juntos somam ${plural(D.commits.filter((c) => posFim(c[3].slice(0, 10))).length, "commit", "commits")} até ${fmt(D.fim)}. Um silêncio depois do marco indica o fim do calendário, não um grupo parado.`),
+  );
+}
+
+iniciarFiltros();
+atualizar();
+let espera;
+new ResizeObserver(() => { clearTimeout(espera); espera = setTimeout(() => { const sil = silenciosDe(serie, estado.limiar); desenharDias(sil); desenharSemana(); }, 80); }).observe(document.querySelector(".wrap"));
+</script>

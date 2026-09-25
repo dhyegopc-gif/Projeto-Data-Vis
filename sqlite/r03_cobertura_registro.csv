@@ -1,0 +1,22 @@
+﻿grupo;arquivo;campo;registros;preenchidos;vazios;pct_preenchido;o_que_inviabiliza;tela
+G01;cartoes;prazo_em;304;8;296;2.6;dizer se um cartão está atrasado (fora do escopo das telas);-
+G02;cartoes;prazo_em;489;16;473;3.3;dizer se um cartão está atrasado (fora do escopo das telas);-
+G03;cartoes;prazo_em;445;0;445;0.0;dizer se um cartão está atrasado (fora do escopo das telas);-
+G01;cartoes;responsaveis_ids;304;296;8;97.4;saber quem responde pelo cartão parado na etapa;R02
+G02;cartoes;responsaveis_ids;489;467;22;95.5;saber quem responde pelo cartão parado na etapa;R02
+G03;cartoes;responsaveis_ids;445;438;7;98.4;saber quem responde pelo cartão parado na etapa;R02
+G01;cartoes;sprint;304;286;18;94.1;"cortar o acúmulo por sprint: sem sprint o cartão cai em ""(sem sprint)""";R02
+G02;cartoes;sprint;489;458;31;93.7;"cortar o acúmulo por sprint: sem sprint o cartão cai em ""(sem sprint)""";R02
+G03;cartoes;sprint;445;430;15;96.6;"cortar o acúmulo por sprint: sem sprint o cartão cai em ""(sem sprint)""";R02
+G01;commits;autor_id resolvido (arquivo inteiro);662;464;198;70.1;atribuir commits a pessoas: a coluna autor da lista de commits fica sem dono;R01
+G02;commits;autor_id resolvido (arquivo inteiro);1067;929;138;87.1;atribuir commits a pessoas: a coluna autor da lista de commits fica sem dono;R01
+G03;commits;autor_id resolvido (arquivo inteiro);959;743;216;77.5;atribuir commits a pessoas: a coluna autor da lista de commits fica sem dono;R01
+G01;commits;autor_id resolvido (base do R01);404;293;111;72.5;atribuir a pessoas os commits contados no gráfico de ritmo;R01
+G02;commits;autor_id resolvido (base do R01);706;655;51;92.8;atribuir a pessoas os commits contados no gráfico de ritmo;R01
+G03;commits;autor_id resolvido (base do R01);633;490;143;77.4;atribuir a pessoas os commits contados no gráfico de ritmo;R01
+G01;merge_requests;revisores_ids;150;36;114;24.0;ler a espera em Waiting Review: sem revisor designado, não há de quem esperar;R02
+G02;merge_requests;revisores_ids;220;212;8;96.4;ler a espera em Waiting Review: sem revisor designado, não há de quem esperar;R02
+G03;merge_requests;revisores_ids;170;169;1;99.4;ler a espera em Waiting Review: sem revisor designado, não há de quem esperar;R02
+G01;sprints;inicio_em e prazo_em;5;0;5;0.0;situar a sprint no calendário: o período do gráfico de ritmo não pode ser cortado por sprint;R01, R02
+G02;sprints;inicio_em e prazo_em;5;0;5;0.0;situar a sprint no calendário: o período do gráfico de ritmo não pode ser cortado por sprint;R01, R02
+G03;sprints;inicio_em e prazo_em;5;5;0;100.0;situar a sprint no calendário: o período do gráfico de ritmo não pode ser cortado por sprint;R01, R02

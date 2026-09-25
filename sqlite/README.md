@@ -1,12 +1,18 @@
 # sqlite/
 
-Os 8 CSVs da raiz do projeto carregados em um banco SQLite unico.
+Os 8 CSVs de [csvs_originais/](../csvs_originais/) carregados em um banco SQLite unico.
 
 | arquivo | o que e |
 |---|---|
-| `dados.db` | o banco gerado — 8 tabelas, 17.773 linhas |
+| `dados.db` | o banco gerado — 8 tabelas, 17.773 linhas, 5 views |
 | `csv_para_sqlite.py` | gera `dados.db` do zero a partir dos CSVs |
 | `verificar.py` | confere que o banco reproduz os CSVs linha a linha |
+| `rodar_sql.py` | roda os `.sql` desta pasta e grava cada resultado em `.csv` ao lado |
+| `t04_cadencia_commits_diaria.sql` | R01 — commits por grupo e dia, com os dias sem commit como zero |
+| `Detalhamento_dos_commits.sql` | R01 — commits de um grupo num dia (o clique no gráfico) |
+| `r02_acumulo_por_etapa.sql` | R02 — cartões e horas por etapa do quadro, por grupo e sprint |
+| `r02_cartoes_da_etapa.sql` | R02 — cartões de uma etapa (abrir a de maior acúmulo) |
+| `r03_cobertura_registro.sql` | R03 — percentual de preenchimento por campo e grupo |
 
 ```
 py -3 sqlite/csv_para_sqlite.py    # reconstroi dados.db
@@ -15,18 +21,18 @@ py -3 sqlite/verificar.py          # confere
 
 ## Os CSVs nao sao tocados
 
-Os arquivos da raiz sao abertos somente para leitura. Nenhum e reescrito,
-movido ou renomeado — o banco e sempre um artefato derivado, descartavel e
-reconstruivel.
+Os arquivos de `csvs_originais/` sao abertos somente para leitura. Nenhum e
+reescrito, movido ou renomeado — o banco e sempre um artefato derivado,
+descartavel e reconstruivel.
 
 ## O que a carga faz
 
 Uma tabela por CSV, com o mesmo nome do arquivo, as mesmas colunas e a mesma
-ordem. Nenhuma linha e filtrada, deduplicada ou normalizada: este e o estagio
-bruto, fiel a origem. A modelagem dimensional descrita em
-[modelagem/schema.sql](../modelagem/schema.sql) e uma camada seguinte, que
-consome estas tabelas — inclusive as 24 duplicatas de `kanban_eventos` e os
-213 commits herdados do repositorio-template, que continuam aqui.
+ordem — mais `evento_id` em `kanban_eventos` (ver [Chaves primarias](#chaves-primarias)).
+Nenhuma linha e filtrada ou deduplicada: as 24 duplicatas de
+`kanban_eventos` e os 213 commits herdados do repositorio-template continuam
+aqui. A modelagem dimensional de [modelagem/schema.sql](../modelagem/schema.sql)
+e uma camada seguinte, que consome estas tabelas.
 
 | tabela | linhas |
 |---|---|
@@ -39,37 +45,137 @@ consome estas tabelas — inclusive as 24 duplicatas de `kanban_eventos` e os
 | `quadro_colunas` | 12 |
 | `sprints` | 15 |
 
-## As duas unicas decisoes de conversao
+## Datas: um fuso so, uma grafia so
+
+Os CSVs trazem tres grafias de tempo: UTC com `Z` (grupos, cartoes, MRs,
+kanban), offset `-03:00` ou `+00:00` (os dois campos de `commits`) e data pura
+`AAAA-MM-DD` (prazos e sprints). Comparar essas grafias como texto da resultado
+errado, e agrupar por dia sem converter joga 397 commits no dia vizinho.
+
+A carga converte todo timestamp para o fuso unico do
+[contrato de dados](../modelagem/Contrato_de_dados.md), **America/Sao_Paulo**, e
+grava em ISO 8601 sem offset:
+
+| tipo declarado | forma gravada | colunas |
+|---|---|---|
+| `DATETIME` | `2026-04-22T14:38:42.296` (hora de Brasilia) | `criado_em`, `atualizado_em`, `fechado_em`, `merged_em`, `ultima_atividade_em`, `ocorrido_em`, `autorado_em`, `commitado_em` |
+| `DATE` | `2026-04-23` | `cartoes.prazo_em`, `sprints.inicio_em`, `sprints.prazo_em` |
+
+Com uma grafia so, tudo funciona direto no SQLite:
+
+```sql
+-- filtro por periodo: comparacao de texto ja e comparacao de tempo
+WHERE ocorrido_em >= '2026-05-01' AND ocorrido_em < '2026-06-01'
+
+-- agrupamento diario e por hora, ja no dia/hora locais
+GROUP BY date(autorado_em)
+GROUP BY strftime('%H', autorado_em)
+
+-- duracao em horas
+(julianday(fechado_em) - julianday(criado_em)) * 24
+```
+
+O offset nao e gravado de proposito: com offset, `date()` do SQLite converte de
+volta para UTC e o dia volta a sair errado. O instante nao se perde — o
+`verificar.py` confere, valor a valor, que a hora local gravada e o mesmo
+instante do CSV. Desde 2019 o Brasil nao tem horario de verao e o dado mais
+antigo e de 2022, entao a hora local e continua, sem hora repetida.
+
+## Chaves primarias
+
+Cada tabela declara a chave do [contrato de dados](../modelagem/Contrato_de_dados.md#chaves-declaradas),
+e o banco recusa um registro que a repita:
+
+| tabela | chave primaria |
+|---|---|
+| `grupos` | `grupo` |
+| `pessoas` | `pessoa_id` |
+| `sprints` | `grupo`, `sprint` |
+| `quadro_colunas` | `grupo`, `quadro`, `coluna` |
+| `cartoes` | `grupo`, `cartao_numero` |
+| `commits` | `grupo`, `commit_id` |
+| `merge_requests` | `grupo`, `mr_numero` |
+| `kanban_eventos` | `evento_id` (substituta) |
+
+**`grupo` entra na chave** porque os identificadores de negocio nao sao unicos
+sozinhos. A numeracao de cartao e de MR reinicia em 1 dentro de cada grupo, e
+71 `commit_id` se repetem entre os grupos, em 213 registros — os commits do
+repositorio-template herdados pelos tres forks. Todo join com essas tabelas usa
+o par, nunca o numero ou o hash sozinho. `pessoa_id` e a excecao: ja traz o
+grupo no prefixo (`G01-A13`) e e unico no conjunto inteiro.
+
+**`kanban_eventos` nao tem chave natural**: 12 eventos do G02 aparecem
+triplicados, identicos nas 6 colunas (os 36 registros com `coluna` vazia). A
+tabela ganha `evento_id` como primeira coluna — o numero do registro no CSV,
+1 para o primeiro apos o cabecalho. E a unica coluna do banco que nao vem do
+CSV; ela distingue as copias sem descartar nenhuma. Quem for contar eventos
+decide se deduplica, e declara a decisao.
+
+## Campos multivalorados: intactos na tabela, divididos nas views
+
+`rotulos` e os campos `*_ids` ficam gravados como no CSV, com o `;` original.
+Cada um tem uma view com uma linha por valor:
+
+| view | chave | valor | registros | linhas |
+|---|---|---|---|---|
+| `v_cartoes_rotulos` | `grupo`, `cartao_numero` | `rotulo` | 1.230 | 3.660 |
+| `v_cartoes_responsaveis_ids` | `grupo`, `cartao_numero` | `pessoa_id` | 1.201 | 1.201 |
+| `v_merge_requests_rotulos` | `grupo`, `mr_numero` | `rotulo` | 373 | 701 |
+| `v_merge_requests_revisores_ids` | `grupo`, `mr_numero` | `pessoa_id` | 417 | 417 |
+| `v_merge_requests_responsaveis_ids` | `grupo`, `mr_numero` | `pessoa_id` | 505 | 505 |
+
+Toda view traz tambem `ordem`, `qtd_valores` e `peso_alocacao` (= 1/`qtd_valores`).
+**Dividir multiplica o registro**: um cartao com 4 rotulos vira 4 linhas. Para
+contar cartoes por rotulo use `COUNT(DISTINCT ...)`; para somar uma medida do
+cartao por rotulo sem dupla contagem, multiplique por `peso_alocacao`. Os
+rotulos saem na grafia bruta; a normalizacao (82 grafias -> 50) e da `dim_rotulo`
+em `schema.sql`. `;` em texto livre (`descricao`, `mensagem`, `titulo`) nao e
+separador e nao e dividido.
+
+## Demais conversoes
 
 **Tipo das colunas.** Inferido do conteudo: `INTEGER` quando todos os valores
-preenchidos sao inteiros, `REAL` quando sao numericos, `TEXT` no resto. Como o
-SQLite tem tipagem dinamica, o valor gravado continua identico ao do CSV — a
-declaracao so garante que `ORDER BY cartao_numero` e `SUM(linhas_adicionadas)`
-se comportem como numero e nao como texto. Timestamps ficam em `TEXT` no ISO
-8601 original, que e o formato que `date()`, `strftime()` e comparacao de
-string entendem no SQLite. `cartoes.peso` ficou `TEXT` por ser 100% nulo na
-origem.
+preenchidos sao inteiros, `REAL` quando sao numericos, `DATE`/`DATETIME` como
+acima, `TEXT` no resto. Um timestamp sem fuso faz a carga parar, em vez de
+gravar uma hora possivelmente 3h errada. `cartoes.peso` ficou `TEXT` por ser
+100% nulo na origem.
 
 **Campo vazio vira `NULL`.** Nenhuma coluna do conjunto usa a string vazia como
 valor com significado proprio.
 
-`verificar.py` fecha o circulo: le o banco de volta, converte para texto
-(`NULL` -> vazio) e compara com o CSV. As 8 tabelas batem linha a linha, na
-mesma ordem.
+## Conferencia
+
+`verificar.py` fecha o circulo em tres partes: (1) le cada tabela de volta e
+compara com o CSV — texto igual, e nas colunas `DATETIME` o mesmo instante;
+(2) confirma a chave primaria de cada tabela e que `evento_id` e o numero do
+registro; (3) remonta cada campo
+multivalorado a partir da view e compara com o original.
 
 ## Indices
 
-Criados sobre as chaves naturais e as colunas de join mais usadas (`grupo`,
-`cartao_numero`, `commit_id`, `mr_numero`, `autor_id`, `pessoa_id`, `sprint`).
-Nenhum e `UNIQUE`: `kanban_eventos` tem repeticoes legitimas na origem.
+Cada chave primaria ja e um indice. Alem delas, ha indices sobre as colunas de
+join que a chave nao cobre (`autor_id`, `pessoa_id`, `sprint`, `coluna`,
+`pessoas.grupo`, `kanban_eventos(grupo, cartao_numero)`) e sobre
+`(grupo, data)` em `commits` e `kanban_eventos`, para os filtros por periodo.
 
 ## Consulta rapida
 
 ```sql
--- commits por grupo, fora do historico herdado do template
-SELECT c.grupo, COUNT(*) AS commits, SUM(c.linhas_total) AS linhas
+-- commits autorais por dia, fora do historico herdado do template
+SELECT c.grupo, date(c.autorado_em) AS dia, COUNT(*) AS commits
 FROM   commits c
 JOIN   grupos  g ON g.grupo = c.grupo
 WHERE  c.commitado_em >= g.criado_em
-GROUP  BY c.grupo;
+  AND  c.e_merge = 0
+GROUP  BY c.grupo, dia
+ORDER  BY c.grupo, dia;
+
+-- cartoes por rotulo, sem dupla contagem de comentarios
+SELECT r.rotulo,
+       COUNT(DISTINCT r.grupo || '-' || r.cartao_numero) AS cartoes,
+       SUM(c.comentarios * r.peso_alocacao)              AS comentarios_alocados
+FROM   v_cartoes_rotulos r
+JOIN   cartoes c USING (grupo, cartao_numero)
+GROUP  BY r.rotulo
+ORDER  BY cartoes DESC;
 ```

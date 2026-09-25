@@ -1,10 +1,10 @@
-"""Gera uma amostra com as 10 primeiras linhas de cada CSV da raiz.
+"""Gera uma amostra com as 10 primeiras linhas de cada CSV de csvs_originais/.
 
 Uso:
     py -3 amostra_10linhas/gerar_amostra.py
 
 Decisoes:
-  - Os CSVs da raiz sao abertos SOMENTE PARA LEITURA. As amostras sao escritas
+  - Os CSVs de csvs_originais/ sao abertos SOMENTE PARA LEITURA. As amostras sao escritas
     aqui dentro, com o mesmo nome do arquivo de origem.
   - "10 linhas" = cabecalho + 10 REGISTROS, nao 10 linhas fisicas. Campos como
     commits.mensagem e cartoes.descricao contem quebras de linha dentro de
@@ -22,7 +22,7 @@ import csv
 import sys
 from pathlib import Path
 
-RAIZ = Path(__file__).resolve().parent.parent
+ORIGEM = Path(__file__).resolve().parent.parent / "csvs_originais"
 DESTINO = Path(__file__).resolve().parent
 REGISTROS = 10
 
@@ -51,9 +51,9 @@ def recortar(caminho: Path, n: int) -> tuple[str, int]:
 
 
 def main() -> int:
-    arquivos = sorted(RAIZ.glob("*.csv"))
+    arquivos = sorted(ORIGEM.glob("*.csv"))
     if not arquivos:
-        print(f"Nenhum CSV encontrado em {RAIZ}", file=sys.stderr)
+        print(f"Nenhum CSV encontrado em {ORIGEM}", file=sys.stderr)
         return 1
 
     for caminho in arquivos:
