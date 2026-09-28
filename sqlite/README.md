@@ -4,7 +4,7 @@ Os 8 CSVs de [csvs_originais/](../csvs_originais/) carregados em um banco SQLite
 
 | arquivo | o que e |
 |---|---|
-| `dados.db` | o banco gerado — 8 tabelas, 17.773 linhas, 5 views |
+| `dados.db` | o banco gerado — 8 tabelas, 17.773 linhas, 5 views de apoio; T05 cria uma view tratada |
 | `csv_para_sqlite.py` | gera `dados.db` do zero a partir dos CSVs |
 | `verificar.py` | confere que o banco reproduz os CSVs linha a linha |
 | `rodar_sql.py` | roda os `.sql` desta pasta e grava cada resultado em `.csv` ao lado |
@@ -13,17 +13,20 @@ Os 8 CSVs de [csvs_originais/](../csvs_originais/) carregados em um banco SQLite
 | `r02_acumulo_por_etapa.sql` | R02 — cartões e horas por etapa do quadro, por grupo e sprint |
 | `r02_cartoes_da_etapa.sql` | R02 — cartões de uma etapa (abrir a de maior acúmulo) |
 | `r03_cobertura_registro.sql` | R03 — percentual de preenchimento por campo e grupo |
+| `t05_eventos_kanban.sql` | T05 — view deduplicada, classificada e sequenciada dos eventos Kanban |
 
 ```
 py -3 sqlite/csv_para_sqlite.py    # reconstroi dados.db
 py -3 sqlite/verificar.py          # confere
+py -3 sqlite/rodar_sql.py t05_eventos_kanban.sql  # cria a view e exporta CSV
 ```
 
 ## Os CSVs nao sao tocados
 
 Os arquivos de `csvs_originais/` sao abertos somente para leitura. Nenhum e
 reescrito, movido ou renomeado — o banco e sempre um artefato derivado,
-descartavel e reconstruivel.
+descartavel e reconstruivel. O executor usa modo gravavel somente para scripts
+`DROP VIEW`/`CREATE VIEW`; consultas analiticas seguem em modo somente leitura.
 
 ## O que a carga faz
 
@@ -33,6 +36,10 @@ Nenhuma linha e filtrada ou deduplicada: as 24 duplicatas de
 `kanban_eventos` e os 213 commits herdados do repositorio-template continuam
 aqui. A modelagem dimensional de [modelagem/schema.sql](../modelagem/schema.sql)
 e uma camada seguinte, que consome estas tabelas.
+
+A view T05 expoe chaves naturais (grupo/cartao, pessoa, coluna e rotulo) para a
+carga dimensional resolver as SKs. As dimensoes modeladas nao existem em
+`dados.db`; portanto, a view nao inventa chaves substitutas.
 
 | tabela | linhas |
 |---|---|

@@ -604,7 +604,7 @@ footer {
           <g>
             <rect x="765" y="225" width="205" height="100" fill="var(--fato-bg)" stroke="var(--fato)" stroke-width="2"></rect>
             <text x="779" y="250" font-size="12.5" font-weight="700" fill="var(--fato)">fato_evento_cartao</text>
-            <text x="779" y="270" font-size="10" fill="currentColor" opacity=".75">transacional · 13.194</text>
+            <text x="779" y="270" font-size="10" fill="currentColor" opacity=".75">transacional · 13.170</text>
             <line x1="779" y1="280" x2="956" y2="280" stroke="currentColor" stroke-width=".8" opacity=".3"></line>
             <text x="779" y="296" font-size="9.5" fill="currentColor" opacity=".65">horas_ate_proximo_evento</text>
             <text x="779" y="310" font-size="9.5" fill="currentColor" opacity=".65">seq_no_cartao</text>
@@ -819,12 +819,13 @@ footer {
         <h4>fato_evento_cartao</h4>
         <span class="tag">transacional</span>
       </div>
-      <p class="grain"><b>Grão</b>1 linha por evento registrado sobre um cartão — movimento de coluna <em>ou</em> marcação de rótulo</p>
-      <p>O fato mais fino do modelo e o único com chave substituta obrigatória: a origem traz 24 linhas duplicadas exatas, sem chave natural capaz de distingui-las.</p>
+      <p class="grain"><b>Grão</b>1 linha por evento distinto sobre um cartão, após remover 24 duplicatas exatas</p>
+      <p>O fato mais fino do modelo; a chave substituta distingue eventos diferentes no mesmo instante.</p>
       <ul class="fieldlist">
-        <li><span class="k">tipo_evento = MOVIMENTO_COLUNA</span><span class="v">9.052</span></li>
+        <li><span class="k">tipo_evento = MUDANCA_COLUNA</span><span class="v">9.052</span></li>
         <li><span class="k">tipo_evento = MARCACAO_ROTULO</span><span class="v">4.106</span></li>
-        <li><span class="k">alvo não informado</span><span class="v">36</span></li>
+        <li><span class="k">tipo_evento = DESCONHECIDO</span><span class="v">12</span></li>
+        <li><span class="k">sk_sprint / is_bot</span><span class="v">dimensão / flag</span></li>
         <li><span class="k">horas_ate_proximo_evento</span><span class="v">derivada</span></li>
         <li><span class="k">seq_no_cartao</span><span class="v">derivada</span></li>
       </ul>
@@ -868,9 +869,9 @@ footer {
   <h3>A normalização de <code>dim_rotulo</code></h3>
   <p>
     Os rótulos chegam sem padronização nenhuma: <code>ART. 5</code>, <code>ART.5</code> e
-    <code>ART.05</code> são o mesmo artefato; <code>SIZE_M</code> e <code>M</code> são o mesmo
-    tamanho; <code>BUG</code> e <code>Fix</code> são o mesmo tipo de trabalho. A regra de
-    normalização foi executada sobre o vocabulário completo e não deixou resíduo.
+    <code>ART.05</code> são o mesmo artefato; <code>SIZE_M</code> e <code>M</code> viram
+    <code>SIZE_M</code>; <code>BUG</code> e <code>Fix</code> viram a categoria canônica
+    <code>BUG</code>. A regra de normalização foi executada sobre o vocabulário completo.
   </p>
 
   <div class="tablebox">
@@ -886,8 +887,9 @@ footer {
       </thead>
       <tbody>
         <tr><th scope="row">ARTEFATO</th><td class="num">42</td><td class="num">18</td><td><code>ART. 5</code> · <code>ART.5</code> · <code>ART.05</code> → <code>ART-05</code></td></tr>
-        <tr><th scope="row">TIPO_TRABALHO</th><td class="num">13</td><td class="num">12</td><td><code>BUG</code> · <code>Fix</code> → <code>CORRECAO</code></td></tr>
-        <tr><th scope="row">TAMANHO</th><td class="num">11</td><td class="num">5</td><td><code>SIZE_M</code> · <code>M</code> → <code>M</code></td></tr>
+        <tr><th scope="row">TIPO_TRABALHO</th><td class="num">11</td><td class="num">11</td><td>demais tipos de trabalho</td></tr>
+        <tr><th scope="row">BUG</th><td class="num">2</td><td class="num">1</td><td><code>BUG</code> · <code>Fix</code> → <code>BUG</code></td></tr>
+        <tr><th scope="row">TAMANHO</th><td class="num">11</td><td class="num">5</td><td><code>SIZE_M</code> · <code>M</code> → <code>SIZE_M</code></td></tr>
         <tr><th scope="row">PRIORIDADE</th><td class="num">8</td><td class="num">8</td><td><code>P1</code> … <code>P8</code> — preservados</td></tr>
         <tr><th scope="row">ESTADO_QUADRO</th><td class="num">4</td><td class="num">4</td><td>nome de coluna vazado para o campo de rótulo</td></tr>
         <tr><th scope="row">METADADO_TURMA</th><td class="num">3</td><td class="num">3</td><td><code>Ano: 2025</code> — ruído, 2 ocorrências cada</td></tr>
@@ -941,8 +943,8 @@ footer {
         <h3>A coluna <code>coluna</code> guarda dois assuntos diferentes</h3>
         <p>
           Em <code>kanban_eventos.csv</code>, o mesmo campo recebe tanto o nome de uma coluna
-          do Scrum Board quanto o nome de um rótulo. Dos 13.194 eventos, 9.052 movem o cartão
-          entre colunas e 4.106 apenas marcam ou desmarcam um rótulo; 36 vêm com o campo vazio.
+          do Scrum Board quanto o nome de um rótulo. Dos 13.194 registros de origem, 24 são
+          duplicatas exatas. Restam 9.052 movimentos, 4.106 marcações e 12 eventos com coluna vazia.
         </p>
         <p class="verdict">
           Um fato único com discriminador <code>tipo_evento</code> e duas FKs exclusivas
@@ -1086,25 +1088,28 @@ footer {
   </p>
 
   <h3>O discriminador de <code>fato_evento_cartao</code> (D‑01)</h3>
-<pre><i>-- Grão: 1 linha por evento registrado sobre um cartão. 13.194 linhas.</i>
-<i>-- Exatamente uma das duas FKs de alvo é preenchida por linha.</i>
+<pre><i>-- Grão: 1 linha por evento distinto sobre um cartão. 13.170 linhas.</i>
+<i>-- Eventos desconhecidos mantêm as duas FKs de alvo nulas.</i>
 <b>CREATE TABLE</b> fato_evento_cartao (
     sk_evento                  BIGSERIAL   <b>PRIMARY KEY</b>,
     sk_grupo                   SMALLINT    <b>NOT NULL REFERENCES</b> dim_grupo(sk_grupo),
     sk_cartao                  BIGINT      <b>NOT NULL REFERENCES</b> fato_cartao(sk_cartao),
+    sk_sprint                  SMALLINT             <b>REFERENCES</b> dim_sprint(sk_sprint),
     sk_pessoa                  INTEGER     <b>NOT NULL REFERENCES</b> dim_pessoa(sk_pessoa),
     sk_data                    INTEGER     <b>NOT NULL REFERENCES</b> dim_data(sk_data),
     sk_hora                    SMALLINT    <b>NOT NULL REFERENCES</b> dim_hora(sk_hora),
     sk_coluna                  SMALLINT             <b>REFERENCES</b> dim_coluna_quadro(sk_coluna),
     sk_rotulo                  SMALLINT             <b>REFERENCES</b> dim_rotulo(sk_rotulo),
-    tipo_evento                VARCHAR(20) <b>NOT NULL</b>,  <i>-- MOVIMENTO_COLUNA | MARCACAO_ROTULO</i>
+    tipo_evento                VARCHAR(20) <b>NOT NULL</b>,  <i>-- MUDANCA_COLUNA | MARCACAO_ROTULO | DESCONHECIDO</i>
     acao                       VARCHAR(6)  <b>NOT NULL</b>,  <i>-- add | remove</i>
+    is_bot                     BOOLEAN     <b>NOT NULL</b>,
     seq_no_cartao              SMALLINT    <b>NOT NULL</b>,
     horas_ate_proximo_evento   NUMERIC(10,2),
     contador_evento            SMALLINT    <b>NOT NULL DEFAULT</b> 1,
     <b>CONSTRAINT</b> ck_evento_alvo <b>CHECK</b> (
-        (tipo_evento = 'MOVIMENTO_COLUNA' <b>AND</b> sk_coluna <b>IS NOT NULL AND</b> sk_rotulo <b>IS NULL</b>) <b>OR</b>
-        (tipo_evento = 'MARCACAO_ROTULO'  <b>AND</b> sk_rotulo <b>IS NOT NULL AND</b> sk_coluna <b>IS NULL</b>)
+        (tipo_evento = 'MUDANCA_COLUNA' <b>AND</b> sk_coluna <b>IS NOT NULL AND</b> sk_rotulo <b>IS NULL</b>) <b>OR</b>
+        (tipo_evento = 'MARCACAO_ROTULO' <b>AND</b> sk_rotulo <b>IS NOT NULL AND</b> sk_coluna <b>IS NULL</b>) <b>OR</b>
+        (tipo_evento = 'DESCONHECIDO' <b>AND</b> sk_coluna <b>IS NULL AND</b> sk_rotulo <b>IS NULL</b>)
     )
 );</pre>
 
@@ -1112,7 +1117,7 @@ footer {
 <pre><b>CREATE TABLE</b> dim_rotulo (
     sk_rotulo        SMALLSERIAL <b>PRIMARY KEY</b>,
     categoria        VARCHAR(20) <b>NOT NULL</b>,   <i>-- ARTEFATO | TAMANHO | TIPO_TRABALHO | ...</i>
-    valor_canonico   VARCHAR(40) <b>NOT NULL</b>,   <i>-- 'ART-05', 'M', 'CORRECAO'</i>
+    valor_canonico   VARCHAR(40) <b>NOT NULL</b>,   <i>-- 'ART-05', 'SIZE_M', 'BUG'</i>
     rotulo_exibicao  VARCHAR(60) <b>NOT NULL</b>,
     ordem            SMALLINT,                 <i>-- ordenação dentro da categoria</i>
     artefato_num     SMALLINT,                 <i>-- 1..18, só em ARTEFATO</i>

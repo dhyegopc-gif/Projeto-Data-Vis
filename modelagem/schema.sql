@@ -7,7 +7,7 @@
 --   fato_commit          1 linha por (grupo, commit_id)                 2.688
 --   fato_cartao          1 linha por (grupo, cartao_numero)             1.238
 --   fato_merge_request   1 linha por (grupo, mr_numero)                   540
---   fato_evento_cartao   1 linha por evento de quadro/rotulo em cartao 13.194
+--   fato_evento_cartao   1 linha por evento distinto de quadro/rotulo      13.170
 -- =====================================================================
 
 DROP SCHEMA IF EXISTS dw CASCADE;
@@ -139,15 +139,9 @@ CREATE TABLE dim_coluna_quadro (
 
 -- ---------------------------------------------------------------------
 -- dim_rotulo  |  a dimensao que carrega o maior ganho da modelagem.
--- O CSV traz 81 grafias distintas de rotulo; a normalizacao as reduz a 50
--- valores canonicos organizados em 6 categorias:
---   ARTEFATO        42 grafias -> 18 canonicos (ART. 5 / ART.5 / ART.05 -> ART-05)
---   TAMANHO         11 grafias ->  5 canonicos (SIZE_M e M -> M)
---   TIPO_TRABALHO   13 grafias -> 12 canonicos (BUG e Fix -> CORRECAO)
---   PRIORIDADE       8 grafias ->  8 canonicos (P1..P8)
---   ESTADO_QUADRO    4 grafias ->  4 canonicos (nome de coluna vazado p/ rotulo)
---   METADADO_TURMA   3 grafias ->  3 canonicos (ruido: 'Ano: 2025', etc.)
--- CUIDADO: 'P' isolado e TAMANHO (pequeno); 'P1'..'P8' sao PRIORIDADE.
+-- O CSV traz grafias distintas normalizadas por T05 antes da resolucao da SK:
+--   ART. 5 / ART.5 / ART.05 -> ART-05; M / SIZE_M -> SIZE_M;
+--   BUG / Fix -> BUG; P / SIZE_P -> SIZE_P; P1..P8 sao PRIORIDADE.
 -- ---------------------------------------------------------------------
 CREATE TABLE dim_rotulo (
     sk_rotulo        SMALLSERIAL PRIMARY KEY,
@@ -301,39 +295,40 @@ CREATE TABLE fato_merge_request (
 
 -- ---------------------------------------------------------------------
 -- fato_evento_cartao  |  TRANSACIONAL (o fato mais fino do modelo)
--- Grao: 1 linha por evento registrado sobre um cartao. 13.194 linhas.
+-- Grao: 1 linha por evento distinto registrado sobre um cartao. 13.170 linhas.
 --
 -- DECISAO CENTRAL: a coluna 'coluna' de kanban_eventos.csv mistura dois
--- assuntos diferentes sob o mesmo nome. Dos 13.194 eventos, 9.052 movem o
--- cartao entre colunas do Scrum Board e 4.142 apenas adicionam/removem um
--- rotulo. O discriminador tipo_evento separa os dois, com uma FK exclusiva
--- para cada caso (exatamente uma preenchida por linha).
+-- assuntos diferentes sob o mesmo nome. A T05 remove 24 duplicatas exatas:
+-- 9.052 eventos movem o cartao, 4.106 marcam rotulos e 12 tem coluna vazia.
+-- DESCONHECIDO representa eventos sem alvo dimensional.
 -- Mantidos na mesma tabela para preservar a linha do tempo do cartao em
 -- ordem; a camada semantica expoe as duas visoes separadas.
 --
--- 24 linhas sao duplicatas exatas na origem (13.194 linhas / 13.170 chaves
--- naturais distintas). Por isso a PK e substituta e nao a combinacao natural.
+-- A PK e substituta para distinguir eventos diferentes no mesmo instante.
 -- ---------------------------------------------------------------------
 CREATE TABLE fato_evento_cartao (
     sk_evento                  BIGSERIAL   PRIMARY KEY,
     -- dimensoes
     sk_grupo                   SMALLINT    NOT NULL REFERENCES dim_grupo(sk_grupo),
     sk_cartao                  BIGINT      NOT NULL REFERENCES fato_cartao(sk_cartao),
+    sk_sprint                  SMALLINT             REFERENCES dim_sprint(sk_sprint),
     sk_pessoa                  INTEGER     NOT NULL REFERENCES dim_pessoa(sk_pessoa),
     sk_data                    INTEGER     NOT NULL REFERENCES dim_data(sk_data),
     sk_hora                    SMALLINT    NOT NULL REFERENCES dim_hora(sk_hora),
     sk_coluna                  SMALLINT             REFERENCES dim_coluna_quadro(sk_coluna),
     sk_rotulo                  SMALLINT             REFERENCES dim_rotulo(sk_rotulo),
     -- discriminador + dimensao degenerada
-    tipo_evento                VARCHAR(20) NOT NULL, -- MOVIMENTO_COLUNA | MARCACAO_ROTULO
+    tipo_evento                VARCHAR(20) NOT NULL, -- MUDANCA_COLUNA | MARCACAO_ROTULO | DESCONHECIDO
     acao                       VARCHAR(6)  NOT NULL, -- add | remove
+    is_bot                     BOOLEAN     NOT NULL,
     -- medidas
     seq_no_cartao              SMALLINT    NOT NULL, -- ordem do evento dentro do cartao
     horas_ate_proximo_evento   NUMERIC(10,2),        -- NULL no ultimo evento do cartao
     contador_evento            SMALLINT    NOT NULL DEFAULT 1,
     CONSTRAINT ck_evento_alvo CHECK (
-        (tipo_evento = 'MOVIMENTO_COLUNA' AND sk_coluna IS NOT NULL AND sk_rotulo IS NULL) OR
-        (tipo_evento = 'MARCACAO_ROTULO'  AND sk_rotulo IS NOT NULL AND sk_coluna IS NULL)
+        (tipo_evento = 'MUDANCA_COLUNA' AND sk_coluna IS NOT NULL AND sk_rotulo IS NULL) OR
+        (tipo_evento = 'MARCACAO_ROTULO' AND sk_rotulo IS NOT NULL AND sk_coluna IS NULL) OR
+        (tipo_evento = 'DESCONHECIDO' AND sk_coluna IS NULL AND sk_rotulo IS NULL)
     )
 );
 
@@ -389,7 +384,7 @@ CREATE VIEW vw_movimento_kanban AS
 SELECT e.*, c.coluna, c.posicao
 FROM   fato_evento_cartao e
 JOIN   dim_coluna_quadro  c ON c.sk_coluna = e.sk_coluna
-WHERE  e.tipo_evento = 'MOVIMENTO_COLUNA';
+WHERE  e.tipo_evento = 'MUDANCA_COLUNA';
 
 CREATE VIEW vw_marcacao_rotulo AS
 SELECT e.*, r.categoria, r.valor_canonico

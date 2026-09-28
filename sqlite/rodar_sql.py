@@ -9,6 +9,7 @@ Cada CSV sai com o nome do .sql (UTF-8 com BOM e ';', abre direto no Excel)
 e as primeiras linhas aparecem no terminal.
 """
 import csv
+import re
 import sqlite3
 import sys
 from pathlib import Path
@@ -23,10 +24,19 @@ def rodar(arquivo: Path) -> None:
         print(f"{arquivo.name} esta vazio no disco -- salve o arquivo (Ctrl+S) e rode de novo.\n")
         return
 
-    with sqlite3.connect(f"file:{BANCO}?mode=ro", uri=True) as con:
-        cur = con.execute(consulta)
-        colunas = [d[0] for d in cur.description]
-        linhas = cur.fetchall()
+    primeira_instrucao = re.sub(r"(?m)^\s*--[^\n]*(?:\n|$)", "", consulta).lstrip().upper()
+    if primeira_instrucao.startswith(("CREATE VIEW", "DROP VIEW")):
+        with sqlite3.connect(BANCO) as con:
+            con.executescript(consulta)
+            nome_view = arquivo.stem.replace('"', '""')
+            cur = con.execute(f'SELECT * FROM "{nome_view}"')
+            colunas = [d[0] for d in cur.description]
+            linhas = cur.fetchall()
+    else:
+        with sqlite3.connect(f"file:{BANCO}?mode=ro", uri=True) as con:
+            cur = con.execute(consulta)
+            colunas = [d[0] for d in cur.description]
+            linhas = cur.fetchall()
 
     saida = arquivo.with_suffix(".csv")
     with saida.open("w", encoding="utf-8-sig", newline="") as f:
