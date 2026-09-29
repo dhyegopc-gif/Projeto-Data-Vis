@@ -1,0 +1,4 @@
+grupo,cartao_numero,titulo,descricao,situacao,criado_em,atualizado_em,fechado_em,prazo_em,autor_id,fechado_por_id,responsaveis_ids,rotulos,sprint,peso,comentarios,tempo_estimado_s,tempo_gasto_s
+G01,12,Regras de negócio - Seção 3.1.2,"Definir regras de negócio e associar aos RF 
+
+Criar regras implementáveis e testáveis, conectando cada uma a um requisito funcional.",closed,2026-04-23T14:27:58.346,2026-05-01T22:50:20.718,2026-05-01T22:50:20.584,,G01-A14,G01-A15,G01-A17,ART.03;CODE;M,Sprint 01,,0,0,0
