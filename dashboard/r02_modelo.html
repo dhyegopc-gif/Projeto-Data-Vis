@@ -1,0 +1,321 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Acúmulo por etapa</title>
+<style>
+/*__CSS_COMUM__*/
+.grafico { min-height: 300px; }
+.halo { paint-order: stroke; stroke: var(--surface); stroke-width: 3px; stroke-linejoin: round; }
+.linha-etapa { cursor: pointer; }
+.tabela-longa { max-height: 460px; overflow: auto; }
+</style>
+
+<div class="wrap">
+  <nav aria-label="Telas do painel"><ul class="telas" id="telas"></ul></nav>
+  <header>
+    <p class="eyebrow">R02 · Acúmulo por etapa · para a orientação pedagógica</p>
+    <h1 id="titulo">Onde os cartões se acumulam no quadro</h1>
+    <p class="pergunta">Em qual etapa do quadro os cartões deste grupo se acumulam ao longo da sprint? Se o gargalo aparece na espera por revisão, a conversa é uma; se aparece na execução, é outra.</p>
+  </header>
+
+  <section class="filtros" aria-label="Filtros">
+    <label class="campo" for="f-grupo"><span>Grupo</span><select id="f-grupo"></select></label>
+    <div class="campo"><span>Sprint</span><div class="presets" id="f-sprint" role="group" aria-label="Sprint"></div></div>
+    <div class="campo"><span>Acúmulo a partir de (premissa)</span><div class="presets" id="f-limite" role="group" aria-label="Limite de acúmulo"></div></div>
+  </section>
+
+  <section class="tiles" aria-label="Resumo do recorte">
+    <div class="tile"><span class="rotulo">Cartões que passaram pelo quadro</span><span class="valor" id="t-n">–</span><span class="sub" id="t-n-sub"></span></div>
+    <div class="tile"><span class="rotulo">Etapa de maior acúmulo</span><span class="valor" id="t-etapa">–</span><span class="sub" id="t-etapa-sub"></span></div>
+    <div class="tile"><span class="rotulo">Cartões acima do limite</span><span class="valor" id="t-acima">–</span><span class="sub" id="t-acima-sub"></span></div>
+    <div class="tile"><span class="rotulo">Passagens sem saída registrada</span><span class="valor" id="t-sem">–</span><span class="sub" id="t-sem-sub"></span></div>
+  </section>
+
+  <section class="card" aria-labelledby="h-etapas">
+    <div class="card-topo">
+      <div>
+        <h2 id="h-etapas">Quantos cartões passaram por cada etapa, e quanto tempo cada um ficou nela</h2>
+        <p class="limite"><strong>Tempo na etapa não é tempo de trabalho.</strong> Um cartão pode ficar em Doing um fim de semana inteiro sem ninguém tocar nele.</p>
+        <p class="recorte" id="recorte"></p>
+      </div>
+      <button type="button" class="botao" id="bt-tabela" aria-expanded="false" aria-controls="tabela-etapas">Ver como tabela</button>
+    </div>
+    <div class="legenda" id="legenda" aria-hidden="true"></div>
+    <div class="grafico" id="grafico"></div>
+    <p class="dica" id="piso"></p>
+    <p class="dica">Clique numa etapa para listar os cartões dela; clique num ponto para marcar o cartão na lista. Pelo teclado: Tab chega em cada etapa, Enter abre. Escala de horas logarítmica.</p>
+    <div class="rolagem" id="tabela-etapas" hidden></div>
+  </section>
+
+  <section class="card" aria-labelledby="h-lista">
+    <div>
+      <h2 id="h-lista">Cartões da etapa</h2>
+      <p class="contagem" id="lista-sub" aria-live="polite"></p>
+    </div>
+    <div class="rolagem tabela-longa" id="lista"></div>
+  </section>
+
+  <section class="card" aria-labelledby="h-prem">
+    <div>
+      <h2 id="h-prem">Premissas desta tela</h2>
+      <p class="contagem">Escolhas do grupo, não definições da orientação. Todas a confirmar com o professor; a mesma lista está no requisito.</p>
+    </div>
+    <div class="rolagem" id="premissas"></div>
+  </section>
+
+  <footer class="notas">
+    <div><h3>Nota de origem</h3><ul id="nota-origem"></ul></div>
+    <div><h3>O que conta como etapa</h3><ul id="nota-etapa"></ul></div>
+    <div><h3>Passagens sem saída</h3><ul id="nota-aberto"></ul></div>
+    <div>
+      <h3>O que esta tela não sustenta</h3>
+      <ul>
+        <li>Tempo de trabalho. Os campos que poderiam ajudar estão vazios: tempo gasto vem zerado em todos os cartões e peso está vazio.</li>
+        <li>Que a etapa seja culpa de alguém. Acúmulo em Waiting Review pode ser falta de revisor designado (ver R03), não demora de quem revisa.</li>
+        <li>Um limite oficial. As 48 horas são premissa nossa; a cliente não definiu o que é acúmulo.</li>
+      </ul>
+    </div>
+  </footer>
+</div>
+<div id="tip" role="tooltip" hidden></div>
+
+<script>
+//__JS_COMUM__
+const D = __DADOS__;
+
+const LINHAS = D.linhas.map(([grupo, sprint, etapa, numero, titulo, situacao, resp, passagens, entrou, saiu, horas, semSaida, abertos]) =>
+  ({ grupo, sprint, etapa, numero, titulo, situacao, resp, passagens, entrou, saiu, horas, semSaida, abertos }));
+const GRUPOS = [...new Set(LINHAS.map((l) => l.grupo))].sort();
+const LIMITES = [24, 48, 72];
+const H0 = 0.1, H1 = 2400;   // 6 min a ~3 meses, em horas
+const TICKS = [[0.1, "≤ 6 min"], [1, "1 h"], [6, "6 h"], [24, "1 dia"], [168, "1 semana"], [720, "1 mês"]];
+const estado = { grupo: GRUPOS[0], sprint: "todas", limite: D.limite_padrao, etapa: null, cartao: null };
+let recorte = [], porEtapa = [];
+
+const horasTxt = (hh) => duracao(hh / 24);
+const desvio = (n, e) => { let x = (n * 2654435761 + e * 40503) % 4294967296; x = (x ^ (x >>> 13)) >>> 0; return (x % 1000) / 500 - 1; };
+const situacaoTxt = (s) => (s === "closed" ? "fechado" : s === "opened" ? "aberto" : s);
+
+function sprintsDoGrupo() {
+  const s = [...new Set(LINHAS.filter((l) => l.grupo === estado.grupo).map((l) => l.sprint))];
+  return s.sort((a, b) => (a.startsWith("(") ? 1 : 0) - (b.startsWith("(") ? 1 : 0) || a.localeCompare(b));
+}
+function montarFiltros() {
+  const cs = $("f-sprint");
+  cs.replaceChildren();
+  for (const s of ["todas", ...sprintsDoGrupo()]) {
+    const b = h("button", { type: "button", "data-foco": `sprint:${s}`, "aria-pressed": String(estado.sprint === s), text: s === "todas" ? "Todas" : s });
+    b.addEventListener("click", () => { estado.sprint = s; estado.etapa = null; atualizar(); });
+    cs.appendChild(b);
+  }
+  const cl = $("f-limite");
+  cl.replaceChildren();
+  for (const l of LIMITES) {
+    const b = h("button", { type: "button", "data-foco": `limite:${l}`, "aria-pressed": String(estado.limite === l), text: `${l} h` + (l === D.limite_padrao ? " (padrão)" : "") });
+    b.addEventListener("click", () => { estado.limite = l; estado.etapa = null; atualizar(); });
+    cl.appendChild(b);
+  }
+}
+function iniciar() {
+  montarTelas("R02");
+  montarPremissas();
+  const sg = $("f-grupo");
+  for (const g of GRUPOS) sg.appendChild(h("option", { value: g, text: g }));
+  sg.addEventListener("change", () => {
+    estado.grupo = sg.value; estado.etapa = null;
+    if (!sprintsDoGrupo().includes(estado.sprint)) estado.sprint = "todas";
+    atualizar();
+  });
+  alternarTabela("bt-tabela", "tabela-etapas");
+  addEventListener("resize", () => desenhar());
+  atualizar();
+}
+
+function atualizar() { comFoco(renderizar); }
+function renderizar() {
+  $("f-grupo").value = estado.grupo;
+  montarFiltros();
+  recorte = LINHAS.filter((l) => l.grupo === estado.grupo && (estado.sprint === "todas" || l.sprint === estado.sprint));
+  porEtapa = D.etapas.map((e) => {
+    const cs = recorte.filter((l) => l.etapa === e).sort((a, b) => b.horas - a.horas);
+    return { etapa: e, cartoes: cs, n: cs.length, acima: cs.filter((l) => l.horas > estado.limite).length,
+             horas: cs.reduce((a, l) => a + l.horas, 0), semSaida: cs.reduce((a, l) => a + l.semSaida, 0) };
+  });
+  const maior = porEtapa.filter((p) => p.n).sort((a, b) => b.acima - a.acima || b.horas - a.horas)[0] || null;
+  if (!estado.etapa || !porEtapa.some((p) => p.etapa === estado.etapa && p.n)) estado.etapa = maior ? maior.etapa : null;
+  estado.maior = maior ? maior.etapa : null;
+
+  const sprintTxt = estado.sprint === "todas" ? "todas as sprints" : estado.sprint;
+  $("titulo").textContent = `Onde os cartões se acumulam no quadro, grupo ${estado.grupo}, ${sprintTxt}`;
+  const cartoes = new Set(recorte.map((l) => l.numero));
+  const acimaAlgum = new Set(recorte.filter((l) => l.horas > estado.limite).map((l) => l.numero));
+  const sem = recorte.reduce((a, l) => a + l.semSaida, 0), abertos = recorte.reduce((a, l) => a + l.abertos, 0);
+  $("t-n").textContent = num(cartoes.size);
+  $("t-n-sub").textContent = `${plural(recorte.reduce((a, l) => a + l.passagens, 0), "passagem", "passagens")} pelas 4 etapas`;
+  $("t-etapa").textContent = maior ? maior.etapa : "–";
+  $("t-etapa-sub").textContent = maior ? `${plural(maior.acima, "cartão passou", "cartões passaram")} de ${estado.limite} h nela` : "";
+  $("t-acima").textContent = cartoes.size ? pct(100 * acimaAlgum.size / cartoes.size) : "–";
+  $("t-acima-sub").textContent = `${plural(acimaAlgum.size, "cartão", "cartões")} com mais de ${estado.limite} h em pelo menos uma etapa`;
+  $("t-sem").textContent = num(sem);
+  $("t-sem-sub").textContent = sem ? `${num(sem - abertos)} fechadas junto com o cartão; ${num(abertos)} abertas no fim do registro` : "toda entrada teve saída registrada";
+  $("recorte").textContent = `Etapa: coluna do Scrum Board (Backlog, Doing, Waiting Review, Review). Acúmulo: cartão que somou mais de ${estado.limite} h na etapa, contando todas as passagens por ela (premissa nossa).`;
+
+  const leg = $("legenda");
+  leg.replaceChildren(
+    h("span", {}, [h("i", { class: "chave s1" }), `até ${estado.limite} h na etapa`]),
+    h("span", {}, [h("i", { class: "chave s2" }), `mais de ${estado.limite} h (acúmulo)`]),
+    h("span", {}, [marcaLegenda("circulo", "var(--series)"), marcaLegenda("triangulo", "var(--series-2)"), "um cartão"]),
+    h("span", {}, [h("i", { class: "chave linha", style: "height: 12px; width: 2px; background: var(--ink)" }), `limite de ${estado.limite} h`]),
+    h("span", {}, [h("i", { class: "chave linha", style: "height: 14px; width: 4px; background: var(--ink-2)" }), "mediana da etapa"]),
+  );
+  const piso = recorte.filter((l) => l.horas <= H0).length;
+  $("piso").textContent = piso ? `${plural(piso, "passagem ficou", "passagens ficaram")} 6 minutos ou menos na etapa (${pct(100 * piso / recorte.length)} do recorte) e aparece${piso === 1 ? "" : "m"} empilhada${piso === 1 ? "" : "s"} na borda esquerda: o cartão atravessou a coluna quase sem parar.` : "";
+  desenhar();
+  tabelaEtapas();
+  lista();
+  notas();
+}
+
+function desenhar() {
+  const caixa = $("grafico");
+  const W = Math.max(caixa.clientWidth, 300), largo = W >= 760;
+  const n = D.etapas.length;
+  if (largo) {
+    const linha = 62, topo = 34, base = 34, H = topo + n * linha + base;
+    const svg = novoSvg(W, H);
+    painelContagem(svg, 0, 360, topo, linha);
+    painelHoras(svg, 384, W, topo, linha, false);
+    caixa.replaceChildren(svg);
+  } else {
+    const l1 = 44, s1 = novoSvg(W, 30 + n * l1 + 6);
+    painelContagem(s1, 0, W, 30, l1);
+    const l2 = 58, s2 = novoSvg(W, 34 + n * l2 + 34);
+    painelHoras(s2, 0, W, 34, l2, true);
+    caixa.replaceChildren(s1, s2);
+  }
+}
+function novoSvg(W, H) {
+  return el("svg", { viewBox: `0 0 ${W} ${H}`, height: H, role: "img",
+    "aria-label": `Etapas do quadro do grupo ${estado.grupo}: ` + porEtapa.map((p) => `${p.etapa}, ${p.n} cartões, ${p.acima} acima de ${estado.limite} h`).join("; ") });
+}
+function faixaSel(svg, x0, x1, y, alt) {
+  el("rect", { x: x0, y, width: x1 - x0, height: alt, fill: "var(--hover)", rx: 6 }, svg);
+}
+function painelContagem(svg, x0, x1, topo, linha) {
+  const lab = 118, rot = 92;
+  const bx0 = x0 + lab, bx1 = x1 - rot;
+  const max = Math.max(1, ...porEtapa.map((p) => p.n));
+  const x = (v) => bx0 + v / max * (bx1 - bx0);
+  texto(svg, x0, 14, "cartões que passaram pela etapa", { class: "eixo-titulo" });
+  porEtapa.forEach((p, i) => {
+    const y0 = topo + i * linha, yc = y0 + linha / 2, sel = p.etapa === estado.etapa;
+    const g = el("g", { class: "linha-etapa", tabindex: "0", role: "button", "data-foco": `etapa:${p.etapa}`,
+      "aria-pressed": String(sel), "aria-label": `Listar os cartões de ${p.etapa}: ${p.n} cartões, ${p.acima} acima de ${estado.limite} h` }, svg);
+    if (sel) faixaSel(g, x0, x1, y0 + 2, linha - 4);
+    el("rect", { x: x0, y: y0, width: x1 - x0, height: linha, fill: "transparent" }, g);
+    texto(g, x0 + 8, yc - 2, p.etapa, { class: sel ? "rot-forte" : "rot" });
+    if (p.etapa === estado.maior && p.acima) texto(g, x0 + 8, yc + 13, "maior acúmulo", { class: "eixo" });
+    const ate = p.n - p.acima, alt = 16;
+    if (ate) el("rect", { x: x(0), y: yc - alt / 2, width: Math.max(2, x(ate) - x(0) - (p.acima ? 1 : 0)), height: alt, rx: p.acima ? 0 : 4, fill: "var(--series)" }, g);
+    if (p.acima) el("rect", { x: x(ate) + (ate ? 1 : 0), y: yc - alt / 2, width: Math.max(2, x(p.n) - x(ate) - (ate ? 1 : 0)), height: alt, rx: 4, fill: "var(--series-2)" }, g);
+    if (ate && p.acima) el("rect", { x: x(ate) - 1, y: yc - alt / 2, width: 2, height: alt, fill: "var(--surface)" }, g);
+    texto(g, x(p.n) + 8, yc + 4, p.n ? `${num(p.n)} · ${num(p.acima)} acima` : "nenhum", { class: "rot" });
+    const abrir = () => comFoco(() => { estado.etapa = p.etapa; estado.cartao = null; desenhar(); lista(); });
+    g.addEventListener("click", abrir);
+    g.addEventListener("keydown", (ev) => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); abrir(); } });
+    g.addEventListener("pointermove", (ev) => dica.mostrar([
+      ["v", `${plural(p.n, "cartão", "cartões")}`], ["d", p.etapa],
+      ["s", `${num(p.acima)} com mais de ${estado.limite} h · ${horasTxt(p.horas)} somadas`]], ev.clientX, ev.clientY));
+    g.addEventListener("pointerleave", () => dica.esconder());
+  });
+}
+function painelHoras(svg, x0, x1, topo, linha, comRotulos) {
+  const lab = comRotulos ? 104 : 0, px0 = x0 + lab + 6, px1 = x1 - 12;
+  const lH0 = Math.log(H0), lH1 = Math.log(H1);
+  const x = (hh) => px0 + (Math.log(Math.min(Math.max(hh, H0), H1)) - lH0) / (lH1 - lH0) * (px1 - px0);
+  const H = topo + D.etapas.length * linha;
+  texto(svg, x0 + (comRotulos ? 0 : 6), 14, "horas de cada cartão na etapa", { class: "eixo-titulo" });
+  const estreito = px1 - px0 < 420;
+  for (const [v, rot] of TICKS) {
+    el("line", { x1: x(v), x2: x(v), y1: topo, y2: H, stroke: "var(--grid)", "stroke-width": 1 }, svg);
+    if (!(estreito && v === 168)) texto(svg, x(v), H + 16, rot, { class: "eixo", "text-anchor": "middle" });
+  }
+  el("line", { x1: x(estado.limite), x2: x(estado.limite), y1: topo - 8, y2: H, stroke: "var(--ink)", "stroke-width": 1.5 }, svg);
+  texto(svg, x(estado.limite) + 4, topo - 2, `${estado.limite} h`, { class: "rot" });
+  porEtapa.forEach((p, i) => {
+    const y0 = topo + i * linha, yc = y0 + linha / 2, sel = p.etapa === estado.etapa;
+    if (sel) faixaSel(svg, px0 - 6, px1 + 6, y0 + 2, linha - 4);
+    if (comRotulos) texto(svg, x0, yc + 4, p.etapa, { class: sel ? "rot-forte" : "rot" });
+    el("line", { x1: px0, x2: px1, y1: y0 + linha, y2: y0 + linha, stroke: "var(--grid)", "stroke-width": 1 }, svg);
+    const jit = linha * 0.3;
+    for (const c of p.cartoes.slice().reverse()) {
+      const cx = x(c.horas), cy = yc + desvio(c.numero, i) * jit, acima = c.horas > estado.limite;
+      const mk = marca(svg, acima ? "triangulo" : "circulo", cx, cy, 3.6,
+        { fill: acima ? "var(--series-2)" : "var(--series)", stroke: "var(--surface)", "stroke-width": 1.2 });
+      if (estado.cartao && estado.cartao.numero === c.numero && c.etapa === estado.etapa)
+        el("circle", { cx, cy, r: 7.5, fill: "none", stroke: "var(--ink)", "stroke-width": 2 }, svg);
+      const alvo = el("circle", { cx, cy, r: 9, fill: "transparent", style: "cursor:pointer" }, svg);
+      alvo.addEventListener("pointermove", (ev) => dica.mostrar([
+        ["v", horasTxt(c.horas)], ["d", `#${c.numero} · ${c.titulo}`],
+        ["s", `${c.etapa} · ${plural(c.passagens, "passagem", "passagens")}${c.semSaida ? " · sem saída registrada" : ""}`]], ev.clientX, ev.clientY));
+      alvo.addEventListener("pointerleave", () => dica.esconder());
+      alvo.addEventListener("click", () => { estado.etapa = c.etapa; estado.cartao = c; desenhar(); lista(); });
+    }
+    if (p.n) {
+      const med = p.cartoes[Math.floor((p.n - 1) / 2)].horas, med2 = p.cartoes[Math.ceil((p.n - 1) / 2)].horas;
+      const mx = x((med + med2) / 2);
+      el("line", { x1: mx, x2: mx, y1: yc - jit - 5, y2: yc + jit + 5, stroke: "var(--surface)", "stroke-width": 6, "stroke-linecap": "round" }, svg);
+      el("line", { x1: mx, x2: mx, y1: yc - jit - 5, y2: yc + jit + 5, stroke: "var(--ink-2)", "stroke-width": 4, "stroke-linecap": "round" }, svg);
+    }
+  });
+}
+
+function tabelaEtapas() {
+  const linhas = porEtapa.map((p) => [p.etapa, num(p.n), num(p.acima), p.n ? horasTxt(p.horas / p.n) : "–",
+    p.n ? horasTxt(p.cartoes[0].horas) : "–", num(p.semSaida)]);
+  $("tabela-etapas").replaceChildren(tabela(
+    [{ t: "Etapa" }, { t: "Cartões", num: true }, { t: `Acima de ${estado.limite} h`, num: true }, { t: "Média por cartão", num: true },
+     { t: "Maior tempo", num: true }, { t: "Passagens sem saída", num: true }],
+    linhas, "Cartões e tempo por etapa"));
+}
+
+function lista() {
+  const p = porEtapa.find((q) => q.etapa === estado.etapa);
+  $("h-lista").textContent = p ? `Cartões em ${p.etapa}` : "Cartões da etapa";
+  if (!p || !p.n) { $("lista-sub").textContent = ""; $("lista").replaceChildren(h("p", { class: "vazio", text: "Nenhum cartão nesta etapa no recorte escolhido." })); return; }
+  $("lista-sub").textContent = `${plural(p.n, "cartão", "cartões")}, do que ficou mais tempo ao que ficou menos. ${plural(p.acima, "passou", "passaram")} de ${estado.limite} h.`;
+  const linhas = p.cartoes.map((c) => {
+    const obs = h("span", {}, [
+      c.horas > estado.limite ? h("span", { class: "chip alerta", text: `acima de ${estado.limite} h` }) : null,
+      c.abertos ? h("span", { class: "chip", text: "aberto no fim do registro" }) : null,
+      c.semSaida && !c.abertos ? h("span", { class: "chip", text: "saída = fechamento do cartão" }) : null,
+    ]);
+    return { classe: estado.cartao === c ? "linha-sel" : "", celulas: [`#${c.numero}`, c.titulo, situacaoTxt(c.situacao), c.resp || "sem responsável",
+      num(c.passagens), horasTxt(c.horas), obs] };
+  });
+  $("lista").replaceChildren(tabela(
+    [{ t: "Cartão", classe: "nw" }, { t: "Título" }, { t: "Situação" }, { t: "Responsável", classe: "nw" }, { t: "Passagens", num: true }, { t: "Tempo na etapa", num: true }, { t: "Observação" }],
+    linhas, `Cartões da etapa ${p.etapa}`));
+  const selRow = $("lista").querySelector("tr.linha-sel");
+  if (selRow) selRow.scrollIntoView({ block: "nearest" });
+}
+
+function notas() {
+  const li = (id, itens) => $(id).replaceChildren(...itens.map((t) => h("li", { text: t })));
+  li("nota-origem", [
+    "Fonte: kanban_eventos.csv (entradas e saídas de coluna) e cartoes.csv (sprint e fechamento), pelas consultas r02_*.sql de sqlite/.",
+    "Horário de Brasília (America/Sao_Paulo). As 24 linhas repetidas do arquivo de eventos têm a coluna vazia e não contam como etapa.",
+    `Data de extração não registrada. Os arquivos entraram no repositório em ${fmt(D.entrada_repositorio)}; o registro mais recente do conjunto é de ${fmt(D.registro_mais_recente)}.`,
+  ]);
+  li("nota-etapa", [
+    "Etapa é o valor de coluna que casa com o Scrum Board do grupo (quadro_colunas): Backlog, Doing, Waiting Review e Review.",
+    `Outros ${num(D.eventos_rotulo)} eventos (${num(D.grafias_rotulo)} grafias, como CODE, SIZE_M ou ART.5) são marcação de rótulo e ficam fora, assim como ${num(D.eventos_coluna_vazia)} eventos com a coluna vazia.`,
+    "Cartão que volta à etapa soma todas as passagens por ela.",
+  ]);
+  li("nota-aberto", [
+    "Entrada sem saída registrada não some da conta: termina no fechamento do cartão, se ele foi fechado depois de entrar na etapa.",
+    "Se o cartão não foi fechado, termina no último registro do conjunto de dados, e aparece como \"aberto no fim do registro\".",
+  ]);
+}
+
+iniciar();
+</script>

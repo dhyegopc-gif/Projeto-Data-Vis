@@ -1,0 +1,256 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cobertura do registro</title>
+<style>
+/*__CSS_COMUM__*/
+.destaque {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+  padding: 14px 18px; display: grid; gap: 4px;
+}
+.destaque p { margin: 0; max-width: 90ch; }
+.destaque .grande { font-size: 16px; font-weight: 600; text-wrap: balance; }
+.matriz td { vertical-align: middle; }
+.matriz td.campo { min-width: 180px; }
+.matriz td.campo .arq { display: block; font-size: 11px; color: var(--muted); }
+.matriz td.cel { min-width: 132px; }
+.matriz td.efeito { min-width: 240px; color: var(--ink-2); font-size: 12px; }
+.matriz td.efeito a { margin-left: 4px; }
+.celula { display: grid; gap: 3px; }
+.celula .v { font-variant-numeric: tabular-nums; font-weight: 600; }
+.celula .n { font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.medidor { position: relative; height: 8px; background: var(--grid); border-radius: 4px; width: 100%; max-width: 120px; }
+.medidor > i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 4px; background: var(--series); }
+.medidor > i.baixo { background: var(--series-2); }
+.medidor > b { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--ink); }
+tr.grupo-titulo td { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 600; padding-top: 16px; border-bottom: 1px solid var(--axis); }
+.prejudicadas { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.prejudicadas li { display: grid; gap: 2px; border-bottom: 1px solid var(--grid); padding-bottom: 8px; }
+.prejudicadas .tela { font-weight: 600; }
+.prejudicadas .itens { color: var(--ink-2); font-size: 13px; }
+</style>
+
+<div class="wrap">
+  <nav aria-label="Telas do painel"><ul class="telas" id="telas"></ul></nav>
+  <header>
+    <p class="eyebrow">R03 · Cobertura do registro · abrir antes das outras telas</p>
+    <h1 id="titulo">Quanto de cada campo o grupo preencheu, e que leitura isso compromete</h1>
+    <p class="pergunta">O registro deste grupo está completo o suficiente para sustentar as leituras das outras telas? Aqui o vazio é o dado: nada foi imputado, corrigido ou preenchido por inferência.</p>
+  </header>
+
+  <section class="filtros" aria-label="Filtros">
+    <div class="campo"><span>Cobertura mínima para confiar na leitura (premissa)</span><div class="presets" id="f-limiar" role="group" aria-label="Cobertura mínima"></div></div>
+  </section>
+
+  <section class="destaque" aria-label="O ponto que mais pesa" id="destaque"></section>
+
+  <section class="tiles" aria-label="Campos abaixo do mínimo, por grupo" id="tiles"></section>
+
+  <div class="pilha">
+    <section class="card" aria-labelledby="h-matriz">
+      <div>
+        <h2 id="h-matriz">Cobertura de cada campo, por grupo</h2>
+        <p class="limite"><strong>Cobertura baixa não é desleixo do grupo.</strong> Pode ser configuração da ferramenta, conta não vinculada ao cadastro ou processo combinado com a orientação.</p>
+        <p class="recorte" id="recorte"></p>
+      </div>
+      <div class="legenda" aria-hidden="true">
+        <span><i class="chave s1"></i>no mínimo ou acima</span>
+        <span><i class="chave s2"></i>abaixo do mínimo, com a marca ▲</span>
+        <span><i class="chave linha" style="width: 2px; height: 12px; background: var(--ink)"></i><span id="leg-limiar"></span></span>
+      </div>
+      <div class="rolagem" id="matriz"></div>
+    </section>
+    <section class="card" aria-labelledby="h-prej">
+      <div>
+        <h2 id="h-prej">Leituras prejudicadas, tela por tela</h2>
+        <p class="contagem" id="prej-sub"></p>
+      </div>
+      <ul class="prejudicadas" id="prejudicadas"></ul>
+    </section>
+  </div>
+
+  <section class="card" aria-labelledby="h-prem">
+    <div>
+      <h2 id="h-prem">Premissas desta tela</h2>
+      <p class="contagem">Escolhas do grupo, não definições da orientação. Todas a confirmar com o professor; a mesma lista está no requisito.</p>
+    </div>
+    <div class="rolagem" id="premissas"></div>
+  </section>
+
+  <footer class="notas">
+    <div><h3>Nota de origem</h3><ul id="nota-origem"></ul></div>
+    <div>
+      <h3>Como ler</h3>
+      <ul>
+        <li>Percentual de registros com o campo preenchido, sobre o total daquele arquivo no grupo.</li>
+        <li>Autoria e responsável "resolvidos" são pessoas que existem no cadastro; [externo] e [bot] não existem lá e contam como vazio.</li>
+        <li>O mínimo de 80% é premissa nossa para dizer "dá para confiar"; troque acima para ver com outro corte.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Campos que nenhuma tela usa</h3>
+      <ul><li>O prazo do cartão aparece no fim da matriz para registro: quase ninguém preenche, e por isso nenhuma tela fala em atraso.</li></ul>
+    </div>
+    <div>
+      <h3>O que esta tela não sustenta</h3>
+      <ul>
+        <li>O motivo do vazio. A tela aponta onde perguntar, não o que concluir.</li>
+        <li>Correção de dado. Nenhum campo foi preenchido aqui; as outras telas trabalham com o que existe.</li>
+      </ul>
+    </div>
+  </footer>
+</div>
+<div id="tip" role="tooltip" hidden></div>
+
+<script>
+//__JS_COMUM__
+const D = __DADOS__;
+
+const LINHAS = D.linhas.map(([grupo, arquivo, campo, registros, preenchidos, pctv, efeito, tela]) =>
+  ({ grupo, arquivo, campo, registros, preenchidos, pct: pctv, efeito, tela }));
+const GRUPOS = [...new Set(LINHAS.map((l) => l.grupo))].sort();
+const LIMIARES = [70, 80, 90];
+const estado = { limiar: 80 };
+const CAMPOS = [...new Set(LINHAS.map((l) => `${l.arquivo}|${l.campo}`))].map((k) => {
+  const [arquivo, campo] = k.split("|");
+  const ls = LINHAS.filter((l) => l.arquivo === arquivo && l.campo === campo);
+  return { arquivo, campo, efeito: ls[0].efeito, tela: ls[0].tela, por: Object.fromEntries(ls.map((l) => [l.grupo, l])),
+           pior: Math.min(...ls.map((l) => l.pct)) };
+});
+const telasDe = (c) => c.tela === "-" ? [] : c.tela.split(",").map((t) => t.trim());
+const CAMPO_TXT = {
+  "commits|autor_id resolvido (arquivo inteiro)": "Autoria do commit (arquivo inteiro)",
+  "commits|autor_id resolvido (base do R01)": "Autoria do commit (base contada no R01)",
+  "commits|número do cartão (#N) na base do R01": "Número do cartão citado no commit",
+  "cartoes|tamanho (rótulo PP a GG)": "Tamanho do cartão (PP a GG)",
+  "cartoes|responsaveis_ids resolvido": "Responsável identificado no cartão",
+  "cartoes|sprint": "Sprint do cartão",
+  "cartoes|prazo_em": "Prazo do cartão",
+  "merge_requests|autor_id resolvido": "Autoria do merge request",
+  "merge_requests|sprint": "Sprint do merge request",
+  "merge_requests|revisores_ids": "Revisor designado no MR",
+  "sprints|inicio_em e prazo_em": "Datas da sprint",
+};
+const CAMPO_CURTO = {
+  "commits|autor_id resolvido (arquivo inteiro)": "autoria do commit",
+  "commits|autor_id resolvido (base do R01)": "autoria na base do R01",
+  "commits|número do cartão (#N) na base do R01": "número do cartão no commit",
+  "cartoes|tamanho (rótulo PP a GG)": "tamanho do cartão",
+  "cartoes|responsaveis_ids resolvido": "responsável identificado",
+  "cartoes|sprint": "sprint do cartão",
+  "cartoes|prazo_em": "prazo do cartão",
+  "merge_requests|autor_id resolvido": "autoria do MR",
+  "merge_requests|sprint": "sprint do MR",
+  "merge_requests|revisores_ids": "revisor do MR",
+  "sprints|inicio_em e prazo_em": "datas da sprint",
+};
+const chaveCampo = (c) => `${c.arquivo}|${c.campo}`;
+const nomeCampo = (c) => CAMPO_TXT[chaveCampo(c)] || c.campo;
+const curto = (c) => CAMPO_CURTO[chaveCampo(c)] || c.campo;
+
+function iniciar() {
+  montarTelas("R03");
+  montarPremissas();
+  atualizar();
+}
+function montarFiltros() {
+  const cl = $("f-limiar");
+  cl.replaceChildren();
+  for (const l of LIMIARES) {
+    const b = h("button", { type: "button", "data-foco": `limiar:${l}`, "aria-pressed": String(estado.limiar === l), text: `${l}%` + (l === 80 ? " (padrão)" : "") });
+    b.addEventListener("click", () => { estado.limiar = l; atualizar(); });
+    cl.appendChild(b);
+  }
+}
+
+function atualizar() { comFoco(renderizar); }
+function renderizar() {
+  montarFiltros();
+  const lim = estado.limiar;
+  $("leg-limiar").textContent = `mínimo de ${lim}%`;
+  $("recorte").textContent = `Campos em ordem da pior cobertura para a melhor. Cada linha diz o que o vazio impede e em que tela.`;
+
+  // destaque: autoria dos commits, o exemplo que o requisito pede
+  const aut = CAMPOS.find((c) => c.campo === "autor_id resolvido (arquivo inteiro)");
+  const ord = GRUPOS.slice().sort((a, b) => aut.por[a].pct - aut.por[b].pct);
+  const pior = aut.por[ord[0]], melhor = aut.por[ord[ord.length - 1]];
+  const semAutor = 100 - pior.pct;
+  $("destaque").replaceChildren(
+    h("p", { class: "grande", text: `A autoria dos commits do ${pior.grupo} é bem menos confiável que a do ${melhor.grupo}: ${pct(pior.pct)} dos commits com autor identificado, contra ${pct(melhor.pct)}.` }),
+    h("p", { class: "contagem", text: `No ${pior.grupo}, ${num(semAutor / 10, 0) === "3" ? "três" : num(semAutor / 10, 0)} de cada dez commits não têm autor identificado (${num(pior.registros - pior.preenchidos)} de ${num(pior.registros)}). Qualquer leitura por pessoa neste grupo, como a lista de commits do R01 ou a concentração por commits do R05, fica apoiada em menos gente do que parece.` }),
+  );
+
+  // tiles: campos abaixo do mínimo por grupo (só campos que alguma tela usa)
+  const usados = CAMPOS.filter((c) => telasDe(c).length);
+  $("tiles").replaceChildren(...GRUPOS.map((g) => {
+    const baixos = usados.filter((c) => c.por[g] && c.por[g].pct < lim);
+    const telas = [...new Set(baixos.flatMap(telasDe))].sort();
+    return h("div", { class: "tile" }, [
+      h("span", { class: "rotulo", text: `${g}: campos abaixo de ${lim}%` }),
+      h("span", { class: "valor", text: `${baixos.length} de ${usados.length}` }),
+      h("span", { class: "sub", text: baixos.length ? `afeta ${telas.join(", ")}: ${baixos.map(curto).join("; ")}` : "nenhuma leitura prejudicada neste corte" }),
+    ]);
+  }).concat([h("div", { class: "tile" }, [
+    h("span", { class: "rotulo", text: "Pior cobertura entre os campos usados" }),
+    h("span", { class: "valor", text: pct(Math.min(...usados.map((c) => c.pior))) }),
+    h("span", { class: "sub", text: nomeCampo(usados.slice().sort((a, b) => a.pior - b.pior)[0]) }),
+  ])]));
+
+  matriz();
+  prejudicadas();
+  notas();
+}
+
+function celula(l) {
+  if (!l) return "–";
+  const baixo = l.pct < estado.limiar;
+  return h("div", { class: "celula" }, [
+    h("span", { class: "v" }, [pct(l.pct), baixo ? h("span", { class: "chip alerta", text: "abaixo" }) : null]),
+    h("span", { class: "medidor", "aria-hidden": "true" }, [
+      h("i", { class: baixo ? "baixo" : "", style: `width:${l.pct}%` }),
+      h("b", { style: `left:calc(${estado.limiar}% - 1px)` })]),
+    h("span", { class: "n", text: `${num(l.preenchidos)} de ${num(l.registros)}` }),
+  ]);
+}
+function matriz() {
+  const usados = CAMPOS.filter((c) => telasDe(c).length).sort((a, b) => a.pior - b.pior);
+  const fora = CAMPOS.filter((c) => !telasDe(c).length);
+  const linha = (c) => h("tr", {}, [
+    h("td", { class: "campo" }, [nomeCampo(c), h("span", { class: "arq", text: `${c.arquivo} · ${c.campo}` })]),
+    ...GRUPOS.map((g) => h("td", { class: "cel" }, [celula(c.por[g])])),
+    h("td", { class: "efeito" }, [`Sem ele: ${c.efeito}.`, ...telasDe(c).map((t) => linkTela(t) || t)]),
+  ]);
+  const t = h("table", { class: "matriz" }, [
+    h("caption", { class: "sr", text: "Cobertura de cada campo por grupo" }),
+    h("thead", {}, [h("tr", {}, [h("th", { scope: "col", text: "Campo" }), ...GRUPOS.map((g) => h("th", { scope: "col", text: g })), h("th", { scope: "col", text: "O que o vazio impede" })])]),
+    h("tbody", {}, [...usados.map(linha),
+      h("tr", { class: "grupo-titulo" }, [h("td", { colspan: String(GRUPOS.length + 2), text: "Campos que nenhuma tela usa" })]),
+      ...fora.map(linha)]),
+  ]);
+  $("matriz").replaceChildren(t);
+}
+
+function prejudicadas() {
+  const lim = estado.limiar;
+  const telas = [...new Set(CAMPOS.flatMap(telasDe))].sort();
+  $("prej-sub").textContent = `Com o mínimo de ${lim}%. Cada tela e os grupos em que ela perde apoio.`;
+  $("prejudicadas").replaceChildren(...telas.map((t) => {
+    const itens = [];
+    for (const c of CAMPOS.filter((c) => telasDe(c).includes(t)))
+      for (const g of GRUPOS) if (c.por[g] && c.por[g].pct < lim) itens.push(`${g}: ${curto(c)} ${pct(c.por[g].pct)}`);
+    const tela = D.telas.find((x) => x.id === t);
+    return h("li", {}, [
+      h("span", { class: "tela" }, [linkTela(t) || t, ` · ${tela ? tela.nome : ""}`]),
+      h("span", { class: "itens", text: itens.length ? itens.join(" · ") : "sem campo abaixo do mínimo nos três grupos" }),
+    ]);
+  }));
+}
+
+function notas() {
+  $("nota-origem").replaceChildren(...[
+    "Fonte: commits.csv, cartoes.csv, merge_requests.csv e sprints.csv, pela consulta r03_cobertura_registro.sql de sqlite/.",
+    `Data de extração não registrada. Os arquivos entraram no repositório em ${fmt(D.entrada_repositorio)}; o registro mais recente do conjunto é de ${fmt(D.registro_mais_recente)}.`,
+  ].map((t) => h("li", { text: t })));
+}
+
+iniciar();
+</script>

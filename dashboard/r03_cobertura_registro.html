@@ -1,0 +1,594 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cobertura do registro</title>
+<style>
+/* Estilo comum das telas R02 a R05. Mesmos tokens e componentes do R01
+   (r01_modelo.html); o gerador injeta este arquivo no <style> de cada modelo.
+   Leitura em uma coluna: pergunta, filtros, resumo, gráfico principal,
+   detalhe, notas. */
+:root {
+  --page: #f9f9f7;
+  --surface: #fcfcfb;
+  --ink: #0b0b0b;
+  --ink-2: #52514e;
+  --muted: #6f6d68;
+  --grid: #e1e0d9;
+  --axis: #c3c2b7;
+  --series: #2a78d6;          /* dentro do limite / do planejado */
+  --series-strong: #184f95;   /* marca selecionada */
+  --series-2: #eb6834;        /* passou do limite / do planejado */
+  --wash-2: rgba(235, 104, 52, 0.045);
+  --wash: rgba(42, 120, 214, 0.08);
+  --hover: rgba(42, 120, 214, 0.10);
+  --zero: #9a988f;
+  --border: rgba(11, 11, 11, 0.10);
+  --chip: #f0efec;
+  --focus: #2a78d6;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #0d0d0d;
+    --surface: #1a1a19;
+    --ink: #ffffff;
+    --ink-2: #c3c2b7;
+    --muted: #a3a197;
+    --grid: #2c2c2a;
+    --axis: #383835;
+    --series: #3987e5;
+    --series-strong: #9ec5f4;
+    --series-2: #d95926;
+    --wash-2: rgba(217, 89, 38, 0.07);
+    --wash: rgba(57, 135, 229, 0.12);
+    --hover: rgba(57, 135, 229, 0.16);
+    --zero: #77756d;
+    --border: rgba(255, 255, 255, 0.10);
+    --chip: #2c2c2a;
+    --focus: #6da7ec;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d;
+  --surface: #1a1a19;
+  --ink: #ffffff;
+  --ink-2: #c3c2b7;
+  --muted: #a3a197;
+  --grid: #2c2c2a;
+  --axis: #383835;
+  --series: #3987e5;
+  --series-strong: #9ec5f4;
+  --series-2: #d95926;
+  --wash-2: rgba(217, 89, 38, 0.07);
+  --wash: rgba(57, 135, 229, 0.12);
+  --hover: rgba(57, 135, 229, 0.16);
+  --zero: #77756d;
+  --border: rgba(255, 255, 255, 0.10);
+  --chip: #2c2c2a;
+  --focus: #6da7ec;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--ink); font: 14px/1.5 var(--sans); }
+a { color: var(--ink); text-decoration: underline; text-underline-offset: 2px; }
+a:hover { color: var(--series-strong); }
+.wrap {
+  max-width: 1180px; margin: 0 auto;
+  padding-inline: 20px; padding-block: 20px 48px;
+  display: grid; gap: 20px;
+}
+@media (max-width: 520px) { .wrap { padding-inline: 16px; } }
+
+/* navegação entre as telas */
+.telas { display: flex; flex-wrap: wrap; gap: 4px 6px; font-size: 12px; margin: 0; padding: 0; list-style: none; }
+.telas a {
+  display: inline-block; color: var(--ink-2); text-decoration: none;
+  border: 1px solid var(--border); border-radius: 999px; padding: 3px 10px;
+}
+.telas a:hover { border-color: var(--ink-2); color: var(--ink); }
+.telas a[aria-current="page"] { background: var(--ink); color: var(--page); border-color: var(--ink); }
+
+header { display: grid; gap: 6px; }
+.eyebrow { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin: 0; }
+h1 { font-size: 24px; line-height: 1.25; margin: 0; font-weight: 600; text-wrap: balance; }
+.pergunta { margin: 0; color: var(--ink-2); max-width: 72ch; }
+
+.filtros {
+  display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 20px;
+  padding-block: 12px; border-block: 1px solid var(--border);
+}
+.campo { display: grid; gap: 4px; font-size: 12px; color: var(--ink-2); min-width: 0; }
+.campo > span { letter-spacing: 0.02em; }
+select {
+  font: inherit; font-size: 14px; color: var(--ink); background: var(--surface);
+  border: 1px solid var(--axis); border-radius: 6px; padding: 5px 8px; min-height: 34px; max-width: 100%;
+}
+.presets { display: flex; flex-wrap: wrap; gap: 6px; }
+.presets button, .botao {
+  font: inherit; font-size: 13px; color: var(--ink); background: var(--surface);
+  border: 1px solid var(--axis); border-radius: 999px; padding: 5px 12px; min-height: 34px; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.presets button[aria-pressed="true"] { background: var(--ink); color: var(--page); border-color: var(--ink); }
+.presets button[aria-pressed="false"] .marca { opacity: 0.35; }
+.presets button:hover, .botao:hover { border-color: var(--ink-2); }
+.presets .nota { font-size: 12px; color: var(--muted); align-self: center; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+.tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 860px) { .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.tile {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+  padding: 14px 16px; display: grid; gap: 2px; align-content: start; min-width: 0;
+}
+.tile .rotulo { font-size: 12px; color: var(--ink-2); }
+.tile .valor { font-size: 28px; font-weight: 600; line-height: 1.2; overflow-wrap: anywhere; }
+.tile .sub { font-size: 12px; color: var(--muted); }
+
+.card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+  padding: 16px 18px; display: grid; gap: 10px; min-width: 0;
+}
+.card > * { min-width: 0; }
+.card-topo { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 8px 16px; }
+.card-topo > div { min-width: 0; flex: 1 1 320px; }
+.card h2 { font-size: 16px; margin: 0; font-weight: 600; text-wrap: balance; }
+.limite { margin: 2px 0 0; font-size: 13px; color: var(--ink-2); max-width: 80ch; }
+.limite strong { font-weight: 600; color: var(--ink); }
+.recorte { margin: 2px 0 0; font-size: 12px; color: var(--muted); max-width: 90ch; }
+.dica { margin: 0; font-size: 12px; color: var(--muted); }
+.legenda { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12px; color: var(--ink-2); }
+.legenda > span { display: inline-flex; align-items: center; gap: 6px; }
+.chave { width: 12px; height: 12px; border-radius: 3px; display: inline-block; flex: none; }
+.chave.s1 { background: var(--series); }
+.chave.s2 { background: var(--series-2); }
+.chave.linha { height: 2px; border-radius: 1px; background: var(--ink-2); }
+.chave.faixa { background: var(--wash-2); border: 1px solid var(--axis); }
+.marca-svg { display: inline-block; flex: none; }
+
+.grafico { width: 100%; }
+.grafico svg { display: block; width: 100%; overflow: visible; }
+.grafico svg:focus-visible { outline-offset: 4px; border-radius: 4px; }
+.eixo { font-size: 11px; fill: var(--muted); font-variant-numeric: tabular-nums; }
+.eixo-titulo { font-size: 12px; fill: var(--ink-2); }
+.rot { font-size: 11px; fill: var(--ink-2); }
+.rot-forte { font-size: 12px; fill: var(--ink); font-weight: 600; }
+
+.duas { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+@media (max-width: 900px) { .duas { grid-template-columns: minmax(0, 1fr); } }
+.pilha { display: grid; gap: 20px; min-width: 0; }
+
+.rolagem { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th { text-align: left; font-weight: 600; font-size: 12px; color: var(--ink-2); padding: 6px 8px; border-bottom: 1px solid var(--axis); white-space: nowrap; }
+td { padding: 6px 8px; border-bottom: 1px solid var(--grid); vertical-align: top; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+td.hora { font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--ink-2); }
+td.nw { white-space: nowrap; }
+.chip { display: inline-block; font-size: 11px; background: var(--chip); color: var(--ink-2); border-radius: 999px; padding: 1px 8px; margin-left: 4px; white-space: nowrap; }
+.chip.alerta::before { content: "▲ "; font-size: 9px; }
+.vazio { margin: 0; color: var(--ink-2); }
+.contagem { font-size: 13px; color: var(--ink-2); margin: 0; }
+tr.linha-sel td { background: var(--hover); }
+button.link { font: inherit; color: var(--ink); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; text-align: left; }
+
+.notas {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 28px;
+  border-top: 1px solid var(--border); padding-top: 18px; font-size: 13px; color: var(--ink-2);
+}
+@media (max-width: 760px) { .notas { grid-template-columns: minmax(0, 1fr); } }
+.notas h3 { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin: 0 0 6px; font-weight: 600; }
+.notas p, .notas ul { margin: 0; max-width: 68ch; }
+.notas ul { padding-left: 18px; display: grid; gap: 4px; }
+.notas code { font-size: 12px; }
+
+#tip {
+  position: fixed; z-index: 10; pointer-events: none;
+  background: var(--surface); color: var(--ink); border: 1px solid var(--border);
+  border-radius: 8px; padding: 8px 10px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  font-size: 12px; line-height: 1.4; max-width: 280px;
+}
+#tip .v { font-size: 15px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+#tip .d { color: var(--ink-2); }
+#tip .s { color: var(--muted); margin-top: 2px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (prefers-reduced-motion: no-preference) { .grafico rect, .grafico path, .grafico circle { transition: fill 120ms, opacity 120ms; } }
+
+.destaque {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+  padding: 14px 18px; display: grid; gap: 4px;
+}
+.destaque p { margin: 0; max-width: 90ch; }
+.destaque .grande { font-size: 16px; font-weight: 600; text-wrap: balance; }
+.matriz td { vertical-align: middle; }
+.matriz td.campo { min-width: 180px; }
+.matriz td.campo .arq { display: block; font-size: 11px; color: var(--muted); }
+.matriz td.cel { min-width: 132px; }
+.matriz td.efeito { min-width: 240px; color: var(--ink-2); font-size: 12px; }
+.matriz td.efeito a { margin-left: 4px; }
+.celula { display: grid; gap: 3px; }
+.celula .v { font-variant-numeric: tabular-nums; font-weight: 600; }
+.celula .n { font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.medidor { position: relative; height: 8px; background: var(--grid); border-radius: 4px; width: 100%; max-width: 120px; }
+.medidor > i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 4px; background: var(--series); }
+.medidor > i.baixo { background: var(--series-2); }
+.medidor > b { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--ink); }
+tr.grupo-titulo td { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 600; padding-top: 16px; border-bottom: 1px solid var(--axis); }
+.prejudicadas { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.prejudicadas li { display: grid; gap: 2px; border-bottom: 1px solid var(--grid); padding-bottom: 8px; }
+.prejudicadas .tela { font-weight: 600; }
+.prejudicadas .itens { color: var(--ink-2); font-size: 13px; }
+</style>
+
+<div class="wrap">
+  <nav aria-label="Telas do painel"><ul class="telas" id="telas"></ul></nav>
+  <header>
+    <p class="eyebrow">R03 · Cobertura do registro · abrir antes das outras telas</p>
+    <h1 id="titulo">Quanto de cada campo o grupo preencheu, e que leitura isso compromete</h1>
+    <p class="pergunta">O registro deste grupo está completo o suficiente para sustentar as leituras das outras telas? Aqui o vazio é o dado: nada foi imputado, corrigido ou preenchido por inferência.</p>
+  </header>
+
+  <section class="filtros" aria-label="Filtros">
+    <div class="campo"><span>Cobertura mínima para confiar na leitura (premissa)</span><div class="presets" id="f-limiar" role="group" aria-label="Cobertura mínima"></div></div>
+  </section>
+
+  <section class="destaque" aria-label="O ponto que mais pesa" id="destaque"></section>
+
+  <section class="tiles" aria-label="Campos abaixo do mínimo, por grupo" id="tiles"></section>
+
+  <div class="pilha">
+    <section class="card" aria-labelledby="h-matriz">
+      <div>
+        <h2 id="h-matriz">Cobertura de cada campo, por grupo</h2>
+        <p class="limite"><strong>Cobertura baixa não é desleixo do grupo.</strong> Pode ser configuração da ferramenta, conta não vinculada ao cadastro ou processo combinado com a orientação.</p>
+        <p class="recorte" id="recorte"></p>
+      </div>
+      <div class="legenda" aria-hidden="true">
+        <span><i class="chave s1"></i>no mínimo ou acima</span>
+        <span><i class="chave s2"></i>abaixo do mínimo, com a marca ▲</span>
+        <span><i class="chave linha" style="width: 2px; height: 12px; background: var(--ink)"></i><span id="leg-limiar"></span></span>
+      </div>
+      <div class="rolagem" id="matriz"></div>
+    </section>
+    <section class="card" aria-labelledby="h-prej">
+      <div>
+        <h2 id="h-prej">Leituras prejudicadas, tela por tela</h2>
+        <p class="contagem" id="prej-sub"></p>
+      </div>
+      <ul class="prejudicadas" id="prejudicadas"></ul>
+    </section>
+  </div>
+
+  <section class="card" aria-labelledby="h-prem">
+    <div>
+      <h2 id="h-prem">Premissas desta tela</h2>
+      <p class="contagem">Escolhas do grupo, não definições da orientação. Todas a confirmar com o professor; a mesma lista está no requisito.</p>
+    </div>
+    <div class="rolagem" id="premissas"></div>
+  </section>
+
+  <footer class="notas">
+    <div><h3>Nota de origem</h3><ul id="nota-origem"></ul></div>
+    <div>
+      <h3>Como ler</h3>
+      <ul>
+        <li>Percentual de registros com o campo preenchido, sobre o total daquele arquivo no grupo.</li>
+        <li>Autoria e responsável "resolvidos" são pessoas que existem no cadastro; [externo] e [bot] não existem lá e contam como vazio.</li>
+        <li>O mínimo de 80% é premissa nossa para dizer "dá para confiar"; troque acima para ver com outro corte.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Campos que nenhuma tela usa</h3>
+      <ul><li>O prazo do cartão aparece no fim da matriz para registro: quase ninguém preenche, e por isso nenhuma tela fala em atraso.</li></ul>
+    </div>
+    <div>
+      <h3>O que esta tela não sustenta</h3>
+      <ul>
+        <li>O motivo do vazio. A tela aponta onde perguntar, não o que concluir.</li>
+        <li>Correção de dado. Nenhum campo foi preenchido aqui; as outras telas trabalham com o que existe.</li>
+      </ul>
+    </div>
+  </footer>
+</div>
+<div id="tip" role="tooltip" hidden></div>
+
+<script>
+// Funções comuns das telas R02 a R05 (o gerador injeta antes do código da tela).
+// Todo texto que vem do dado entra por textContent, nunca por innerHTML.
+const NS = "http://www.w3.org/2000/svg";
+const $ = (id) => document.getElementById(id);
+
+function el(tag, attrs, pai) {
+  const e = document.createElementNS(NS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (pai) pai.appendChild(e);
+  return e;
+}
+function h(tag, props, filhos) {
+  const e = document.createElement(tag);
+  if (props) for (const k in props) {
+    if (k === "text") e.textContent = props[k];
+    else if (k === "class") e.className = props[k];
+    else e.setAttribute(k, props[k]);
+  }
+  if (filhos) for (const f of filhos) if (f !== null && f !== undefined && f !== false)
+    e.appendChild(typeof f === "string" || typeof f === "number" ? document.createTextNode(String(f)) : f);
+  return e;
+}
+function texto(svgPai, x, y, conteudo, attrs) {
+  const t = el("text", Object.assign({ x, y }, attrs || {}), svgPai);
+  t.textContent = conteudo;
+  return t;
+}
+
+const num = (n, casas) => Number(n).toLocaleString("pt-BR", { maximumFractionDigits: casas ?? 0, minimumFractionDigits: casas ? 0 : 0 });
+const num1 = (n) => Number(n).toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const pct = (n) => num1(n) + "%";
+const plural = (n, um, varios) => num(n) + " " + (n === 1 ? um : varios);
+const fmt = (iso) => iso ? iso.slice(8, 10) + "/" + iso.slice(5, 7) + "/" + iso.slice(0, 4) : "–";
+const fmtDH = (iso) => iso ? fmt(iso) + " " + iso.slice(11, 16) : "–";
+
+// Duração em linguagem comum, a partir de dias (fração)
+function duracao(dias) {
+  const horas = dias * 24;
+  if (horas < 1) return `${Math.max(1, Math.round(horas * 60))} min`;
+  if (horas < 24) return `${num(horas, horas < 10 ? 1 : 0)} h`;
+  return `${num(dias, dias < 10 ? 1 : 0)} ${dias < 1.95 ? "dia" : "dias"}`;
+}
+
+// Dica flutuante: um só elemento #tip para a página
+const dica = {
+  mostrar(linhas, x, y) {
+    const t = $("tip");
+    t.replaceChildren(...linhas.map(([cls, txt]) => h("div", { class: cls, text: txt })));
+    t.hidden = false;
+    const r = t.getBoundingClientRect();
+    let px = x + 14, py = y + 14;
+    if (px + r.width > innerWidth - 8) px = x - r.width - 14;
+    if (py + r.height > innerHeight - 8) py = y - r.height - 14;
+    t.style.left = Math.max(8, px) + "px";
+    t.style.top = Math.max(8, py) + "px";
+  },
+  noElemento(linhas, alvo) {
+    const r = alvo.getBoundingClientRect();
+    this.mostrar(linhas, r.left + r.width / 2, r.top);
+  },
+  esconder() { $("tip").hidden = true; },
+};
+addEventListener("scroll", () => dica.esconder(), { passive: true });
+
+// Redesenhar recria botões e SVG, e o foco do teclado se perderia. Quem tem
+// data-foco recebe o foco de volta depois de fn(), pelo mesmo valor.
+function comFoco(fn) {
+  const a = document.activeElement;
+  const k = a && a.getAttribute ? a.getAttribute("data-foco") : null;
+  fn();
+  if (k) {
+    const e = document.querySelector(`[data-foco="${CSS.escape(k)}"]`);
+    if (e) e.focus();
+  }
+}
+
+// Botão "Ver como tabela" que alterna um contêiner
+function alternarTabela(botaoId, caixaId) {
+  const b = $(botaoId), c = $(caixaId);
+  b.addEventListener("click", () => {
+    const abrir = c.hidden;
+    c.hidden = !abrir;
+    b.setAttribute("aria-expanded", String(abrir));
+    b.textContent = abrir ? "Ocultar tabela" : "Ver como tabela";
+  });
+}
+
+// Tabela simples: colunas [{t: título, num: bool}], linhas de células (texto ou nó)
+function tabela(colunas, linhas, legenda) {
+  const tb = h("table", {}, [
+    legenda ? h("caption", { class: "sr", text: legenda }) : null,
+    h("thead", {}, [h("tr", {}, colunas.map((c) => h("th", { class: c.num ? "num" : "", scope: "col", text: c.t })))]),
+    h("tbody", {}, linhas.map((l) => h("tr", l.classe ? { class: l.classe } : {},
+      (l.celulas || l).map((v, i) => h("td", { class: colunas[i].num ? "num" : (colunas[i].classe || "") },
+        [v instanceof Node ? v : String(v ?? "–")]))))),
+  ]);
+  return tb;
+}
+
+// Navegação entre as telas: arquivo local quando aberto do disco, URL publicada
+// quando aberto na web (se já houver uma).
+function montarTelas(atual) {
+  const lista = $("telas");
+  const local = location.protocol === "file:";
+  for (const t of D.telas) {
+    const href = local || !t.url ? t.arquivo : t.url;
+    const a = h("a", { href, text: `${t.id} · ${t.nome}` });
+    if (t.id === atual) a.setAttribute("aria-current", "page");
+    lista.appendChild(h("li", {}, [a]));
+  }
+}
+function linkTela(id) {
+  const t = D.telas.find((x) => x.id === id);
+  if (!t) return null;
+  const local = location.protocol === "file:";
+  return h("a", { href: local || !t.url ? t.arquivo : t.url, text: id });
+}
+
+// Marcas por forma (forma + cor: a identidade nunca depende só da cor)
+function marca(pai, forma, x, y, r, attrs) {
+  let e;
+  if (forma === "triangulo") {
+    const a = r * 1.25;
+    e = el("path", Object.assign({ d: `M${x},${y - a} L${x + a * 0.95},${y + a * 0.62} L${x - a * 0.95},${y + a * 0.62} Z` }, attrs), pai);
+  } else if (forma === "quadrado") {
+    e = el("rect", Object.assign({ x: x - r * 0.9, y: y - r * 0.9, width: r * 1.8, height: r * 1.8, rx: 1 }, attrs), pai);
+  } else {
+    e = el("circle", Object.assign({ cx: x, cy: y, r }, attrs), pai);
+  }
+  return e;
+}
+function marcaLegenda(forma, cor) {
+  const s = el("svg", { width: 14, height: 14, viewBox: "0 0 14 14", class: "marca-svg", "aria-hidden": "true" });
+  marca(s, forma, 7, 7.5, 4.6, { fill: cor });
+  return s;
+}
+
+// Bloco "Premissas desta tela": a mesma lista da linha "Premissas do grupo" do
+// requisito (fonte única em comum.py, conferida pelo gerador).
+const maiuscula = (t) => t[0].toUpperCase() + t.slice(1);
+function montarPremissas() {
+  $("premissas").replaceChildren(tabela(
+    [{ t: "Premissa" }, { t: "Valor adotado" }, { t: "Por quê" }],
+    D.premissas.map((p) => [h("strong", { text: p.nome }), maiuscula(p.valor), maiuscula(p.por_que)]),
+    "Premissas desta tela"));
+}
+
+const D = {"linhas":[["G01","cartoes","prazo_em",304,8,2.6,"dizer se um cartão está atrasado (fora do escopo das telas)","-"],["G02","cartoes","prazo_em",489,16,3.3,"dizer se um cartão está atrasado (fora do escopo das telas)","-"],["G03","cartoes","prazo_em",445,0,0.0,"dizer se um cartão está atrasado (fora do escopo das telas)","-"],["G01","cartoes","responsaveis_ids resolvido",304,278,91.4,"saber quem responde pelo cartão parado na etapa e a quem somar o cartão concluído na concentração","R02, R05"],["G02","cartoes","responsaveis_ids resolvido",489,450,92.0,"saber quem responde pelo cartão parado na etapa e a quem somar o cartão concluído na concentração","R02, R05"],["G03","cartoes","responsaveis_ids resolvido",445,438,98.4,"saber quem responde pelo cartão parado na etapa e a quem somar o cartão concluído na concentração","R02, R05"],["G01","cartoes","sprint",304,286,94.1,"cortar por sprint: sem sprint o cartão cai em \"(sem sprint)\" e só aparece no recorte de todas as sprints","R02, R04, R05"],["G02","cartoes","sprint",489,458,93.7,"cortar por sprint: sem sprint o cartão cai em \"(sem sprint)\" e só aparece no recorte de todas as sprints","R02, R04, R05"],["G03","cartoes","sprint",445,430,96.6,"cortar por sprint: sem sprint o cartão cai em \"(sem sprint)\" e só aparece no recorte de todas as sprints","R02, R04, R05"],["G01","cartoes","tamanho (rótulo PP a GG)",304,263,86.5,"comparar planejado com realizado e pesar o cartão concluído: sem tamanho o cartão sai das duas telas","R04, R05"],["G02","cartoes","tamanho (rótulo PP a GG)",489,456,93.3,"comparar planejado com realizado e pesar o cartão concluído: sem tamanho o cartão sai das duas telas","R04, R05"],["G03","cartoes","tamanho (rótulo PP a GG)",445,440,98.9,"comparar planejado com realizado e pesar o cartão concluído: sem tamanho o cartão sai das duas telas","R04, R05"],["G01","commits","autor_id resolvido (arquivo inteiro)",662,464,70.1,"atribuir commits a pessoas: a coluna autor da lista de commits fica sem dono","R01"],["G02","commits","autor_id resolvido (arquivo inteiro)",1067,929,87.1,"atribuir commits a pessoas: a coluna autor da lista de commits fica sem dono","R01"],["G03","commits","autor_id resolvido (arquivo inteiro)",959,743,77.5,"atribuir commits a pessoas: a coluna autor da lista de commits fica sem dono","R01"],["G01","commits","autor_id resolvido (base do R01)",404,293,72.5,"atribuir a pessoas os commits contados no gráfico de ritmo e na concentração por commits","R01, R05"],["G02","commits","autor_id resolvido (base do R01)",706,655,92.8,"atribuir a pessoas os commits contados no gráfico de ritmo e na concentração por commits","R01, R05"],["G03","commits","autor_id resolvido (base do R01)",633,490,77.4,"atribuir a pessoas os commits contados no gráfico de ritmo e na concentração por commits","R01, R05"],["G01","commits","número do cartão (#N) na base do R01",404,317,78.5,"ligar o commit ao cartão: commit sem #N não entra na contagem de commits por cartão","R04"],["G02","commits","número do cartão (#N) na base do R01",706,619,87.7,"ligar o commit ao cartão: commit sem #N não entra na contagem de commits por cartão","R04"],["G03","commits","número do cartão (#N) na base do R01",633,514,81.2,"ligar o commit ao cartão: commit sem #N não entra na contagem de commits por cartão","R04"],["G01","merge_requests","autor_id resolvido",150,143,95.3,"atribuir o merge request a uma pessoa na concentração por MRs","R05"],["G02","merge_requests","autor_id resolvido",220,205,93.2,"atribuir o merge request a uma pessoa na concentração por MRs","R05"],["G03","merge_requests","autor_id resolvido",170,170,100.0,"atribuir o merge request a uma pessoa na concentração por MRs","R05"],["G01","merge_requests","revisores_ids",150,36,24.0,"ler a espera em Waiting Review: sem revisor designado, não há de quem esperar","R02"],["G02","merge_requests","revisores_ids",220,212,96.4,"ler a espera em Waiting Review: sem revisor designado, não há de quem esperar","R02"],["G03","merge_requests","revisores_ids",170,169,99.4,"ler a espera em Waiting Review: sem revisor designado, não há de quem esperar","R02"],["G01","merge_requests","sprint",150,100,66.7,"cortar a concentração por MRs por sprint: sem sprint o MR só entra no recorte de todas as sprints","R05"],["G02","merge_requests","sprint",220,192,87.3,"cortar a concentração por MRs por sprint: sem sprint o MR só entra no recorte de todas as sprints","R05"],["G03","merge_requests","sprint",170,150,88.2,"cortar a concentração por MRs por sprint: sem sprint o MR só entra no recorte de todas as sprints","R05"],["G01","sprints","inicio_em e prazo_em",5,0,0.0,"situar a sprint no calendário: o período do gráfico de ritmo não pode ser cortado por sprint","R01, R02"],["G02","sprints","inicio_em e prazo_em",5,0,0.0,"situar a sprint no calendário: o período do gráfico de ritmo não pode ser cortado por sprint","R01, R02"],["G03","sprints","inicio_em e prazo_em",5,5,100.0,"situar a sprint no calendário: o período do gráfico de ritmo não pode ser cortado por sprint","R01, R02"]],"registro_mais_recente":"2026-08-07","telas":[{"id":"R01","nome":"Ritmo de registro","arquivo":"r01_ritmo_de_registro.html","url":"https://claude.ai/artifact/J8vMTWGFyRVzfqxYK9nNXo"},{"id":"R02","nome":"Acúmulo por etapa","arquivo":"r02_acumulo_por_etapa.html","url":"https://claude.ai/artifact/HTDPZKzttfVncZUGBU4kvv"},{"id":"R03","nome":"Cobertura do registro","arquivo":"r03_cobertura_registro.html","url":"https://claude.ai/artifact/6UznL9ZeRJR2973pazcdCG"},{"id":"R04","nome":"Planejado × realizado","arquivo":"r04_prazo_planejado_realizado.html","url":"https://claude.ai/artifact/X6Z8ZAoEurjtGkGagFE8my"},{"id":"R05","nome":"Concentração (Gini)","arquivo":"r05_concentracao_gini.html","url":"https://claude.ai/artifact/UFJ17FrDcetbwMGXCuqNRj"}],"entrada_repositorio":"2026-09-18","premissas":[{"nome":"Cobertura mínima","valor":"80% de preenchimento para confiar na leitura; 70% e 90% para comparar","por_que":"corte nosso para separar sinal de registro incompleto"},{"nome":"Pessoa resolvida","valor":"[externo] e [bot] contam como vazio em autoria e responsável","por_que":"não existem no cadastro de pessoas"}]};
+
+const LINHAS = D.linhas.map(([grupo, arquivo, campo, registros, preenchidos, pctv, efeito, tela]) =>
+  ({ grupo, arquivo, campo, registros, preenchidos, pct: pctv, efeito, tela }));
+const GRUPOS = [...new Set(LINHAS.map((l) => l.grupo))].sort();
+const LIMIARES = [70, 80, 90];
+const estado = { limiar: 80 };
+const CAMPOS = [...new Set(LINHAS.map((l) => `${l.arquivo}|${l.campo}`))].map((k) => {
+  const [arquivo, campo] = k.split("|");
+  const ls = LINHAS.filter((l) => l.arquivo === arquivo && l.campo === campo);
+  return { arquivo, campo, efeito: ls[0].efeito, tela: ls[0].tela, por: Object.fromEntries(ls.map((l) => [l.grupo, l])),
+           pior: Math.min(...ls.map((l) => l.pct)) };
+});
+const telasDe = (c) => c.tela === "-" ? [] : c.tela.split(",").map((t) => t.trim());
+const CAMPO_TXT = {
+  "commits|autor_id resolvido (arquivo inteiro)": "Autoria do commit (arquivo inteiro)",
+  "commits|autor_id resolvido (base do R01)": "Autoria do commit (base contada no R01)",
+  "commits|número do cartão (#N) na base do R01": "Número do cartão citado no commit",
+  "cartoes|tamanho (rótulo PP a GG)": "Tamanho do cartão (PP a GG)",
+  "cartoes|responsaveis_ids resolvido": "Responsável identificado no cartão",
+  "cartoes|sprint": "Sprint do cartão",
+  "cartoes|prazo_em": "Prazo do cartão",
+  "merge_requests|autor_id resolvido": "Autoria do merge request",
+  "merge_requests|sprint": "Sprint do merge request",
+  "merge_requests|revisores_ids": "Revisor designado no MR",
+  "sprints|inicio_em e prazo_em": "Datas da sprint",
+};
+const CAMPO_CURTO = {
+  "commits|autor_id resolvido (arquivo inteiro)": "autoria do commit",
+  "commits|autor_id resolvido (base do R01)": "autoria na base do R01",
+  "commits|número do cartão (#N) na base do R01": "número do cartão no commit",
+  "cartoes|tamanho (rótulo PP a GG)": "tamanho do cartão",
+  "cartoes|responsaveis_ids resolvido": "responsável identificado",
+  "cartoes|sprint": "sprint do cartão",
+  "cartoes|prazo_em": "prazo do cartão",
+  "merge_requests|autor_id resolvido": "autoria do MR",
+  "merge_requests|sprint": "sprint do MR",
+  "merge_requests|revisores_ids": "revisor do MR",
+  "sprints|inicio_em e prazo_em": "datas da sprint",
+};
+const chaveCampo = (c) => `${c.arquivo}|${c.campo}`;
+const nomeCampo = (c) => CAMPO_TXT[chaveCampo(c)] || c.campo;
+const curto = (c) => CAMPO_CURTO[chaveCampo(c)] || c.campo;
+
+function iniciar() {
+  montarTelas("R03");
+  montarPremissas();
+  atualizar();
+}
+function montarFiltros() {
+  const cl = $("f-limiar");
+  cl.replaceChildren();
+  for (const l of LIMIARES) {
+    const b = h("button", { type: "button", "data-foco": `limiar:${l}`, "aria-pressed": String(estado.limiar === l), text: `${l}%` + (l === 80 ? " (padrão)" : "") });
+    b.addEventListener("click", () => { estado.limiar = l; atualizar(); });
+    cl.appendChild(b);
+  }
+}
+
+function atualizar() { comFoco(renderizar); }
+function renderizar() {
+  montarFiltros();
+  const lim = estado.limiar;
+  $("leg-limiar").textContent = `mínimo de ${lim}%`;
+  $("recorte").textContent = `Campos em ordem da pior cobertura para a melhor. Cada linha diz o que o vazio impede e em que tela.`;
+
+  // destaque: autoria dos commits, o exemplo que o requisito pede
+  const aut = CAMPOS.find((c) => c.campo === "autor_id resolvido (arquivo inteiro)");
+  const ord = GRUPOS.slice().sort((a, b) => aut.por[a].pct - aut.por[b].pct);
+  const pior = aut.por[ord[0]], melhor = aut.por[ord[ord.length - 1]];
+  const semAutor = 100 - pior.pct;
+  $("destaque").replaceChildren(
+    h("p", { class: "grande", text: `A autoria dos commits do ${pior.grupo} é bem menos confiável que a do ${melhor.grupo}: ${pct(pior.pct)} dos commits com autor identificado, contra ${pct(melhor.pct)}.` }),
+    h("p", { class: "contagem", text: `No ${pior.grupo}, ${num(semAutor / 10, 0) === "3" ? "três" : num(semAutor / 10, 0)} de cada dez commits não têm autor identificado (${num(pior.registros - pior.preenchidos)} de ${num(pior.registros)}). Qualquer leitura por pessoa neste grupo, como a lista de commits do R01 ou a concentração por commits do R05, fica apoiada em menos gente do que parece.` }),
+  );
+
+  // tiles: campos abaixo do mínimo por grupo (só campos que alguma tela usa)
+  const usados = CAMPOS.filter((c) => telasDe(c).length);
+  $("tiles").replaceChildren(...GRUPOS.map((g) => {
+    const baixos = usados.filter((c) => c.por[g] && c.por[g].pct < lim);
+    const telas = [...new Set(baixos.flatMap(telasDe))].sort();
+    return h("div", { class: "tile" }, [
+      h("span", { class: "rotulo", text: `${g}: campos abaixo de ${lim}%` }),
+      h("span", { class: "valor", text: `${baixos.length} de ${usados.length}` }),
+      h("span", { class: "sub", text: baixos.length ? `afeta ${telas.join(", ")}: ${baixos.map(curto).join("; ")}` : "nenhuma leitura prejudicada neste corte" }),
+    ]);
+  }).concat([h("div", { class: "tile" }, [
+    h("span", { class: "rotulo", text: "Pior cobertura entre os campos usados" }),
+    h("span", { class: "valor", text: pct(Math.min(...usados.map((c) => c.pior))) }),
+    h("span", { class: "sub", text: nomeCampo(usados.slice().sort((a, b) => a.pior - b.pior)[0]) }),
+  ])]));
+
+  matriz();
+  prejudicadas();
+  notas();
+}
+
+function celula(l) {
+  if (!l) return "–";
+  const baixo = l.pct < estado.limiar;
+  return h("div", { class: "celula" }, [
+    h("span", { class: "v" }, [pct(l.pct), baixo ? h("span", { class: "chip alerta", text: "abaixo" }) : null]),
+    h("span", { class: "medidor", "aria-hidden": "true" }, [
+      h("i", { class: baixo ? "baixo" : "", style: `width:${l.pct}%` }),
+      h("b", { style: `left:calc(${estado.limiar}% - 1px)` })]),
+    h("span", { class: "n", text: `${num(l.preenchidos)} de ${num(l.registros)}` }),
+  ]);
+}
+function matriz() {
+  const usados = CAMPOS.filter((c) => telasDe(c).length).sort((a, b) => a.pior - b.pior);
+  const fora = CAMPOS.filter((c) => !telasDe(c).length);
+  const linha = (c) => h("tr", {}, [
+    h("td", { class: "campo" }, [nomeCampo(c), h("span", { class: "arq", text: `${c.arquivo} · ${c.campo}` })]),
+    ...GRUPOS.map((g) => h("td", { class: "cel" }, [celula(c.por[g])])),
+    h("td", { class: "efeito" }, [`Sem ele: ${c.efeito}.`, ...telasDe(c).map((t) => linkTela(t) || t)]),
+  ]);
+  const t = h("table", { class: "matriz" }, [
+    h("caption", { class: "sr", text: "Cobertura de cada campo por grupo" }),
+    h("thead", {}, [h("tr", {}, [h("th", { scope: "col", text: "Campo" }), ...GRUPOS.map((g) => h("th", { scope: "col", text: g })), h("th", { scope: "col", text: "O que o vazio impede" })])]),
+    h("tbody", {}, [...usados.map(linha),
+      h("tr", { class: "grupo-titulo" }, [h("td", { colspan: String(GRUPOS.length + 2), text: "Campos que nenhuma tela usa" })]),
+      ...fora.map(linha)]),
+  ]);
+  $("matriz").replaceChildren(t);
+}
+
+function prejudicadas() {
+  const lim = estado.limiar;
+  const telas = [...new Set(CAMPOS.flatMap(telasDe))].sort();
+  $("prej-sub").textContent = `Com o mínimo de ${lim}%. Cada tela e os grupos em que ela perde apoio.`;
+  $("prejudicadas").replaceChildren(...telas.map((t) => {
+    const itens = [];
+    for (const c of CAMPOS.filter((c) => telasDe(c).includes(t)))
+      for (const g of GRUPOS) if (c.por[g] && c.por[g].pct < lim) itens.push(`${g}: ${curto(c)} ${pct(c.por[g].pct)}`);
+    const tela = D.telas.find((x) => x.id === t);
+    return h("li", {}, [
+      h("span", { class: "tela" }, [linkTela(t) || t, ` · ${tela ? tela.nome : ""}`]),
+      h("span", { class: "itens", text: itens.length ? itens.join(" · ") : "sem campo abaixo do mínimo nos três grupos" }),
+    ]);
+  }));
+}
+
+function notas() {
+  $("nota-origem").replaceChildren(...[
+    "Fonte: commits.csv, cartoes.csv, merge_requests.csv e sprints.csv, pela consulta r03_cobertura_registro.sql de sqlite/.",
+    `Data de extração não registrada. Os arquivos entraram no repositório em ${fmt(D.entrada_repositorio)}; o registro mais recente do conjunto é de ${fmt(D.registro_mais_recente)}.`,
+  ].map((t) => h("li", { text: t })));
+}
+
+iniciar();
+</script>

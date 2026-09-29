@@ -114,6 +114,28 @@ Os eixos são interpretados como um mapeamento de como competências do curso de
 **Status e Classificação**  
 A presença e a distribuição dos rótulos nas fontes são **Definição do Dado**. A correspondência dos rótulos a eixos do curso e sua leitura como perfil ou desenvolvimento de aprendizagem são **Premissa do Grupo**.
 
+## 10. Tempo Realizado do Cartão (Planejado × Realizado)
+
+**Definição do Dado**  
+`cartoes.csv` registra `criado_em` e `fechado_em` de cada cartão, e o tamanho aparece como rótulo (seção 8). A diferença entre as duas datas é tempo corrido: inclui noites, fins de semana e a espera no Backlog antes de alguém pegar o cartão. O commit se liga ao cartão quando cita `#N` no título (ou na mensagem, se o título não cita número), com N igual a um cartão do mesmo grupo; 83,2% dos commits autorais fazem isso.
+
+**Definição da Cliente / Premissa do Grupo**  
+Cada tamanho equivale a um número de dias planejados: PP 0,25, P 0,5, M 1, G 3 e GG 5. O cartão "levou mais que o planejado" quando o tempo realizado passa desses dias. A tabela vem do exemplo do professor e é **Premissa do Grupo**; a cliente não a definiu.
+
+**Status e Classificação**  
+As datas, o rótulo de tamanho e a citação `#N` são **Definição do Dado**. A equivalência tamanho → dias e a leitura "levou mais que o planejado" são **Premissa do Grupo**. Não usar "atraso": não há prazo combinado (seção 2), e o tempo corrido não é tempo de trabalho. Tela: R04.
+
+## 11. Concentração do Trabalho Registrado (Índice de Gini)
+
+**Definição do Dado**  
+Cada registro com dono identificado (responsável por cartão fechado, autor de commit ou de MR) pode ser somado por pessoa. O índice de Gini resume a distribuição dessas somas entre os integrantes: 0 quando todos têm a mesma parte, (n − 1)/n quando uma pessoa tem tudo (0,857 com 7 integrantes). Registros de `[externo]`, `[bot]`, sem responsável ou de pessoa que não é integrante do grupo (de outro grupo, ou do cadastro sem movimento no quadro) não têm dono no índice e ficam fora dele.
+
+**Definição da Cliente / Premissa do Grupo**  
+Integrante é a pessoa do cadastro do grupo com pelo menos um evento no quadro do próprio grupo (7 em cada grupo). A medida principal pesa o cartão concluído pelos dias planejados do tamanho (seção 10). As faixas de leitura (até 0,2 distribuído, até 0,4 moderado, acima disso concentrado) orientam a conversa e não são régua oficial. Tudo isso é **Premissa do Grupo**.
+
+**Status e Classificação**  
+As somas por pessoa são **Definição do Dado**. O critério de integrante, o peso por tamanho e as faixas de leitura são **Premissa do Grupo**. O índice mede concentração do registro, não dedicação nem desempenho individual, e não serve para ordenar alunos. Tela: R05.
+
 ## Limites de interpretação
 
 - Um registro representa evidência na plataforma, não uma avaliação completa do esforço ou da aprendizagem.

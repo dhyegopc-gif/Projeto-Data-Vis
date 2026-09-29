@@ -1,64 +1,64 @@
-﻿grupo;sprint;etapa;cartao_numero;titulo;situacao;responsaveis_ids;passagens;primeira_entrada;ultima_saida;horas_na_etapa;acima_limite;tipo_fim
-G01;Sprint 02;Backlog;73;Adicionar constraints NOT NULL em todos os campos obrigatórios - Seção 3.6.3;closed;[externo];1;2026-05-04T14:23:26.129;2026-06-01T14:15:44.621;671.9;1;saida registrada
-G01;Sprint 02;Backlog;74;Adicionar constraints UNIQUE onde aplicável - Seção 3.6.3;closed;[externo];1;2026-05-04T14:23:27.209;2026-06-01T14:15:42.474;671.9;1;saida registrada
-G01;Sprint 02;Backlog;75;Adicionar constraints FOREIGN KEY com referências corretas - Seção 3.6.3;closed;[externo];1;2026-05-04T14:23:28.278;2026-06-01T14:15:40.205;671.9;1;saida registrada
-G01;Sprint 02;Backlog;76;Adicionar constraints CHECK onde aplicável - Seção 3.6.3;closed;[externo];1;2026-05-04T14:23:29.908;2026-06-01T14:15:38.093;671.9;1;saida registrada
-G01;Sprint 02;Backlog;77;Criar índices com CREATE INDEX nas colunas relevantes - Seção 3.6.3;closed;[externo];1;2026-05-04T14:23:31.033;2026-06-01T14:15:35.648;671.9;1;saida registrada
-G01;Sprint 02;Backlog;78;Garantir que a ordem de criação das tabelas respeita as dependências - Seção 3.6.3;closed;[externo];1;2026-05-04T14:23:32.877;2026-06-01T14:15:34.102;671.9;1;saida registrada
-G01;Sprint 02;Backlog;79;Testar a execução do script sem erros - Seção 3.6.3;closed;[externo];1;2026-05-04T14:23:35.067;2026-06-01T14:15:32.089;671.9;1;saida registrada
-G01;Sprint 02;Backlog;80;Inserir o modelo relacional e o arquivo migration.sql na seção 3.6.3 do WAD;closed;[externo];1;2026-05-04T14:23:37.726;2026-06-01T14:15:21.987;671.9;1;saida registrada
-G01;Sprint 02;Backlog;64;Verificar consistência interna do diagrama - Seção 3.6.1;closed;G01-A23;1;2026-05-04T14:28:16.894;2026-05-26T14:38:27.122;528.2;1;saida registrada
-G01;Sprint 02;Backlog;65;Inserir o diagrama na seção 3.6.1 do WAD;closed;G01-A23;1;2026-05-04T14:28:15.869;2026-05-26T14:38:32.739;528.2;1;saida registrada
-G01;Sprint 02;Backlog;123;Revisar pasta Source;closed;[externo];1;2026-05-15T11:12:31.894;2026-06-01T14:15:46.964;411.1;1;saida registrada
-G01;Sprint 02;Backlog;61;Definir notação de uso para o diagrama (Chen ou Crow's Foot) - Seção 3.6.1;closed;G01-A23;1;2026-05-04T14:28:20.230;2026-05-19T10:02:49.444;355.6;1;saida registrada
-G01;Sprint 02;Backlog;72;Preencher a seção 3.2.1 e criar o diagrama de arquitetura;closed;G01-A15;1;2026-05-04T14:23:25.026;2026-05-18T14:24:44.826;336.0;1;saida registrada
-G01;Sprint 02;Backlog;144;gerenciamento de solicitaçao;closed;;1;2026-05-20T15:44:31.108;2026-06-01T14:15:49.050;286.5;1;saida registrada
-G01;Sprint 02;Backlog;84;Documentar o fluxo em um diagrama - Seção 3.3;closed;G01-A12;1;2026-05-04T14:28:40.930;2026-05-15T22:37:20.091;272.1;1;saida registrada
-G01;Sprint 02;Backlog;86;Inserir o link público da ferramenta na seção 3.3;closed;G01-A13;1;2026-05-04T14:28:43.089;2026-05-15T22:21:40.981;271.9;1;saida registrada
-G01;Sprint 02;Backlog;87;Verificar coerência entre o wireframe e o objetivo proposto na entrega - Seção 3.3;closed;G01-A13;1;2026-05-04T14:28:43.918;2026-05-15T22:21:45.193;271.9;1;saida registrada
-G01;Sprint 02;Backlog;88;Garantir que o fluxo de navegação das User Stories priorizadas está explicado no documento - Seção 3.3;closed;G01-A13;1;2026-05-04T14:28:44.868;2026-05-15T22:21:48.007;271.9;1;saida registrada
-G01;Sprint 02;Backlog;58;Revisão Final com P6 e Publicação do Link;closed;G01-A16;1;2026-05-04T11:35:54.669;2026-05-15T17:37:14.879;270.0;1;saida registrada
-G01;Sprint 02;Backlog;89;Revisão geral artefato 4;closed;G01-A14;1;2026-05-04T14:28:46.427;2026-05-14T22:30:56.761;248.0;1;saida registrada
-G01;Sprint 02;Backlog;90;Revisão geral artefato 5;closed;G01-A14;1;2026-05-04T14:28:47.558;2026-05-14T22:30:57.844;248.0;1;saida registrada
-G01;Sprint 02;Backlog;85;Exportar e inserir as imagens do wireframe na seção 3.3 do WAD;closed;G01-A13;1;2026-05-04T14:28:41.871;2026-05-13T15:05:48.280;216.6;1;saida registrada
-G01;Sprint 02;Backlog;45;Adicionar multiplicidades em todos os relacionamentos - Seção 3.2.3;closed;G01-A17;1;2026-05-04T14:28:15.751;2026-05-11T16:47:21.575;170.3;1;saida registrada
-G01;Sprint 02;Backlog;48;Representar composição entre as classes - Seção 3.2.3;closed;G01-A17;1;2026-05-04T14:28:12.489;2026-05-11T16:47:20.372;170.3;1;saida registrada
-G01;Sprint 02;Backlog;49;Representar herança entre as classes - Seção 3.2.3;closed;G01-A17;1;2026-05-04T14:28:11.354;2026-05-11T16:47:19.408;170.3;1;saida registrada
-G01;Sprint 02;Backlog;51;Inserir o diagrama finalizado na Seção 3.2.3 do WAD;closed;G01-A17;1;2026-05-04T14:28:10.431;2026-05-11T16:47:23.493;170.3;1;saida registrada
-G01;Sprint 02;Backlog;54;Diagrama de Classes 3.2.3;closed;G01-A17;1;2026-05-04T14:28:09.153;2026-05-11T16:47:18.251;170.3;1;saida registrada
-G01;Sprint 02;Backlog;71;Inserir o diagrama finalizado na Seção 3.6.2 no WAD;closed;G01-A14;1;2026-05-04T14:28:09.496;2026-05-11T14:39:58.517;168.2;1;saida registrada
-G01;Sprint 02;Backlog;81;Listar as USer Stories priorizadas - Seção 3.3;closed;G01-A12;1;2026-05-04T14:28:38.505;2026-05-10T20:09:22.787;149.7;1;saida registrada
-G01;Sprint 02;Backlog;82;Definir as sequências de interação para cada User Story priorizada - Seção 3.3;closed;G01-A12;1;2026-05-04T14:28:39.241;2026-05-10T20:09:11.942;149.7;1;saida registrada
-G01;Sprint 02;Backlog;83;Mapear a lógica de navegação de telas - Seção 3.3;closed;G01-A12;1;2026-05-04T14:28:40.093;2026-05-10T20:09:24.848;149.7;1;saida registrada
-G01;Sprint 02;Backlog;57;Desenho Final das Telas com Grid e Organização Visual;closed;G01-A16;1;2026-05-04T11:35:53.416;2026-05-07T15:30:08.771;75.9;1;saida registrada
-G01;Sprint 02;Backlog;68;Identificar e marcar todas as PKs (Primary keys) - Seção 3.6.2;closed;G01-A14;1;2026-05-04T14:28:12.901;2026-05-07T15:10:21.999;72.7;1;saida registrada
-G01;Sprint 02;Backlog;69;Identificar e marcar todas as FKs (Foreign keys) - Seção 3.6.2;closed;G01-A14;1;2026-05-04T14:28:11.517;2026-05-07T15:10:23.685;72.7;1;saida registrada
-G01;Sprint 02;Backlog;44;Criar o diagrama de classes com notação UML - Seção 3.2.3;closed;G01-A17;1;2026-05-04T14:28:18.208;2026-05-07T14:43:57.416;72.3;1;saida registrada
-G01;Sprint 02;Backlog;46;Representar associação entre as classes - Seção 3.2.3;closed;G01-A17;1;2026-05-04T14:28:17.114;2026-05-07T14:45:16.750;72.3;1;saida registrada
-G01;Sprint 02;Backlog;47;Representar agregação entre as classes - Seção 3.2.3;closed;G01-A17;1;2026-05-04T14:28:13.975;2026-05-07T14:45:14.806;72.3;1;saida registrada
-G01;Sprint 02;Backlog;50;Estruturação da Ferramenta e Esboço Inicial das Telas;closed;G01-A16;1;2026-05-04T11:35:52.024;2026-05-06T14:21:28.137;50.8;1;saida registrada
-G01;Sprint 02;Backlog;70;Verificar coerência com o diagrama de classes (seção 3.2.3) - Seção 3.6.2;closed;G01-A14;1;2026-05-04T14:28:10.524;2026-05-06T14:07:14.309;47.7;0;saida registrada
-G01;Sprint 02;Backlog;53;Representar o fluxo Controller -> Service -> Repository -> Banco - Seção 3.2.4;closed;G01-A15;1;2026-05-04T14:28:29.304;2026-05-05T15:13:27.241;24.7;0;saida registrada
-G01;Sprint 02;Backlog;55;Identificar e marcar as mensagens síncronas - Seção 3.2.4;closed;G01-A15;1;2026-05-04T14:28:27.952;2026-05-05T15:13:26.187;24.7;0;saida registrada
-G01;Sprint 02;Backlog;56;Identificar e marcar as mensagens assíncronas - Seção 3.2.4;closed;G01-A15;1;2026-05-04T14:28:27.042;2026-05-05T15:11:43.405;24.7;0;saida registrada
-G01;Sprint 02;Backlog;59;Representar todos os retornos com linhas tracejadas - Seção 3.2.4;closed;G01-A15;1;2026-05-04T14:28:26.116;2026-05-05T15:13:09.457;24.7;0;saida registrada
-G01;Sprint 02;Backlog;60;Inserir o diagrama finalizado na seção 3.2.4 do WAD;closed;G01-A15;1;2026-05-04T14:28:25.027;2026-05-05T15:12:50.661;24.7;0;saida registrada
-G01;Sprint 02;Backlog;67;Adicionar cardinalidades explícitas nos dois lados de cada relacionamento - Seção 3.6.2;closed;G01-A14;1;2026-05-04T14:28:13.642;2026-05-05T14:41:51.772;24.2;0;saida registrada
-G01;Sprint 02;Backlog;52;Criar o diagrama de sequência UML - Seção 3.2.4;closed;G01-A15;1;2026-05-04T14:28:30.221;2026-05-05T14:22:01.377;23.9;0;saida registrada
-G01;Sprint 02;Backlog;66;Criar o DER com base no ER conceitual e diagrama de classes - Seção 3.6.2;closed;G01-A14;1;2026-05-04T14:28:14.933;2026-05-05T14:11:37.673;23.7;0;saida registrada
-G01;Sprint 02;Backlog;139;3.6.4 Consultas SQL e lógica proposicional;closed;G01-A23;1;2026-05-19T15:42:38.730;2026-05-20T14:35:34.053;22.9;0;saida registrada
-G01;Sprint 02;Backlog;117;diagrama entidade de relacionamento;closed;G01-A23;1;2026-05-13T14:38:19.615;2026-05-14T10:33:50.895;19.9;0;saida registrada
-G01;Sprint 02;Backlog;106;Adicionar modelo de MVC;closed;G01-A17;1;2026-05-11T11:52:56.765;2026-05-11T16:47:09.669;4.9;0;saida registrada
-G01;Sprint 02;Backlog;116;Slides;closed;G01-A17;1;2026-05-13T10:08:19.764;2026-05-13T13:31:43.851;3.4;0;saida registrada
-G01;Sprint 02;Backlog;62;Identificar e listar todas as entidades do domínio - Seção 3.6.1;closed;G01-A23;1;2026-05-04T14:28:18.899;2026-05-04T14:50:13.980;0.4;0;saida registrada
-G01;Sprint 02;Backlog;63;Definir os atributos de cada entidade - Seção 3.6.1;closed;G01-A23;1;2026-05-04T14:28:17.798;2026-05-04T14:50:09.510;0.4;0;saida registrada
-G01;Sprint 02;Backlog;108;Adicionar-modelo-fisico no migrations.sql(30%);closed;[externo];1;2026-05-11T14:23:43.133;2026-05-11T14:24:23.117;0.0;0;saida registrada
-G01;Sprint 02;Backlog;110;Alterar Pasta Raiz para se adequar ao template;closed;[externo];1;2026-05-11T15:03:42.883;2026-05-11T15:04:11.775;0.0;0;saida registrada
-G01;Sprint 02;Backlog;111;Adiciona Modelo Fisico/Reformula template;closed;[externo];1;2026-05-12T14:30:07.731;2026-05-12T14:30:43.736;0.0;0;saida registrada
-G01;Sprint 02;Backlog;112;Revisão de documentação geral;closed;G01-A14;1;2026-05-12T14:41:09.891;2026-05-12T14:41:51.581;0.0;0;saida registrada
-G01;Sprint 02;Backlog;113;Criar telas de cadastro;closed;G01-A12;1;2026-05-13T00:40:20.723;2026-05-13T00:40:27.350;0.0;0;saida registrada
-G01;Sprint 02;Backlog;114;Criar telas de visualizar contratos;closed;G01-A12;1;2026-05-13T00:40:22.864;2026-05-13T00:40:29.110;0.0;0;saida registrada
-G01;Sprint 02;Backlog;115;Criar telas de aprovar solicitações;closed;G01-A12;1;2026-05-13T00:40:24.275;2026-05-13T00:40:31.245;0.0;0;saida registrada
-G01;Sprint 02;Backlog;120;Construir tasks dos fluxos de telas do wireframes;closed;G01-A12;1;2026-05-15T22:57:22.423;2026-05-15T22:57:25.085;0.0;0;saida registrada
-G01;Sprint 02;Backlog;122;Correção de diagramas e texto da seção 3;closed;G01-A14;1;2026-05-14T15:03:32.399;2026-05-14T15:04:02.893;0.0;0;saida registrada
-G01;Sprint 02;Backlog;124;Documentar a introdução e conclusão da seção do Wireframe no wad;closed;G01-A12;1;2026-05-15T23:07:09.335;2026-05-15T23:07:11.305;0.0;0;saida registrada
+﻿grupo;sprint;etapa;cartao_numero;titulo;situacao;responsaveis_ids;passagens;primeira_entrada;ultima_saida;horas_na_etapa;horas_exatas;acima_limite;tipo_fim;intervalos_sem_saida;intervalos_abertos_no_corte
+G01;Sprint 02;Backlog;73;Adicionar constraints NOT NULL em todos os campos obrigatórios - Seção 3.6.3;closed;[externo];1;2026-05-04T14:23:26.129;2026-06-01T14:15:44.621;671.9;671.8718033283949;1;saida registrada;0;0
+G01;Sprint 02;Backlog;74;Adicionar constraints UNIQUE onde aplicável - Seção 3.6.3;closed;[externo];1;2026-05-04T14:23:27.209;2026-06-01T14:15:42.474;671.9;671.870906945318;1;saida registrada;0;0
+G01;Sprint 02;Backlog;75;Adicionar constraints FOREIGN KEY com referências corretas - Seção 3.6.3;closed;[externo];1;2026-05-04T14:23:28.278;2026-06-01T14:15:40.205;671.9;671.8699797280133;1;saida registrada;0;0
+G01;Sprint 02;Backlog;76;Adicionar constraints CHECK onde aplicável - Seção 3.6.3;closed;[externo];1;2026-05-04T14:23:29.908;2026-06-01T14:15:38.093;671.9;671.868940282613;1;saida registrada;0;0
+G01;Sprint 02;Backlog;77;Criar índices com CREATE INDEX nas colunas relevantes - Seção 3.6.3;closed;[externo];1;2026-05-04T14:23:31.033;2026-06-01T14:15:35.648;671.9;671.8679486140609;1;saida registrada;0;0
+G01;Sprint 02;Backlog;78;Garantir que a ordem de criação das tabelas respeita as dependências - Seção 3.6.3;closed;[externo];1;2026-05-04T14:23:32.877;2026-06-01T14:15:34.102;671.9;671.8670069463551;1;saida registrada;0;0
+G01;Sprint 02;Backlog;79;Testar a execução do script sem erros - Seção 3.6.3;closed;[externo];1;2026-05-04T14:23:35.067;2026-06-01T14:15:32.089;671.9;671.8658394366503;1;saida registrada;0;0
+G01;Sprint 02;Backlog;80;Inserir o modelo relacional e o arquivo migration.sql na seção 3.6.3 do WAD;closed;[externo];1;2026-05-04T14:23:37.726;2026-06-01T14:15:21.987;671.9;671.8622947186232;1;saida registrada;0;0
+G01;Sprint 02;Backlog;64;Verificar consistência interna do diagrama - Seção 3.6.1;closed;G01-A23;1;2026-05-04T14:28:16.894;2026-05-26T14:38:27.122;528.2;528.1695077754557;1;saida registrada;0;0
+G01;Sprint 02;Backlog;65;Inserir o diagrama na seção 3.6.1 do WAD;closed;G01-A23;1;2026-05-04T14:28:15.869;2026-05-26T14:38:32.739;528.2;528.1713527776301;1;saida registrada;0;0
+G01;Sprint 02;Backlog;123;Revisar pasta Source;closed;[externo];1;2026-05-15T11:12:31.894;2026-06-01T14:15:46.964;411.1;411.0541861206293;1;saida registrada;0;0
+G01;Sprint 02;Backlog;61;Definir notação de uso para o diagrama (Chen ou Crow's Foot) - Seção 3.6.1;closed;G01-A23;1;2026-05-04T14:28:20.230;2026-05-19T10:02:49.444;355.6;355.57478166371584;1;saida registrada;0;0
+G01;Sprint 02;Backlog;72;Preencher a seção 3.2.1 e criar o diagrama de arquitetura;closed;G01-A15;1;2026-05-04T14:23:25.026;2026-05-18T14:24:44.826;336.0;336.02216666936874;1;saida registrada;0;0
+G01;Sprint 02;Backlog;144;gerenciamento de solicitaçao;closed;;1;2026-05-20T15:44:31.108;2026-06-01T14:15:49.050;286.5;286.5216505564749;1;saida registrada;0;0
+G01;Sprint 02;Backlog;84;Documentar o fluxo em um diagrama - Seção 3.3;closed;G01-A12;1;2026-05-04T14:28:40.930;2026-05-15T22:37:20.091;272.1;272.1442113853991;1;saida registrada;0;0
+G01;Sprint 02;Backlog;86;Inserir o link público da ferramenta na seção 3.3;closed;G01-A13;1;2026-05-04T14:28:43.089;2026-05-15T22:21:40.981;271.9;271.88274777308106;1;saida registrada;0;0
+G01;Sprint 02;Backlog;87;Verificar coerência entre o wireframe e o objetivo proposto na entrega - Seção 3.3;closed;G01-A13;1;2026-05-04T14:28:43.918;2026-05-15T22:21:45.193;271.9;271.8836874961853;1;saida registrada;0;0
+G01;Sprint 02;Backlog;88;Garantir que o fluxo de navegação das User Stories priorizadas está explicado no documento - Seção 3.3;closed;G01-A13;1;2026-05-04T14:28:44.868;2026-05-15T22:21:48.007;271.9;271.88420528545976;1;saida registrada;0;0
+G01;Sprint 02;Backlog;58;Revisão Final com P6 e Publicação do Link;closed;G01-A16;1;2026-05-04T11:35:54.669;2026-05-15T17:37:14.879;270.0;270.02228056266904;1;saida registrada;0;0
+G01;Sprint 02;Backlog;89;Revisão geral artefato 4;closed;G01-A14;1;2026-05-04T14:28:46.427;2026-05-14T22:30:56.761;248.0;248.0362038910389;1;saida registrada;0;0
+G01;Sprint 02;Backlog;90;Revisão geral artefato 5;closed;G01-A14;1;2026-05-04T14:28:47.558;2026-05-14T22:30:57.844;248.0;248.03619054704905;1;saida registrada;0;0
+G01;Sprint 02;Backlog;85;Exportar e inserir as imagens do wireframe na seção 3.3 do WAD;closed;G01-A13;1;2026-05-04T14:28:41.871;2026-05-13T15:05:48.280;216.6;216.61844693496823;1;saida registrada;0;0
+G01;Sprint 02;Backlog;45;Adicionar multiplicidades em todos os relacionamentos - Seção 3.2.3;closed;G01-A17;1;2026-05-04T14:28:15.751;2026-05-11T16:47:21.575;170.3;170.31828444823623;1;saida registrada;0;0
+G01;Sprint 02;Backlog;48;Representar composição entre as classes - Seção 3.2.3;closed;G01-A17;1;2026-05-04T14:28:12.489;2026-05-11T16:47:20.372;170.3;170.31885638460517;1;saida registrada;0;0
+G01;Sprint 02;Backlog;49;Representar herança entre as classes - Seção 3.2.3;closed;G01-A17;1;2026-05-04T14:28:11.354;2026-05-11T16:47:19.408;170.3;170.31890389323235;1;saida registrada;0;0
+G01;Sprint 02;Backlog;51;Inserir o diagrama finalizado na Seção 3.2.3 do WAD;closed;G01-A17;1;2026-05-04T14:28:10.431;2026-05-11T16:47:23.493;170.3;170.32029499858618;1;saida registrada;0;0
+G01;Sprint 02;Backlog;54;Diagrama de Classes 3.2.3;closed;G01-A17;1;2026-05-04T14:28:09.153;2026-05-11T16:47:18.251;170.3;170.3191938959062;1;saida registrada;0;0
+G01;Sprint 02;Backlog;71;Inserir o diagrama finalizado na Seção 3.6.2 no WAD;closed;G01-A14;1;2026-05-04T14:28:09.496;2026-05-11T14:39:58.517;168.2;168.19695027172565;1;saida registrada;0;0
+G01;Sprint 02;Backlog;81;Listar as USer Stories priorizadas - Seção 3.3;closed;G01-A12;1;2026-05-04T14:28:38.505;2026-05-10T20:09:22.787;149.7;149.67896721884608;1;saida registrada;0;0
+G01;Sprint 02;Backlog;82;Definir as sequências de interação para cada User Story priorizada - Seção 3.3;closed;G01-A12;1;2026-05-04T14:28:39.241;2026-05-10T20:09:11.942;149.7;149.6757502667606;1;saida registrada;0;0
+G01;Sprint 02;Backlog;83;Mapear a lógica de navegação de telas - Seção 3.3;closed;G01-A12;1;2026-05-04T14:28:40.093;2026-05-10T20:09:24.848;149.7;149.6790986135602;1;saida registrada;0;0
+G01;Sprint 02;Backlog;57;Desenho Final das Telas com Grid e Organização Visual;closed;G01-A16;1;2026-05-04T11:35:53.416;2026-05-07T15:30:08.771;75.9;75.9042652733624;1;saida registrada;0;0
+G01;Sprint 02;Backlog;68;Identificar e marcar todas as PKs (Primary keys) - Seção 3.6.2;closed;G01-A14;1;2026-05-04T14:28:12.901;2026-05-07T15:10:21.999;72.7;72.70252722501755;1;saida registrada;0;0
+G01;Sprint 02;Backlog;69;Identificar e marcar todas as FKs (Foreign keys) - Seção 3.6.2;closed;G01-A14;1;2026-05-04T14:28:11.517;2026-05-07T15:10:23.685;72.7;72.70337999984622;1;saida registrada;0;0
+G01;Sprint 02;Backlog;44;Criar o diagrama de classes com notação UML - Seção 3.2.3;closed;G01-A17;1;2026-05-04T14:28:18.208;2026-05-07T14:43:57.416;72.3;72.26089111715555;1;saida registrada;0;0
+G01;Sprint 02;Backlog;46;Representar associação entre as classes - Seção 3.2.3;closed;G01-A17;1;2026-05-04T14:28:17.114;2026-05-07T14:45:16.750;72.3;72.28323221951723;1;saida registrada;0;0
+G01;Sprint 02;Backlog;47;Representar agregação entre as classes - Seção 3.2.3;closed;G01-A17;1;2026-05-04T14:28:13.975;2026-05-07T14:45:14.806;72.3;72.28356416523457;1;saida registrada;0;0
+G01;Sprint 02;Backlog;50;Estruturação da Ferramenta e Esboço Inicial das Telas;closed;G01-A16;1;2026-05-04T11:35:52.024;2026-05-06T14:21:28.137;50.8;50.76003138720989;1;saida registrada;0;0
+G01;Sprint 02;Backlog;70;Verificar coerência com o diagrama de classes (seção 3.2.3) - Seção 3.6.2;closed;G01-A14;1;2026-05-04T14:28:10.524;2026-05-06T14:07:14.309;47.7;47.65105137974024;0;saida registrada;0;0
+G01;Sprint 02;Backlog;53;Representar o fluxo Controller -> Service -> Repository -> Banco - Seção 3.2.4;closed;G01-A15;1;2026-05-04T14:28:29.304;2026-05-05T15:13:27.241;24.7;24.749426946043968;0;saida registrada;0;0
+G01;Sprint 02;Backlog;55;Identificar e marcar as mensagens síncronas - Seção 3.2.4;closed;G01-A15;1;2026-05-04T14:28:27.952;2026-05-05T15:13:26.187;24.7;24.74950972571969;0;saida registrada;0;0
+G01;Sprint 02;Backlog;56;Identificar e marcar as mensagens assíncronas - Seção 3.2.4;closed;G01-A15;1;2026-05-04T14:28:27.042;2026-05-05T15:11:43.405;24.7;24.721211940050125;0;saida registrada;0;0
+G01;Sprint 02;Backlog;59;Representar todos os retornos com linhas tracejadas - Seção 3.2.4;closed;G01-A15;1;2026-05-04T14:28:26.116;2026-05-05T15:13:09.457;24.7;24.745372496545315;0;saida registrada;0;0
+G01;Sprint 02;Backlog;60;Inserir o diagrama finalizado na seção 3.2.4 do WAD;closed;G01-A15;1;2026-05-04T14:28:25.027;2026-05-05T15:12:50.661;24.7;24.740453884005547;0;saida registrada;0;0
+G01;Sprint 02;Backlog;67;Adicionar cardinalidades explícitas nos dois lados de cada relacionamento - Seção 3.6.2;closed;G01-A14;1;2026-05-04T14:28:13.642;2026-05-05T14:41:51.772;24.2;24.227258328348398;0;saida registrada;0;0
+G01;Sprint 02;Backlog;52;Criar o diagrama de sequência UML - Seção 3.2.4;closed;G01-A15;1;2026-05-04T14:28:30.221;2026-05-05T14:22:01.377;23.9;23.891987778246403;0;saida registrada;0;0
+G01;Sprint 02;Backlog;66;Criar o DER com base no ER conceitual e diagrama de classes - Seção 3.6.2;closed;G01-A14;1;2026-05-04T14:28:14.933;2026-05-05T14:11:37.673;23.7;23.722983330488205;0;saida registrada;0;0
+G01;Sprint 02;Backlog;139;3.6.4 Consultas SQL e lógica proposicional;closed;G01-A23;1;2026-05-19T15:42:38.730;2026-05-20T14:35:34.053;22.9;22.882034171372652;0;saida registrada;0;0
+G01;Sprint 02;Backlog;117;diagrama entidade de relacionamento;closed;G01-A23;1;2026-05-13T14:38:19.615;2026-05-14T10:33:50.895;19.9;19.925355546176434;0;saida registrada;0;0
+G01;Sprint 02;Backlog;106;Adicionar modelo de MVC;closed;G01-A17;1;2026-05-11T11:52:56.765;2026-05-11T16:47:09.669;4.9;4.903584446758032;0;saida registrada;0;0
+G01;Sprint 02;Backlog;116;Slides;closed;G01-A17;1;2026-05-13T10:08:19.764;2026-05-13T13:31:43.851;3.4;3.390024170279503;0;saida registrada;0;0
+G01;Sprint 02;Backlog;62;Identificar e listar todas as entidades do domínio - Seção 3.6.1;closed;G01-A23;1;2026-05-04T14:28:18.899;2026-05-04T14:50:13.980;0.4;0.3653002828359604;0;saida registrada;0;0
+G01;Sprint 02;Backlog;63;Definir os atributos de cada entidade - Seção 3.6.1;closed;G01-A23;1;2026-05-04T14:28:17.798;2026-05-04T14:50:09.510;0.4;0.3643644377589226;0;saida registrada;0;0
+G01;Sprint 02;Backlog;108;Adicionar-modelo-fisico no migrations.sql(30%);closed;[externo];1;2026-05-11T14:23:43.133;2026-05-11T14:24:23.117;0.0;0.011106669902801514;0;saida registrada;0;0
+G01;Sprint 02;Backlog;110;Alterar Pasta Raiz para se adequar ao template;closed;[externo];1;2026-05-11T15:03:42.883;2026-05-11T15:04:11.775;0.0;0.008025560528039932;0;saida registrada;0;0
+G01;Sprint 02;Backlog;111;Adiciona Modelo Fisico/Reformula template;closed;[externo];1;2026-05-12T14:30:07.731;2026-05-12T14:30:43.736;0.0;0.010001398622989655;0;saida registrada;0;0
+G01;Sprint 02;Backlog;112;Revisão de documentação geral;closed;G01-A14;1;2026-05-12T14:41:09.891;2026-05-12T14:41:51.581;0.0;0.011580560356378555;0;saida registrada;0;0
+G01;Sprint 02;Backlog;113;Criar telas de cadastro;closed;G01-A12;1;2026-05-13T00:40:20.723;2026-05-13T00:40:27.350;0.0;0.0018408223986625671;0;saida registrada;0;0
+G01;Sprint 02;Backlog;114;Criar telas de visualizar contratos;closed;G01-A12;1;2026-05-13T00:40:22.864;2026-05-13T00:40:29.110;0.0;0.001735009253025055;0;saida registrada;0;0
+G01;Sprint 02;Backlog;115;Criar telas de aprovar solicitações;closed;G01-A12;1;2026-05-13T00:40:24.275;2026-05-13T00:40:31.245;0.0;0.001936107873916626;0;saida registrada;0;0
+G01;Sprint 02;Backlog;120;Construir tasks dos fluxos de telas do wireframes;closed;G01-A12;1;2026-05-15T22:57:22.423;2026-05-15T22:57:25.085;0.0;0.0007394403219223022;0;saida registrada;0;0
+G01;Sprint 02;Backlog;122;Correção de diagramas e texto da seção 3;closed;G01-A14;1;2026-05-14T15:03:32.399;2026-05-14T15:04:02.893;0.0;0.008470550179481506;0;saida registrada;0;0
+G01;Sprint 02;Backlog;124;Documentar a introdução e conclusão da seção do Wireframe no wad;closed;G01-A12;1;2026-05-15T23:07:09.335;2026-05-15T23:07:11.305;0.0;0.0005472265183925629;0;saida registrada;0;0

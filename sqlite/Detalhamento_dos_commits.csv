@@ -1,47 +1,47 @@
-﻿grupo;commit_id;autor_id;autorado_em;titulo;linhas_adicionadas;linhas_removidas;linhas_total
-G01;3260ef93;G01-A17;2026-06-25T10:56:23.000;feat(editar): separar telas de edição e visualizacao (#281);135;29;164
-G01;c7023bdf;G01-A17;2026-06-25T11:01:53.000;feat(visualizacao): atualizando botoes da pagina de visualizacao (#281);6;6;12
-G01;e83889d2;G01-A17;2026-06-25T11:04:21.000;feat(historico): adicionar pagina de historico (#281);37;54;91
-G01;c0f352be;G01-A17;2026-06-25T11:10:18.000;feat(visualizacao): melhorar estilo dos blocos das telas de parceiro (#285);4;3;7
-G01;60d2ecbd;G01-A13;2026-06-25T11:10:45.000;docs(documentos extras): move os documentos extras para a pasta documentos/outros e remove os documentos desnecessarios;0;0;0
-G01;309f5ced;G01-A17;2026-06-25T11:20:03.000;feat(historico): reformulando a pagina de historico (#280);81;191;272
-G01;d14adf09;G01-A13;2026-06-25T11:25:05.000;docs(readme): adiciona links dos integrantes a licensa #284;1;1;2
-G01;3777807c;G01-A17;2026-06-25T11:45:08.000;feat(editar): fazer botao de voltar ir para visualizacao (#280);200;175;375
-G01;448d8d1b;G01-A17;2026-06-25T12:40:07.000;fix(editar): corrigir opcoes de edicao (#281);33;11;44
-G01;ca523d81;G01-A17;2026-06-25T12:40:55.000;fix(editar): corrigir texto da opcao de voltar (#281);14;18;32
-G01;259d8722;G01-A14;2026-06-25T12:59:52.000;feat/implementa-pagina-dehistorico/(#287);258;235;493
-G01;fa91785d;G01-A13;2026-06-25T13:38:33.000;docs(wad): troca links inacessiveis #283;4;6;10
-G01;f8d3a520;G01-A15;2026-06-25T14:07:01.000;docs(wad): converte diagramas de sequência para Mermaid (#254);502;114;616
-G01;949f7d8c;G01-A13;2026-06-25T14:19:47.000;refactor(config): muda os arquivos de configuracao para a pasta src;40;82;122
-G01;c534da5f;G01-A17;2026-06-25T14:25:57.000;fix(editar): corrigir tela de edicao (#281);6;16;22
-G01;475db61b;G01-A15;2026-06-25T14:42:51.000;docs(wad): converte diagramas arquiteturais e relacionais para Mermaid (#254);688;50;738
-G01;650eaf8f;G01-A17;2026-06-25T14:43:57.000;feat(historico): historico vai [externo] mostrado (#286);172;112;284
-G01;0a8eb77c;G01-A15;2026-06-25T16:01:16.000;docs(wad): preenche secao 4.2 da sprint 4 (#257);277;146;423
-G01;13c0f995;G01-A15;2026-06-25T16:33:30.000;docs(wad): preenche secao 4.3 da sprint 5 (#257);25;13;38
-G01;c4bb908f;G01-A15;2026-06-25T16:59:49.000;docs(wad): renumera imagens e anexos (#257);294;520;814
-G01;34c67d81;[externo];2026-06-25T17:02:28.000;fix(historico): ajuste no nome, horario e detalhamento da descricao (#244);249;84;333
-G01;161216f0;G01-A12;2026-06-25T17:05:55.000;docs: preenche o relatorio da primeira leva de testes de usabilidade (#291);5;1;6
-G01;ce94314b;G01-A12;2026-06-25T17:07:43.000;docs: preenche analise dos resultados da primeira leva de testes (#291);5;0;5
-G01;4e130509;G01-A15;2026-06-25T17:12:40.000;docs(wad): padroniza paragrafos e ajustes finais (#257);90;90;180
-G01;b407c2cf;G01-A12;2026-06-25T19:12:26.000;docs: preenche relatorio da  secao dos testes sus (#293);3;1;4
-G01;6b7f5fb8;G01-A12;2026-06-25T19:13:59.000;docs: preenche resultados dos testes sus (#293);4;0;4
-G01;a9c84eaa;G01-A12;2026-06-25T19:23:54.000;docs: preenche secao da avaliacao heuristica (#294);16;0;16
-G01;b042e232;G01-A12;2026-06-25T19:54:06.000;docs: preenche secao da segunda leva dos testes de usablidade (#292);6;0;6
-G01;a15c1a1a;G01-A12;2026-06-25T19:56:03.000;docs: preenche resultados da segunda leva dos testes de usabilidade;6;0;6
-G01;bbe38e20;G01-A12;2026-06-25T20:15:10.000;docs: adiciona planilha da primeira leva de testes (#295);11;7;18
-G01;3cd27f96;G01-A12;2026-06-25T20:16:40.000;docs: adicona planilha da segunda leva de testes (#296);6;1;7
-G01;321ace89;G01-A12;2026-06-25T20:21:38.000;docs: adiciona formulario dos testes sus (#293);10;5;15
-G01;00d0e116;G01-A12;2026-06-25T20:34:43.000;docs: adiciona fotos da primeira rodada de testes (#291);14;0;14
-G01;e771b1e2;G01-A12;2026-06-25T20:58:06.000;docs: adiciona fotos da segunda rodada dos testes (#292);14;0;14
-G01;91b446e3;[externo];2026-06-25T21:25:36.000;fix(historico): remove historico button do sidebar lateral (#299);0;10;10
-G01;446a6f45;G01-A23;2026-06-25T21:56:09.000;docs(readme): insere video de demonstracao #235;1;1;2
-G01;3323570a;G01-A15;2026-06-25T22:13:43.000;fix: ajusta validacoes e confirma testes #298;45;35;80
-G01;1610569f;G01-A15;2026-06-25T22:18:18.000;docs: atualiza validacao final do WAD #298;1;1;2
-G01;a82af0c3;G01-A12;2026-06-25T22:19:07.000;docs: corrige erros na secao de testes (#301);10;10;20
-G01;a30db8c2;[externo];2026-06-25T22:32:38.000;fix(historico): css responsivo, filtros e correcao de gaps (#299);63;100;163
-G01;f4ec4f15;[externo];2026-06-25T22:32:43.000;fix(editar): migrar entidade ao trocar tipo parceiro/fornecedor (#299);55;1;56
-G01;bfa200d9;[externo];2026-06-25T22:32:46.000;feat(inicio): movimentacoes recentes funcionais e icone branco (#299);112;31;143
-G01;2823c7ce;G01-A12;2026-06-25T22:47:42.000;docs: corrige erros secao 5.2 (#302);0;1;1
-G01;d7450e63;G01-A15;2026-06-25T22:56:17.000;docs(wad): alinha documentação final e evidências de testes #298;92;94;186
-G01;d2a578f2;[externo];2026-06-25T23:20:27.000;fix(readme): instrucoes de teste, geracao de JWT_SECRET e validacao E2E (#303);49;6;55
-G01;76330163;[externo];2026-06-25T23:58:37.000;fix(wad): corrige inconsistencias de RBAC, resiliencia e integrantes (#303);7535;7511;15046
+﻿commit_id;autor_id;autorado_em;titulo;linhas_adicionadas;linhas_removidas;linhas_total
+3260ef93;G01-A17;2026-06-25T10:56:23.000;feat(editar): separar telas de edição e visualizacao (#281);135;29;164
+c7023bdf;G01-A17;2026-06-25T11:01:53.000;feat(visualizacao): atualizando botoes da pagina de visualizacao (#281);6;6;12
+e83889d2;G01-A17;2026-06-25T11:04:21.000;feat(historico): adicionar pagina de historico (#281);37;54;91
+c0f352be;G01-A17;2026-06-25T11:10:18.000;feat(visualizacao): melhorar estilo dos blocos das telas de parceiro (#285);4;3;7
+60d2ecbd;G01-A13;2026-06-25T11:10:45.000;docs(documentos extras): move os documentos extras para a pasta documentos/outros e remove os documentos desnecessarios;0;0;0
+309f5ced;G01-A17;2026-06-25T11:20:03.000;feat(historico): reformulando a pagina de historico (#280);81;191;272
+d14adf09;G01-A13;2026-06-25T11:25:05.000;docs(readme): adiciona links dos integrantes a licensa #284;1;1;2
+3777807c;G01-A17;2026-06-25T11:45:08.000;feat(editar): fazer botao de voltar ir para visualizacao (#280);200;175;375
+448d8d1b;G01-A17;2026-06-25T12:40:07.000;fix(editar): corrigir opcoes de edicao (#281);33;11;44
+ca523d81;G01-A17;2026-06-25T12:40:55.000;fix(editar): corrigir texto da opcao de voltar (#281);14;18;32
+259d8722;G01-A14;2026-06-25T12:59:52.000;feat/implementa-pagina-dehistorico/(#287);258;235;493
+fa91785d;G01-A13;2026-06-25T13:38:33.000;docs(wad): troca links inacessiveis #283;4;6;10
+f8d3a520;G01-A15;2026-06-25T14:07:01.000;docs(wad): converte diagramas de sequência para Mermaid (#254);502;114;616
+949f7d8c;G01-A13;2026-06-25T14:19:47.000;refactor(config): muda os arquivos de configuracao para a pasta src;40;82;122
+c534da5f;G01-A17;2026-06-25T14:25:57.000;fix(editar): corrigir tela de edicao (#281);6;16;22
+475db61b;G01-A15;2026-06-25T14:42:51.000;docs(wad): converte diagramas arquiteturais e relacionais para Mermaid (#254);688;50;738
+650eaf8f;G01-A17;2026-06-25T14:43:57.000;feat(historico): historico vai [externo] mostrado (#286);172;112;284
+0a8eb77c;G01-A15;2026-06-25T16:01:16.000;docs(wad): preenche secao 4.2 da sprint 4 (#257);277;146;423
+13c0f995;G01-A15;2026-06-25T16:33:30.000;docs(wad): preenche secao 4.3 da sprint 5 (#257);25;13;38
+c4bb908f;G01-A15;2026-06-25T16:59:49.000;docs(wad): renumera imagens e anexos (#257);294;520;814
+34c67d81;[externo];2026-06-25T17:02:28.000;fix(historico): ajuste no nome, horario e detalhamento da descricao (#244);249;84;333
+161216f0;G01-A12;2026-06-25T17:05:55.000;docs: preenche o relatorio da primeira leva de testes de usabilidade (#291);5;1;6
+ce94314b;G01-A12;2026-06-25T17:07:43.000;docs: preenche analise dos resultados da primeira leva de testes (#291);5;0;5
+4e130509;G01-A15;2026-06-25T17:12:40.000;docs(wad): padroniza paragrafos e ajustes finais (#257);90;90;180
+b407c2cf;G01-A12;2026-06-25T19:12:26.000;docs: preenche relatorio da  secao dos testes sus (#293);3;1;4
+6b7f5fb8;G01-A12;2026-06-25T19:13:59.000;docs: preenche resultados dos testes sus (#293);4;0;4
+a9c84eaa;G01-A12;2026-06-25T19:23:54.000;docs: preenche secao da avaliacao heuristica (#294);16;0;16
+b042e232;G01-A12;2026-06-25T19:54:06.000;docs: preenche secao da segunda leva dos testes de usablidade (#292);6;0;6
+a15c1a1a;G01-A12;2026-06-25T19:56:03.000;docs: preenche resultados da segunda leva dos testes de usabilidade;6;0;6
+bbe38e20;G01-A12;2026-06-25T20:15:10.000;docs: adiciona planilha da primeira leva de testes (#295);11;7;18
+3cd27f96;G01-A12;2026-06-25T20:16:40.000;docs: adicona planilha da segunda leva de testes (#296);6;1;7
+321ace89;G01-A12;2026-06-25T20:21:38.000;docs: adiciona formulario dos testes sus (#293);10;5;15
+00d0e116;G01-A12;2026-06-25T20:34:43.000;docs: adiciona fotos da primeira rodada de testes (#291);14;0;14
+e771b1e2;G01-A12;2026-06-25T20:58:06.000;docs: adiciona fotos da segunda rodada dos testes (#292);14;0;14
+91b446e3;[externo];2026-06-25T21:25:36.000;fix(historico): remove historico button do sidebar lateral (#299);0;10;10
+446a6f45;G01-A23;2026-06-25T21:56:09.000;docs(readme): insere video de demonstracao #235;1;1;2
+3323570a;G01-A15;2026-06-25T22:13:43.000;fix: ajusta validacoes e confirma testes #298;45;35;80
+1610569f;G01-A15;2026-06-25T22:18:18.000;docs: atualiza validacao final do WAD #298;1;1;2
+a82af0c3;G01-A12;2026-06-25T22:19:07.000;docs: corrige erros na secao de testes (#301);10;10;20
+a30db8c2;[externo];2026-06-25T22:32:38.000;fix(historico): css responsivo, filtros e correcao de gaps (#299);63;100;163
+f4ec4f15;[externo];2026-06-25T22:32:43.000;fix(editar): migrar entidade ao trocar tipo parceiro/fornecedor (#299);55;1;56
+bfa200d9;[externo];2026-06-25T22:32:46.000;feat(inicio): movimentacoes recentes funcionais e icone branco (#299);112;31;143
+2823c7ce;G01-A12;2026-06-25T22:47:42.000;docs: corrige erros secao 5.2 (#302);0;1;1
+d7450e63;G01-A15;2026-06-25T22:56:17.000;docs(wad): alinha documentação final e evidências de testes #298;92;94;186
+d2a578f2;[externo];2026-06-25T23:20:27.000;fix(readme): instrucoes de teste, geracao de JWT_SECRET e validacao E2E (#303);49;6;55
+76330163;[externo];2026-06-25T23:58:37.000;fix(wad): corrige inconsistencias de RBAC, resiliencia e integrantes (#303);7535;7511;15046

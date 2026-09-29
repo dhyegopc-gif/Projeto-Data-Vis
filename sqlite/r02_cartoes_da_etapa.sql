@@ -1,9 +1,12 @@
 -- R02: Cartões de uma etapa, para abrir a etapa de maior acúmulo
 -- Mesmas regras de r02_acumulo_por_etapa.sql (etapa, emparelhamento,
--- intervalos sem saída e limite); os parâmetros ficam no fim do arquivo.
+-- intervalos sem saída e limite).
+-- Parâmetros no CTE abaixo: grupo, sprint ('(sem sprint)' para cartões sem
+-- sprint) e etapa (Backlog, Doing, Waiting Review, Review). '*' = todos.
 WITH
 parametros AS (
-    SELECT 48.0 AS limite_horas
+    SELECT 48.0 AS limite_horas,
+           'G01' AS grupo, 'Sprint 02' AS sprint, 'Backlog' AS etapa
 ),
 corte AS (
     SELECT MAX(t) AS corte_em FROM (
@@ -59,13 +62,16 @@ SELECT
     MIN(i.entrou_em)                                                AS primeira_entrada,
     MAX(i.saiu_em)                                                  AS ultima_saida,
     ROUND(SUM((JULIANDAY(i.saiu_em) - JULIANDAY(i.entrou_em)) * 24), 1) AS horas_na_etapa,
+    SUM((JULIANDAY(i.saiu_em) - JULIANDAY(i.entrou_em)) * 24)       AS horas_exatas,  -- para comparar com o limite
     CASE WHEN SUM((JULIANDAY(i.saiu_em) - JULIANDAY(i.entrou_em)) * 24) > p.limite_horas
          THEN 1 ELSE 0 END                                          AS acima_limite,
-    GROUP_CONCAT(DISTINCT i.tipo_fim)                               AS tipo_fim
+    GROUP_CONCAT(DISTINCT i.tipo_fim)                               AS tipo_fim,
+    SUM(i.tipo_fim <> 'saida registrada')                           AS intervalos_sem_saida,
+    SUM(i.tipo_fim = 'sem saida: aberto no corte')                  AS intervalos_abertos_no_corte
 FROM intervalos i
 CROSS JOIN parametros p
-WHERE i.grupo  = 'G01'              -- Parâmetro: grupo
-  AND i.sprint = 'Sprint 02'        -- Parâmetro: sprint ('(sem sprint)' para cartões sem sprint)
-  AND i.etapa  = 'Backlog'          -- Parâmetro: etapa (Backlog, Doing, Waiting Review, Review)
+WHERE (p.grupo  = '*' OR i.grupo  = p.grupo)
+  AND (p.sprint = '*' OR i.sprint = p.sprint)
+  AND (p.etapa  = '*' OR i.etapa  = p.etapa)
 GROUP BY i.grupo, i.sprint, i.etapa, i.cartao_numero
 ORDER BY horas_na_etapa DESC;

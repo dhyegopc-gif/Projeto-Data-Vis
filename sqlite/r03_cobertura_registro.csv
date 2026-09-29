@@ -2,21 +2,33 @@
 G01;cartoes;prazo_em;304;8;296;2.6;dizer se um cartão está atrasado (fora do escopo das telas);-
 G02;cartoes;prazo_em;489;16;473;3.3;dizer se um cartão está atrasado (fora do escopo das telas);-
 G03;cartoes;prazo_em;445;0;445;0.0;dizer se um cartão está atrasado (fora do escopo das telas);-
-G01;cartoes;responsaveis_ids;304;296;8;97.4;saber quem responde pelo cartão parado na etapa;R02
-G02;cartoes;responsaveis_ids;489;467;22;95.5;saber quem responde pelo cartão parado na etapa;R02
-G03;cartoes;responsaveis_ids;445;438;7;98.4;saber quem responde pelo cartão parado na etapa;R02
-G01;cartoes;sprint;304;286;18;94.1;"cortar o acúmulo por sprint: sem sprint o cartão cai em ""(sem sprint)""";R02
-G02;cartoes;sprint;489;458;31;93.7;"cortar o acúmulo por sprint: sem sprint o cartão cai em ""(sem sprint)""";R02
-G03;cartoes;sprint;445;430;15;96.6;"cortar o acúmulo por sprint: sem sprint o cartão cai em ""(sem sprint)""";R02
+G01;cartoes;responsaveis_ids resolvido;304;278;26;91.4;saber quem responde pelo cartão parado na etapa e a quem somar o cartão concluído na concentração;R02, R05
+G02;cartoes;responsaveis_ids resolvido;489;450;39;92.0;saber quem responde pelo cartão parado na etapa e a quem somar o cartão concluído na concentração;R02, R05
+G03;cartoes;responsaveis_ids resolvido;445;438;7;98.4;saber quem responde pelo cartão parado na etapa e a quem somar o cartão concluído na concentração;R02, R05
+G01;cartoes;sprint;304;286;18;94.1;"cortar por sprint: sem sprint o cartão cai em ""(sem sprint)"" e só aparece no recorte de todas as sprints";R02, R04, R05
+G02;cartoes;sprint;489;458;31;93.7;"cortar por sprint: sem sprint o cartão cai em ""(sem sprint)"" e só aparece no recorte de todas as sprints";R02, R04, R05
+G03;cartoes;sprint;445;430;15;96.6;"cortar por sprint: sem sprint o cartão cai em ""(sem sprint)"" e só aparece no recorte de todas as sprints";R02, R04, R05
+G01;cartoes;tamanho (rótulo PP a GG);304;263;41;86.5;comparar planejado com realizado e pesar o cartão concluído: sem tamanho o cartão sai das duas telas;R04, R05
+G02;cartoes;tamanho (rótulo PP a GG);489;456;33;93.3;comparar planejado com realizado e pesar o cartão concluído: sem tamanho o cartão sai das duas telas;R04, R05
+G03;cartoes;tamanho (rótulo PP a GG);445;440;5;98.9;comparar planejado com realizado e pesar o cartão concluído: sem tamanho o cartão sai das duas telas;R04, R05
 G01;commits;autor_id resolvido (arquivo inteiro);662;464;198;70.1;atribuir commits a pessoas: a coluna autor da lista de commits fica sem dono;R01
 G02;commits;autor_id resolvido (arquivo inteiro);1067;929;138;87.1;atribuir commits a pessoas: a coluna autor da lista de commits fica sem dono;R01
 G03;commits;autor_id resolvido (arquivo inteiro);959;743;216;77.5;atribuir commits a pessoas: a coluna autor da lista de commits fica sem dono;R01
-G01;commits;autor_id resolvido (base do R01);404;293;111;72.5;atribuir a pessoas os commits contados no gráfico de ritmo;R01
-G02;commits;autor_id resolvido (base do R01);706;655;51;92.8;atribuir a pessoas os commits contados no gráfico de ritmo;R01
-G03;commits;autor_id resolvido (base do R01);633;490;143;77.4;atribuir a pessoas os commits contados no gráfico de ritmo;R01
+G01;commits;autor_id resolvido (base do R01);404;293;111;72.5;atribuir a pessoas os commits contados no gráfico de ritmo e na concentração por commits;R01, R05
+G02;commits;autor_id resolvido (base do R01);706;655;51;92.8;atribuir a pessoas os commits contados no gráfico de ritmo e na concentração por commits;R01, R05
+G03;commits;autor_id resolvido (base do R01);633;490;143;77.4;atribuir a pessoas os commits contados no gráfico de ritmo e na concentração por commits;R01, R05
+G01;commits;número do cartão (#N) na base do R01;404;317;87;78.5;ligar o commit ao cartão: commit sem #N não entra na contagem de commits por cartão;R04
+G02;commits;número do cartão (#N) na base do R01;706;619;87;87.7;ligar o commit ao cartão: commit sem #N não entra na contagem de commits por cartão;R04
+G03;commits;número do cartão (#N) na base do R01;633;514;119;81.2;ligar o commit ao cartão: commit sem #N não entra na contagem de commits por cartão;R04
+G01;merge_requests;autor_id resolvido;150;143;7;95.3;atribuir o merge request a uma pessoa na concentração por MRs;R05
+G02;merge_requests;autor_id resolvido;220;205;15;93.2;atribuir o merge request a uma pessoa na concentração por MRs;R05
+G03;merge_requests;autor_id resolvido;170;170;0;100.0;atribuir o merge request a uma pessoa na concentração por MRs;R05
 G01;merge_requests;revisores_ids;150;36;114;24.0;ler a espera em Waiting Review: sem revisor designado, não há de quem esperar;R02
 G02;merge_requests;revisores_ids;220;212;8;96.4;ler a espera em Waiting Review: sem revisor designado, não há de quem esperar;R02
 G03;merge_requests;revisores_ids;170;169;1;99.4;ler a espera em Waiting Review: sem revisor designado, não há de quem esperar;R02
+G01;merge_requests;sprint;150;100;50;66.7;cortar a concentração por MRs por sprint: sem sprint o MR só entra no recorte de todas as sprints;R05
+G02;merge_requests;sprint;220;192;28;87.3;cortar a concentração por MRs por sprint: sem sprint o MR só entra no recorte de todas as sprints;R05
+G03;merge_requests;sprint;170;150;20;88.2;cortar a concentração por MRs por sprint: sem sprint o MR só entra no recorte de todas as sprints;R05
 G01;sprints;inicio_em e prazo_em;5;0;5;0.0;situar a sprint no calendário: o período do gráfico de ritmo não pode ser cortado por sprint;R01, R02
 G02;sprints;inicio_em e prazo_em;5;0;5;0.0;situar a sprint no calendário: o período do gráfico de ritmo não pode ser cortado por sprint;R01, R02
 G03;sprints;inicio_em e prazo_em;5;5;0;100.0;situar a sprint no calendário: o período do gráfico de ritmo não pode ser cortado por sprint;R01, R02

@@ -1,0 +1,424 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Planejado × realizado</title>
+<style>
+/*__CSS_COMUM__*/
+.grafico { min-height: 360px; }
+.halo { paint-order: stroke; stroke: var(--surface); stroke-width: 3px; stroke-linejoin: round; }
+.detalhe { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 4px 14px; margin: 0; font-size: 13px; }
+.detalhe dt { color: var(--ink-2); }
+.detalhe dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.titulo-cartao { font-size: 15px; font-weight: 600; margin: 0; overflow-wrap: anywhere; }
+.barra-pct { display: inline-block; vertical-align: middle; width: 56px; height: 8px; background: var(--grid); border-radius: 4px; overflow: hidden; margin-right: 6px; }
+.barra-pct > i { display: block; height: 100%; background: var(--series-2); border-radius: 0 4px 4px 0; }
+.tabela-longa { max-height: 420px; overflow: auto; }
+.duas { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+@media (max-width: 900px) { .duas { grid-template-columns: minmax(0, 1fr); } }
+</style>
+
+<div class="wrap">
+  <nav aria-label="Telas do painel"><ul class="telas" id="telas"></ul></nav>
+  <header>
+    <p class="eyebrow">R04 · Planejado × realizado · para a orientação pedagógica</p>
+    <h1 id="titulo">Tempo entre criar e fechar cada cartão, comparado ao tamanho planejado</h1>
+    <p class="pergunta">Os cartões deste grupo levam o tempo que o tamanho prometia? Quais fogem tanto do previsto que merecem uma pergunta na próxima reunião?</p>
+  </header>
+
+  <section class="filtros" aria-label="Filtros">
+    <label class="campo" for="f-grupo"><span>Grupo</span><select id="f-grupo"></select></label>
+    <div class="campo"><span>Sprint</span><div class="presets" id="f-sprint" role="group" aria-label="Sprint"></div></div>
+    <div class="campo"><span>Tamanhos no gráfico</span><div class="presets" id="f-tam" role="group" aria-label="Tamanhos"></div></div>
+  </section>
+
+  <section class="tiles" aria-label="Resumo do recorte">
+    <div class="tile"><span class="rotulo">Cartões no gráfico</span><span class="valor" id="t-n">–</span><span class="sub" id="t-n-sub"></span></div>
+    <div class="tile"><span class="rotulo">Levaram mais que o planejado</span><span class="valor" id="t-passou">–</span><span class="sub" id="t-passou-sub"></span></div>
+    <div class="tile"><span class="rotulo">Realizado ÷ planejado (mediana)</span><span class="valor" id="t-med">–</span><span class="sub" id="t-med-sub"></span></div>
+    <div class="tile"><span class="rotulo">Commits autorais ligados a cartão</span><span class="valor" id="t-vinc">–</span><span class="sub" id="t-vinc-sub"></span></div>
+  </section>
+
+  <section class="card" aria-labelledby="h-disp">
+    <div class="card-topo">
+      <div>
+        <h2 id="h-disp">Cada ponto é um cartão fechado. Acima da linha do planejado, levou mais tempo que o tamanho previa</h2>
+        <p class="limite"><strong>Tempo decorrido entre criar e fechar o cartão, em dias corridos; não é tempo de trabalho.</strong> Noite, fim de semana e espera no Backlog contam.</p>
+        <p class="recorte" id="recorte"></p>
+      </div>
+      <button type="button" class="botao" id="bt-tabela" aria-expanded="false" aria-controls="tabela-pontos">Ver como tabela</button>
+    </div>
+    <div class="legenda" id="legenda" aria-hidden="true"></div>
+    <div class="grafico" id="grafico"></div>
+    <div class="legenda" id="destaques"></div>
+    <p class="dica">Passe o mouse para ler um cartão e clique para abrir os commits ligados a ele. Pelo teclado: foco no gráfico, setas para andar, Enter para abrir. Escala vertical logarítmica: cada linha de grade multiplica o tempo.</p>
+    <div class="rolagem tabela-longa" id="tabela-pontos" hidden></div>
+  </section>
+
+  <div class="duas">
+    <section class="card" aria-labelledby="h-sel">
+      <p class="sr" id="anuncio" aria-live="polite"></p>
+      <h2 id="h-sel">Cartão aberto</h2>
+      <div id="sel"></div>
+    </section>
+    <section class="card" aria-labelledby="h-tam">
+      <div>
+        <h2 id="h-tam">Por tamanho</h2>
+        <p class="contagem">Mesmo recorte do gráfico. Mediana: quanto o cartão levou. Passaram: % que levou mais que o planejado. Commits: citam o número do cartão; por cartão é a mediana.</p>
+      </div>
+      <div class="rolagem" id="por-tamanho"></div>
+      <p class="contagem" id="sem-cartao"></p>
+    </section>
+  </div>
+
+  <section class="card" aria-labelledby="h-prem">
+    <div>
+      <h2 id="h-prem">Premissas desta tela</h2>
+      <p class="contagem">Escolhas do grupo, não definições da orientação. Todas a confirmar com o professor; a mesma lista está no requisito.</p>
+    </div>
+    <div class="rolagem" id="premissas"></div>
+  </section>
+
+  <footer class="notas">
+    <div><h3>Nota de origem</h3><ul id="nota-origem"></ul></div>
+    <div><h3>O que ficou fora do gráfico</h3><ul id="nota-fora"></ul></div>
+    <div><h3>Qualidade do registro</h3><ul id="nota-qualidade"></ul></div>
+    <div>
+      <h3>O que esta tela não sustenta</h3>
+      <ul>
+        <li>Esforço ou horas trabalhadas. O tempo entre criar e fechar inclui noites, fins de semana e a espera até alguém pegar o cartão.</li>
+        <li>Atraso. O planejado vem do tamanho do cartão, por premissa nossa (PP ¼ dia, P ½, M 1, G 3, GG 5), e não de um prazo combinado com o grupo.</li>
+        <li>Quem trabalhou mais. O responsável no quadro não é necessariamente quem fez, e commit sem número de cartão não entra na conta.</li>
+      </ul>
+    </div>
+  </footer>
+</div>
+<div id="tip" role="tooltip" hidden></div>
+
+<script>
+//__JS_COMUM__
+const D = __DADOS__;
+
+const TAM = ["PP", "P", "M", "G", "GG"];
+const ROT_TAM = { PP: "¼ dia", P: "½ dia", M: "1 dia", G: "3 dias", GG: "5 dias" };
+const SENT = new Set(["[externo]", "[bot]"]);
+const Y0 = 10 / 1440, Y1 = 64;                 // 10 min a ~2 meses, em dias
+const TICKS = [[Y0, "≤ 10 min"], [1 / 24, "1 h"], [0.25, "6 h"], [1, "1 dia"], [3, "3 dias"],
+               [7, "1 semana"], [14, "2 semanas"], [30, "1 mês"], [60, "2 meses"]];
+
+const CARTOES = D.cartoes.map(([grupo, numero, titulo, sprint, resp, tamanho, plan, criado, fechado, dias, commits, linhas]) =>
+  ({ grupo, numero, titulo, sprint, resp, tamanho, plan, criado, fechado, dias, commits, linhas,
+     razao: dias / plan, passou: dias > plan, dobro: dias > 2 * plan }));
+const GRUPOS = Object.keys(D.grupos);
+const estado = { grupo: GRUPOS[0], sprint: "todas", tamanhos: new Set(TAM), sel: null, cursor: null };
+let lista = [], pontos = [], destaques = [];
+
+const mediana = (xs) => {
+  if (!xs.length) return null;
+  const s = xs.slice().sort((a, b) => a - b), m = s.length >> 1;
+  return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+};
+const razaoTxt = (r) => (r < 10 ? num(r, 1) : num(r)) + "×";
+// afastamento lateral fixo por cartão (não muda entre recargas)
+const desvio = (c) => { let x = c.numero * 2654435761 % 4294967296; x = (x ^ (x >>> 15)) >>> 0; return (x % 1000) / 500 - 1; };
+
+// ---------- filtros ----------
+function sprintsDoGrupo() {
+  const s = [...new Set(CARTOES.filter((c) => c.grupo === estado.grupo).map((c) => c.sprint))];
+  return s.sort((a, b) => (a.startsWith("(") ? 1 : 0) - (b.startsWith("(") ? 1 : 0) || a.localeCompare(b));
+}
+function montarFiltros() {
+  const cs = $("f-sprint");
+  cs.replaceChildren();
+  for (const s of ["todas", ...sprintsDoGrupo()]) {
+    const b = h("button", { type: "button", "data-foco": `sprint:${s}`, "aria-pressed": String(estado.sprint === s), text: s === "todas" ? "Todas" : s });
+    b.addEventListener("click", () => { estado.sprint = s; estado.sel = null; atualizar(); });
+    cs.appendChild(b);
+  }
+  const ct = $("f-tam");
+  ct.replaceChildren();
+  for (const t of TAM) {
+    const on = estado.tamanhos.has(t);
+    const b = h("button", { type: "button", "data-foco": `tam:${t}`, "aria-pressed": String(on), text: `${t} · ${ROT_TAM[t]}` });
+    b.addEventListener("click", () => {
+      if (on && estado.tamanhos.size === 1) return;       // pelo menos um tamanho
+      on ? estado.tamanhos.delete(t) : estado.tamanhos.add(t);
+      atualizar();
+    });
+    ct.appendChild(b);
+  }
+}
+function iniciar() {
+  montarTelas("R04");
+  montarPremissas();
+  const sg = $("f-grupo");
+  for (const g of GRUPOS) sg.appendChild(h("option", { value: g, text: g }));
+  sg.addEventListener("change", () => {
+    estado.grupo = sg.value; estado.sel = null;
+    if (!sprintsDoGrupo().includes(estado.sprint)) estado.sprint = "todas";
+    atualizar();
+  });
+  alternarTabela("bt-tabela", "tabela-pontos");
+  const leg = $("legenda");
+  leg.append(
+    h("span", {}, [marcaLegenda("circulo", "var(--series)"), "no planejado ou antes"]),
+    h("span", {}, [marcaLegenda("triangulo", "var(--series-2)"), "levou mais que o planejado"]),
+    h("span", {}, [h("i", { class: "chave linha", style: "background: var(--muted)" }), "realizado = planejado"]),
+    h("span", {}, [h("i", { class: "chave linha", style: "height: 0; background: none; border-top: 2px dashed var(--muted); width: 14px" }), "o dobro do planejado"]),
+    h("span", {}, [h("i", { class: "chave faixa" }), "região em que levou mais"]),
+    h("span", {}, [h("i", { class: "chave linha", style: "height: 4px; width: 16px; background: var(--ink)" }), "mediana do tamanho"]),
+  );
+  addEventListener("resize", () => desenhar());
+  atualizar();
+}
+
+// ---------- render ----------
+function atualizar() { comFoco(renderizar); }
+function renderizar() {
+  const G = D.grupos[estado.grupo];
+  const doGrupo = CARTOES.filter((c) => c.grupo === estado.grupo && (estado.sprint === "todas" || c.sprint === estado.sprint));
+  lista = doGrupo.filter((c) => estado.tamanhos.has(c.tamanho));
+  if (!lista.some((c) => c === estado.sel)) estado.sel = lista.slice().sort((a, b) => b.razao - a.razao)[0] || null;
+  estado.cursor = null;
+  $("f-grupo").value = estado.grupo;
+  montarFiltros();
+
+  const sprintTxt = estado.sprint === "todas" ? "todas as sprints" : estado.sprint;
+  $("titulo").textContent = `Tempo entre criar e fechar cada cartão, comparado ao tamanho planejado, grupo ${estado.grupo}, ${sprintTxt}`;
+
+  const n = lista.length, passou = lista.filter((c) => c.passou).length, dobro = lista.filter((c) => c.dobro).length;
+  $("t-n").textContent = num(n);
+  const recorteTotal = estado.sprint === "todas" && estado.tamanhos.size === TAM.length;
+  $("t-n-sub").textContent = recorteTotal
+    ? `de ${num(G.cartoes)} cartões do grupo; ficam fora ${num(G.sem_tamanho)} sem tamanho e ${num(G.abertos_com_tamanho)} abertos`
+    : `fechados e com tamanho, no recorte escolhido`;
+  $("t-passou").textContent = n ? pct(100 * passou / n) : "–";
+  $("t-passou-sub").textContent = n ? `${plural(passou, "cartão", "cartões")}; ${num(dobro)} passaram do dobro` : "nenhum cartão no recorte";
+  const med = mediana(lista.map((c) => c.razao));
+  $("t-med").textContent = med === null ? "–" : razaoTxt(med);
+  $("t-med-sub").textContent = med === null ? "" : "1× = levou o que o tamanho previa; metade dos cartões ficou abaixo deste valor";
+  $("t-vinc").textContent = pct(100 * G.commits_com_cartao / G.commits_autorais);
+  $("t-vinc-sub").textContent = `${num(G.commits_com_cartao)} de ${num(G.commits_autorais)} citam o número de um cartão (grupo inteiro)`;
+  $("recorte").textContent = `Planejado por tamanho, premissa nossa: PP ¼ dia, P ½, M 1, G 3, GG 5. Ficam fora cartões sem tamanho e cartões ainda abertos.`;
+
+  desenhar();
+  tabelaPontos();
+  detalhe();
+  porTamanho();
+  notas();
+}
+
+let geo = null;
+function desenhar() {
+  const caixa = $("grafico");
+  const W = Math.max(caixa.clientWidth, 300), estreito = W < 560;
+  const H = estreito ? 400 : 460;
+  const m = { t: 30, r: 12, b: 50, l: estreito ? 62 : 70 };
+  const pw = W - m.l - m.r, ph = H - m.t - m.b;
+  const banda = pw / TAM.length, jw = Math.min(banda * 0.32, 46);
+  const cx = (t) => m.l + banda * (TAM.indexOf(t) + 0.5);
+  const lY0 = Math.log(Y0), lY1 = Math.log(Y1);
+  const y = (d) => m.t + ph - (Math.log(Math.min(Math.max(d, Y0), Y1)) - lY0) / (lY1 - lY0) * ph;
+
+  const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, height: H, tabindex: "0", role: "application",
+    "aria-label": `Dispersão: ${lista.length} cartões do grupo ${estado.grupo}, tempo realizado por tamanho planejado. Setas percorrem os cartões, Enter abre.` });
+
+  // grade e eixo vertical
+  for (const [v, rot] of TICKS) {
+    el("line", { x1: m.l, x2: W - m.r, y1: y(v), y2: y(v), stroke: "var(--grid)", "stroke-width": 1 }, svg);
+    texto(svg, m.l - 8, y(v) + 4, rot, { class: "eixo", "text-anchor": "end" });
+  }
+  texto(svg, 0, 14, "tempo entre criar e fechar", { class: "eixo-titulo" });
+
+  // regiões "levou mais" e linhas de referência por tamanho
+  for (const t of TAM) {
+    const x0 = cx(t) - banda / 2 + 3, x1 = cx(t) + banda / 2 - 3, yp = y(D.planejado[t]);
+    el("rect", { x: x0, y: m.t, width: x1 - x0, height: yp - m.t, fill: "var(--wash-2)" }, svg);
+  }
+  for (const t of TAM) {
+    const x0 = cx(t) - jw - 8, x1 = cx(t) + jw + 8;
+    el("line", { x1: x0, x2: x1, y1: y(2 * D.planejado[t]), y2: y(2 * D.planejado[t]), stroke: "var(--muted)", "stroke-width": 1.5, "stroke-dasharray": "4 3" }, svg);
+    el("line", { x1: x0, x2: x1, y1: y(D.planejado[t]), y2: y(D.planejado[t]), stroke: "var(--muted)", "stroke-width": 2, "stroke-linecap": "round" }, svg);
+    const on = estado.tamanhos.has(t);
+    texto(svg, cx(t), H - m.b + 20, t, { class: on ? "rot-forte" : "eixo", "text-anchor": "middle" });
+    texto(svg, cx(t), H - m.b + 35, estreito ? ROT_TAM[t] : `planejado ${ROT_TAM[t]}`, { class: "eixo", "text-anchor": "middle" });
+  }
+  el("line", { x1: m.l, x2: W - m.r, y1: m.t + ph, y2: m.t + ph, stroke: "var(--axis)", "stroke-width": 1 }, svg);
+
+  // pontos
+  pontos = lista.map((c) => ({ c, x: cx(c.tamanho) + desvio(c) * jw, y: y(c.dias) }));
+  const camada = el("g", {}, svg);
+  for (const p of pontos.filter((p) => !p.c.passou).concat(pontos.filter((p) => p.c.passou))) {
+    p.no = marca(camada, p.c.passou ? "triangulo" : "circulo", p.x, p.y, 4.2,
+      { fill: p.c.passou ? "var(--series-2)" : "var(--series)", stroke: "var(--surface)", "stroke-width": 1.5 });
+  }
+
+  // medianas por tamanho
+  for (const t of TAM) {
+    const md = mediana(lista.filter((c) => c.tamanho === t).map((c) => c.dias));
+    if (md === null) continue;
+    el("line", { x1: cx(t) - jw * 0.55, x2: cx(t) + jw * 0.55, y1: y(md), y2: y(md), stroke: "var(--surface)", "stroke-width": 7, "stroke-linecap": "round" }, svg);
+    el("line", { x1: cx(t) - jw * 0.55, x2: cx(t) + jw * 0.55, y1: y(md), y2: y(md), stroke: "var(--ink)", "stroke-width": 4, "stroke-linecap": "round" }, svg);
+  }
+
+  // destaques: os 3 cartões mais longe do planejado ganham um número no ponto;
+  // o texto vai para a lista abaixo do gráfico, sem cobrir outros pontos
+  destaques = pontos.slice().sort((a, b) => b.c.razao - a.c.razao).slice(0, 3).filter((p) => p.c.razao > 2);
+  destaques.forEach((p, i) => {
+    el("circle", { cx: p.x, cy: p.y, r: 6.5, fill: "none", stroke: "var(--ink)", "stroke-width": 1.2 }, svg);
+    texto(svg, p.x + 9, p.y - 7, String(i + 1), { class: "rot-forte halo" });
+  });
+
+  // seleção, cursor e área de toque
+  const selRing = el("circle", { r: 8, fill: "none", stroke: "var(--ink)", "stroke-width": 2, visibility: "hidden" }, svg);
+  const hovRing = el("circle", { r: 7, fill: "none", stroke: "var(--ink-2)", "stroke-width": 1.5, visibility: "hidden" }, svg);
+  el("rect", { x: m.l, y: m.t, width: pw, height: ph, fill: "transparent" }, svg);
+
+  const perto = (ev) => {
+    const r = svg.getBoundingClientRect(), k = W / r.width;
+    const px = (ev.clientX - r.left) * k, py = (ev.clientY - r.top) * k;
+    let melhor = null, dm = 24 * k;
+    for (const p of pontos) { const d = Math.hypot(p.x - px, p.y - py); if (d < dm) { dm = d; melhor = p; } }
+    return melhor;
+  };
+  svg.addEventListener("pointermove", (ev) => {
+    const p = perto(ev);
+    if (!p) { dica.esconder(); hovRing.setAttribute("visibility", "hidden"); svg.style.cursor = ""; return; }
+    svg.style.cursor = "pointer";
+    anel(hovRing, p);
+    dica.mostrar(linhasDica(p.c), ev.clientX, ev.clientY);
+  });
+  svg.addEventListener("pointerleave", () => { dica.esconder(); hovRing.setAttribute("visibility", "hidden"); });
+  svg.addEventListener("click", (ev) => { const p = perto(ev); if (p) selecionar(p.c); });
+
+  const ordem = pontos.slice().sort((a, b) => a.x - b.x);
+  svg.addEventListener("keydown", (ev) => {
+    if (!ordem.length) return;
+    let i = ordem.findIndex((p) => p.c === estado.cursor);
+    if (ev.key === "ArrowRight" || ev.key === "ArrowDown") i = Math.min(ordem.length - 1, i + 1);
+    else if (ev.key === "ArrowLeft" || ev.key === "ArrowUp") i = Math.max(0, i < 0 ? 0 : i - 1);
+    else if (ev.key === "Home") i = 0;
+    else if (ev.key === "End") i = ordem.length - 1;
+    else if ((ev.key === "Enter" || ev.key === " ") && estado.cursor) { ev.preventDefault(); selecionar(estado.cursor); return; }
+    else return;
+    ev.preventDefault();
+    const p = ordem[Math.max(0, i)];
+    estado.cursor = p.c;
+    anel(hovRing, p);
+    dica.noElemento(linhasDica(p.c), p.no);
+  });
+  svg.addEventListener("blur", () => { dica.esconder(); hovRing.setAttribute("visibility", "hidden"); });
+
+  caixa.replaceChildren(svg);
+  geo = { selRing };
+  marcarSel();
+  const dq = $("destaques");
+  dq.replaceChildren(...(destaques.length ? [h("span", { text: "Mais longe do planejado:" })] : []), ...destaques.map((p, i) => {
+    const b = h("button", { type: "button", class: "link", text: `${i + 1} · #${p.c.numero}, ${p.c.tamanho} planejado ${ROT_TAM[p.c.tamanho]}, levou ${duracao(p.c.dias)}` });
+    b.addEventListener("click", () => selecionar(p.c));
+    return b;
+  }));
+}
+function anel(ring, p) { ring.setAttribute("cx", p.x); ring.setAttribute("cy", p.y); ring.setAttribute("visibility", "visible"); }
+function marcarSel() {
+  const p = pontos.find((q) => q.c === estado.sel);
+  if (p) anel(geo.selRing, p); else geo.selRing.setAttribute("visibility", "hidden");
+}
+function linhasDica(c) {
+  return [
+    ["v", `levou ${duracao(c.dias)}`],
+    ["d", `#${c.numero} · ${c.titulo}`],
+    ["s", `${c.tamanho}, planejado ${ROT_TAM[c.tamanho]} · ${razaoTxt(c.razao)} o planejado`],
+    ["s", `${plural(c.commits, "commit ligado", "commits ligados")} · ${c.sprint}`],
+  ];
+}
+function selecionar(c) {
+  estado.sel = c;
+  marcarSel();
+  detalhe();
+  for (const tr of document.querySelectorAll("#tabela-pontos tr[data-k]"))
+    tr.classList.toggle("linha-sel", tr.dataset.k === `${c.grupo}:${c.numero}`);
+}
+
+function detalhe() {
+  const caixa = $("sel"), c = estado.sel;
+  if (!c) { caixa.replaceChildren(h("p", { class: "vazio", text: "Nenhum cartão no recorte escolhido." })); return; }
+  const commits = D.commits[`${c.grupo}:${c.numero}`] || [];
+  $("anuncio").textContent = `Cartão ${c.numero} aberto: levou ${duracao(c.dias)}, ${plural(commits.length, "commit ligado", "commits ligados")}.`;
+  const dl = h("dl", { class: "detalhe" });
+  const par = (k, v) => dl.append(h("dt", { text: k }), h("dd", {}, [v]));
+  par("Tamanho", `${c.tamanho} (planejado ${ROT_TAM[c.tamanho]})`);
+  par("Levou", `${duracao(c.dias)}, ${razaoTxt(c.razao)} o planejado`);
+  par("Criado", fmtDH(c.criado));
+  par("Fechado", fmtDH(c.fechado));
+  par("Sprint", c.sprint);
+  par("Responsável", c.resp || "sem responsável no quadro");
+  let corpo;
+  if (commits.length) {
+    corpo = h("div", { class: "rolagem" }, [tabela(
+      [{ t: "Quando" }, { t: "Autor" }, { t: "Título do commit" }, { t: "Linhas", num: true }],
+      commits.map(([id, autor, quando, titulo, add, rem]) => [
+        fmtDH(quando),
+        h("span", {}, [autor, SENT.has(autor) ? h("span", { class: "chip", text: "autoria não resolvida" }) : null]),
+        titulo, `+${num(add)} −${num(rem)}`]),
+      `Commits ligados ao cartão ${c.numero}`)]);
+  } else {
+    corpo = h("p", { class: "vazio", text: `Nenhum commit autoral cita #${c.numero}. Isso não quer dizer que não houve trabalho: documentação, revisão e reunião não geram commit, e nem todo commit cita o cartão.` });
+  }
+  caixa.replaceChildren(
+    h("p", { class: "titulo-cartao", text: `#${c.numero} · ${c.titulo}` }),
+    dl,
+    h("p", { class: "contagem", text: `${plural(commits.length, "commit autoral cita", "commits autorais citam")} este cartão` }),
+    corpo);
+}
+
+function tabelaPontos() {
+  const linhas = lista.slice().sort((a, b) => b.razao - a.razao).map((c) => {
+    const b = h("button", { type: "button", class: "link", text: `#${c.numero}` });
+    b.addEventListener("click", () => selecionar(c));
+    return { classe: c === estado.sel ? "linha-sel" : "", celulas: [b, c.titulo, c.tamanho, ROT_TAM[c.tamanho], duracao(c.dias), razaoTxt(c.razao), num(c.commits)] };
+  });
+  const t = tabela([{ t: "Cartão" }, { t: "Título" }, { t: "Tamanho" }, { t: "Planejado" }, { t: "Levou", num: true }, { t: "÷ planejado", num: true }, { t: "Commits", num: true }],
+    linhas, "Cartões do gráfico, do mais distante do planejado ao mais próximo");
+  const rows = t.querySelectorAll("tbody tr");
+  lista.slice().sort((a, b) => b.razao - a.razao).forEach((c, i) => { rows[i].dataset.k = `${c.grupo}:${c.numero}`; });
+  $("tabela-pontos").replaceChildren(t);
+}
+
+function porTamanho() {
+  const linhas = TAM.filter((t) => estado.tamanhos.has(t)).map((t) => {
+    const cs = lista.filter((c) => c.tamanho === t);
+    if (!cs.length) return [`${t} · ${ROT_TAM[t]}`, "0", "–", "–", "–", "–"];
+    const p = 100 * cs.filter((c) => c.passou).length / cs.length;
+    const barra = h("span", {}, [h("span", { class: "barra-pct", "aria-hidden": "true" }, [h("i", { style: `width:${p}%` })]), pct(p)]);
+    return [`${t} · ${ROT_TAM[t]}`, num(cs.length), duracao(mediana(cs.map((c) => c.dias))), barra,
+            num(cs.reduce((a, c) => a + c.commits, 0)), num(mediana(cs.map((c) => c.commits)), 1)];
+  });
+  $("por-tamanho").replaceChildren(tabela(
+    [{ t: "Tamanho", classe: "nw" }, { t: "Cartões", num: true }, { t: "Mediana", num: true },
+     { t: "Passaram", num: true }, { t: "Commits", num: true }, { t: "Por cartão", num: true }],
+    linhas, "Resumo por tamanho do cartão"));
+  const G = D.grupos[estado.grupo], sem = G.commits_autorais - G.commits_com_cartao;
+  $("sem-cartao").textContent = `No grupo inteiro, ${plural(sem, "commit autoral não cita", "commits autorais não citam")} número de cartão (${pct(100 * sem / G.commits_autorais)}) e não entram em nenhuma linha acima.`;
+}
+
+function notas() {
+  const G = D.grupos[estado.grupo];
+  const li = (id, itens) => $(id).replaceChildren(...itens.map((t) => h("li", { text: t })));
+  li("nota-origem", [
+    "Fonte: cartoes.csv (tamanho no campo rotulos, criado_em e fechado_em) e commits.csv (título e mensagem), pelas consultas r04_*.sql de sqlite/.",
+    "Horário de Brasília (America/Sao_Paulo); a carga converte todos os horários para esse fuso.",
+    `Data de extração não registrada. Os arquivos entraram no repositório em ${fmt(D.entrada_repositorio)}; o registro mais recente do conjunto é de ${fmt(D.registro_mais_recente)}.`,
+  ]);
+  li("nota-fora", [
+    `${plural(G.sem_tamanho, "cartão sem rótulo de tamanho", "cartões sem rótulo de tamanho")} e ${plural(G.abertos_com_tamanho, "cartão com tamanho ainda aberto", "cartões com tamanho ainda abertos")} no grupo ${estado.grupo}.`,
+    "Rótulos P1 a P8 são prioridade, não tamanho, e não entram.",
+    "Commits de merge e o histórico herdado do repositório-template (mesmo recorte do R01).",
+  ]);
+  li("nota-qualidade", [
+    `O commit é ligado ao cartão pelo "#número" no título (ou na mensagem, quando o título não cita número); "#12abc" e cores como "#9ab445" não contam. No ${estado.grupo}, ${pct(100 * G.commits_com_cartao / G.commits_autorais)} dos commits autorais fazem isso.`,
+    `Commit que cita dois cartões conta nos dois. ` + (G.citacoes_sem_cartao ? `${plural(G.citacoes_sem_cartao, "citação aponta", "citações apontam")} número de cartão que não existe no ${estado.grupo} e não entra.` : `Nenhuma citação do ${estado.grupo} aponta cartão inexistente.`),
+    `No ${estado.grupo}, ${plural(G.fechados_em_lote, "cartão foi fechado", "cartões foram fechados")} em lote (5 ou mais no mesmo minuto), contando também os sem tamanho. O fechamento pode ser arrumação do quadro, não o fim do trabalho.`,
+  ]);
+}
+
+iniciar();
+</script>

@@ -11,8 +11,13 @@ Os 8 CSVs de [csvs_originais/](../csvs_originais/) carregados em um banco SQLite
 | `t04_cadencia_commits_diaria.sql` | R01 — commits por grupo e dia, com os dias sem commit como zero |
 | `Detalhamento_dos_commits.sql` | R01 — commits de um grupo num dia (o clique no gráfico) |
 | `r02_acumulo_por_etapa.sql` | R02 — cartões e horas por etapa do quadro, por grupo e sprint |
-| `r02_cartoes_da_etapa.sql` | R02 — cartões de uma etapa (abrir a de maior acúmulo) |
-| `r03_cobertura_registro.sql` | R03 — percentual de preenchimento por campo e grupo |
+| `r02_cartoes_da_etapa.sql` | R02 — cartões de uma etapa (abrir a de maior acúmulo); parâmetros no CTE `parametros`, `'*'` = todos |
+| `r03_cobertura_registro.sql` | R03 — percentual de preenchimento por campo e grupo, inclusive tamanho do cartão e `#N` no commit |
+| `r04_prazo_planejado_realizado.sql` | R04 — um cartão fechado com tamanho por linha: dias planejados, dias realizados, commits ligados |
+| `r04_commits_por_cartao.sql` | R04 — um vínculo commit → cartão por linha (o clique no gráfico) |
+| `r04_resumo_por_tamanho.sql` | R04 — por grupo e tamanho: medianas, % acima do planejado, commits por cartão |
+| `r05_contribuicao_por_integrante.sql` | R05 — valor de cada integrante por grupo, sprint e medida, com a parcela sem dono |
+| `r05_gini_concentracao.sql` | R05 — índice de Gini por grupo, sprint e medida |
 | `t05_eventos_kanban.sql` | T05 — view deduplicada, classificada e sequenciada dos eventos Kanban |
 
 ```
@@ -36,6 +41,15 @@ Nenhuma linha e filtrada ou deduplicada: as 24 duplicatas de
 `kanban_eventos` e os 213 commits herdados do repositorio-template continuam
 aqui. A modelagem dimensional de [modelagem/schema.sql](../modelagem/schema.sql)
 e uma camada seguinte, que consome estas tabelas.
+
+Duas regras dos R04 e R05 aparecem em mais de um `.sql`, copiadas de propósito
+para cada arquivo rodar sozinho (o padrão do R02): o **tamanho do cartão** (token
+exato `PP`/`SIZE_PP` ... `GG`/`SIZE_GG`; `P1`–`P8` são prioridade) e o **vínculo
+commit → cartão** (`#N` no título, ou na mensagem quando o título não cita número,
+com N no mesmo grupo). O SQLite não tem regex: o número é lido cortando o texto
+em cada `#` e usando `CAST(trecho AS INTEGER)`, que para no primeiro não-dígito.
+Os geradores de `dashboard/` recontam as duas regras em Python e param se o
+resultado divergir.
 
 A view T05 expoe chaves naturais (grupo/cartao, pessoa, coluna e rotulo) para a
 carga dimensional resolver as SKs. As dimensoes modeladas nao existem em

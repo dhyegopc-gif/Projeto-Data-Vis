@@ -1,0 +1,415 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Concentração do trabalho</title>
+<style>
+/*__CSS_COMUM__*/
+.medida-explica { margin: 0; font-size: 12px; color: var(--muted); max-width: 80ch; }
+.presets button[disabled] { opacity: 0.45; cursor: not-allowed; }
+.grupo-linha { cursor: pointer; }
+.halo { paint-order: stroke; stroke: var(--surface); stroke-width: 3px; stroke-linejoin: round; }
+.lorenz { max-width: 520px; }
+</style>
+
+<div class="wrap">
+  <nav aria-label="Telas do painel"><ul class="telas" id="telas"></ul></nav>
+  <header>
+    <p class="eyebrow">R05 · Concentração do trabalho registrado · para a orientação pedagógica</p>
+    <h1 id="titulo">Concentração do trabalho registrado entre os integrantes de cada grupo</h1>
+    <p class="pergunta">O trabalho registrado está distribuído entre os integrantes do grupo ou concentrado em poucas pessoas? O índice de Gini resume isso num número por grupo: 0 é todo mundo com a mesma parte; quanto mais perto do máximo, mais o registro depende de uma pessoa só.</p>
+  </header>
+
+  <section class="filtros" aria-label="Filtros">
+    <div class="campo"><span>Medida de trabalho registrado</span><div class="presets" id="f-medida" role="group" aria-label="Medida"></div></div>
+    <div class="campo"><span>Sprint</span><div class="presets" id="f-sprint" role="group" aria-label="Sprint"></div></div>
+    <label class="campo" for="f-grupo"><span>Grupo em detalhe</span><select id="f-grupo"></select></label>
+  </section>
+  <p class="medida-explica" id="medida-explica"></p>
+
+  <section class="tiles" aria-label="Resumo do grupo em detalhe">
+    <div class="tile"><span class="rotulo" id="t-gini-rot">Índice de Gini</span><span class="valor" id="t-gini">–</span><span class="sub" id="t-gini-sub"></span></div>
+    <div class="tile"><span class="rotulo">Maior parte de uma pessoa</span><span class="valor" id="t-maior">–</span><span class="sub" id="t-maior-sub"></span></div>
+    <div class="tile"><span class="rotulo">Menor parte de uma pessoa</span><span class="valor" id="t-menor">–</span><span class="sub" id="t-menor-sub"></span></div>
+    <div class="tile"><span class="rotulo">Sem dono identificado</span><span class="valor" id="t-na">–</span><span class="sub" id="t-na-sub"></span></div>
+  </section>
+
+  <section class="card" aria-labelledby="h-grupos">
+    <div class="card-topo">
+      <div>
+        <h2 id="h-grupos">Índice de Gini por grupo</h2>
+        <p class="limite"><strong>Mede a concentração do registro, não do trabalho.</strong> Programação em dupla, reunião e estudo podem ficar no nome de uma pessoa só ou de ninguém.</p>
+        <p class="recorte" id="recorte-grupos"></p>
+      </div>
+      <button type="button" class="botao" id="bt-tabela" aria-expanded="false" aria-controls="tabela-grupos">Ver como tabela</button>
+    </div>
+    <div class="legenda" aria-hidden="true">
+      <span><i class="chave s1"></i>grupo em detalhe</span>
+      <span><i class="chave" style="background: var(--zero)"></i>outros grupos</span>
+      <span><i class="chave linha" style="width: 14px"></i>faixa possível se a parte sem dono fosse de alguém</span>
+    </div>
+    <div class="grafico" id="g-grupos"></div>
+    <p class="dica">Clique num grupo para ver o detalhe. As faixas de leitura (distribuído até 0,2; moderado até 0,4; concentrado acima) são premissa nossa, não uma régua oficial.</p>
+    <div class="rolagem" id="tabela-grupos" hidden></div>
+  </section>
+
+  <div class="duas">
+    <section class="card" aria-labelledby="h-part">
+      <div>
+        <h2 id="h-part">Parte de cada integrante</h2>
+        <p class="contagem" id="part-sub"></p>
+      </div>
+      <div class="grafico" id="g-part"></div>
+    </section>
+    <section class="card" aria-labelledby="h-lorenz">
+      <div>
+        <h2 id="h-lorenz">Curva de Lorenz</h2>
+        <p class="contagem">Integrantes em ordem, de quem registrou menos para quem registrou mais. Quanto mais a curva se afasta da diagonal, maior o Gini.</p>
+      </div>
+      <div class="grafico lorenz" id="g-lorenz"></div>
+    </section>
+  </div>
+
+  <div class="duas">
+    <section class="card" aria-labelledby="h-sprint">
+      <div>
+        <h2 id="h-sprint">Gini por sprint</h2>
+        <p class="contagem" id="sprint-sub"></p>
+      </div>
+      <div class="grafico" id="g-sprint"></div>
+    </section>
+    <section class="card" aria-labelledby="h-medidas">
+      <div>
+        <h2 id="h-medidas">O mesmo grupo, outras medidas</h2>
+        <p class="contagem" id="medidas-sub"></p>
+      </div>
+      <div class="rolagem" id="t-medidas"></div>
+    </section>
+  </div>
+
+  <section class="card" aria-labelledby="h-prem">
+    <div>
+      <h2 id="h-prem">Premissas desta tela</h2>
+      <p class="contagem">Escolhas do grupo, não definições da orientação. Todas a confirmar com o professor; a mesma lista está no requisito.</p>
+    </div>
+    <div class="rolagem" id="premissas"></div>
+  </section>
+
+  <footer class="notas">
+    <div><h3>Nota de origem</h3><ul id="nota-origem"></ul></div>
+    <div>
+      <h3>Como o índice é calculado</h3>
+      <ul>
+        <li>Integrante: pessoa do cadastro do grupo que fez pelo menos um movimento no quadro do próprio grupo. São 7 em cada grupo. Premissa nossa.</li>
+        <li>Gini = soma de (2i − n − 1) × valor, dividida por n × total, com os n integrantes em ordem crescente e quem não registrou nada entrando com zero.</li>
+        <li>Com 7 integrantes, o máximo é 0,857: uma pessoa com tudo e as outras seis com zero.</li>
+        <li>Cartão com mais de um responsável divide o valor entre eles.</li>
+        <li id="nota-sem-tamanho"></li>
+      </ul>
+    </div>
+    <div><h3>Qualidade do registro</h3><ul id="nota-qualidade"></ul></div>
+    <div>
+      <h3>O que esta tela não sustenta</h3>
+      <ul>
+        <li>Quem trabalhou mais ou quem se dedicou mais. O responsável no quadro não é necessariamente quem fez, e boa parte do trabalho não deixa registro com nome.</li>
+        <li>Um ranking de alunos. A unidade de análise é o grupo; os identificadores aparecem só para ler a curva.</li>
+        <li>Um veredito. Concentração alta pode ser divisão de papéis combinada no grupo. A tela aponta onde perguntar.</li>
+      </ul>
+    </div>
+  </footer>
+</div>
+<div id="tip" role="tooltip" hidden></div>
+
+<script>
+//__JS_COMUM__
+const D = __DADOS__;
+
+const GRUPOS = [...new Set(D.recortes.map((r) => r.grupo))].sort();
+const MED = Object.fromEntries(D.medidas.map((m) => [m.id, m]));
+const estado = { medida: D.medidas[0].id, sprint: "(todas)", grupo: GRUPOS[0] };
+const G_MAX = 6 / 7;
+const gTxt = (v) => v.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const leitura = (g) => g <= 0.2 ? "distribuído" : g <= 0.4 ? "moderado" : "concentrado";
+// Com poucos registros inteiros entre 7 pessoas, o Gini tem um piso: mesmo a
+// divisão mais igual possível não chega a zero (4 MRs para 7 pessoas: 0,43).
+const INTEIRA = new Set(["cartoes_concluidos", "commits_autorais", "mrs_autorados"]);
+function giniMinimo(total, n) {
+  const t = Math.round(total), q = Math.floor(t / n), r = t % n;
+  const x = Array(n - r).fill(q).concat(Array(r).fill(q + 1));
+  const s = x.reduce((a, v) => a + v, 0);
+  return s ? x.reduce((a, v, i) => a + (2 * (i + 1) - n - 1) * v, 0) / (n * s) : 0;
+}
+const totalDe = (r) => r.valores.reduce((a, [, v]) => a + v, 0);
+const poucos = (r, medida) => INTEIRA.has(medida ?? estado.medida) && totalDe(r) < 14;
+
+function recorte(grupo, sprint, medida) {
+  return D.recortes.find((r) => r.grupo === grupo && r.sprint === (sprint ?? estado.sprint) && r.medida === (medida ?? estado.medida));
+}
+const valTxt = (v, m) => num(v, MED[m ?? estado.medida].casas);
+
+// ---------- filtros ----------
+function montarFiltros() {
+  const cm = $("f-medida");
+  cm.replaceChildren();
+  for (const m of D.medidas) {
+    const b = h("button", { type: "button", "data-foco": `medida:${m.id}`, "aria-pressed": String(estado.medida === m.id), text: m.nome + (m === D.medidas[0] ? " (principal)" : "") });
+    b.addEventListener("click", () => { estado.medida = m.id; if (!m.sprint) estado.sprint = "(todas)"; atualizar(); });
+    cm.appendChild(b);
+  }
+  const cs = $("f-sprint");
+  cs.replaceChildren();
+  const comSprint = MED[estado.medida].sprint;
+  for (const s of ["(todas)", ...D.sprints]) {
+    const b = h("button", { type: "button", "data-foco": `sprint:${s}`, "aria-pressed": String(estado.sprint === s), text: s === "(todas)" ? "Todas" : s });
+    if (!comSprint && s !== "(todas)") b.disabled = true;
+    b.addEventListener("click", () => { estado.sprint = s; atualizar(); });
+    cs.appendChild(b);
+  }
+  if (!comSprint) cs.appendChild(h("span", { class: "nota", text: "Commit não tem sprint no registro" }));
+}
+function iniciar() {
+  montarTelas("R05");
+  montarPremissas();
+  const sg = $("f-grupo");
+  for (const g of GRUPOS) sg.appendChild(h("option", { value: g, text: g }));
+  sg.addEventListener("change", () => { estado.grupo = sg.value; atualizar(); });
+  alternarTabela("bt-tabela", "tabela-grupos");
+  addEventListener("resize", () => desenharTudo());
+  atualizar();
+}
+
+// ---------- render ----------
+function atualizar() { comFoco(renderizar); }
+function renderizar() {
+  montarFiltros();
+  $("f-grupo").value = estado.grupo;
+  const m = MED[estado.medida];
+  const sprintTxt = estado.sprint === "(todas)" ? "todas as sprints" : estado.sprint;
+  $("titulo").textContent = `Concentração de ${m.curto} entre os 7 integrantes de cada grupo, ${sprintTxt}`;
+  $("medida-explica").textContent = m.explica;
+
+  const r = recorte(estado.grupo);
+  $("t-gini-rot").textContent = `Índice de Gini, ${estado.grupo}`;
+  if (r) {
+    const tot = totalDe(r), vs = r.valores.map(([, v]) => v);
+    const vMaior = Math.max(...vs), vMenor = Math.min(...vs), zeros = vs.filter((v) => v === 0).length;
+    $("t-gini").textContent = gTxt(r.gini);
+    $("t-gini-sub").textContent = (r.nao_atribuido
+      ? `${leitura(r.gini)}; entre ${gTxt(r.gini_min)} e ${gTxt(r.gini_max)} se a parte sem dono fosse de alguém`
+      : `${leitura(r.gini)}; máximo possível com 7 pessoas: 0,857`)
+      + (poucos(r) ? `. Atenção: só ${valTxt(tot)} ${m.unidade}; com isso o índice não fica abaixo de ${gTxt(giniMinimo(tot, 7))}` : "");
+    $("t-maior").textContent = pct(100 * vMaior / tot);
+    $("t-maior-sub").textContent = `${valTxt(vMaior)} ${m.unidade} de uma pessoa; a divisão igual seria 14,3% para cada`;
+    $("t-menor").textContent = pct(100 * vMenor / tot);
+    $("t-menor-sub").textContent = zeros ? `${plural(zeros, "integrante sem", "integrantes sem")} nenhum registro nesta medida` : `${valTxt(vMenor)} ${m.unidade} de uma pessoa`;
+    $("t-na").textContent = pct(100 * r.nao_atribuido / (tot + r.nao_atribuido));
+    $("t-na-sub").textContent = `${valTxt(r.nao_atribuido)} ${m.unidade} de [externo], [bot], sem responsável ou de quem não é integrante; fora do índice`;
+  } else {
+    for (const id of ["t-gini", "t-maior", "t-menor", "t-na"]) $(id).textContent = "–";
+    for (const id of ["t-gini-sub", "t-maior-sub", "t-menor-sub", "t-na-sub"]) $(id).textContent = "nada registrado neste recorte";
+  }
+  const baixos = GRUPOS.map((g) => recorte(g)).filter((r) => r && poucos(r));
+  $("recorte-grupos").textContent = `${m.nome}, ${sprintTxt}. Aqui a comparação entre grupos vale: o índice não depende da escala, e os três grupos têm 7 integrantes. `
+    + (baixos.length ? `Mas com poucos registros ele sobe por construção: ${baixos.map((r) => `${r.grupo} tem só ${valTxt(totalDe(r))} ${m.unidade} (índice mínimo possível ${gTxt(giniMinimo(totalDe(r), 7))})`).join("; ")}.` : "");
+  desenharTudo();
+  tabelaGrupos();
+  tabelaMedidas();
+  notas();
+}
+function desenharTudo() { desenharGrupos(); desenharPartes(); desenharLorenz(); desenharSprints(); }
+
+function desenharGrupos() {
+  const caixa = $("g-grupos");
+  const W = Math.max(caixa.clientWidth, 300), estreito = W < 560;
+  const linha = 40, m = { t: 24, r: estreito ? 16 : 28, b: 30, l: 46 };
+  const H = m.t + GRUPOS.length * linha + m.b, pw = W - m.l - m.r;
+  const x = (v) => m.l + v * pw;
+  const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, height: H, role: "img",
+    "aria-label": "Índice de Gini por grupo: " + GRUPOS.map((g) => { const r = recorte(g); return r ? `${g} ${gTxt(r.gini)}` : `${g} sem registro`; }).join(", ") });
+
+  // faixas de leitura (premissa) e grade
+  const faixas = estreito ? [[0, 0.2, "distrib."], [0.2, 0.4, "moder."], [0.4, 1, "concentrado"]]
+                          : [[0, 0.2, "distribuído"], [0.2, 0.4, "moderado"], [0.4, 1, "concentrado"]];
+  faixas.forEach(([a, b, rot], i) => {
+    if (i === 1) el("rect", { x: x(a), y: m.t - 6, width: x(b) - x(a), height: GRUPOS.length * linha + 6, fill: "var(--wash)" }, svg);
+    texto(svg, (x(a) + x(Math.min(b, 1))) / 2, m.t - 10, rot, { class: "eixo", "text-anchor": "middle" });
+  });
+  for (let v = 0; v <= 1.0001; v += 0.2) {
+    el("line", { x1: x(v), x2: x(v), y1: m.t - 6, y2: H - m.b, stroke: "var(--grid)", "stroke-width": 1 }, svg);
+    texto(svg, x(v), H - m.b + 16, gTxt(v).replace(",00", ""), { class: "eixo", "text-anchor": "middle" });
+  }
+  el("line", { x1: x(G_MAX), x2: x(G_MAX), y1: m.t - 6, y2: H - m.b, stroke: "var(--ink-2)", "stroke-width": 1 }, svg);
+  texto(svg, x(G_MAX) - 4, H - m.b - 4, estreito ? "máx." : "máximo com 7", { class: "rot", "text-anchor": "end" });
+
+  GRUPOS.forEach((g, i) => {
+    const r = recorte(g), yc = m.t + i * linha + linha / 2, sel = g === estado.grupo;
+    const grupo = el("g", { class: "grupo-linha", tabindex: "0", role: "button", "data-foco": `grupo:${g}`, "aria-pressed": String(sel),
+      "aria-label": `Ver detalhe do ${g}` + (r ? `: Gini ${gTxt(r.gini)}` : "") }, svg);
+    el("rect", { x: 0, y: yc - linha / 2, width: W, height: linha, fill: "transparent" }, grupo);
+    texto(grupo, m.l - 10, yc + 4, g, { class: sel ? "rot-forte" : "rot", "text-anchor": "end" });
+    if (!r) { texto(grupo, x(0) + 6, yc + 4, "sem registro", { class: "eixo" }); return; }
+    el("rect", { x: x(0), y: yc - 7, width: Math.max(2, x(r.gini) - x(0)), height: 14, rx: 4,
+      fill: sel ? "var(--series)" : "var(--zero)" }, grupo);
+    if (r.gini_max > r.gini_min + 0.001) {
+      el("line", { x1: x(r.gini_min), x2: x(r.gini_max), y1: yc, y2: yc, stroke: "var(--ink)", "stroke-width": 1.5 }, grupo);
+      for (const v of [r.gini_min, r.gini_max]) el("line", { x1: x(v), x2: x(v), y1: yc - 6, y2: yc + 6, stroke: "var(--ink)", "stroke-width": 1.5 }, grupo);
+    }
+    texto(grupo, x(Math.max(r.gini, r.gini_max)) + 8, yc + 4, gTxt(r.gini) + (poucos(r) ? " · poucos registros" : ""), { class: sel ? "rot-forte" : "rot" });
+    const abrir = () => { estado.grupo = g; atualizar(); };
+    grupo.addEventListener("click", abrir);
+    grupo.addEventListener("keydown", (ev) => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); abrir(); } });
+    grupo.addEventListener("pointermove", (ev) => dica.mostrar([
+      ["v", `Gini ${gTxt(r.gini)}`], ["d", `${g}: ${leitura(r.gini)}`],
+      ["s", r.nao_atribuido ? `faixa possível ${gTxt(r.gini_min)} a ${gTxt(r.gini_max)}` : "tudo com dono identificado"]], ev.clientX, ev.clientY));
+    grupo.addEventListener("pointerleave", () => dica.esconder());
+  });
+  caixa.replaceChildren(svg);
+}
+
+function desenharPartes() {
+  const caixa = $("g-part"), r = recorte(estado.grupo), m0 = MED[estado.medida];
+  if (!r) { caixa.replaceChildren(h("p", { class: "vazio", text: "Nada registrado neste recorte." })); $("part-sub").textContent = ""; return; }
+  const tot = r.valores.reduce((a, [, v]) => a + v, 0);
+  $("part-sub").textContent = `${estado.grupo}, ${m0.nome.toLowerCase()}: % do total dos integrantes (${valTxt(tot)} ${m0.unidade}), na ordem do identificador. A linha marca a divisão igual, 14,3% para cada um.`;
+  const W = Math.max(caixa.clientWidth, 280), linha = 30, m = { t: 8, r: 118, b: 24, l: 70 };
+  const H = m.t + r.valores.length * linha + m.b, pw = W - m.l - m.r;
+  const maxPct = Math.max(30, ...r.valores.map(([, v]) => 100 * v / tot));
+  const topo = Math.ceil(maxPct / 10) * 10;
+  const x = (p) => m.l + p / topo * pw;
+  const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, height: H, role: "img",
+    "aria-label": `Parte de cada integrante do ${estado.grupo}: ` + r.valores.map(([p, v]) => `${p} ${pct(100 * v / tot)}`).join(", ") });
+  for (let v = 0; v <= topo; v += 10) {
+    el("line", { x1: x(v), x2: x(v), y1: m.t, y2: H - m.b, stroke: "var(--grid)", "stroke-width": 1 }, svg);
+    texto(svg, x(v), H - m.b + 15, `${v}%`, { class: "eixo", "text-anchor": "middle" });
+  }
+  r.valores.forEach(([p, v], i) => {
+    const yc = m.t + i * linha + linha / 2, pc = 100 * v / tot;
+    texto(svg, m.l - 8, yc + 4, p, { class: "rot", "text-anchor": "end" });
+    if (v > 0) el("rect", { x: x(0), y: yc - 8, width: Math.max(2, x(pc) - x(0)), height: 16, rx: 4, fill: "var(--series)" }, svg);
+    else el("line", { x1: x(0), x2: x(0) + 10, y1: yc, y2: yc, stroke: "var(--zero)", "stroke-width": 3 }, svg);
+  });
+  el("line", { x1: x(100 / 7), x2: x(100 / 7), y1: m.t - 2, y2: H - m.b, stroke: "var(--ink)", "stroke-width": 1.5 }, svg);
+  r.valores.forEach(([p, v], i) => {
+    const yc = m.t + i * linha + linha / 2, pc = 100 * v / tot;
+    texto(svg, Math.max(x(pc), v > 0 ? 0 : x(0) + 10) + 6, yc + 4, `${pct(pc)} · ${valTxt(v)}`, { class: "rot halo" });
+  });
+  caixa.replaceChildren(svg);
+}
+
+function desenharLorenz() {
+  const caixa = $("g-lorenz"), r = recorte(estado.grupo);
+  if (!r) { caixa.replaceChildren(h("p", { class: "vazio", text: "Nada registrado neste recorte." })); return; }
+  const W = Math.min(Math.max(caixa.clientWidth, 260), 520), m = { t: 12, r: 16, b: 40, l: 46 };
+  const pw = W - m.l - m.r, ph = Math.min(pw, 300), H = m.t + ph + m.b;
+  const x = (p) => m.l + p * pw, y = (p) => m.t + ph - p * ph;
+  const asc = r.valores.map(([, v]) => v).sort((a, b) => a - b), tot = asc.reduce((a, v) => a + v, 0);
+  const pts = [[0, 0]];
+  let acum = 0;
+  asc.forEach((v, i) => { acum += v; pts.push([(i + 1) / asc.length, acum / tot]); });
+  const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, height: H, role: "img",
+    "aria-label": `Curva de Lorenz do ${estado.grupo}: ` + pts.slice(1).map(([a, b], i) => `${i + 1} de 7 integrantes com ${pct(100 * b)} do total`).join("; ") });
+  for (const v of [0, 0.25, 0.5, 0.75, 1]) {
+    el("line", { x1: x(0), x2: x(1), y1: y(v), y2: y(v), stroke: "var(--grid)", "stroke-width": 1 }, svg);
+    texto(svg, m.l - 6, y(v) + 4, `${v * 100}%`, { class: "eixo", "text-anchor": "end" });
+  }
+  for (let i = 0; i <= 7; i++) texto(svg, x(i / 7), H - m.b + 15, String(i), { class: "eixo", "text-anchor": "middle" });
+  texto(svg, x(0.5), H - 6, "integrantes, de quem registrou menos a quem registrou mais", { class: "eixo", "text-anchor": "middle" });
+  el("path", { d: `M${pts.map(([a, b]) => `${x(a)},${y(b)}`).join("L")}L${x(1)},${y(1)}Z`, fill: "var(--wash)" }, svg);
+  el("line", { x1: x(0), y1: y(0), x2: x(1), y2: y(1), stroke: "var(--muted)", "stroke-width": 1.5 }, svg);
+  texto(svg, x(0.62), y(0.62) - 8, "divisão igual", { class: "rot halo", "text-anchor": "end", transform: `rotate(${-Math.atan2(ph, pw) * 180 / Math.PI} ${x(0.62)} ${y(0.62) - 8})` });
+  el("polyline", { points: pts.map(([a, b]) => `${x(a)},${y(b)}`).join(" "), fill: "none", stroke: "var(--series)", "stroke-width": 2, "stroke-linejoin": "round" }, svg);
+  pts.slice(1).forEach(([a, b], i) => {
+    const c = el("circle", { cx: x(a), cy: y(b), r: 4, fill: "var(--series)", stroke: "var(--surface)", "stroke-width": 2 }, svg);
+    const alvo = el("circle", { cx: x(a), cy: y(b), r: 12, fill: "transparent" }, svg);
+    alvo.addEventListener("pointermove", (ev) => dica.mostrar([["v", pct(100 * b)], ["d", `os ${i + 1} de 7 que registraram menos`], ["s", "somam esta parte do total"]], ev.clientX, ev.clientY));
+    alvo.addEventListener("pointerleave", () => dica.esconder());
+  });
+  const meio = pts[4];
+  texto(svg, x(meio[0]) + 10, y(meio[1]) + 16, "os 4 que registraram menos", { class: "rot halo" });
+  texto(svg, x(meio[0]) + 10, y(meio[1]) + 30, `somam ${pct(100 * meio[1])} do total`, { class: "rot halo" });
+  caixa.replaceChildren(svg);
+}
+
+function desenharSprints() {
+  const caixa = $("g-sprint"), m0 = MED[estado.medida];
+  if (!m0.sprint) {
+    caixa.replaceChildren(h("p", { class: "vazio", text: "Commit não tem sprint no registro, então esta medida só existe para o período inteiro. Escolha outra medida para ver a evolução." }));
+    $("sprint-sub").textContent = "";
+    return;
+  }
+  $("sprint-sub").textContent = `${m0.nome}. ${estado.grupo} em destaque; os outros grupos em cinza, para contexto.` + (INTEIRA.has(estado.medida) ? " Ponto vazado: menos de 14 registros na sprint, o índice sobe por construção." : "");
+  const W = Math.max(caixa.clientWidth, 280), m = { t: 14, r: 44, b: 28, l: 38 }, H = 230;
+  const pw = W - m.l - m.r, ph = H - m.t - m.b, n = D.sprints.length;
+  const x = (i) => m.l + (n === 1 ? pw / 2 : i / (n - 1) * pw), y = (v) => m.t + ph - v / 0.9 * ph;
+  const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, height: H, role: "img",
+    "aria-label": `Gini por sprint do ${estado.grupo}: ` + D.sprints.map((s) => { const r = recorte(estado.grupo, s); return `${s} ${r ? gTxt(r.gini) : "sem registro"}`; }).join(", ") });
+  for (const v of [0, 0.2, 0.4, 0.6, 0.8]) {
+    el("line", { x1: m.l, x2: W - m.r, y1: y(v), y2: y(v), stroke: "var(--grid)", "stroke-width": 1 }, svg);
+    texto(svg, m.l - 6, y(v) + 4, gTxt(v), { class: "eixo", "text-anchor": "end" });
+  }
+  el("line", { x1: m.l, x2: W - m.r, y1: y(G_MAX), y2: y(G_MAX), stroke: "var(--ink-2)", "stroke-width": 1 }, svg);
+  texto(svg, W - m.r, y(G_MAX) - 4, "máximo 0,857", { class: "eixo", "text-anchor": "end" });
+  D.sprints.forEach((s, i) => texto(svg, x(i), H - m.b + 16, s.replace("Sprint ", "S"), { class: "eixo", "text-anchor": "middle" }));
+  const ordem = GRUPOS.filter((g) => g !== estado.grupo).concat(estado.grupo);
+  for (const g of ordem) {
+    const sel = g === estado.grupo;
+    const pts = D.sprints.map((s, i) => { const r = recorte(g, s); return r ? [x(i), y(r.gini), r.gini, s, poucos(r)] : null; }).filter(Boolean);
+    if (!pts.length) continue;
+    el("polyline", { points: pts.map((p) => `${p[0]},${p[1]}`).join(" "), fill: "none",
+      stroke: sel ? "var(--series)" : "var(--zero)", "stroke-width": sel ? 2 : 1.5, "stroke-linejoin": "round" }, svg);
+    for (const p of pts) {
+      const cor = sel ? "var(--series)" : "var(--zero)";
+      if (p[4]) el("circle", { cx: p[0], cy: p[1], r: sel ? 4 : 3, fill: "var(--surface)", stroke: cor, "stroke-width": 2 }, svg);
+      else el("circle", { cx: p[0], cy: p[1], r: sel ? 4 : 3, fill: cor, stroke: "var(--surface)", "stroke-width": 2 }, svg);
+      if (sel) {
+        const alvo = el("circle", { cx: p[0], cy: p[1], r: 12, fill: "transparent" }, svg);
+        alvo.addEventListener("pointermove", (ev) => dica.mostrar([["v", `Gini ${gTxt(p[2])}`], ["d", `${g}, ${p[3]}`]].concat(p[4] ? [["s", "poucos registros: o índice sobe por construção"]] : []), ev.clientX, ev.clientY));
+        alvo.addEventListener("pointerleave", () => dica.esconder());
+      }
+    }
+    const u = pts[pts.length - 1];
+    texto(svg, u[0] + 8, u[1] + 4, sel ? `${g} ${gTxt(u[2])}` : g, { class: sel ? "rot-forte" : "eixo" });
+  }
+  caixa.replaceChildren(svg);
+}
+
+function tabelaGrupos() {
+  const linhas = [];
+  for (const g of GRUPOS) {
+    const r = recorte(g);
+    if (!r) { linhas.push([g, "–", "–", "–", "–"]); continue; }
+    const tot = r.valores.reduce((a, [, v]) => a + v, 0);
+    linhas.push([g, gTxt(r.gini), `${gTxt(r.gini_min)} a ${gTxt(r.gini_max)}`, leitura(r.gini),
+      r.valores.map(([p, v]) => `${p} ${pct(100 * v / tot)}`).join(" · ")]);
+  }
+  $("tabela-grupos").replaceChildren(tabela(
+    [{ t: "Grupo" }, { t: "Gini", num: true }, { t: "Faixa possível", num: true }, { t: "Leitura" }, { t: "Parte de cada integrante" }],
+    linhas, "Índice de Gini e parte de cada integrante, por grupo"));
+}
+
+function tabelaMedidas() {
+  $("medidas-sub").textContent = `${estado.sprint === "(todas)" ? "Todas as sprints" : estado.sprint}. Se as medidas contam histórias diferentes, a pergunta muda: quem registra commit nem sempre é quem fecha cartão.`;
+  const linhas = D.medidas.map((m) => {
+    const cel = GRUPOS.map((g) => { const r = recorte(g, m.sprint ? estado.sprint : "(todas)", m.id); return r ? gTxt(r.gini) : "–"; });
+    return { classe: m.id === estado.medida ? "linha-sel" : "", celulas: [m.nome + (m.sprint || estado.sprint === "(todas)" ? "" : " (todas as sprints)"), ...cel] };
+  });
+  $("t-medidas").replaceChildren(tabela([{ t: "Medida" }, ...GRUPOS.map((g) => ({ t: g, num: true }))], linhas, "Gini por medida e grupo"));
+}
+
+function notas() {
+  const r = recorte(estado.grupo, "(todas)", "commits_autorais");
+  const tot = r ? r.valores.reduce((a, [, v]) => a + v, 0) : 0;
+  const li = (id, itens) => $(id).replaceChildren(...itens.map((t) => h("li", { text: t })));
+  li("nota-origem", [
+    "Fonte: cartoes.csv (responsáveis, tamanho, fechamento e sprint), commits.csv, merge_requests.csv, kanban_eventos.csv e pessoas.csv, pelas consultas r05_*.sql de sqlite/.",
+    `Data de extração não registrada. Os arquivos entraram no repositório em ${fmt(D.entrada_repositorio)}; o registro mais recente do conjunto é de ${fmt(D.registro_mais_recente)}.`,
+  ]);
+  li("nota-qualidade", [
+    r ? `Commits: ${pct(100 * r.nao_atribuido / (tot + r.nao_atribuido))} dos commits autorais do ${estado.grupo} ficam fora do índice por não serem de um integrante ([externo], [bot] ou pessoa que não é integrante do grupo). A faixa possível mostra quanto isso pode mudar o Gini.` : "",
+    "Cartões: o responsável é quem está marcado no quadro no fim do período, não necessariamente quem executou.",
+    `Do cadastro de ${num(D.cadastro)} perfis, ${num(D.integrantes)} são integrantes e ${num(D.sem_registro)} não têm registro nenhum; se esses entrassem, o índice subiria sem que nada no trabalho mudasse. ${plural(D.fora_com_registro.length, "perfil tem", "perfis têm")} registro mas nenhum movimento no quadro do próprio grupo e fica${D.fora_com_registro.length === 1 ? "" : "m"} fora do índice: ${D.fora_com_registro.join(", ")}.`,
+  ].filter(Boolean));
+  const st = D.fechados_sem_tamanho[estado.grupo] || 0;
+  $("nota-sem-tamanho").textContent = `Na medida principal, cartão fechado sem rótulo de tamanho não tem dias planejados e fica de fora: ${plural(st, "cartão", "cartões")} de ${num(D.fechados[estado.grupo])} fechados no ${estado.grupo}. Ele conta em "cartões concluídos".`;
+}
+
+iniciar();
+</script>

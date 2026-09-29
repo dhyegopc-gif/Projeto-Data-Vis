@@ -59,6 +59,15 @@
   --focus: #6da7ec;
 }
 
+/* navegação entre as telas (mesma de comum.css) */
+.telas { display: flex; flex-wrap: wrap; gap: 4px 6px; font-size: 12px; margin: 0; padding: 0; list-style: none; }
+.telas a {
+  display: inline-block; color: var(--ink-2); text-decoration: none;
+  border: 1px solid var(--border); border-radius: 999px; padding: 3px 10px;
+}
+.telas a:hover { border-color: var(--ink-2); color: var(--ink); }
+.telas a[aria-current="page"] { background: var(--ink); color: var(--page); border-color: var(--ink); }
+
 * { box-sizing: border-box; }
 body {
   margin: 0;
@@ -188,6 +197,7 @@ tr.linha-sel td { background: var(--hover); }
 </style>
 
 <div class="wrap">
+  <nav aria-label="Telas do painel"><ul class="telas" id="telas"></ul></nav>
   <header>
     <p class="eyebrow">R01 · Ritmo de registro · para a orientação pedagógica</p>
     <h1 id="titulo">Commits registrados por dia</h1>
@@ -203,7 +213,7 @@ tr.linha-sel td { background: var(--hover); }
     </div>
     <label class="campo" for="f-ini"><span>De</span><input type="date" id="f-ini"></label>
     <label class="campo" for="f-fim"><span>Até</span><input type="date" id="f-fim"></label>
-    <label class="campo" for="f-limiar"><span>Silêncio a partir de</span>
+    <label class="campo" for="f-limiar"><span>Silêncio a partir de (premissa)</span>
       <select id="f-limiar">
         <option value="2">2 dias seguidos</option>
         <option value="3" selected>3 dias seguidos</option>
@@ -267,6 +277,14 @@ tr.linha-sel td { background: var(--hover); }
       </section>
     </div>
   </div>
+
+  <section class="card" aria-labelledby="h-prem">
+    <div>
+      <h2 id="h-prem">Premissas desta tela</h2>
+      <p class="contagem">Escolhas do grupo, não definições da orientação. Todas a confirmar com o professor; a mesma lista está no requisito.</p>
+    </div>
+    <div class="rolagem" id="premissas"></div>
+  </section>
 
   <footer class="notas">
     <div>
@@ -696,6 +714,28 @@ function notas(total) {
   );
 }
 
+// Premissas: a mesma lista da linha "Premissas do grupo" do requisito (comum.py)
+function montarPremissas() {
+  const linhas = D.premissas.map((p) => h("tr", {}, [
+    h("td", {}, [h("strong", { text: p.nome })]), h("td", { text: p.valor[0].toUpperCase() + p.valor.slice(1) }),
+    h("td", { text: p.por_que[0].toUpperCase() + p.por_que.slice(1) })]));
+  $("premissas").replaceChildren(h("table", {}, [
+    h("thead", {}, [h("tr", {}, ["Premissa", "Valor adotado", "Por quê"].map((t) => h("th", { scope: "col", text: t })))]),
+    h("tbody", {}, linhas)]));
+}
+
+// Navegação entre as telas: arquivo local quando aberto do disco, URL publicada na web
+function montarTelas() {
+  const local = location.protocol === "file:";
+  $("telas").replaceChildren(...D.telas.map((t) => {
+    const a = h("a", { href: local || !t.url ? t.arquivo : t.url, text: `${t.id} · ${t.nome}` });
+    if (t.id === "R01") a.setAttribute("aria-current", "page");
+    return h("li", {}, [a]);
+  }));
+}
+
+montarTelas();
+montarPremissas();
 iniciarFiltros();
 atualizar();
 let espera;

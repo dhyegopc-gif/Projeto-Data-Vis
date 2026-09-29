@@ -1,0 +1,58 @@
+﻿grupo;sprint;medida;integrantes;total_integrantes;nao_atribuido;pct_nao_atribuido;gini;gini_maximo_possivel;pct_do_maior;pessoa_maior;pct_divisao_igual;integrantes_sem_registro
+G01;(todas);cartoes_concluidos;7;278.0;26.0;8.6;0.212;0.857;21.2;G01-A15;14.3;0
+G02;(todas);cartoes_concluidos;7;450.0;29.0;6.1;0.235;0.857;26.9;G02-A12;14.3;0
+G03;(todas);cartoes_concluidos;7;391.0;0.0;0.0;0.358;0.857;36.1;G03-A15;14.3;0
+G01;Sprint 01;cartoes_concluidos;7;36.0;4.0;10.0;0.31;0.857;25.0;G01-A12;14.3;0
+G02;Sprint 01;cartoes_concluidos;7;60.0;8.0;11.8;0.443;0.857;43.3;G02-A12;14.3;0
+G03;Sprint 01;cartoes_concluidos;7;52.0;0.0;0.0;0.28;0.857;26.9;G03-A15;14.3;0
+G01;Sprint 02;cartoes_concluidos;7;52.0;13.0;20.0;0.209;0.857;21.2;G01-A14;14.3;0
+G02;Sprint 02;cartoes_concluidos;7;74.0;11.0;12.9;0.263;0.857;31.1;G02-A12;14.3;0
+G03;Sprint 02;cartoes_concluidos;7;65.0;0.0;0.0;0.356;0.857;40.0;G03-A15;14.3;0
+G01;Sprint 03;cartoes_concluidos;7;60.0;6.0;9.1;0.333;0.857;30.0;G01-A12;14.3;0
+G02;Sprint 03;cartoes_concluidos;7;95.0;0.0;0.0;0.322;0.857;31.6;G02-A12;14.3;0
+G03;Sprint 03;cartoes_concluidos;7;79.0;0.0;0.0;0.38;0.857;34.2;G03-A15;14.3;0
+G01;Sprint 04;cartoes_concluidos;7;34.0;0.0;0.0;0.328;0.857;32.4;G01-A15;14.3;0
+G02;Sprint 04;cartoes_concluidos;7;90.0;0.0;0.0;0.257;0.857;24.4;G02-A12;14.3;0
+G03;Sprint 04;cartoes_concluidos;7;97.0;0.0;0.0;0.468;0.857;45.4;G03-A15;14.3;0
+G01;Sprint 05;cartoes_concluidos;7;81.0;0.0;0.0;0.243;0.857;21.0;G01-A16;14.3;0
+G02;Sprint 05;cartoes_concluidos;7;120.0;0.0;0.0;0.205;0.857;21.7;G02-A15;14.3;0
+G03;Sprint 05;cartoes_concluidos;7;87.0;0.0;0.0;0.394;0.857;34.5;G03-A15;14.3;0
+G01;(todas);commits_autorais;7;292.0;112.0;27.7;0.376;0.857;31.8;G01-A17;14.3;1
+G02;(todas);commits_autorais;7;655.0;51.0;7.2;0.248;0.857;25.6;G02-A15;14.3;0
+G03;(todas);commits_autorais;7;489.0;144.0;22.7;0.206;0.857;23.1;G03-A12;14.3;0
+G01;(todas);dias_planejados_concluidos;7;352.5;18.5;5.0;0.276;0.857;24.8;G01-A17;14.3;0
+G02;(todas);dias_planejados_concluidos;7;622.5;18.5;2.9;0.143;0.857;21.4;G02-A12;14.3;0
+G03;(todas);dias_planejados_concluidos;7;306.0;0.0;0.0;0.356;0.857;33.0;G03-A15;14.3;0
+G01;Sprint 01;dias_planejados_concluidos;7;40.0;6.0;13.0;0.407;0.857;31.3;G01-A12;14.3;0
+G02;Sprint 01;dias_planejados_concluidos;7;52.0;7.0;11.9;0.349;0.857;38.5;G02-A12;14.3;0
+G03;Sprint 01;dias_planejados_concluidos;7;53.75;0.0;0.0;0.31;0.857;25.6;G03-A15;14.3;0
+G01;Sprint 02;dias_planejados_concluidos;7;30.75;8.5;21.7;0.437;0.857;30.9;G01-A14;14.3;2
+G02;Sprint 02;dias_planejados_concluidos;7;117.75;11.5;8.9;0.247;0.857;23.4;G02-A19;14.3;0
+G03;Sprint 02;dias_planejados_concluidos;7;35.75;0.0;0.0;0.296;0.857;31.5;G03-A15;14.3;0
+G01;Sprint 03;dias_planejados_concluidos;7;89.5;0.0;0.0;0.374;0.857;26.8;G01-A12;14.3;1
+G02;Sprint 03;dias_planejados_concluidos;7;141.5;0.0;0.0;0.215;0.857;23.7;G02-A12;14.3;0
+G03;Sprint 03;dias_planejados_concluidos;7;62.75;0.0;0.0;0.429;0.857;37.5;G03-A15;14.3;0
+G01;Sprint 04;dias_planejados_concluidos;7;56.0;0.0;0.0;0.388;0.857;26.8;G01-A14;14.3;1
+G02;Sprint 04;dias_planejados_concluidos;7;124.25;0.0;0.0;0.247;0.857;25.8;G02-A12;14.3;0
+G03;Sprint 04;dias_planejados_concluidos;7;84.0;0.0;0.0;0.44;0.857;44.6;G03-A15;14.3;0
+G01;Sprint 05;dias_planejados_concluidos;7;116.5;0.0;0.0;0.462;0.857;40.3;G01-A17;14.3;0
+G02;Sprint 05;dias_planejados_concluidos;7;163.75;0.0;0.0;0.183;0.857;22.6;G02-A14;14.3;0
+G03;Sprint 05;dias_planejados_concluidos;7;55.75;0.0;0.0;0.351;0.857;26.9;G03-A15;14.3;0
+G01;(todas);mrs_autorados;7;142.0;8.0;5.3;0.292;0.857;32.4;G01-A14;14.3;0
+G02;(todas);mrs_autorados;7;203.0;17.0;7.7;0.187;0.857;23.6;G02-A15;14.3;0
+G03;(todas);mrs_autorados;7;169.0;1.0;0.6;0.238;0.857;27.2;G03-A15;14.3;0
+G01;Sprint 01;mrs_autorados;7;9.0;0.0;0.0;0.762;0.857;77.8;G01-A14;14.3;4
+G02;Sprint 01;mrs_autorados;7;22.0;7.0;24.1;0.247;0.857;27.3;G02-A12;14.3;0
+G03;Sprint 01;mrs_autorados;7;19.0;0.0;0.0;0.301;0.857;26.3;G03-A15;14.3;0
+G01;Sprint 02;mrs_autorados;7;4.0;2.0;33.3;0.643;0.857;50.0;G01-A14;14.3;4
+G02;Sprint 02;mrs_autorados;7;16.0;8.0;33.3;0.5;0.857;37.5;G02-A19;14.3;2
+G03;Sprint 02;mrs_autorados;7;13.0;0.0;0.0;0.33;0.857;23.1;G03-A12;14.3;1
+G01;Sprint 03;mrs_autorados;7;31.0;0.0;0.0;0.498;0.857;38.7;G01-A14;14.3;1
+G02;Sprint 03;mrs_autorados;7;34.0;0.0;0.0;0.387;0.857;29.4;G02-A15;14.3;1
+G03;Sprint 03;mrs_autorados;7;29.0;0.0;0.0;0.266;0.857;24.1;G03-A12;14.3;0
+G01;Sprint 04;mrs_autorados;7;16.0;0.0;0.0;0.554;0.857;50.0;G01-A14;14.3;2
+G02;Sprint 04;mrs_autorados;7;45.0;0.0;0.0;0.356;0.857;33.3;G02-A15;14.3;0
+G03;Sprint 04;mrs_autorados;7;57.0;0.0;0.0;0.341;0.857;38.6;G03-A15;14.3;0
+G01;Sprint 05;mrs_autorados;7;38.0;0.0;0.0;0.346;0.857;34.2;G01-A14;14.3;0
+G02;Sprint 05;mrs_autorados;7;60.0;0.0;0.0;0.229;0.857;26.7;G02-A15;14.3;0
+G03;Sprint 05;mrs_autorados;7;32.0;0.0;0.0;0.313;0.857;31.3;G03-A15;14.3;0

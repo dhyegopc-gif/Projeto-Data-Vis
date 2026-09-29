@@ -12,6 +12,9 @@ import sys
 from collections import Counter
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from comum import TELAS, premissas  # noqa: E402  (lista única, conferida contra o requisito)
+
 RAIZ = Path(__file__).resolve().parent.parent
 BANCO = RAIZ / "sqlite" / "dados.db"
 T04 = RAIZ / "sqlite" / "t04_cadencia_commits_diaria.sql"
@@ -126,6 +129,8 @@ def main() -> None:
         "extracao": DATA_EXTRACAO,
         "entrada_repositorio": ENTRADA_NO_REPOSITORIO,
         "registro_mais_recente": registro_mais_recente[:10],
+        "premissas": premissas("R01"),
+        "telas": TELAS,
     }
     bloco = json.dumps(dados, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
     html = MODELO.read_text(encoding="utf-8").replace("__DADOS__", bloco)
