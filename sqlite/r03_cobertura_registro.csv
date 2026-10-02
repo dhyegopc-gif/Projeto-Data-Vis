@@ -1,13 +1,16 @@
 ﻿grupo;arquivo;campo;registros;preenchidos;vazios;pct_preenchido;o_que_inviabiliza;tela
+G01;cartoes;eixo de tarefa (rótulo CODE, DESIGN, DOCUMENTATION...);304;301;3;99.0;saber em que tipo de tarefa o integrante trabalhou: sem rótulo de eixo o cartão fica fora do radar;R06
+G02;cartoes;eixo de tarefa (rótulo CODE, DESIGN, DOCUMENTATION...);489;473;16;96.7;saber em que tipo de tarefa o integrante trabalhou: sem rótulo de eixo o cartão fica fora do radar;R06
+G03;cartoes;eixo de tarefa (rótulo CODE, DESIGN, DOCUMENTATION...);445;422;23;94.8;saber em que tipo de tarefa o integrante trabalhou: sem rótulo de eixo o cartão fica fora do radar;R06
 G01;cartoes;prazo_em;304;8;296;2.6;dizer se um cartão está atrasado (fora do escopo das telas);-
 G02;cartoes;prazo_em;489;16;473;3.3;dizer se um cartão está atrasado (fora do escopo das telas);-
 G03;cartoes;prazo_em;445;0;445;0.0;dizer se um cartão está atrasado (fora do escopo das telas);-
-G01;cartoes;responsaveis_ids resolvido;304;278;26;91.4;saber quem responde pelo cartão parado na etapa e a quem somar o cartão concluído na concentração;R02, R05
-G02;cartoes;responsaveis_ids resolvido;489;450;39;92.0;saber quem responde pelo cartão parado na etapa e a quem somar o cartão concluído na concentração;R02, R05
-G03;cartoes;responsaveis_ids resolvido;445;438;7;98.4;saber quem responde pelo cartão parado na etapa e a quem somar o cartão concluído na concentração;R02, R05
-G01;cartoes;sprint;304;286;18;94.1;"cortar por sprint: sem sprint o cartão cai em ""(sem sprint)"" e só aparece no recorte de todas as sprints";R02, R04, R05
-G02;cartoes;sprint;489;458;31;93.7;"cortar por sprint: sem sprint o cartão cai em ""(sem sprint)"" e só aparece no recorte de todas as sprints";R02, R04, R05
-G03;cartoes;sprint;445;430;15;96.6;"cortar por sprint: sem sprint o cartão cai em ""(sem sprint)"" e só aparece no recorte de todas as sprints";R02, R04, R05
+G01;cartoes;responsaveis_ids resolvido;304;278;26;91.4;saber quem responde pelo cartão parado na etapa, a quem somar o cartão concluído na concentração e em que eixo de tarefa a pessoa está;R02, R05, R06
+G02;cartoes;responsaveis_ids resolvido;489;450;39;92.0;saber quem responde pelo cartão parado na etapa, a quem somar o cartão concluído na concentração e em que eixo de tarefa a pessoa está;R02, R05, R06
+G03;cartoes;responsaveis_ids resolvido;445;438;7;98.4;saber quem responde pelo cartão parado na etapa, a quem somar o cartão concluído na concentração e em que eixo de tarefa a pessoa está;R02, R05, R06
+G01;cartoes;sprint;304;286;18;94.1;"cortar por sprint: sem sprint o cartão cai em ""(sem sprint)"" e só aparece no recorte de todas as sprints";R02, R04, R05, R06
+G02;cartoes;sprint;489;458;31;93.7;"cortar por sprint: sem sprint o cartão cai em ""(sem sprint)"" e só aparece no recorte de todas as sprints";R02, R04, R05, R06
+G03;cartoes;sprint;445;430;15;96.6;"cortar por sprint: sem sprint o cartão cai em ""(sem sprint)"" e só aparece no recorte de todas as sprints";R02, R04, R05, R06
 G01;cartoes;tamanho (rótulo PP a GG);304;263;41;86.5;comparar planejado com realizado e pesar o cartão concluído: sem tamanho o cartão sai das duas telas;R04, R05
 G02;cartoes;tamanho (rótulo PP a GG);489;456;33;93.3;comparar planejado com realizado e pesar o cartão concluído: sem tamanho o cartão sai das duas telas;R04, R05
 G03;cartoes;tamanho (rótulo PP a GG);445;440;5;98.9;comparar planejado com realizado e pesar o cartão concluído: sem tamanho o cartão sai das duas telas;R04, R05

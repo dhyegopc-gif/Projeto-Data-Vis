@@ -88,7 +88,7 @@ const GRUPOS = [...new Set(LINHAS.map((l) => l.grupo))].sort();
 const LIMITES = [24, 48, 72];
 const H0 = 0.1, H1 = 2400;   // 6 min a ~3 meses, em horas
 const TICKS = [[0.1, "≤ 6 min"], [1, "1 h"], [6, "6 h"], [24, "1 dia"], [168, "1 semana"], [720, "1 mês"]];
-const estado = { grupo: GRUPOS[0], sprint: "todas", limite: D.limite_padrao, etapa: null, cartao: null };
+const estado = { grupo: grupoDoEndereco(GRUPOS, GRUPOS[0]), sprint: "todas", limite: D.limite_padrao, etapa: null, cartao: null };
 let recorte = [], porEtapa = [];
 
 const horasTxt = (hh) => duracao(hh / 24);

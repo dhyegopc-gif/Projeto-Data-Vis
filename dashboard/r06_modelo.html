@@ -1,0 +1,365 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Eixos de tarefa</title>
+<style>
+/*__CSS_COMUM__*/
+.multiplos { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; }
+@media (max-width: 1000px) { .multiplos { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .multiplos { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.duas.r06 { grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); }
+@media (max-width: 900px) { .duas.r06 { grid-template-columns: minmax(0, 1fr); } }
+.lista-max td:nth-child(2) { min-width: 220px; }
+.mini {
+  font: inherit; color: var(--ink); background: var(--surface); text-align: left;
+  border: 1px solid var(--border); border-radius: 10px; padding: 8px 8px 10px; cursor: pointer;
+  display: grid; gap: 2px; min-width: 0;
+}
+.mini:hover { border-color: var(--ink-2); }
+.mini[aria-pressed="true"] { border-color: var(--series); box-shadow: inset 0 0 0 1px var(--series); }
+.mini .quem { font-weight: 600; font-size: 13px; display: flex; justify-content: space-between; gap: 6px; }
+.mini .quem small { font-weight: 400; color: var(--muted); font-size: 11px; }
+.mini .foco { font-size: 12px; color: var(--ink-2); }
+.mini .foco.alerta::before { content: "▲ "; color: var(--series-2); font-size: 10px; }
+.mini svg { display: block; width: 100%; height: auto; }
+.radar-grande { max-width: 460px; margin-inline: auto; width: 100%; }
+.seletor { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.calor td.c { text-align: right; font-variant-numeric: tabular-nums; min-width: 92px; }
+.calor td.c.forte { color: #fff; font-weight: 600; }
+.calor tr.ref td { border-top: 1px solid var(--axis); color: var(--ink-2); font-style: italic; }
+.calor tr.ref td.c.forte { color: #fff; }
+.calor tr.sel td:first-child { box-shadow: inset 3px 0 0 var(--series); }
+.calor button.link { font-weight: 600; }
+.alerta-txt::before { content: "▲ "; color: var(--series-2); font-size: 10px; }
+.eixo-chip { display: inline-block; font-size: 11px; border: 1px solid var(--axis); border-radius: 999px; padding: 0 7px; margin: 0 4px 2px 0; white-space: nowrap; color: var(--ink-2); }
+.lista-max { max-height: 420px; overflow: auto; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .calor td.c.forte { color: var(--ink); } }
+:root[data-theme="dark"] .calor td.c.forte { color: var(--ink); }
+</style>
+
+<div class="wrap">
+  <nav aria-label="Telas do painel"><ul class="telas" id="telas"></ul></nav>
+  <header>
+    <p class="eyebrow">R06 · Concentração por eixo de tarefa · para a orientação pedagógica</p>
+    <h1 id="titulo">Em que tipo de tarefa cada integrante trabalhou</h1>
+    <p class="pergunta">Cada integrante passou por vários eixos de tarefa (código, design, documentação, negócio) ou ficou preso a um só? Ficar o módulo inteiro num eixo só tira do aluno a chance de praticar os outros, e é isso que a tela ajuda a ver.</p>
+  </header>
+
+  <section class="filtros" aria-label="Filtros">
+    <div class="campo"><span>Grupo</span><div class="presets" id="f-grupo" role="group" aria-label="Grupo"></div></div>
+    <div class="campo"><span>Sprint</span><div class="presets" id="f-sprint" role="group" aria-label="Sprint"></div></div>
+    <div class="campo"><span>Foco num eixo só (premissa)</span><div class="presets" id="f-limiar" role="group" aria-label="Foco num eixo só"></div></div>
+  </section>
+
+  <section class="tiles" aria-label="Resumo do grupo">
+    <div class="tile"><span class="rotulo">Focados num eixo só</span><span class="valor" id="t-foco">–</span><span class="sub" id="t-foco-sub"></span></div>
+    <div class="tile"><span class="rotulo">Eixo mais comum no grupo</span><span class="valor" id="t-eixo">–</span><span class="sub" id="t-eixo-sub"></span></div>
+    <div class="tile"><span class="rotulo">Cartões com eixo</span><span class="valor" id="t-n">–</span><span class="sub" id="t-n-sub"></span></div>
+    <div class="tile"><span class="rotulo">Fora do radar</span><span class="valor" id="t-fora">–</span><span class="sub" id="t-fora-sub"></span></div>
+  </section>
+
+  <section class="card" aria-labelledby="h-mult">
+    <div class="card-topo">
+      <div>
+        <h2 id="h-mult">Perfil de cada integrante, na mesma escala</h2>
+        <p class="limite"><strong>Mede onde o integrante foi alocado no quadro, não o que ele sabe fazer.</strong> O responsável do cartão nem sempre é quem executou, e trabalho em dupla fica no nome de um só.</p>
+        <p class="recorte" id="recorte"></p>
+      </div>
+    </div>
+    <div class="legenda" aria-hidden="true" id="legenda"></div>
+    <div class="multiplos" id="multiplos" role="group" aria-label="Integrantes do grupo"></div>
+    <p class="dica">Clique num integrante (ou Tab e Enter) para abrir o radar e os cartões dele. Os integrantes vêm na ordem do identificador, não do volume.</p>
+  </section>
+
+  <div class="duas r06">
+    <section class="card" aria-labelledby="h-radar">
+      <div>
+        <h2 id="h-radar">Radar do integrante</h2>
+        <p class="contagem" id="radar-sub"></p>
+      </div>
+      <div class="seletor presets" id="seletor" role="group" aria-label="Integrante em destaque"></div>
+      <div class="grafico radar-grande" id="g-radar"></div>
+      <p class="dica">Leia os vértices, não a área: cada vértice é a parte do eixo nos cartões da pessoa. A linha tracejada é o grupo inteiro, para comparar.</p>
+    </section>
+    <section class="card" aria-labelledby="h-lista">
+      <div>
+        <h2 id="h-lista">Cartões do integrante</h2>
+        <p class="contagem" id="lista-sub"></p>
+      </div>
+      <div class="presets" id="f-eixo" role="group" aria-label="Eixo da lista"></div>
+      <div class="rolagem lista-max" id="lista"></div>
+    </section>
+  </div>
+
+  <section class="card" aria-labelledby="h-calor">
+    <div>
+      <h2 id="h-calor">Parte de cada eixo, integrante a integrante</h2>
+      <p class="contagem" id="calor-sub"></p>
+    </div>
+    <div class="rolagem" id="calor"></div>
+  </section>
+
+  <section class="card" aria-labelledby="h-prem">
+    <div>
+      <h2 id="h-prem">Premissas desta tela</h2>
+      <p class="contagem">Escolhas do grupo, não definições da orientação. Todas a confirmar com o professor; a mesma lista está no requisito.</p>
+    </div>
+    <div class="rolagem" id="premissas"></div>
+  </section>
+
+  <footer class="notas">
+    <div><h3>Nota de origem</h3><ul id="nota-origem"></ul></div>
+    <div>
+      <h3>Como ler</h3>
+      <ul>
+        <li>Parte do eixo = cartões do eixo ÷ cartões com eixo do integrante. Cartão de dois eixos conta metade em cada um.</li>
+        <li>Todos os radares usam a mesma escala, de 0 (centro) a 100% (borda). O anel tracejado marca o limiar de foco.</li>
+        <li>Um vértice além do anel vira triângulo laranja: a pessoa passou do limiar naquele eixo.</li>
+        <li>O radar exagera a diferença de área; a tabela de partes traz os números exatos.</li>
+      </ul>
+    </div>
+    <div><h3>Qualidade do registro</h3><ul id="nota-qualidade"></ul></div>
+    <div>
+      <h3>O que esta tela não sustenta</h3>
+      <ul>
+        <li>Competência ou aprendizagem do aluno. Rótulo é registro de alocação, um indicador indireto.</li>
+        <li>Um ranking. Foco num eixo pode ser divisão de papéis combinada com o grupo; a tela aponta onde perguntar.</li>
+        <li>Comparar a parte de Negócio entre grupos: o G03 não usa nenhum rótulo desse eixo, o que não quer dizer que não fez a tarefa.</li>
+      </ul>
+    </div>
+  </footer>
+</div>
+<div id="tip" role="tooltip" hidden></div>
+
+<script>
+//__JS_COMUM__
+const D = __DADOS__;
+
+const EIXOS = D.eixos.map((e) => e.id);
+const GRUPOS = Object.keys(D.integrantes).sort();
+const LIMIARES = [60, 75, 90];
+const POUCOS = 10;
+const estado = { grupo: grupoDoEndereco(GRUPOS, GRUPOS[0]), sprint: "(todas)", limiar: 75, pessoa: null, eixo: "*" };
+
+function recorte(pessoa, grupo, sprint) {
+  const r = D.recortes[`${grupo ?? estado.grupo}|${sprint ?? estado.sprint}|${pessoa}`];
+  if (!r || !r.n) return null;
+  const tot = r.v.reduce((a, v) => a + v, 0);
+  const pcts = r.v.map((v) => 100 * v / tot);
+  const iMax = pcts.indexOf(Math.max(...pcts));
+  return { n: r.n, sem: r.sem, v: r.v, pcts, iMax, max: pcts[iMax] };
+}
+const focado = (r) => r && r.max >= estado.limiar;
+const poucos = (r) => r && r.n < POUCOS;
+const pctCurto = (v) => num(v, 0) + "%";
+
+// ---------- filtros ----------
+function botoes(id, itens, atual, rotulo, ao) {
+  const c = $(id);
+  c.replaceChildren(...itens.map((v) => {
+    const b = h("button", { type: "button", "data-foco": `${id}:${v}`, "aria-pressed": String(atual === v), text: rotulo(v) });
+    b.addEventListener("click", () => ao(v));
+    return b;
+  }));
+}
+function montarFiltros() {
+  botoes("f-grupo", GRUPOS, estado.grupo, (g) => g, (g) => { estado.grupo = g; estado.pessoa = null; estado.eixo = "*"; atualizar(); });
+  botoes("f-sprint", ["(todas)", ...D.sprints], estado.sprint, (s) => s === "(todas)" ? "Todas" : s, (s) => { estado.sprint = s; atualizar(); });
+  botoes("f-limiar", LIMIARES, estado.limiar, (l) => `${l}%` + (l === 75 ? " (padrão)" : ""), (l) => { estado.limiar = l; atualizar(); });
+}
+
+// ---------- render ----------
+function atualizar() { comFoco(renderizar); }
+function renderizar() {
+  montarFiltros();
+  const pessoas = D.integrantes[estado.grupo];
+  const rs = pessoas.map((p) => [p, recorte(p)]);
+  if (!estado.pessoa) {
+    // abre no integrante mais focado: a tela começa mostrando o que faz
+    const com = rs.filter(([, r]) => r).sort((a, b) => b[1].max - a[1].max);
+    estado.pessoa = com.length ? com[0][0] : pessoas[0];
+  }
+  const sprintTxt = estado.sprint === "(todas)" ? "todas as sprints" : estado.sprint;
+  $("titulo").textContent = `Em que tipo de tarefa cada integrante do ${estado.grupo} trabalhou, ${sprintTxt}`;
+
+  const g = recorte("(grupo)");
+  const foc = rs.filter(([, r]) => focado(r));
+  const comCartao = rs.filter(([, r]) => r).length;
+  $("t-foco").textContent = `${foc.length} de 7`;
+  $("t-foco-sub").textContent = foc.length
+    ? `com ${estado.limiar}% ou mais dos cartões num mesmo eixo` + (comCartao < 7 ? `; ${plural(7 - comCartao, "integrante sem", "integrantes sem")} cartão no recorte` : "")
+    : `ninguém com ${estado.limiar}% ou mais num mesmo eixo`;
+  if (g) {
+    $("t-eixo").textContent = EIXOS[g.iMax];
+    $("t-eixo-sub").textContent = `${pct(g.max)} dos cartões com eixo dos 7 integrantes`;
+    $("t-n").textContent = num(g.n);
+    $("t-n-sub").textContent = `dos integrantes, abertos e fechados, ${sprintTxt}`;
+  } else {
+    for (const id of ["t-eixo", "t-n"]) $(id).textContent = "–";
+    $("t-eixo-sub").textContent = $("t-n-sub").textContent = "nenhum cartão neste recorte";
+  }
+  const f = D.fora[estado.grupo];
+  const sem = g ? g.sem : 0;
+  $("t-fora").textContent = num(sem + (estado.sprint === "(todas)" ? f.sem_responsavel + f.nao_integrante : 0));
+  $("t-fora-sub").textContent = estado.sprint === "(todas)"
+    ? `${plural(sem, "cartão", "cartões")} sem rótulo de eixo; ${num(f.sem_responsavel)} sem responsável e ${num(f.nao_integrante)} de quem não é integrante`
+    : `${plural(sem, "cartão", "cartões")} sem rótulo de eixo na sprint`;
+  $("recorte").textContent = `${estado.grupo}, ${sprintTxt}. Foco num eixo só: ${estado.limiar}% ou mais dos cartões do integrante num mesmo eixo (premissa nossa). Com menos de ${POUCOS} cartões a leitura é frágil e o radar aparece tracejado.`;
+  const leg = $("legenda");
+  leg.replaceChildren(
+    h("span", {}, [h("i", { class: "chave s1" }), "integrante"]),
+    h("span", {}, [h("i", { class: "chave linha", style: "width: 14px; background: var(--muted)" }), "grupo inteiro (tracejado)"]),
+    h("span", {}, [marcaLegenda("triangulo", "var(--series-2)"), `eixo com ${estado.limiar}% ou mais`]),
+  );
+  desenharMultiplos(rs, g);
+  seletor(pessoas);
+  desenharRadarGrande(g);
+  lista();
+  calor(rs, g);
+  notas();
+}
+
+// Um radar: 4 eixos fixos (Código no alto, depois sentido horário), raio linear 0–100%.
+function radar(svg, cx, cy, R, r, g, grande) {
+  const ang = (i) => -Math.PI / 2 + i * 2 * Math.PI / EIXOS.length;
+  const ponto = (i, p) => [cx + Math.cos(ang(i)) * R * p / 100, cy + Math.sin(ang(i)) * R * p / 100];
+  const poli = (ps) => ps.map((p, i) => ponto(i, p).join(",")).join(" ");
+  for (const p of [25, 50, 100]) el("polygon", { points: poli(EIXOS.map(() => p)), fill: "none", stroke: "var(--grid)", "stroke-width": 1 }, svg);
+  el("polygon", { points: poli(EIXOS.map(() => estado.limiar)), fill: "none", stroke: "var(--ink-2)", "stroke-width": 1, "stroke-dasharray": "2 3" }, svg);
+  EIXOS.forEach((_, i) => { const [x, y] = ponto(i, 100); el("line", { x1: cx, y1: cy, x2: x, y2: y, stroke: "var(--grid)", "stroke-width": 1 }, svg); });
+  if (grande) texto(svg, cx + 4, cy - R * estado.limiar / 100 - 3, `${estado.limiar}%`, { class: "eixo" });
+  if (g) el("polygon", { points: poli(g.pcts), fill: "none", stroke: "var(--muted)", "stroke-width": 1.5, "stroke-dasharray": "5 3" }, svg);
+  if (!r) return { ponto };
+  el("polygon", { points: poli(r.pcts), fill: "var(--wash)", stroke: "var(--series)", "stroke-width": 2, "stroke-linejoin": "round",
+    "stroke-dasharray": poucos(r) ? "4 3" : "none" }, svg);
+  r.pcts.forEach((p, i) => {
+    const [x, y] = ponto(i, p);
+    if (p >= estado.limiar) marca(svg, "triangulo", x, y, grande ? 5.5 : 4, { fill: "var(--series-2)", stroke: "var(--surface)", "stroke-width": 1.5 });
+    else el("circle", { cx: x, cy: y, r: grande ? 4 : 2.5, fill: "var(--series)", stroke: "var(--surface)", "stroke-width": 1.5 }, svg);
+  });
+  return { ponto };
+}
+
+function desenharMultiplos(rs, g) {
+  const caixa = $("multiplos");
+  caixa.replaceChildren(...rs.map(([p, r]) => {
+    const sel = p === estado.pessoa;
+    const b = h("button", { type: "button", class: "mini", "data-foco": `pessoa:${p}`, "aria-pressed": String(sel),
+      "aria-label": `${p}: ` + (r ? EIXOS.map((e, i) => `${e} ${pctCurto(r.pcts[i])}`).join(", ") + `, ${plural(r.n, "cartão", "cartões")}` : "sem cartão neste recorte") });
+    const W = 150, H = 136, cx = W / 2, cy = 68, R = 52;
+    const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, "aria-hidden": "true" });
+    radar(svg, cx, cy, R, r, g, false);
+    const curtos = ["Cód", "Des", "Doc", "Neg"];
+    [[cx, cy - R - 6, "middle"], [cx + R + 4, cy + 4, "start"], [cx, cy + R + 14, "middle"], [cx - R - 4, cy + 4, "end"]]
+      .forEach(([x, y, a], i) => texto(svg, x, y, curtos[i], { class: "eixo", "text-anchor": a }));
+    const foco = r ? `${EIXOS[r.iMax]} ${pctCurto(r.max)}` + (poucos(r) ? " · poucos cartões" : "") : "sem cartão no recorte";
+    b.append(
+      h("span", { class: "quem" }, [p, h("small", { text: r ? plural(r.n, "cartão", "cartões") : "" })]),
+      svg,
+      h("span", { class: "foco" + (focado(r) ? " alerta-txt" : ""), text: foco }));
+    b.addEventListener("click", () => { estado.pessoa = p; estado.eixo = "*"; atualizar(); });
+    return b;
+  }));
+}
+
+function seletor(pessoas) {
+  botoes("seletor", pessoas, estado.pessoa, (p) => p, (p) => { estado.pessoa = p; estado.eixo = "*"; atualizar(); });
+}
+
+function desenharRadarGrande(g) {
+  const caixa = $("g-radar"), r = recorte(estado.pessoa);
+  $("radar-sub").textContent = r
+    ? `${estado.pessoa}: ${plural(r.n, "cartão", "cartões")} com eixo` + (r.sem ? ` e ${plural(r.sem, "sem", "sem")} eixo, fora do radar` : "") + (poucos(r) ? `. Poucos cartões: leitura frágil.` : ".")
+    : `${estado.pessoa} não tem cartão neste recorte.`;
+  const W = Math.min(Math.max(caixa.clientWidth, 280), 460), estreito = W < 380;
+  const R = estreito ? W * 0.26 : W * 0.3, cx = W / 2, cy = R + 44, H = cy + R + 50;
+  const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, height: H, role: "img",
+    "aria-label": r ? `Radar de ${estado.pessoa}: ` + EIXOS.map((e, i) => `${e} ${pct(r.pcts[i])}` + (g ? ` (grupo ${pct(g.pcts[i])})` : "")).join(", ") : `${estado.pessoa} sem cartão neste recorte` });
+  const { ponto } = radar(svg, cx, cy, R, r, g, true);
+  // rótulo de cada eixo: nome, parte da pessoa e do grupo
+  const pos = [[cx, cy - R - 30, "middle"], [cx + R + 10, cy - 6, "start"], [cx, cy + R + 20, "middle"], [cx - R - 10, cy - 6, "end"]];
+  EIXOS.forEach((e, i) => {
+    const [x, y, a] = pos[i];
+    texto(svg, x, y, e, { class: "rot-forte", "text-anchor": a });
+    if (r) texto(svg, x, y + 15, pct(r.pcts[i]) + (g ? ` · grupo ${pctCurto(g.pcts[i])}` : ""), { class: "rot", "text-anchor": a });
+    else if (g) texto(svg, x, y + 15, `grupo ${pctCurto(g.pcts[i])}`, { class: "rot", "text-anchor": a });
+    if (!r) return;
+    const [px, py] = ponto(i, r.pcts[i]);
+    const alvo = el("circle", { cx: px, cy: py, r: 14, fill: "transparent", tabindex: "-1" }, svg);
+    alvo.addEventListener("pointermove", (ev) => dica.mostrar([
+      ["v", pct(r.pcts[i])], ["d", `${estado.pessoa}, ${e}: ${num(r.v[i], 1)} de ${plural(r.n, "cartão", "cartões")}`],
+      ["s", g ? `no grupo inteiro: ${pct(g.pcts[i])}` : ""]], ev.clientX, ev.clientY));
+    alvo.addEventListener("pointerleave", () => dica.esconder());
+    alvo.addEventListener("click", () => { estado.eixo = e; atualizar(); });
+  });
+  caixa.replaceChildren(svg);
+}
+
+function lista() {
+  const cs = D.cartoes.filter(([g, , , s, , resp]) => g === estado.grupo && resp === estado.pessoa && (estado.sprint === "(todas)" || s === estado.sprint));
+  const conta = (e) => e === "*" ? cs.length : e === "" ? cs.filter((c) => !c[6]).length : cs.filter((c) => c[6].split(";").includes(e)).length;
+  const opcoes = ["*", ...EIXOS, ""].filter((e) => e === "*" || conta(e));
+  if (!opcoes.includes(estado.eixo)) estado.eixo = "*";
+  botoes("f-eixo", opcoes, estado.eixo, (e) => `${e === "*" ? "Todos" : e || "Sem eixo"} (${conta(e)})`, (e) => { estado.eixo = e; atualizar(); });
+  const vis = cs.filter((c) => estado.eixo === "*" || (estado.eixo === "" ? !c[6] : c[6].split(";").includes(estado.eixo)));
+  $("lista-sub").textContent = `${estado.pessoa}, ${estado.sprint === "(todas)" ? "todas as sprints" : estado.sprint}: ${plural(vis.length, "cartão", "cartões")} como responsável. Clique num vértice do radar para filtrar pelo eixo.`;
+  if (!vis.length) { $("lista").replaceChildren(h("p", { class: "vazio", text: "Nenhum cartão neste recorte." })); return; }
+  $("lista").replaceChildren(tabela(
+    [{ t: "Cartão", num: true }, { t: "Título" }, { t: "Eixo" }, { t: "Sprint", classe: "nw" }, { t: "Situação" }],
+    vis.map(([, n, titulo, s, sit, , eixos]) => [`#${n}`, titulo,
+      eixos ? h("span", {}, eixos.split(";").map((e) => h("span", { class: "eixo-chip", text: e }))) : h("span", { class: "chip", text: "sem eixo" }),
+      s, sit]),
+    `Cartões de ${estado.pessoa}`));
+}
+
+function calor(rs, g) {
+  $("calor-sub").textContent = `${estado.grupo}, ${estado.sprint === "(todas)" ? "todas as sprints" : estado.sprint}. Cada linha soma 100%; quanto mais escura a célula, maior a parte do eixo. A última linha é o grupo inteiro.`;
+  const cel = (p) => {
+    const td = h("td", { class: "c" + (p >= 55 ? " forte" : ""), text: pct(p) });
+    td.style.background = `color-mix(in srgb, var(--series) ${Math.round(p)}%, var(--surface))`;
+    return td;
+  };
+  const linha = (rotulo, r, classe) => {
+    const tr = h("tr", { class: classe || "" });
+    tr.appendChild(h("td", {}, [rotulo]));
+    if (r) for (const p of r.pcts) tr.appendChild(cel(p));
+    else for (const _ of EIXOS) tr.appendChild(h("td", { class: "c", text: "–" }));
+    tr.appendChild(h("td", { class: "num", text: r ? num(r.n) : "0" }));
+    tr.appendChild(h("td", { class: focado(r) ? "alerta-txt" : "", text: r ? `${EIXOS[r.iMax]} ${pctCurto(r.max)}` + (poucos(r) ? " · poucos cartões" : "") : "sem cartão" }));
+    return tr;
+  };
+  const corpo = rs.map(([p, r]) => {
+    const b = h("button", { type: "button", class: "link", "data-foco": `calor:${p}`, text: p });
+    b.addEventListener("click", () => { estado.pessoa = p; estado.eixo = "*"; atualizar(); });
+    return linha(b, r, p === estado.pessoa ? "sel" : "");
+  });
+  corpo.push(linha("Grupo inteiro", g, "ref"));
+  const tb = h("table", { class: "calor" }, [
+    h("caption", { class: "sr", text: "Parte de cada eixo de tarefa por integrante" }),
+    h("thead", {}, [h("tr", {}, [h("th", { scope: "col", text: "Integrante" }), ...EIXOS.map((e) => h("th", { class: "num", scope: "col", text: e })),
+      h("th", { class: "num", scope: "col", text: "Cartões" }), h("th", { scope: "col", text: "Eixo principal" })])]),
+    h("tbody", {}, corpo)]);
+  $("calor").replaceChildren(tb);
+}
+
+function notas() {
+  const li = (id, itens) => $(id).replaceChildren(...itens.map((t) => h("li", { text: t })));
+  li("nota-origem", [
+    "Fonte: cartoes.csv (rótulos, responsável, sprint e fechamento), kanban_eventos.csv e pessoas.csv, pelas consultas r06_*.sql de sqlite/.",
+    `Data de extração não registrada. Os arquivos entraram no repositório em ${fmt(D.entrada_repositorio)}; o registro mais recente do conjunto é de ${fmt(D.registro_mais_recente)}.`,
+  ]);
+  const f = D.fora[estado.grupo];
+  li("nota-qualidade", [
+    `Não existe rótulo UX no conjunto; o eixo Design reúne o rótulo DESIGN, o mais próximo.`,
+    `${estado.grupo}: ${num(f.sem_responsavel)} dos ${num(f.total)} cartões não têm responsável e ${num(f.nao_integrante)} estão com quem não é integrante; ficam fora da tela (ver R03).`,
+    "O rótulo é posto pelo próprio grupo, e cada grupo rotula do seu jeito: NEGÓCIOS só aparece no G01 e Presentation só no G02.",
+  ]);
+}
+
+function iniciar() {
+  montarTelas("R06");
+  montarPremissas();
+  addEventListener("resize", () => { const g = recorte("(grupo)"); desenharRadarGrande(g); });
+  atualizar();
+}
+iniciar();
+</script>

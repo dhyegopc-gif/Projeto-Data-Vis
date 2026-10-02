@@ -1,0 +1,318 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Visão geral</title>
+<style>
+/*__CSS_COMUM__*/
+.contexto { display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: 13px; color: var(--ink-2); margin: 0; padding: 0; list-style: none; }
+.contexto strong { color: var(--ink); font-variant-numeric: tabular-nums; }
+
+/* placar: requisito × grupo */
+.placar { border-collapse: separate; border-spacing: 0; width: 100%; }
+.placar th { font-size: 12px; color: var(--ink-2); padding: 0 10px 8px; border-bottom: 1px solid var(--axis); }
+.placar th.grupo { text-align: left; font-size: 14px; color: var(--ink); }
+.placar td { padding: 0; border-bottom: 1px solid var(--grid); vertical-align: top; }
+.placar tbody tr:last-child td { border-bottom: 0; }
+.placar th[scope="row"] { white-space: normal; width: 25%; min-width: 200px; }
+.req { padding: 12px 14px 12px 0; display: grid; gap: 2px; }
+.req .nome { font-weight: 600; font-size: 14px; }
+.req .nome a { text-decoration: none; }
+.req .nome a:hover { text-decoration: underline; }
+.req .mede { font-size: 12px; color: var(--ink-2); }
+.req .criterio { font-size: 11px; color: var(--muted); }
+a.cel {
+  display: grid; gap: 4px; padding: 12px 12px 12px; margin: 4px; border-radius: 8px;
+  color: var(--ink); text-decoration: none; min-width: 150px; border: 1px solid transparent;
+}
+a.cel:hover { background: var(--hover); border-color: var(--border); }
+a.cel .v { font-size: 20px; font-weight: 600; line-height: 1.2; font-variant-numeric: tabular-nums; display: flex; align-items: center; gap: 6px; }
+a.cel .v .tri { color: var(--series-2); font-size: 13px; }
+a.cel .t { font-size: 12px; color: var(--ink-2); }
+a.cel.sinal { background: var(--wash-2); }
+.barra { position: relative; height: 6px; border-radius: 3px; background: var(--grid); max-width: 160px; }
+.barra > i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 3px; background: var(--series); }
+.sinal .barra > i { background: var(--series-2); }
+.cobertura { font-size: 11px; color: var(--ink-2); }
+.cobertura::before { content: "◇ "; color: var(--muted); }
+.placar tfoot td { padding: 10px 12px 2px; font-size: 12px; color: var(--ink-2); border: 0; }
+.placar tfoot td:first-child { padding-left: 0; }
+.g-mob { display: none; font-size: 11px; color: var(--muted); font-weight: 600; letter-spacing: 0.04em; }
+@media (max-width: 640px) {
+  .placar, .placar tbody, .placar tfoot { display: block; }
+  .placar thead { display: none; }
+  .placar tr { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-bottom: 1px solid var(--grid); padding-bottom: 6px; }
+  .placar td { border-bottom: 0; }
+  .placar th[scope="row"] { grid-column: 1 / -1; width: auto; min-width: 0; border-bottom: 0 !important; }
+  .req { padding-bottom: 2px; }
+  a.cel { min-width: 0; margin: 2px; padding: 8px 6px; }
+  a.cel .v { font-size: 16px; }
+  .g-mob { display: block; }
+  .placar tfoot tr { border-bottom: 0; }
+  .placar tfoot td:first-child { grid-column: 1 / -1; }
+}
+
+/* roteiro por grupo */
+.roteiros { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 900px) { .roteiros { grid-template-columns: minmax(0, 1fr); } }
+.roteiro { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; display: grid; gap: 8px; align-content: start; }
+.roteiro h3 { margin: 0; font-size: 15px; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.roteiro h3 small { font-weight: 400; font-size: 12px; color: var(--muted); }
+.roteiro ol { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 13px; }
+.roteiro .antes { font-size: 12px; color: var(--ink-2); border-top: 1px solid var(--grid); padding-top: 8px; margin: 0; }
+.roteiro .nada { font-size: 13px; color: var(--ink-2); margin: 0; }
+
+.conclusoes { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.conclusoes li { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 4px 14px; border-bottom: 1px solid var(--grid); padding-bottom: 10px; font-size: 14px; }
+.conclusoes li:last-child { border-bottom: 0; padding-bottom: 0; }
+.conclusoes .qual { font-weight: 600; font-size: 13px; }
+.conclusoes .qual a { text-decoration: none; }
+.conclusoes .qual small { display: block; font-weight: 400; color: var(--muted); font-size: 12px; }
+@media (max-width: 640px) { .conclusoes li { grid-template-columns: minmax(0, 1fr); } }
+.prem { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 28px; font-size: 13px; color: var(--ink-2); }
+@media (max-width: 760px) { .prem { grid-template-columns: minmax(0, 1fr); } }
+.prem strong { color: var(--ink); font-weight: 600; }
+</style>
+
+<div class="wrap">
+  <nav aria-label="Telas do painel"><ul class="telas" id="telas"></ul></nav>
+  <header>
+    <p class="eyebrow">Visão geral · R01 a R06 em uma página · para a orientação pedagógica</p>
+    <h1 id="titulo">Com qual grupo começar, e por qual assunto</h1>
+    <p class="pergunta" id="subtitulo"></p>
+  </header>
+  <ul class="contexto" id="contexto" aria-label="Recorte dos dados"></ul>
+
+  <section class="card" aria-labelledby="h-placar">
+    <div class="card-topo">
+      <div>
+        <h2 id="h-placar">Leitura principal de cada requisito, nos três grupos</h2>
+        <p class="limite"><strong>Registro não é trabalho, e o ▲ não é nota.</strong> Ele marca, em cada linha, o grupo que mais se afasta dos outros dois naquela leitura. Os três grupos têm 7 integrantes, o que deixa a comparação justa.</p>
+      </div>
+    </div>
+    <div class="legenda" aria-hidden="true">
+      <span><i class="chave s1"></i>leitura do grupo, na mesma escala da linha</span>
+      <span><i class="chave s2"></i>▲ o grupo que mais se afasta na linha</span>
+      <span id="leg-cob"></span>
+    </div>
+    <div class="rolagem"><table class="placar" id="placar"></table></div>
+    <p class="dica">Clique numa célula para abrir a tela do requisito já no grupo; o nome do requisito abre a tela no primeiro grupo.</p>
+  </section>
+
+  <section aria-labelledby="h-roteiro" class="pilha" style="gap: 10px">
+    <div>
+      <h2 id="h-roteiro" style="font-size: 16px; margin: 0">Por onde começar a conversa com cada grupo</h2>
+      <p class="contagem">Os assuntos com ▲, na ordem dos requisitos, e o que conferir no registro antes de levar o número para a reunião.</p>
+    </div>
+    <div class="roteiros" id="roteiros"></div>
+  </section>
+
+  <section class="card" aria-labelledby="h-concl">
+    <div>
+      <h2 id="h-concl">O que cada requisito mostra</h2>
+      <p class="contagem">Uma frase por tela, todas as sprints. O detalhe, os filtros e a lista dos registros estão na tela de cada requisito.</p>
+    </div>
+    <ul class="conclusoes" id="conclusoes"></ul>
+  </section>
+
+  <section class="card" aria-labelledby="h-prem">
+    <div>
+      <h2 id="h-prem">Premissas por trás destes números</h2>
+      <p class="contagem">Escolhas do grupo, não definições da orientação, todas a confirmar com o professor. Aqui só as que mudam esta página; a lista completa está no fim de cada tela.</p>
+    </div>
+    <ul class="prem" id="premissas-vg"></ul>
+  </section>
+
+  <footer class="notas">
+    <div><h3>Nota de origem</h3><ul id="nota-origem"></ul></div>
+    <div>
+      <h3>Como ler</h3>
+      <ul>
+        <li>Cada célula é a leitura principal da tela do requisito, com os padrões da própria tela, todas as sprints.</li>
+        <li>A barra usa a escala natural da medida (0 a 100%, 0 ao máximo do Gini, 0 a 7 integrantes); nas contagens sem teto, o maior valor da linha.</li>
+        <li>Empate na linha marca todos os empatados; linha com tudo em zero não marca ninguém.</li>
+      </ul>
+    </div>
+    <div><h3>O que esta tela não sustenta</h3>
+      <ul>
+        <li>Um ranking ou uma nota de grupo. A contagem de ▲ diz em quantas leituras o grupo é o que mais se afasta, não quanto ele trabalhou ou aprendeu.</li>
+        <li>Uma conclusão sem conferir o detalhe. Cada número tem limites que só a tela do requisito mostra por inteiro.</li>
+      </ul>
+    </div>
+    <div><h3>Ordem sugerida das telas</h3>
+      <ul><li>Depois desta, o R03: ele diz em que grupo cada leitura perde apoio. Os avisos ◇ do placar já trazem o essencial dele.</li></ul>
+    </div>
+  </footer>
+</div>
+<div id="tip" role="tooltip" hidden></div>
+
+<script>
+//__JS_COMUM__
+const D = __DADOS__;
+
+const L = D.leituras, P = D.padroes;
+const GRUPOS = Object.keys(L.R01.grupos).sort();
+const TELA = Object.fromEntries(D.telas.map((t) => [t.id, t]));
+const gTxt = (v) => v.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const dm = (iso) => iso.slice(8, 10) + "/" + iso.slice(5, 7);
+const faixa = (g) => g <= 0.2 ? "distribuído" : g <= 0.4 ? "moderado" : "concentrado";
+const lista = (xs) => xs.length <= 1 ? xs.join("") : xs.slice(0, -1).join(", ") + " e " + xs[xs.length - 1];
+
+// Uma linha por requisito: o valor que entra na comparação, a escala da barra e os textos da célula
+const LINHAS = [
+  { id: "R01", mede: `Silêncios de ${P.silencio} dias ou mais sem commit autoral, até ${fmt(L.R01.marco)}`,
+    criterio: "▲ mais silêncios", escala: () => Math.max(...GRUPOS.map((g) => L.R01.grupos[g].valor)),
+    valor: (x) => plural(x.silencios, "silêncio", "silêncios"),
+    texto: (x) => x.maior ? `maior: ${plural(x.maior.dias, "dia", "dias")} (${dm(x.maior.de)} a ${dm(x.maior.ate)})` : "commit em todos os dias" },
+  { id: "R02", mede: `Cartões que passaram de ${P.limite} h em alguma etapa do quadro`,
+    criterio: "▲ maior parte acima do limite", escala: () => 100,
+    valor: (x) => pct(x.valor),
+    texto: (x) => `${num(x.acima)} de ${num(x.cartoes)}; mais acúmulo em ${x.etapa}` },
+  { id: "R03", mede: `Campos usados pelas telas com menos de ${P.cobertura}% preenchido`,
+    criterio: "▲ mais campos abaixo do mínimo", escala: (x) => x.usados,
+    valor: (x) => `${x.valor} de ${x.usados}`,
+    texto: (x) => x.baixos.length ? lista(x.baixos.slice().sort((a, b) => a.pct - b.pct).slice(0, 2).map((b) => `${CAMPO_CURTO[b.chave] || b.chave} ${num(b.pct, 0)}%`)) + (x.baixos.length > 2 ? "…" : "") : "todos no mínimo ou acima" },
+  { id: "R04", mede: "Cartões fechados que levaram mais que o tamanho previa",
+    criterio: "▲ maior parte acima do planejado", escala: () => 100,
+    valor: (x) => pct(x.valor),
+    texto: (x) => `mediana de ${num(x.mediana, 1)}× o planejado; ${pct(100 * x.dobro / x.cartoes)} mais que o dobro` },
+  { id: "R05", mede: "Gini dos dias planejados concluídos entre os 7 integrantes",
+    criterio: "▲ registro mais concentrado", escala: () => 6 / 7,
+    valor: (x) => gTxt(x.valor), texto: (x) => faixa(x.valor) },
+  { id: "R06", mede: `Integrantes com ${P.foco}% ou mais dos cartões num eixo de tarefa só`,
+    criterio: "▲ mais integrantes focados", escala: () => 7,
+    valor: (x) => `${x.valor} de 7`,
+    texto: (x) => x.valor ? `em ${lista([...new Set(x.focados.map((f) => f.eixo))])}; perfil do grupo: ${x.eixo} ${num(x.eixo_pct, 0)}%` : `perfil do grupo: ${x.eixo} ${num(x.eixo_pct, 0)}%` },
+];
+// ▲: o maior valor da linha (empate marca todos; tudo zero não marca)
+for (const l of LINHAS) {
+  const vs = GRUPOS.map((g) => L[l.id].grupos[g].valor), topo = Math.max(...vs);
+  l.sinal = new Set(topo > 0 ? GRUPOS.filter((g, i) => vs[i] === topo) : []);
+}
+const sinaisDe = (g) => LINHAS.filter((l) => l.sinal.has(g));
+// Avisos do R03: campos abaixo do mínimo que a leitura daquela tela usa
+const avisos = (id, g) => L.R03.grupos[g].baixos.filter((b) => id !== "R03" && b.telas.includes(id));
+
+function cabecalho() {
+  const cont = GRUPOS.map((g) => [g, sinaisDe(g)]).sort((a, b) => b[1].length - a[1].length);
+  const [g1, s1] = cont[0];
+  const empatados = cont.filter(([, s]) => s.length === s1.length).map(([g]) => g);
+  const nomes = (s) => lista(s.map((l) => TELA[l.id].nome[0].toLowerCase() + TELA[l.id].nome.slice(1)));
+  $("titulo").textContent = empatados.length > 1
+    ? `${lista(empatados)} empatam como os grupos que mais se afastam, em ${s1.length} das 6 leituras cada`
+    : `Comece pelo ${g1}: é o grupo que mais se afasta em ${s1.length} das 6 leituras`;
+  const resto = cont.slice(1).map(([g, s]) => s.length ? `${g} em ${nomes(s)}` : `${g} em nenhuma`);
+  $("subtitulo").textContent = `${g1}: ${nomes(s1)}. ${maiuscula(lista(resto))}. Cada linha abaixo resume uma tela; a célula leva ao detalhe do grupo.`;
+  const c = D.contexto;
+  $("contexto").replaceChildren(...[
+    ["Período", `${fmt(L.R01.inicio)} a ${fmt(L.R01.fim)}`], ["Grupos", `${GRUPOS.length}, com 7 integrantes cada`],
+    ["Commits autorais", num(c.commits_autorais)], ["Cartões", num(c.cartoes)], ["Merge requests", num(c.mrs)],
+  ].map(([k, v]) => h("li", {}, [`${k}: `, h("strong", { text: v })])));
+}
+
+function placar() {
+  $("leg-cob").textContent = `◇ campo do registro abaixo de ${P.cobertura}% que esta leitura usa (R03)`;
+  const thead = h("thead", {}, [h("tr", {}, [h("th", { scope: "col", text: "Requisito" }),
+    ...GRUPOS.map((g) => h("th", { scope: "col", class: "grupo", text: g }))])]);
+  const corpo = LINHAS.map((l) => {
+    const t = TELA[l.id];
+    const req = h("th", { scope: "row", style: "font-weight: 400; text-align: left; padding: 0; border-bottom: 1px solid var(--grid)" }, [h("div", { class: "req" }, [
+      h("span", { class: "nome" }, [h("a", { href: hrefTela(t), text: `${l.id} · ${t.nome}` })]),
+      h("span", { class: "mede", text: l.mede }),
+      h("span", { class: "criterio", text: l.criterio })])]);
+    const cels = GRUPOS.map((g) => {
+      const x = L[l.id].grupos[g], s = l.sinal.has(g), escala = l.escala(x);
+      const larg = escala ? Math.min(100, 100 * x.valor / escala) : 0;
+      const av = avisos(l.id, g);
+      const a = h("a", { class: "cel" + (s ? " sinal" : ""), href: hrefTela(t, g),
+        "aria-label": `${l.id}, ${g}: ${l.valor(x)}, ${l.texto(x)}` + (s ? ". O grupo que mais se afasta nesta leitura" : "") + (av.length ? `. Registro abaixo de ${P.cobertura}%: ${av.map((b) => CAMPO_CURTO[b.chave]).join(", ")}` : "") }, [
+        h("span", { class: "g-mob", "aria-hidden": "true", text: g }),
+        h("span", { class: "v" }, [l.valor(x), s ? h("span", { class: "tri", "aria-hidden": "true", text: "▲" }) : null]),
+        h("span", { class: "barra", "aria-hidden": "true" }, [h("i", { style: `width: ${Math.max(larg, x.valor ? 2 : 0)}%` })]),
+        h("span", { class: "t", text: l.texto(x) }),
+        av.length ? h("span", { class: "cobertura", text: lista(av.map((b) => `${CAMPO_CURTO[b.chave] || b.chave} ${num(b.pct, 0)}%`)) }) : null]);
+      return h("td", {}, [a]);
+    });
+    return h("tr", {}, [req, ...cels]);
+  });
+  const pe = h("tfoot", {}, [h("tr", {}, [h("td", { text: "Leituras com ▲" }),
+    ...GRUPOS.map((g) => h("td", { text: `${g}: ${sinaisDe(g).length} de 6` }))])]);
+  $("placar").replaceChildren(h("caption", { class: "sr", text: "Leitura principal de cada requisito por grupo" }), thead, h("tbody", {}, corpo), pe);
+}
+
+// Frase curta do assunto, para o roteiro do grupo
+const ASSUNTO = {
+  R01: (x) => `Ritmo: ${plural(x.silencios, "silêncio", "silêncios")} de ${P.silencio}+ dias até ${dm(L.R01.marco)}, o maior de ${plural(x.maior.dias, "dia", "dias")}.`,
+  R02: (x) => `Acúmulo: ${pct(x.valor)} dos cartões passaram de ${P.limite} h numa etapa; o maior acúmulo é em ${x.etapa}.`,
+  R03: (x) => `Registro: ${x.valor} de ${x.usados} campos abaixo de ${P.cobertura}%.`,
+  R04: (x) => `Planejado × realizado: ${pct(x.valor)} dos cartões levaram mais que o tamanho previa.`,
+  R05: (x) => `Concentração: Gini ${gTxt(x.valor)}, ${faixa(x.valor)}.`,
+  R06: (x) => `Eixos: ${x.valor} de 7 integrantes com ${P.foco}%+ dos cartões em ${lista([...new Set(x.focados.map((f) => f.eixo))])}.`,
+};
+function roteiros() {
+  $("roteiros").replaceChildren(...GRUPOS.map((g) => {
+    const ss = sinaisDe(g);
+    const baixos = L.R03.grupos[g].baixos;
+    return h("article", { class: "roteiro", "aria-label": `Roteiro do ${g}` }, [
+      h("h3", {}, [g, h("small", { text: `${ss.length} de 6 leituras com ▲` })]),
+      ss.length
+        ? h("ol", {}, ss.map((l) => h("li", {}, [ASSUNTO[l.id](L[l.id].grupos[g]) + " ", h("a", { href: hrefTela(TELA[l.id], g), text: `abrir ${l.id}` })])))
+        : h("p", { class: "nada", text: "Em nenhuma leitura este grupo é o que mais se afasta. A conversa pode partir do que o grupo quiser mostrar; o detalhe de cada tela continua valendo." }),
+      h("p", { class: "antes", text: baixos.length
+        ? `Antes, conferir o registro: ${lista(baixos.map((b) => `${CAMPO_CURTO[b.chave] || b.chave} ${num(b.pct, 0)}%`))} (afeta ${lista([...new Set(baixos.flatMap((b) => b.telas))].sort())}).`
+        : `Registro: todos os campos usados pelas telas com ${P.cobertura}% ou mais.` }),
+    ]);
+  }));
+}
+
+function conclusoes() {
+  const por = (id, f) => GRUPOS.map((g) => f(L[id].grupos[g], g));
+  const r1 = L.R01.grupos, depois = GRUPOS.map((g) => r1[g].maior_depois).filter(Boolean).map((c) => c.dias);
+  const etapas = new Set(GRUPOS.map((g) => L.R02.grupos[g].etapa));
+  const r6 = L.R06.grupos, totFoco = GRUPOS.reduce((a, g) => a + r6[g].valor, 0);
+  const lider = GRUPOS.filter((g) => r6[g].eixo !== "Documentação");
+  const frases = {
+    R01: `Até ${fmt(L.R01.marco)}, fim da última sprint com data, os silêncios de ${P.silencio} dias ou mais foram ${lista(por("R01", (x, g) => `${x.silencios} no ${g}`))}. `
+      + (depois.length === GRUPOS.length ? `Depois dessa data os três param juntos por ${Math.min(...depois)} a ${Math.max(...depois)} dias: é o fim do calendário, não o silêncio de um grupo.` : ""),
+    R02: (etapas.size === 1 ? `Nos três grupos o maior acúmulo é em ${[...etapas][0]}: a espera por revisão pesa mais que a execução. ` : `Etapa de maior acúmulo: ${lista(por("R02", (x, g) => `${x.etapa} no ${g}`))}. `)
+      + `Cartões acima de ${P.limite} h em alguma etapa: ${lista(por("R02", (x, g) => `${pct(x.valor)} no ${g}`))}.`,
+    R03: `Campos abaixo de ${P.cobertura}%: ${lista(por("R03", (x, g) => `${x.valor} no ${g}`))}. `
+      + (() => { const r = L.R03.grupos.G01 && L.R03.grupos.G01.baixos.find((b) => b.chave === "merge_requests|revisores_ids");
+                 return r ? `No G01 só ${num(r.pct, 0)}% dos MRs têm revisor designado, o que pesa na leitura da espera em Waiting Review.` : ""; })(),
+    R04: `Nos três grupos a maioria dos cartões levou mais que o tamanho previa: ${lista(por("R04", (x, g) => `${pct(x.valor)} no ${g} (mediana ${num(x.mediana, 1)}×)`))}. Como os dias por tamanho são premissa nossa, a pergunta é sobre como o grupo estima, não sobre atraso.`,
+    R05: `Gini dos dias planejados concluídos: ${lista(por("R05", (x, g) => `${gTxt(x.valor)} no ${g} (${faixa(x.valor)})`))}. `
+      + (GRUPOS.some((g) => L.R05.grupos[g].valor > 0.4) ? "" : "Nenhum grupo passa da faixa de concentrado (acima de 0,4)."),
+    R06: `${plural(totFoco, "integrante ficou", "integrantes ficaram")} com ${P.foco}% ou mais dos cartões num eixo só: ${lista(por("R06", (x, g) => `${x.valor} no ${g}` + (x.valor ? ` (${lista([...new Set(x.focados.map((f) => f.eixo))])})` : "")))}. `
+      + (lider.length && lider.length < GRUPOS.length ? `O ${lista(lider)} é o único em que ${lista(lider.map((g) => r6[g].eixo.toLowerCase()))} lidera o perfil do grupo; nos outros, a documentação.` : ""),
+  };
+  $("conclusoes").replaceChildren(...LINHAS.map((l) => h("li", {}, [
+    h("span", { class: "qual" }, [h("a", { href: hrefTela(TELA[l.id]), text: `${l.id} · ${TELA[l.id].nome}` }), h("small", { text: [...l.sinal].length ? `▲ ${lista([...l.sinal])}` : "sem ▲" })]),
+    h("span", { text: frases[l.id] })])));
+}
+
+function premissasVG() {
+  const escolha = { R01: ["Silêncio", "Marco de fim de sprint"], R02: ["Acúmulo"], R03: ["Cobertura mínima"],
+    R04: ["Dias planejados por tamanho", "Levou mais que o planejado"], R05: ["Medida principal", "Faixas de leitura"],
+    R06: ["Eixo de tarefa", "Foco num eixo só"] };
+  const itens = [];
+  for (const [tela, nomes] of Object.entries(escolha))
+    for (const n of nomes) {
+      const p = (D.premissas_telas[tela] || []).find((x) => x.nome === n);
+      if (p) itens.push(h("li", {}, [h("a", { href: hrefTela(TELA[tela]), text: tela }), " · ", h("strong", { text: p.nome }), `: ${p.valor}.`]));
+    }
+  $("premissas-vg").replaceChildren(...itens);
+}
+
+function notas() {
+  $("nota-origem").replaceChildren(...[
+    "Fonte: os oito CSVs de csvs_originais/, carregados em sqlite/dados.db, pelas mesmas consultas das telas (t04, r02, r03, r04, r05 e r06).",
+    `Data de extração não registrada. Os arquivos entraram no repositório em ${fmt(D.entrada_repositorio)}; o registro mais recente do conjunto é de ${fmt(D.registro_mais_recente)}.`,
+  ].map((t) => h("li", { text: t })));
+}
+
+montarTelas("Início");
+cabecalho();
+placar();
+roteiros();
+conclusoes();
+premissasVG();
+notas();
+</script>

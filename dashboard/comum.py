@@ -1,4 +1,4 @@
-"""Peças comuns dos geradores R02 a R05.
+"""Peças comuns dos geradores R02 a R06 e da visão geral.
 
 Cada gerador:
   1. roda os .sql de sqlite/ (fonte da verdade dos números);
@@ -24,9 +24,12 @@ BANCO = SQLITE / "dados.db"
 # Nenhum arquivo do conjunto registra a data de extração (ver R01).
 ENTRADA_NO_REPOSITORIO = "2026-09-18"  # primeiro commit de csvs_originais/ no git
 
-# Telas do projeto, em ordem numérica (a navegação do topo segue esta ordem). url = versão publicada (privada) quando
+# Telas do projeto: a visão geral primeiro, depois os requisitos em ordem numérica
+# (a navegação do topo segue esta ordem). url = versão publicada (privada) quando
 # houver (None até publicar); a navegação usa o arquivo local quando a página é aberta do disco.
 TELAS = [
+    {"id": "Início", "nome": "Visão geral", "arquivo": "visao_geral.html",
+     "url": "https://claude.ai/artifact/Jh4vnFxrMXM2oP9gE2jjsD"},
     {"id": "R01", "nome": "Ritmo de registro", "arquivo": "r01_ritmo_de_registro.html",
      "url": "https://claude.ai/artifact/J8vMTWGFyRVzfqxYK9nNXo"},
     {"id": "R02", "nome": "Acúmulo por etapa", "arquivo": "r02_acumulo_por_etapa.html",
@@ -37,6 +40,8 @@ TELAS = [
      "url": "https://claude.ai/artifact/X6Z8ZAoEurjtGkGagFE8my"},
     {"id": "R05", "nome": "Concentração (Gini)", "arquivo": "r05_concentracao_gini.html",
      "url": "https://claude.ai/artifact/UFJ17FrDcetbwMGXCuqNRj"},
+    {"id": "R06", "nome": "Eixos de tarefa", "arquivo": "r06_eixos_de_tarefa.html",
+     "url": "https://claude.ai/artifact/4tvQRwKfVW5JZs6p2cYRqv"},
 ]
 
 # Premissas de cada tela: escolhas do grupo, não definições da orientação.
@@ -89,6 +94,19 @@ PREMISSAS = {
          "2 por integrante; abaixo disso o índice sobe por construção"),
         ("Registro sem dono", "fica fora do índice e vira uma faixa possível (mínimo nivelando, máximo para quem tem mais)",
          "não se sabe de quem é"),
+    ],
+    "R06": [
+        ("Eixo de tarefa", "rótulo do cartão agrupado em Código (CODE, BUG, Fix, TEST, DEPLOY, CODE_REVIEW), "
+         "Design (DESIGN), Documentação (DOCUMENTATION, REQUIREMENTS, user-story) e Negócio (NEGÓCIOS, Presentation)",
+         "não há rótulo UX no conjunto, e DESIGN é o mais próximo; os outros rótulos são tamanho, prioridade, artefato ou etapa"),
+        ("Cartões do integrante", "os que têm o integrante como responsável, abertos e fechados; integrante é o mesmo do R05 (7 por grupo)",
+         "o eixo mostra em que a pessoa foi alocada, não só o que ela concluiu"),
+        ("Cartão de dois eixos", "conta metade em cada eixo",
+         "assim a parte de cada integrante soma 100%"),
+        ("Foco num eixo só", "75% ou mais dos cartões do integrante num mesmo eixo, ajustável para 60% ou 90% na tela",
+         "três de cada quatro cartões no mesmo tipo de tarefa"),
+        ("Poucos cartões", "aviso quando o integrante tem menos de 10 cartões com eixo no recorte",
+         "com menos de 10, um cartão só muda a parte de um eixo em mais de 10 pontos"),
     ],
 }
 REQUISITOS = RAIZ / "requisitos" / "Requisitos.MD"
@@ -172,8 +190,9 @@ def conferir(condicao: bool, mensagem: str) -> None:
 
 
 def gravar(modelo: str, dados: dict, saida: str, titulo: str) -> None:
-    tela = modelo[:3].upper()   # "r02_modelo.html" -> "R02"
-    dados = dict(dados, telas=TELAS, entrada_repositorio=ENTRADA_NO_REPOSITORIO, premissas=premissas(tela))
+    tela = modelo[:3].upper()   # "r02_modelo.html" -> "R02"; a visão geral não tem premissas próprias
+    dados = dict(dados, telas=TELAS, entrada_repositorio=ENTRADA_NO_REPOSITORIO,
+                 premissas=premissas(tela) if tela in PREMISSAS else [])
     bloco = json.dumps(dados, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
     html = (PASTA / modelo).read_text(encoding="utf-8")
     for marcador, conteudo in (("/*__CSS_COMUM__*/", (PASTA / "comum.css").read_text(encoding="utf-8")),

@@ -124,7 +124,7 @@ const D = __DADOS__;
 
 const GRUPOS = [...new Set(D.recortes.map((r) => r.grupo))].sort();
 const MED = Object.fromEntries(D.medidas.map((m) => [m.id, m]));
-const estado = { medida: D.medidas[0].id, sprint: "(todas)", grupo: GRUPOS[0] };
+const estado = { medida: D.medidas[0].id, sprint: "(todas)", grupo: grupoDoEndereco(GRUPOS, GRUPOS[0]) };
 const G_MAX = 6 / 7;
 const gTxt = (v) => v.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const leitura = (g) => g <= 0.2 ? "distribuído" : g <= 0.4 ? "moderado" : "concentrado";

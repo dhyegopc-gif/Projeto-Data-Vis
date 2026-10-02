@@ -1,21 +1,26 @@
 # dashboard/
 
-As telas dos cinco requisitos de [Requisitos.MD](../requisitos/Requisitos.MD), para a
+A visão geral e as telas dos seis requisitos de [Requisitos.MD](../requisitos/Requisitos.MD), para a
 orientadora pedagógica. Cada tela é um arquivo HTML só, que abre no navegador sem
 internet, com a versão em preto, branco e cinza ao lado (`_pb`).
 
 | ordem de leitura | tela | arquivo | pergunta |
 | --- | --- | --- | --- |
+| 0 | Visão geral | `visao_geral.html` | com qual grupo começar, e por qual assunto? (R01 a R06 em uma página) |
 | 1 | R03 · Cobertura do registro | `r03_cobertura_registro.html` | o registro deste grupo sustenta as leituras das outras telas? |
 | 2 | R01 · Ritmo de registro | `r01_ritmo_de_registro.html` | em quais dias o registro se concentra, e há silêncio prolongado? |
 | 3 | R02 · Acúmulo por etapa | `r02_acumulo_por_etapa.html` | em qual etapa do quadro os cartões se acumulam? |
 | 4 | R04 · Planejado × realizado | `r04_prazo_planejado_realizado.html` | os cartões levam o tempo que o tamanho prometia? |
 | 5 | R05 · Concentração (Gini) | `r05_concentracao_gini.html` | o trabalho registrado está distribuído ou concentrado em poucos? |
+| 6 | R06 · Eixos de tarefa | `r06_eixos_de_tarefa.html` | cada integrante passou por vários eixos de tarefa ou ficou num só? |
 
-O R03 vem primeiro na leitura porque diz, antes das outras, qual leitura fica
-prejudicada em qual grupo. Todas as telas têm a mesma faixa de navegação no topo,
-em ordem numérica (R01 a R05): aberta do disco, ela leva ao arquivo local; aberta
-na web, à versão publicada.
+A visão geral abre o painel: a leitura principal de cada requisito nos três grupos,
+numa página, com link para cada tela já no grupo. Entre os requisitos, o R03 vem
+primeiro porque diz qual leitura fica prejudicada em qual grupo. Todas as telas
+têm a mesma faixa de navegação no topo (Início, depois R01 a R06): aberta do
+disco, ela leva ao arquivo local; aberta na web, à versão publicada. As telas R01,
+R02, R04, R05 e R06 aceitam o grupo no endereço (`r02_acumulo_por_etapa.html#G03`),
+que é como a visão geral abre o detalhe.
 
 ```
 py -3 dashboard/gerar_r01.py
@@ -23,9 +28,11 @@ py -3 dashboard/gerar_r02.py
 py -3 dashboard/gerar_r03.py
 py -3 dashboard/gerar_r04.py
 py -3 dashboard/gerar_r05.py
+py -3 dashboard/gerar_r06.py
+py -3 dashboard/gerar_visao_geral.py   # por último: resume as outras
 ```
 
-## Como as telas R02 a R05 são geradas
+## Como as telas R02 a R06 e a visão geral são geradas
 
 | arquivo | o que é |
 | --- | --- |
@@ -56,6 +63,8 @@ que vai para a tela não bater com uma segunda conta:
 | R03 | autoria dos commits, tamanho do cartão e revisor de MR, contados direto das tabelas |
 | R04 | o vínculo `#N` refeito com regex em Python tem de dar os mesmos pares do SQL; commits por cartão e medianas por tamanho também |
 | R05 | o Gini refeito em Python a partir das contribuições, e 7 integrantes em todo recorte |
+| R06 | o eixo de cada cartão refeito dos rótulos crus em Python tem de dar as mesmas partes do SQL, por integrante, sprint e eixo; 7 integrantes por grupo |
+| Visão geral | cada leitura por um segundo caminho: t04 contra os commits autorais, o detalhe do R02 contra o resumo, o % do R04 contra o resumo por tamanho, o Gini do R05 refeito, o total do R06 contra a lista de cartões; e os padrões (3 dias, 48 h, 80%, 75%) contra as premissas |
 
 **Cor.** Azul é "dentro do limite ou do planejado"; laranja é "passou". O par
 passa no validador de daltonismo nos temas claro e escuro. A cor nunca é o único
@@ -123,6 +132,40 @@ versão P&B as duas cores viram cinza e quase preto, e a forma segue separando.
 - Também: a linha de divisão igual (14,3%), a **curva de Lorenz**, o **Gini por
   sprint** e o mesmo grupo nas quatro medidas.
 
+## R06 · Eixos de tarefa
+
+- **Eixos**: os rótulos de tipo de tarefa do cartão em quatro grupos (premissa):
+  Código (CODE, BUG, Fix, TEST, DEPLOY, CODE_REVIEW), Design (DESIGN),
+  Documentação (DOCUMENTATION, REQUIREMENTS, user-story) e Negócio (NEGÓCIOS,
+  Presentation). Não existe rótulo UX no conjunto; DESIGN é o mais próximo.
+- **Filtros**: grupo, sprint e o limiar de foco (60, 75 ou 90%; 75 é o padrão).
+- **Pequenos múltiplos**: um radar por integrante, na ordem do identificador,
+  todos na mesma escala (0 a 100%), com o perfil do grupo tracejado por baixo e o
+  anel do limiar. Vértice além do limiar vira triângulo laranja; com menos de 10
+  cartões o contorno fica tracejado.
+- **Radar do integrante**: o escolhido em tamanho grande, com o percentual dele e
+  o do grupo no rótulo de cada eixo. Clicar num vértice filtra a lista.
+- **Cartões do integrante**: os cartões em que ele é o responsável, filtráveis
+  por eixo.
+- **Parte de cada eixo**: matriz integrante × eixo em tom único (mais escuro, maior
+  a parte), com os números escritos; é também a visão em tabela dos radares.
+- Por que radar com cuidados: com 4 eixos fixos e escala igual, a forma mostra
+  de relance para onde a pessoa pende. O radar exagera área, então a tela manda
+  ler os vértices, sempre põe o grupo como referência e traz a matriz exata.
+
+## Visão geral
+
+- **Título que afirma** a conclusão (o grupo que mais se afasta e em quantas leituras).
+- **Placar requisito × grupo**: a leitura principal de cada tela com os padrões
+  dela, todas as sprints, com barra na escala natural da medida. O ▲ laranja marca,
+  em cada linha, o grupo que mais se afasta dos outros dois (comparação relativa;
+  os três têm 7 integrantes). O ◇ traz, da matriz do R03, o campo abaixo de 80%
+  que aquela leitura usa naquele grupo. A célula abre a tela já no grupo.
+- **Por onde começar**: para cada grupo, os assuntos com ▲ e o que conferir no
+  registro antes.
+- **O que cada requisito mostra**: uma frase por tela, montada a partir dos números.
+- **Premissas** que mudam a página, com link para a lista completa de cada tela.
+
 ## Publicação
 
 Versões coloridas publicadas (privadas; compartilhar pelo menu Share). As URLs
@@ -135,11 +178,14 @@ ficam também em `TELAS`, em `comum.py`, para a navegação entre telas.
 | R03 | <https://claude.ai/artifact/6UznL9ZeRJR2973pazcdCG> |
 | R04 | <https://claude.ai/artifact/X6Z8ZAoEurjtGkGagFE8my> |
 | R05 | <https://claude.ai/artifact/UFJ17FrDcetbwMGXCuqNRj> |
+| R06 | <https://claude.ai/artifact/4tvQRwKfVW5JZs6p2cYRqv> |
+| Visão geral | <https://claude.ai/artifact/Jh4vnFxrMXM2oP9gE2jjsD> |
 
 ## Pendências
 
 - **Premissas a confirmar**: dias por tamanho (R04), limite de 48 h (R02), mínimo
-  de 80% (R03), critério de integrante e faixas de leitura do Gini (R05).
+  de 80% (R03), critério de integrante e faixas de leitura do Gini (R05),
+  agrupamento dos rótulos em eixos e limiar de foco de 75% (R06).
 - **Teste de aceite** de cada tela com uma pessoa que não a construiu, como o
   roteiro do R01 (seção 9 de [05_fluxo_interacao_R01.md](05_fluxo_interacao_R01.md)).
 

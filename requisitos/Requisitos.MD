@@ -1,6 +1,6 @@
 # Requisitos e lacunas
 
-Cinco requisitos de tela e as perguntas que o recorte não sustenta. Todo número
+Seis requisitos de tela, a tela de abertura que resume os seis e as perguntas que o recorte não sustenta. Todo número
 citado aqui foi conferido nos CSVs de `csvs_originais/`; as regras de grão,
 chave e junção estão em [Contrato_de_dados.md](../modelagem/Contrato_de_dados.md).
 
@@ -11,8 +11,10 @@ chave e junção estão em [Contrato_de_dados.md](../modelagem/Contrato_de_dados
 | [R03 — Cobertura do próprio registro](#r03--cobertura-do-próprio-registro) | IMPLEMENTÁVEL | [r03_cobertura_registro.html](../dashboard/r03_cobertura_registro.html) |
 | [R04 — Tamanho planejado × tempo realizado dos cartões](#r04--tamanho-planejado--tempo-realizado-dos-cartões) | IMPLEMENTÁVEL COM PREMISSA | [r04_prazo_planejado_realizado.html](../dashboard/r04_prazo_planejado_realizado.html) |
 | [R05 — Concentração do trabalho registrado no grupo](#r05--concentração-do-trabalho-registrado-no-grupo) | IMPLEMENTÁVEL COM PREMISSA | [r05_concentracao_gini.html](../dashboard/r05_concentracao_gini.html) |
+| [R06 — Concentração por eixo de tarefa](#r06--concentração-por-eixo-de-tarefa) | IMPLEMENTÁVEL COM PREMISSA | [r06_eixos_de_tarefa.html](../dashboard/r06_eixos_de_tarefa.html) |
+| [Tela de abertura — Visão geral](#tela-de-abertura--visão-geral) | IMPLEMENTÁVEL (resume R01 a R06) | [visao_geral.html](../dashboard/visao_geral.html) |
 
-A tela do R03 é a porta de entrada: ela diz, antes das outras, qual leitura fica prejudicada em qual grupo.
+A visão geral é a primeira tela: em uma página, a leitura principal de cada requisito nos três grupos, com o link para o detalhe. Entre os requisitos, o R03 continua sendo a porta de entrada: ele diz qual leitura fica prejudicada em qual grupo, e a visão geral leva esse aviso para dentro de cada célula.
 
 
 
@@ -101,6 +103,39 @@ A tela do R03 é a porta de entrada: ela diz, antes das outras, qual leitura fic
 | **Suporte na tela**        | Barra de Gini por grupo com as faixas de leitura declaradas como premissa (até 0,2 distribuído, até 0,4 moderado, acima disso concentrado), marca do máximo possível e intervalo de incerteza. Curva de Lorenz, parte de cada integrante com a linha de divisão igual, Gini por sprint e tabela do mesmo grupo nas quatro medidas. |
 | **Lacunas e premissas**    | Registro não é trabalho: programação em dupla, estudo e reunião ficam no nome de uma pessoa só ou de ninguém. O responsável no quadro não é necessariamente quem executou. O critério de integrante e as faixas de leitura são **premissas do grupo**. Com poucos registros o índice sobe por construção: 4 MRs entre 7 pessoas não dão Gini abaixo de 0,43. Nas medidas de contagem, a tela avisa quando o recorte tem menos de 14 registros. A tela não é ranking de alunos: a unidade de análise continua sendo o grupo, e os identificadores aparecem só para ler a curva. |
 | **Premissas do grupo**   | Todas a confirmar com o professor; a tela mostra a mesma lista.<br>• **Integrante**: pessoa do cadastro do grupo com pelo menos um movimento no quadro do próprio grupo (7 por grupo). Deixa de fora 59 perfis sem registro e quem só atua em outro grupo.<br>• **Medida principal**: dias planejados dos cartões concluídos, somados por responsável. Pesa o cartão pelo tamanho e herda os dias por tamanho do R04.<br>• **Faixas de leitura**: até 0,2 distribuído; até 0,4 moderado; acima disso, concentrado. Orientam a conversa; não são régua oficial.<br>• **Poucos registros**: aviso quando uma medida de contagem tem menos de 14 registros no recorte. 2 por integrante; abaixo disso o índice sobe por construção.<br>• **Registro sem dono**: fica fora do índice e vira uma faixa possível (mínimo nivelando, máximo para quem tem mais). Não se sabe de quem é. |
+
+## R06 — Concentração por eixo de tarefa
+
+> **IMPLEMENTÁVEL COM PREMISSA** (agrupamento dos rótulos em eixos e limiar de foco)
+
+| item                           | definição |
+| ------------------------------ | --------- |
+| **Público**                | Orientadora pedagógica (Vanessa). |
+| **Decisão que apoia**      | Decidir se vale perguntar, na reunião, por que um integrante ficou o módulo inteiro (ou a sprint inteira) num tipo de tarefa só, e sugerir rodízio entre os eixos. Ficar num eixo só é prejudicial à formação: o aluno deixa de praticar os outros. |
+| **Frequência**             | A cada sprint, e ao fim do módulo para ver a trajetória de cada integrante. |
+| **Pergunta de decisão**    | Cada integrante passou por vários eixos de tarefa (código, design, documentação, negócio) ou ficou concentrado em um só? |
+| **Evidência**              | `cartoes.csv` (`rotulos`, `responsaveis_ids`, `sprint`, `fechado_em`), `kanban_eventos.csv` e `pessoas.csv` (critério de integrante do R05). Base conferida: dos 1.238 cartões, 1.196 têm rótulo de eixo e 42 não têm; 138 têm dois eixos e 6 têm três. 1.166 cartões estão com um integrante como responsável (G01 278, G02 450, G03 438); os outros 72 não têm responsável ou estão com quem não é integrante. Perfil do grupo, todas as sprints: G01 é o único com Código à frente (52,9%, Documentação 26,9%); G02 e G03 têm Documentação à frente (60,4% e 61,8%). Integrantes com 75% ou mais num eixo só: 2 no G01 (Código, 80,2% e 90,6%), 1 no G02 (Documentação, 83,3%) e 4 no G03 (Documentação, de 81,3% a 83,7%; um deles com só 12 cartões). Não há rótulo UX no conjunto. |
+| **Regra de cálculo**       | O grão é um cartão, identificado por (`grupo`, `cartao_numero`). O eixo vem dos rótulos de tipo de tarefa, em qualquer grafia: Código (CODE, BUG, Fix, TEST, DEPLOY, CODE_REVIEW), Design (DESIGN), Documentação (DOCUMENTATION, REQUIREMENTS, user-story) e Negócio (NEGÓCIOS, Presentation). Rótulo de tamanho, prioridade, artefato (ART.N), etapa do quadro e COMP não é eixo. Cartão com rótulos de dois eixos conta metade em cada (BUG e CODE são o mesmo eixo e não dividem). Parte do eixo = soma dos pesos do eixo ÷ cartões com eixo do integrante; cada integrante soma 100%. O perfil do grupo é a mesma conta com os cartões dos 7 integrantes juntos. Consultas: `r06_cartoes_por_eixo.sql` e `r06_eixo_por_integrante.sql`. |
+| **Critério de aceite**     | O leitor escolhe um grupo e uma sprint, aponta nos radares quais integrantes passaram do limiar de foco, abre o radar de um deles, compara com o perfil do grupo, abre a lista dos cartões daquele eixo e diz em voz alta que a tela mede alocação registrada no quadro, e não competência. |
+| **Suporte na tela**        | Pequenos múltiplos: um radar por integrante, todos na mesma escala de 0 a 100%, com o perfil do grupo tracejado por baixo e o anel do limiar de foco. Vértice acima do limiar vira triângulo laranja (forma e cor). Radar grande do integrante escolhido com o percentual de cada eixo escrito no rótulo, lista dos cartões filtrável por eixo e matriz integrante × eixo com os números exatos, que também serve de visão em tabela. |
+| **Lacunas e premissas**    | O rótulo é posto pelo próprio grupo, e cada grupo rotula do seu jeito: NEGÓCIOS só aparece no G01 e Presentation só no G02, então o eixo Negócio não compara grupos. O responsável do cartão não é necessariamente quem executou, e trabalho em dupla fica no nome de um só. O radar exagera diferenças de área, por isso a tela manda ler os vértices e traz a matriz. Foco num eixo pode ser divisão de papéis combinada com o grupo: a tela aponta onde perguntar. |
+| **Premissas do grupo**   | Todas a confirmar com o professor; a tela mostra a mesma lista.<br>• **Eixo de tarefa**: rótulo do cartão agrupado em Código (CODE, BUG, Fix, TEST, DEPLOY, CODE_REVIEW), Design (DESIGN), Documentação (DOCUMENTATION, REQUIREMENTS, user-story) e Negócio (NEGÓCIOS, Presentation). Não há rótulo UX no conjunto, e DESIGN é o mais próximo; os outros rótulos são tamanho, prioridade, artefato ou etapa.<br>• **Cartões do integrante**: os que têm o integrante como responsável, abertos e fechados; integrante é o mesmo do R05 (7 por grupo). O eixo mostra em que a pessoa foi alocada, não só o que ela concluiu.<br>• **Cartão de dois eixos**: conta metade em cada eixo. Assim a parte de cada integrante soma 100%.<br>• **Foco num eixo só**: 75% ou mais dos cartões do integrante num mesmo eixo, ajustável para 60% ou 90% na tela. Três de cada quatro cartões no mesmo tipo de tarefa.<br>• **Poucos cartões**: aviso quando o integrante tem menos de 10 cartões com eixo no recorte. Com menos de 10, um cartão só muda a parte de um eixo em mais de 10 pontos. |
+
+## Tela de abertura — Visão geral
+
+> **IMPLEMENTÁVEL** (resume R01 a R06; não cria medida nova)
+
+| item                           | definição |
+| ------------------------------ | --------- |
+| **Público**                | Orientadora pedagógica (Vanessa), com cerca de 4 minutos antes da reunião com cada grupo. |
+| **Decisão que apoia**      | Com qual grupo abrir a conversa e por qual assunto começar, antes de entrar no detalhe de cada tela. |
+| **Frequência**             | Antes de cada rodada de reuniões de acompanhamento. |
+| **Pergunta de decisão**    | Em uma página: o que cada requisito diz de cada grupo, e onde está o sinal mais forte? |
+| **Evidência**              | Os mesmos números das seis telas, recalculados pelas mesmas consultas de `sqlite/` (t04, r02, r03, r04, r05 e r06), todas as sprints. |
+| **Regra de cálculo**       | Uma leitura por requisito e grupo: R01, silêncios de 3 dias ou mais até o fim da última sprint com data (26/06/2026); R02, cartões que passaram de 48 h em alguma etapa e a etapa de maior acúmulo; R03, campos usados pelas telas abaixo de 80%; R04, cartões que levaram mais que o planejado; R05, Gini dos dias planejados concluídos; R06, integrantes com 75% ou mais dos cartões num eixo só. Em cada linha, o ▲ marca o grupo que mais se afasta entre os três (empate marca todos os empatados); é comparação relativa, não régua. Os três grupos têm 7 integrantes. Quando o R03 mostra campo abaixo de 80% num campo que a leitura usa, a célula traz o aviso de cobertura. |
+| **Critério de aceite**     | Em menos de um minuto, uma pessoa que não construiu a tela diz com qual grupo começaria e por qual assunto, e abre a tela do requisito, já no grupo, para conferir o número. |
+| **Suporte na tela**        | Título que afirma a conclusão principal, matriz requisito × grupo com barra na mesma escala por linha, marca ▲ com cor e forma, conclusões em uma frase por requisito com link, e as premissas resumidas com link para a lista completa de cada tela. |
+| **Lacunas**                | Herda as lacunas de cada requisito. A contagem de ▲ por grupo não é nota nem ranking: só diz em quantas leituras o grupo é o que mais se afasta dos outros dois. |
 
 ## Lacunas do recorte
 

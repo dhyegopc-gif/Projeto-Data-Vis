@@ -108,7 +108,7 @@ const CARTOES = D.cartoes.map(([grupo, numero, titulo, sprint, resp, tamanho, pl
   ({ grupo, numero, titulo, sprint, resp, tamanho, plan, criado, fechado, dias, commits, linhas,
      razao: dias / plan, passou: dias > plan, dobro: dias > 2 * plan }));
 const GRUPOS = Object.keys(D.grupos);
-const estado = { grupo: GRUPOS[0], sprint: "todas", tamanhos: new Set(TAM), sel: null, cursor: null };
+const estado = { grupo: grupoDoEndereco(GRUPOS, GRUPOS[0]), sprint: "todas", tamanhos: new Set(TAM), sel: null, cursor: null };
 let lista = [], pontos = [], destaques = [];
 
 const mediana = (xs) => {

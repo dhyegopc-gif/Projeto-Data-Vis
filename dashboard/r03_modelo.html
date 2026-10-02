@@ -117,32 +117,6 @@ const CAMPOS = [...new Set(LINHAS.map((l) => `${l.arquivo}|${l.campo}`))].map((k
            pior: Math.min(...ls.map((l) => l.pct)) };
 });
 const telasDe = (c) => c.tela === "-" ? [] : c.tela.split(",").map((t) => t.trim());
-const CAMPO_TXT = {
-  "commits|autor_id resolvido (arquivo inteiro)": "Autoria do commit (arquivo inteiro)",
-  "commits|autor_id resolvido (base do R01)": "Autoria do commit (base contada no R01)",
-  "commits|número do cartão (#N) na base do R01": "Número do cartão citado no commit",
-  "cartoes|tamanho (rótulo PP a GG)": "Tamanho do cartão (PP a GG)",
-  "cartoes|responsaveis_ids resolvido": "Responsável identificado no cartão",
-  "cartoes|sprint": "Sprint do cartão",
-  "cartoes|prazo_em": "Prazo do cartão",
-  "merge_requests|autor_id resolvido": "Autoria do merge request",
-  "merge_requests|sprint": "Sprint do merge request",
-  "merge_requests|revisores_ids": "Revisor designado no MR",
-  "sprints|inicio_em e prazo_em": "Datas da sprint",
-};
-const CAMPO_CURTO = {
-  "commits|autor_id resolvido (arquivo inteiro)": "autoria do commit",
-  "commits|autor_id resolvido (base do R01)": "autoria na base do R01",
-  "commits|número do cartão (#N) na base do R01": "número do cartão no commit",
-  "cartoes|tamanho (rótulo PP a GG)": "tamanho do cartão",
-  "cartoes|responsaveis_ids resolvido": "responsável identificado",
-  "cartoes|sprint": "sprint do cartão",
-  "cartoes|prazo_em": "prazo do cartão",
-  "merge_requests|autor_id resolvido": "autoria do MR",
-  "merge_requests|sprint": "sprint do MR",
-  "merge_requests|revisores_ids": "revisor do MR",
-  "sprints|inicio_em e prazo_em": "datas da sprint",
-};
 const chaveCampo = (c) => `${c.arquivo}|${c.campo}`;
 const nomeCampo = (c) => CAMPO_TXT[chaveCampo(c)] || c.campo;
 const curto = (c) => CAMPO_CURTO[chaveCampo(c)] || c.campo;

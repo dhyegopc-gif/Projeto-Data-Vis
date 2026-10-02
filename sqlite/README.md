@@ -18,6 +18,8 @@ Os 8 CSVs de [csvs_originais/](../csvs_originais/) carregados em um banco SQLite
 | `r04_resumo_por_tamanho.sql` | R04 — por grupo e tamanho: medianas, % acima do planejado, commits por cartão |
 | `r05_contribuicao_por_integrante.sql` | R05 — valor de cada integrante por grupo, sprint e medida, com a parcela sem dono |
 | `r05_gini_concentracao.sql` | R05 — índice de Gini por grupo, sprint e medida |
+| `r06_cartoes_por_eixo.sql` | R06 — um cartão por linha, com o eixo de tarefa (Código, Design, Documentação, Negócio) e o responsável |
+| `r06_eixo_por_integrante.sql` | R06 — parte de cada eixo nos cartões de cada integrante, por grupo e sprint, com o perfil do grupo |
 | `t05_eventos_kanban.sql` | T05 — view deduplicada, classificada e sequenciada dos eventos Kanban |
 
 ```

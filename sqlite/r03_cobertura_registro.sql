@@ -10,6 +10,8 @@
 -- Duas medidas servem ao R04 e ao R05: cartão com rótulo de tamanho (P1..P8
 -- são prioridade e não contam) e commit autoral que cita "#N" de um cartão do
 -- próprio grupo (mesma regra de vínculo de r04_prazo_planejado_realizado.sql).
+-- Uma serve ao R06: cartão com rótulo de eixo de tarefa (mesma tabela de
+-- r06_cartoes_por_eixo.sql).
 WITH RECURSIVE
 commits_autorais AS (
     SELECT c.grupo, c.commit_id, c.titulo, c.mensagem
@@ -58,6 +60,12 @@ commits_com_cartao AS (
     FROM citacoes_validas v
     JOIN cartoes k ON k.grupo = v.grupo AND k.cartao_numero = v.numero
 ),
+cartoes_com_eixo AS (
+    SELECT DISTINCT grupo, cartao_numero
+    FROM v_cartoes_rotulos
+    WHERE UPPER(rotulo) IN ('CODE', 'BUG', 'FIX', 'TEST', 'DEPLOY', 'CODE_REVIEW', 'DESIGN',
+                            'DOCUMENTATION', 'REQUIREMENTS', 'USER-STORY', 'NEGÓCIOS', 'PRESENTATION')
+),
 cartoes_com_tamanho AS (
     SELECT DISTINCT grupo, cartao_numero
     FROM v_cartoes_rotulos
@@ -90,15 +98,24 @@ medidas AS (
     SELECT grupo, 'cartoes', 'sprint',
            COUNT(*), SUM(sprint IS NOT NULL),
            'cortar por sprint: sem sprint o cartão cai em "(sem sprint)" e só aparece no recorte de todas as sprints',
-           'R02, R04, R05'
+           'R02, R04, R05, R06'
     FROM cartoes GROUP BY grupo
 
     UNION ALL
     SELECT grupo, 'cartoes', 'responsaveis_ids resolvido',
            COUNT(*), SUM(responsaveis_ids IS NOT NULL AND responsaveis_ids NOT IN ('[externo]', '[bot]')),
-           'saber quem responde pelo cartão parado na etapa e a quem somar o cartão concluído na concentração',
-           'R02, R05'
+           'saber quem responde pelo cartão parado na etapa, a quem somar o cartão concluído na concentração e em que eixo de tarefa a pessoa está',
+           'R02, R05, R06'
     FROM cartoes GROUP BY grupo
+
+    UNION ALL
+    SELECT c.grupo, 'cartoes', 'eixo de tarefa (rótulo CODE, DESIGN, DOCUMENTATION...)',
+           COUNT(*), SUM(e.cartao_numero IS NOT NULL),
+           'saber em que tipo de tarefa o integrante trabalhou: sem rótulo de eixo o cartão fica fora do radar',
+           'R06'
+    FROM cartoes c
+    LEFT JOIN cartoes_com_eixo e ON e.grupo = c.grupo AND e.cartao_numero = c.cartao_numero
+    GROUP BY c.grupo
 
     UNION ALL
     SELECT c.grupo, 'cartoes', 'tamanho (rótulo PP a GG)',

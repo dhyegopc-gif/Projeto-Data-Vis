@@ -1,4 +1,4 @@
-// Funções comuns das telas R02 a R05 (o gerador injeta antes do código da tela).
+// Funções comuns das telas R02 a R06 e da visão geral (o gerador injeta antes do código da tela).
 // Todo texto que vem do dado entra por textContent, nunca por innerHTML.
 const NS = "http://www.w3.org/2000/svg";
 const $ = (id) => document.getElementById(id);
@@ -108,6 +108,46 @@ function montarTelas(atual) {
     if (t.id === atual) a.setAttribute("aria-current", "page");
     lista.appendChild(h("li", {}, [a]));
   }
+}
+// Nomes dos campos do R03 (usados no R03 e nos avisos de cobertura da visão geral)
+const CAMPO_TXT = {
+  "commits|autor_id resolvido (arquivo inteiro)": "Autoria do commit (arquivo inteiro)",
+  "commits|autor_id resolvido (base do R01)": "Autoria do commit (base contada no R01)",
+  "commits|número do cartão (#N) na base do R01": "Número do cartão citado no commit",
+  "cartoes|tamanho (rótulo PP a GG)": "Tamanho do cartão (PP a GG)",
+  "cartoes|responsaveis_ids resolvido": "Responsável identificado no cartão",
+  "cartoes|eixo de tarefa (rótulo CODE, DESIGN, DOCUMENTATION...)": "Eixo de tarefa do cartão",
+  "cartoes|sprint": "Sprint do cartão",
+  "cartoes|prazo_em": "Prazo do cartão",
+  "merge_requests|autor_id resolvido": "Autoria do merge request",
+  "merge_requests|sprint": "Sprint do merge request",
+  "merge_requests|revisores_ids": "Revisor designado no MR",
+  "sprints|inicio_em e prazo_em": "Datas da sprint",
+};
+const CAMPO_CURTO = {
+  "commits|autor_id resolvido (arquivo inteiro)": "autoria do commit",
+  "commits|autor_id resolvido (base do R01)": "autoria na base do R01",
+  "commits|número do cartão (#N) na base do R01": "número do cartão no commit",
+  "cartoes|tamanho (rótulo PP a GG)": "tamanho do cartão",
+  "cartoes|responsaveis_ids resolvido": "responsável identificado",
+  "cartoes|eixo de tarefa (rótulo CODE, DESIGN, DOCUMENTATION...)": "eixo de tarefa do cartão",
+  "cartoes|sprint": "sprint do cartão",
+  "cartoes|prazo_em": "prazo do cartão",
+  "merge_requests|autor_id resolvido": "autoria do MR",
+  "merge_requests|sprint": "sprint do MR",
+  "merge_requests|revisores_ids": "revisor do MR",
+  "sprints|inicio_em e prazo_em": "datas da sprint",
+};
+
+// Grupo pedido no endereço (#G01), vindo da visão geral; senão, o padrão
+function grupoDoEndereco(grupos, padrao) {
+  let g = "";
+  try { g = decodeURIComponent(location.hash.slice(1)); } catch (e) { g = ""; }
+  return grupos.includes(g) ? g : padrao;
+}
+function hrefTela(t, grupo) {
+  const local = location.protocol === "file:";
+  return (local || !t.url ? t.arquivo : t.url) + (grupo ? "#" + grupo : "");
 }
 function linkTela(id) {
   const t = D.telas.find((x) => x.id === id);

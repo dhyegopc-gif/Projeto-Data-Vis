@@ -344,7 +344,13 @@ for (const c of D.commits) {
   MAPA[g].get(dia).push({ id, autor, quando, titulo, add, rem });
 }
 
-const estado = { grupo: Object.keys(D.grupos)[0], ini: D.inicio, fim: D.fim, preset: "tudo", limiar: 3, sel: null, cursor: null };
+// Grupo pedido no endereço (#G01), vindo da visão geral (mesma função de comum.js)
+function grupoDoEndereco(grupos, padrao) {
+  let g = "";
+  try { g = decodeURIComponent(location.hash.slice(1)); } catch (e) { g = ""; }
+  return grupos.includes(g) ? g : padrao;
+}
+const estado = { grupo: grupoDoEndereco(Object.keys(D.grupos), Object.keys(D.grupos)[0]), ini: D.inicio, fim: D.fim, preset: "tudo", limiar: 3, sel: null, cursor: null };
 let serie = [];
 
 function el(tag, attrs, pai) {

@@ -1,0 +1,696 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Visão geral</title>
+<style>
+/* Estilo comum das telas R02 a R05. Mesmos tokens e componentes do R01
+   (r01_modelo.html); o gerador injeta este arquivo no <style> de cada modelo.
+   Leitura em uma coluna: pergunta, filtros, resumo, gráfico principal,
+   detalhe, notas. */
+:root {
+  --page: #f9f9f7;
+  --surface: #fcfcfb;
+  --ink: #0b0b0b;
+  --ink-2: #52514e;
+  --muted: #6f6d68;
+  --grid: #e1e0d9;
+  --axis: #c3c2b7;
+  --series: #2a78d6;          /* dentro do limite / do planejado */
+  --series-strong: #184f95;   /* marca selecionada */
+  --series-2: #eb6834;        /* passou do limite / do planejado */
+  --wash-2: rgba(235, 104, 52, 0.045);
+  --wash: rgba(42, 120, 214, 0.08);
+  --hover: rgba(42, 120, 214, 0.10);
+  --zero: #9a988f;
+  --border: rgba(11, 11, 11, 0.10);
+  --chip: #f0efec;
+  --focus: #2a78d6;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #0d0d0d;
+    --surface: #1a1a19;
+    --ink: #ffffff;
+    --ink-2: #c3c2b7;
+    --muted: #a3a197;
+    --grid: #2c2c2a;
+    --axis: #383835;
+    --series: #3987e5;
+    --series-strong: #9ec5f4;
+    --series-2: #d95926;
+    --wash-2: rgba(217, 89, 38, 0.07);
+    --wash: rgba(57, 135, 229, 0.12);
+    --hover: rgba(57, 135, 229, 0.16);
+    --zero: #77756d;
+    --border: rgba(255, 255, 255, 0.10);
+    --chip: #2c2c2a;
+    --focus: #6da7ec;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d;
+  --surface: #1a1a19;
+  --ink: #ffffff;
+  --ink-2: #c3c2b7;
+  --muted: #a3a197;
+  --grid: #2c2c2a;
+  --axis: #383835;
+  --series: #3987e5;
+  --series-strong: #9ec5f4;
+  --series-2: #d95926;
+  --wash-2: rgba(217, 89, 38, 0.07);
+  --wash: rgba(57, 135, 229, 0.12);
+  --hover: rgba(57, 135, 229, 0.16);
+  --zero: #77756d;
+  --border: rgba(255, 255, 255, 0.10);
+  --chip: #2c2c2a;
+  --focus: #6da7ec;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--ink); font: 14px/1.5 var(--sans); }
+a { color: var(--ink); text-decoration: underline; text-underline-offset: 2px; }
+a:hover { color: var(--series-strong); }
+.wrap {
+  max-width: 1180px; margin: 0 auto;
+  padding-inline: 20px; padding-block: 20px 48px;
+  display: grid; gap: 20px;
+}
+@media (max-width: 520px) { .wrap { padding-inline: 16px; } }
+
+/* navegação entre as telas */
+.telas { display: flex; flex-wrap: wrap; gap: 4px 6px; font-size: 12px; margin: 0; padding: 0; list-style: none; }
+.telas a {
+  display: inline-block; color: var(--ink-2); text-decoration: none;
+  border: 1px solid var(--border); border-radius: 999px; padding: 3px 10px;
+}
+.telas a:hover { border-color: var(--ink-2); color: var(--ink); }
+.telas a[aria-current="page"] { background: var(--ink); color: var(--page); border-color: var(--ink); }
+
+header { display: grid; gap: 6px; }
+.eyebrow { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin: 0; }
+h1 { font-size: 24px; line-height: 1.25; margin: 0; font-weight: 600; text-wrap: balance; }
+.pergunta { margin: 0; color: var(--ink-2); max-width: 72ch; }
+
+.filtros {
+  display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 20px;
+  padding-block: 12px; border-block: 1px solid var(--border);
+}
+.campo { display: grid; gap: 4px; font-size: 12px; color: var(--ink-2); min-width: 0; }
+.campo > span { letter-spacing: 0.02em; }
+select {
+  font: inherit; font-size: 14px; color: var(--ink); background: var(--surface);
+  border: 1px solid var(--axis); border-radius: 6px; padding: 5px 8px; min-height: 34px; max-width: 100%;
+}
+.presets { display: flex; flex-wrap: wrap; gap: 6px; }
+.presets button, .botao {
+  font: inherit; font-size: 13px; color: var(--ink); background: var(--surface);
+  border: 1px solid var(--axis); border-radius: 999px; padding: 5px 12px; min-height: 34px; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.presets button[aria-pressed="true"] { background: var(--ink); color: var(--page); border-color: var(--ink); }
+.presets button[aria-pressed="false"] .marca { opacity: 0.35; }
+.presets button:hover, .botao:hover { border-color: var(--ink-2); }
+.presets .nota { font-size: 12px; color: var(--muted); align-self: center; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+.tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 860px) { .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.tile {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+  padding: 14px 16px; display: grid; gap: 2px; align-content: start; min-width: 0;
+}
+.tile .rotulo { font-size: 12px; color: var(--ink-2); }
+.tile .valor { font-size: 28px; font-weight: 600; line-height: 1.2; overflow-wrap: anywhere; }
+.tile .sub { font-size: 12px; color: var(--muted); }
+
+.card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+  padding: 16px 18px; display: grid; gap: 10px; min-width: 0;
+}
+.card > * { min-width: 0; }
+.card-topo { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 8px 16px; }
+.card-topo > div { min-width: 0; flex: 1 1 320px; }
+.card h2 { font-size: 16px; margin: 0; font-weight: 600; text-wrap: balance; }
+.limite { margin: 2px 0 0; font-size: 13px; color: var(--ink-2); max-width: 80ch; }
+.limite strong { font-weight: 600; color: var(--ink); }
+.recorte { margin: 2px 0 0; font-size: 12px; color: var(--muted); max-width: 90ch; }
+.dica { margin: 0; font-size: 12px; color: var(--muted); }
+.legenda { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12px; color: var(--ink-2); }
+.legenda > span { display: inline-flex; align-items: center; gap: 6px; }
+.chave { width: 12px; height: 12px; border-radius: 3px; display: inline-block; flex: none; }
+.chave.s1 { background: var(--series); }
+.chave.s2 { background: var(--series-2); }
+.chave.linha { height: 2px; border-radius: 1px; background: var(--ink-2); }
+.chave.faixa { background: var(--wash-2); border: 1px solid var(--axis); }
+.marca-svg { display: inline-block; flex: none; }
+
+.grafico { width: 100%; }
+.grafico svg { display: block; width: 100%; overflow: visible; }
+.grafico svg:focus-visible { outline-offset: 4px; border-radius: 4px; }
+.eixo { font-size: 11px; fill: var(--muted); font-variant-numeric: tabular-nums; }
+.eixo-titulo { font-size: 12px; fill: var(--ink-2); }
+.rot { font-size: 11px; fill: var(--ink-2); }
+.rot-forte { font-size: 12px; fill: var(--ink); font-weight: 600; }
+
+.duas { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+@media (max-width: 900px) { .duas { grid-template-columns: minmax(0, 1fr); } }
+.pilha { display: grid; gap: 20px; min-width: 0; }
+
+.rolagem { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th { text-align: left; font-weight: 600; font-size: 12px; color: var(--ink-2); padding: 6px 8px; border-bottom: 1px solid var(--axis); white-space: nowrap; }
+td { padding: 6px 8px; border-bottom: 1px solid var(--grid); vertical-align: top; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+td.hora { font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--ink-2); }
+td.nw { white-space: nowrap; }
+.chip { display: inline-block; font-size: 11px; background: var(--chip); color: var(--ink-2); border-radius: 999px; padding: 1px 8px; margin-left: 4px; white-space: nowrap; }
+.chip.alerta::before { content: "▲ "; font-size: 9px; }
+.vazio { margin: 0; color: var(--ink-2); }
+.contagem { font-size: 13px; color: var(--ink-2); margin: 0; }
+tr.linha-sel td { background: var(--hover); }
+button.link { font: inherit; color: var(--ink); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; text-align: left; }
+
+.notas {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 28px;
+  border-top: 1px solid var(--border); padding-top: 18px; font-size: 13px; color: var(--ink-2);
+}
+@media (max-width: 760px) { .notas { grid-template-columns: minmax(0, 1fr); } }
+.notas h3 { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin: 0 0 6px; font-weight: 600; }
+.notas p, .notas ul { margin: 0; max-width: 68ch; }
+.notas ul { padding-left: 18px; display: grid; gap: 4px; }
+.notas code { font-size: 12px; }
+
+#tip {
+  position: fixed; z-index: 10; pointer-events: none;
+  background: var(--surface); color: var(--ink); border: 1px solid var(--border);
+  border-radius: 8px; padding: 8px 10px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  font-size: 12px; line-height: 1.4; max-width: 280px;
+}
+#tip .v { font-size: 15px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+#tip .d { color: var(--ink-2); }
+#tip .s { color: var(--muted); margin-top: 2px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (prefers-reduced-motion: no-preference) { .grafico rect, .grafico path, .grafico circle { transition: fill 120ms, opacity 120ms; } }
+
+.contexto { display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: 13px; color: var(--ink-2); margin: 0; padding: 0; list-style: none; }
+.contexto strong { color: var(--ink); font-variant-numeric: tabular-nums; }
+
+/* placar: requisito × grupo */
+.placar { border-collapse: separate; border-spacing: 0; width: 100%; }
+.placar th { font-size: 12px; color: var(--ink-2); padding: 0 10px 8px; border-bottom: 1px solid var(--axis); }
+.placar th.grupo { text-align: left; font-size: 14px; color: var(--ink); }
+.placar td { padding: 0; border-bottom: 1px solid var(--grid); vertical-align: top; }
+.placar tbody tr:last-child td { border-bottom: 0; }
+.placar th[scope="row"] { white-space: normal; width: 25%; min-width: 200px; }
+.req { padding: 12px 14px 12px 0; display: grid; gap: 2px; }
+.req .nome { font-weight: 600; font-size: 14px; }
+.req .nome a { text-decoration: none; }
+.req .nome a:hover { text-decoration: underline; }
+.req .mede { font-size: 12px; color: var(--ink-2); }
+.req .criterio { font-size: 11px; color: var(--muted); }
+a.cel {
+  display: grid; gap: 4px; padding: 12px 12px 12px; margin: 4px; border-radius: 8px;
+  color: var(--ink); text-decoration: none; min-width: 150px; border: 1px solid transparent;
+}
+a.cel:hover { background: var(--hover); border-color: var(--border); }
+a.cel .v { font-size: 20px; font-weight: 600; line-height: 1.2; font-variant-numeric: tabular-nums; display: flex; align-items: center; gap: 6px; }
+a.cel .v .tri { color: var(--series-2); font-size: 13px; }
+a.cel .t { font-size: 12px; color: var(--ink-2); }
+a.cel.sinal { background: var(--wash-2); }
+.barra { position: relative; height: 6px; border-radius: 3px; background: var(--grid); max-width: 160px; }
+.barra > i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 3px; background: var(--series); }
+.sinal .barra > i { background: var(--series-2); }
+.cobertura { font-size: 11px; color: var(--ink-2); }
+.cobertura::before { content: "◇ "; color: var(--muted); }
+.placar tfoot td { padding: 10px 12px 2px; font-size: 12px; color: var(--ink-2); border: 0; }
+.placar tfoot td:first-child { padding-left: 0; }
+.g-mob { display: none; font-size: 11px; color: var(--muted); font-weight: 600; letter-spacing: 0.04em; }
+@media (max-width: 640px) {
+  .placar, .placar tbody, .placar tfoot { display: block; }
+  .placar thead { display: none; }
+  .placar tr { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-bottom: 1px solid var(--grid); padding-bottom: 6px; }
+  .placar td { border-bottom: 0; }
+  .placar th[scope="row"] { grid-column: 1 / -1; width: auto; min-width: 0; border-bottom: 0 !important; }
+  .req { padding-bottom: 2px; }
+  a.cel { min-width: 0; margin: 2px; padding: 8px 6px; }
+  a.cel .v { font-size: 16px; }
+  .g-mob { display: block; }
+  .placar tfoot tr { border-bottom: 0; }
+  .placar tfoot td:first-child { grid-column: 1 / -1; }
+}
+
+/* roteiro por grupo */
+.roteiros { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 900px) { .roteiros { grid-template-columns: minmax(0, 1fr); } }
+.roteiro { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; display: grid; gap: 8px; align-content: start; }
+.roteiro h3 { margin: 0; font-size: 15px; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.roteiro h3 small { font-weight: 400; font-size: 12px; color: var(--muted); }
+.roteiro ol { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 13px; }
+.roteiro .antes { font-size: 12px; color: var(--ink-2); border-top: 1px solid var(--grid); padding-top: 8px; margin: 0; }
+.roteiro .nada { font-size: 13px; color: var(--ink-2); margin: 0; }
+
+.conclusoes { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.conclusoes li { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 4px 14px; border-bottom: 1px solid var(--grid); padding-bottom: 10px; font-size: 14px; }
+.conclusoes li:last-child { border-bottom: 0; padding-bottom: 0; }
+.conclusoes .qual { font-weight: 600; font-size: 13px; }
+.conclusoes .qual a { text-decoration: none; }
+.conclusoes .qual small { display: block; font-weight: 400; color: var(--muted); font-size: 12px; }
+@media (max-width: 640px) { .conclusoes li { grid-template-columns: minmax(0, 1fr); } }
+.prem { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 28px; font-size: 13px; color: var(--ink-2); }
+@media (max-width: 760px) { .prem { grid-template-columns: minmax(0, 1fr); } }
+.prem strong { color: var(--ink); font-weight: 600; }
+</style>
+
+<div class="wrap">
+  <nav aria-label="Telas do painel"><ul class="telas" id="telas"></ul></nav>
+  <header>
+    <p class="eyebrow">Visão geral · R01 a R06 em uma página · para a orientação pedagógica</p>
+    <h1 id="titulo">Com qual grupo começar, e por qual assunto</h1>
+    <p class="pergunta" id="subtitulo"></p>
+  </header>
+  <ul class="contexto" id="contexto" aria-label="Recorte dos dados"></ul>
+
+  <section class="card" aria-labelledby="h-placar">
+    <div class="card-topo">
+      <div>
+        <h2 id="h-placar">Leitura principal de cada requisito, nos três grupos</h2>
+        <p class="limite"><strong>Registro não é trabalho, e o ▲ não é nota.</strong> Ele marca, em cada linha, o grupo que mais se afasta dos outros dois naquela leitura. Os três grupos têm 7 integrantes, o que deixa a comparação justa.</p>
+      </div>
+    </div>
+    <div class="legenda" aria-hidden="true">
+      <span><i class="chave s1"></i>leitura do grupo, na mesma escala da linha</span>
+      <span><i class="chave s2"></i>▲ o grupo que mais se afasta na linha</span>
+      <span id="leg-cob"></span>
+    </div>
+    <div class="rolagem"><table class="placar" id="placar"></table></div>
+    <p class="dica">Clique numa célula para abrir a tela do requisito já no grupo; o nome do requisito abre a tela no primeiro grupo.</p>
+  </section>
+
+  <section aria-labelledby="h-roteiro" class="pilha" style="gap: 10px">
+    <div>
+      <h2 id="h-roteiro" style="font-size: 16px; margin: 0">Por onde começar a conversa com cada grupo</h2>
+      <p class="contagem">Os assuntos com ▲, na ordem dos requisitos, e o que conferir no registro antes de levar o número para a reunião.</p>
+    </div>
+    <div class="roteiros" id="roteiros"></div>
+  </section>
+
+  <section class="card" aria-labelledby="h-concl">
+    <div>
+      <h2 id="h-concl">O que cada requisito mostra</h2>
+      <p class="contagem">Uma frase por tela, todas as sprints. O detalhe, os filtros e a lista dos registros estão na tela de cada requisito.</p>
+    </div>
+    <ul class="conclusoes" id="conclusoes"></ul>
+  </section>
+
+  <section class="card" aria-labelledby="h-prem">
+    <div>
+      <h2 id="h-prem">Premissas por trás destes números</h2>
+      <p class="contagem">Escolhas do grupo, não definições da orientação, todas a confirmar com o professor. Aqui só as que mudam esta página; a lista completa está no fim de cada tela.</p>
+    </div>
+    <ul class="prem" id="premissas-vg"></ul>
+  </section>
+
+  <footer class="notas">
+    <div><h3>Nota de origem</h3><ul id="nota-origem"></ul></div>
+    <div>
+      <h3>Como ler</h3>
+      <ul>
+        <li>Cada célula é a leitura principal da tela do requisito, com os padrões da própria tela, todas as sprints.</li>
+        <li>A barra usa a escala natural da medida (0 a 100%, 0 ao máximo do Gini, 0 a 7 integrantes); nas contagens sem teto, o maior valor da linha.</li>
+        <li>Empate na linha marca todos os empatados; linha com tudo em zero não marca ninguém.</li>
+      </ul>
+    </div>
+    <div><h3>O que esta tela não sustenta</h3>
+      <ul>
+        <li>Um ranking ou uma nota de grupo. A contagem de ▲ diz em quantas leituras o grupo é o que mais se afasta, não quanto ele trabalhou ou aprendeu.</li>
+        <li>Uma conclusão sem conferir o detalhe. Cada número tem limites que só a tela do requisito mostra por inteiro.</li>
+      </ul>
+    </div>
+    <div><h3>Ordem sugerida das telas</h3>
+      <ul><li>Depois desta, o R03: ele diz em que grupo cada leitura perde apoio. Os avisos ◇ do placar já trazem o essencial dele.</li></ul>
+    </div>
+  </footer>
+</div>
+<div id="tip" role="tooltip" hidden></div>
+
+<script>
+// Funções comuns das telas R02 a R06 e da visão geral (o gerador injeta antes do código da tela).
+// Todo texto que vem do dado entra por textContent, nunca por innerHTML.
+const NS = "http://www.w3.org/2000/svg";
+const $ = (id) => document.getElementById(id);
+
+function el(tag, attrs, pai) {
+  const e = document.createElementNS(NS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (pai) pai.appendChild(e);
+  return e;
+}
+function h(tag, props, filhos) {
+  const e = document.createElement(tag);
+  if (props) for (const k in props) {
+    if (k === "text") e.textContent = props[k];
+    else if (k === "class") e.className = props[k];
+    else e.setAttribute(k, props[k]);
+  }
+  if (filhos) for (const f of filhos) if (f !== null && f !== undefined && f !== false)
+    e.appendChild(typeof f === "string" || typeof f === "number" ? document.createTextNode(String(f)) : f);
+  return e;
+}
+function texto(svgPai, x, y, conteudo, attrs) {
+  const t = el("text", Object.assign({ x, y }, attrs || {}), svgPai);
+  t.textContent = conteudo;
+  return t;
+}
+
+const num = (n, casas) => Number(n).toLocaleString("pt-BR", { maximumFractionDigits: casas ?? 0, minimumFractionDigits: casas ? 0 : 0 });
+const num1 = (n) => Number(n).toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const pct = (n) => num1(n) + "%";
+const plural = (n, um, varios) => num(n) + " " + (n === 1 ? um : varios);
+const fmt = (iso) => iso ? iso.slice(8, 10) + "/" + iso.slice(5, 7) + "/" + iso.slice(0, 4) : "–";
+const fmtDH = (iso) => iso ? fmt(iso) + " " + iso.slice(11, 16) : "–";
+
+// Duração em linguagem comum, a partir de dias (fração)
+function duracao(dias) {
+  const horas = dias * 24;
+  if (horas < 1) return `${Math.max(1, Math.round(horas * 60))} min`;
+  if (horas < 24) return `${num(horas, horas < 10 ? 1 : 0)} h`;
+  return `${num(dias, dias < 10 ? 1 : 0)} ${dias < 1.95 ? "dia" : "dias"}`;
+}
+
+// Dica flutuante: um só elemento #tip para a página
+const dica = {
+  mostrar(linhas, x, y) {
+    const t = $("tip");
+    t.replaceChildren(...linhas.map(([cls, txt]) => h("div", { class: cls, text: txt })));
+    t.hidden = false;
+    const r = t.getBoundingClientRect();
+    let px = x + 14, py = y + 14;
+    if (px + r.width > innerWidth - 8) px = x - r.width - 14;
+    if (py + r.height > innerHeight - 8) py = y - r.height - 14;
+    t.style.left = Math.max(8, px) + "px";
+    t.style.top = Math.max(8, py) + "px";
+  },
+  noElemento(linhas, alvo) {
+    const r = alvo.getBoundingClientRect();
+    this.mostrar(linhas, r.left + r.width / 2, r.top);
+  },
+  esconder() { $("tip").hidden = true; },
+};
+addEventListener("scroll", () => dica.esconder(), { passive: true });
+
+// Redesenhar recria botões e SVG, e o foco do teclado se perderia. Quem tem
+// data-foco recebe o foco de volta depois de fn(), pelo mesmo valor.
+function comFoco(fn) {
+  const a = document.activeElement;
+  const k = a && a.getAttribute ? a.getAttribute("data-foco") : null;
+  fn();
+  if (k) {
+    const e = document.querySelector(`[data-foco="${CSS.escape(k)}"]`);
+    if (e) e.focus();
+  }
+}
+
+// Botão "Ver como tabela" que alterna um contêiner
+function alternarTabela(botaoId, caixaId) {
+  const b = $(botaoId), c = $(caixaId);
+  b.addEventListener("click", () => {
+    const abrir = c.hidden;
+    c.hidden = !abrir;
+    b.setAttribute("aria-expanded", String(abrir));
+    b.textContent = abrir ? "Ocultar tabela" : "Ver como tabela";
+  });
+}
+
+// Tabela simples: colunas [{t: título, num: bool}], linhas de células (texto ou nó)
+function tabela(colunas, linhas, legenda) {
+  const tb = h("table", {}, [
+    legenda ? h("caption", { class: "sr", text: legenda }) : null,
+    h("thead", {}, [h("tr", {}, colunas.map((c) => h("th", { class: c.num ? "num" : "", scope: "col", text: c.t })))]),
+    h("tbody", {}, linhas.map((l) => h("tr", l.classe ? { class: l.classe } : {},
+      (l.celulas || l).map((v, i) => h("td", { class: colunas[i].num ? "num" : (colunas[i].classe || "") },
+        [v instanceof Node ? v : String(v ?? "–")]))))),
+  ]);
+  return tb;
+}
+
+// Navegação entre as telas: arquivo local quando aberto do disco, URL publicada
+// quando aberto na web (se já houver uma).
+function montarTelas(atual) {
+  const lista = $("telas");
+  const local = location.protocol === "file:";
+  for (const t of D.telas) {
+    const href = local || !t.url ? t.arquivo : t.url;
+    const a = h("a", { href, text: `${t.id} · ${t.nome}` });
+    if (t.id === atual) a.setAttribute("aria-current", "page");
+    lista.appendChild(h("li", {}, [a]));
+  }
+}
+// Nomes dos campos do R03 (usados no R03 e nos avisos de cobertura da visão geral)
+const CAMPO_TXT = {
+  "commits|autor_id resolvido (arquivo inteiro)": "Autoria do commit (arquivo inteiro)",
+  "commits|autor_id resolvido (base do R01)": "Autoria do commit (base contada no R01)",
+  "commits|número do cartão (#N) na base do R01": "Número do cartão citado no commit",
+  "cartoes|tamanho (rótulo PP a GG)": "Tamanho do cartão (PP a GG)",
+  "cartoes|responsaveis_ids resolvido": "Responsável identificado no cartão",
+  "cartoes|eixo de tarefa (rótulo CODE, DESIGN, DOCUMENTATION...)": "Eixo de tarefa do cartão",
+  "cartoes|sprint": "Sprint do cartão",
+  "cartoes|prazo_em": "Prazo do cartão",
+  "merge_requests|autor_id resolvido": "Autoria do merge request",
+  "merge_requests|sprint": "Sprint do merge request",
+  "merge_requests|revisores_ids": "Revisor designado no MR",
+  "sprints|inicio_em e prazo_em": "Datas da sprint",
+};
+const CAMPO_CURTO = {
+  "commits|autor_id resolvido (arquivo inteiro)": "autoria do commit",
+  "commits|autor_id resolvido (base do R01)": "autoria na base do R01",
+  "commits|número do cartão (#N) na base do R01": "número do cartão no commit",
+  "cartoes|tamanho (rótulo PP a GG)": "tamanho do cartão",
+  "cartoes|responsaveis_ids resolvido": "responsável identificado",
+  "cartoes|eixo de tarefa (rótulo CODE, DESIGN, DOCUMENTATION...)": "eixo de tarefa do cartão",
+  "cartoes|sprint": "sprint do cartão",
+  "cartoes|prazo_em": "prazo do cartão",
+  "merge_requests|autor_id resolvido": "autoria do MR",
+  "merge_requests|sprint": "sprint do MR",
+  "merge_requests|revisores_ids": "revisor do MR",
+  "sprints|inicio_em e prazo_em": "datas da sprint",
+};
+
+// Grupo pedido no endereço (#G01), vindo da visão geral; senão, o padrão
+function grupoDoEndereco(grupos, padrao) {
+  let g = "";
+  try { g = decodeURIComponent(location.hash.slice(1)); } catch (e) { g = ""; }
+  return grupos.includes(g) ? g : padrao;
+}
+function hrefTela(t, grupo) {
+  const local = location.protocol === "file:";
+  return (local || !t.url ? t.arquivo : t.url) + (grupo ? "#" + grupo : "");
+}
+function linkTela(id) {
+  const t = D.telas.find((x) => x.id === id);
+  if (!t) return null;
+  const local = location.protocol === "file:";
+  return h("a", { href: local || !t.url ? t.arquivo : t.url, text: id });
+}
+
+// Marcas por forma (forma + cor: a identidade nunca depende só da cor)
+function marca(pai, forma, x, y, r, attrs) {
+  let e;
+  if (forma === "triangulo") {
+    const a = r * 1.25;
+    e = el("path", Object.assign({ d: `M${x},${y - a} L${x + a * 0.95},${y + a * 0.62} L${x - a * 0.95},${y + a * 0.62} Z` }, attrs), pai);
+  } else if (forma === "quadrado") {
+    e = el("rect", Object.assign({ x: x - r * 0.9, y: y - r * 0.9, width: r * 1.8, height: r * 1.8, rx: 1 }, attrs), pai);
+  } else {
+    e = el("circle", Object.assign({ cx: x, cy: y, r }, attrs), pai);
+  }
+  return e;
+}
+function marcaLegenda(forma, cor) {
+  const s = el("svg", { width: 14, height: 14, viewBox: "0 0 14 14", class: "marca-svg", "aria-hidden": "true" });
+  marca(s, forma, 7, 7.5, 4.6, { fill: cor });
+  return s;
+}
+
+// Bloco "Premissas desta tela": a mesma lista da linha "Premissas do grupo" do
+// requisito (fonte única em comum.py, conferida pelo gerador).
+const maiuscula = (t) => t[0].toUpperCase() + t.slice(1);
+function montarPremissas() {
+  $("premissas").replaceChildren(tabela(
+    [{ t: "Premissa" }, { t: "Valor adotado" }, { t: "Por quê" }],
+    D.premissas.map((p) => [h("strong", { text: p.nome }), maiuscula(p.valor), maiuscula(p.por_que)]),
+    "Premissas desta tela"));
+}
+
+const D = {"leituras":{"R01":{"marco":"2026-06-26","grupos":{"G01":{"silencios":5,"maior":{"dias":8,"de":"2026-05-31","ate":"2026-06-07"},"maior_depois":{"dias":16,"de":"2026-06-27","ate":"2026-07-12"},"commits":403,"dias":65,"dias_com":37,"valor":5},"G02":{"silencios":1,"maior":{"dias":4,"de":"2026-06-17","ate":"2026-06-20"},"maior_depois":{"dias":17,"de":"2026-06-27","ate":"2026-07-13"},"commits":706,"dias":65,"dias_com":47,"valor":1},"G03":{"silencios":4,"maior":{"dias":8,"de":"2026-06-14","ate":"2026-06-21"},"maior_depois":{"dias":16,"de":"2026-06-27","ate":"2026-07-12"},"commits":632,"dias":65,"dias_com":40,"valor":4}},"inicio":"2026-04-23","fim":"2026-07-13"},"R02":{"grupos":{"G01":{"cartoes":298,"acima":175,"valor":58.7,"etapa":"Waiting Review","etapa_acima":82},"G02":{"cartoes":487,"acima":181,"valor":37.2,"etapa":"Waiting Review","etapa_acima":134},"G03":{"cartoes":398,"acima":124,"valor":31.2,"etapa":"Waiting Review","etapa_acima":95}}},"R03":{"grupos":{"G01":{"baixos":[{"chave":"commits|autor_id resolvido (arquivo inteiro)","pct":70.1,"telas":["R01"]},{"chave":"commits|autor_id resolvido (base do R01)","pct":72.5,"telas":["R01","R05"]},{"chave":"commits|número do cartão (#N) na base do R01","pct":78.5,"telas":["R04"]},{"chave":"merge_requests|revisores_ids","pct":24.0,"telas":["R02"]},{"chave":"merge_requests|sprint","pct":66.7,"telas":["R05"]},{"chave":"sprints|inicio_em e prazo_em","pct":0.0,"telas":["R01","R02"]}],"usados":11,"valor":6},"G02":{"baixos":[{"chave":"sprints|inicio_em e prazo_em","pct":0.0,"telas":["R01","R02"]}],"usados":11,"valor":1},"G03":{"baixos":[{"chave":"commits|autor_id resolvido (arquivo inteiro)","pct":77.5,"telas":["R01"]},{"chave":"commits|autor_id resolvido (base do R01)","pct":77.4,"telas":["R01","R05"]}],"usados":11,"valor":2}}},"R04":{"grupos":{"G01":{"cartoes":263,"acima":193,"dobro":159,"valor":73.4,"mediana":2.73},"G02":{"cartoes":456,"acima":268,"dobro":196,"valor":58.8,"mediana":1.3},"G03":{"cartoes":388,"acima":227,"dobro":187,"valor":58.5,"mediana":1.85}}},"R05":{"grupos":{"G01":{"valor":0.276},"G02":{"valor":0.143},"G03":{"valor":0.356}}},"R06":{"grupos":{"G01":{"valor":2,"focados":[{"pessoa":"G01-A14","eixo":"Código","pct":80.2,"cartoes":48},{"pessoa":"G01-A17","eixo":"Código","pct":90.6,"cartoes":48}],"eixo":"Código","eixo_pct":52.9,"perfil":{"Código":52.9,"Design":14.8,"Documentação":26.9,"Negócio":5.3}},"G02":{"valor":1,"focados":[{"pessoa":"G02-A19","eixo":"Documentação","pct":83.3,"cartoes":78}],"eixo":"Documentação","eixo_pct":60.4,"perfil":{"Código":25.2,"Design":11.5,"Documentação":60.4,"Negócio":2.9}},"G03":{"valor":4,"focados":[{"pessoa":"G03-A13","eixo":"Documentação","pct":83.3,"cartoes":12},{"pessoa":"G03-A14","eixo":"Documentação","pct":82.4,"cartoes":34},{"pessoa":"G03-A18","eixo":"Documentação","pct":83.7,"cartoes":49},{"pessoa":"G03-A19","eixo":"Documentação","pct":81.3,"cartoes":24}],"eixo":"Documentação","eixo_pct":61.8,"perfil":{"Código":22.8,"Design":15.5,"Documentação":61.8,"Negócio":0.0}}}}},"padroes":{"silencio":3,"limite":48,"cobertura":80,"foco":75},"contexto":{"cartoes":1238,"mrs":540,"commits_autorais":1743,"integrantes":21},"premissas_telas":{"R01":[{"nome":"Silêncio","valor":"3 dias seguidos sem commit autoral, ajustável de 2 a 7 na tela"},{"nome":"Dia do commit","valor":"a data de autoria, não a de commit"},{"nome":"Marco de fim de sprint","valor":"26/06/2026 para os três grupos, fim da Sprint 05 do G03"}],"R02":[{"nome":"Etapa","valor":"valor de coluna que casa com o Scrum Board do grupo (Backlog, Doing, Waiting Review, Review)"},{"nome":"Acúmulo","valor":"cartão que somou mais de 48 h na etapa, contando todas as passagens; 24 h e 72 h para comparar"},{"nome":"Passagem sem saída","valor":"termina no fechamento do cartão; se ele não foi fechado, no último registro do conjunto"},{"nome":"Etapa de maior acúmulo","valor":"a que tem mais cartões acima do limite; no empate, a de mais horas somadas"}],"R03":[{"nome":"Cobertura mínima","valor":"80% de preenchimento para confiar na leitura; 70% e 90% para comparar"},{"nome":"Pessoa resolvida","valor":"[externo] e [bot] contam como vazio em autoria e responsável"}],"R04":[{"nome":"Dias planejados por tamanho","valor":"PP 0,25 · P 0,5 · M 1 · G 3 · GG 5"},{"nome":"Tempo realizado","valor":"da criação ao fechamento do cartão, em dias corridos"},{"nome":"Commit ligado ao cartão","valor":"#N no título (ou na mensagem, se o título não cita número) é o cartão N do mesmo grupo"},{"nome":"Levou mais que o planejado","valor":"tempo realizado acima dos dias planejados; o dobro, acima de 2 vezes"}],"R05":[{"nome":"Integrante","valor":"pessoa do cadastro do grupo com pelo menos um movimento no quadro do próprio grupo (7 por grupo)"},{"nome":"Medida principal","valor":"dias planejados dos cartões concluídos, somados por responsável"},{"nome":"Faixas de leitura","valor":"até 0,2 distribuído; até 0,4 moderado; acima disso, concentrado"},{"nome":"Poucos registros","valor":"aviso quando uma medida de contagem tem menos de 14 registros no recorte"},{"nome":"Registro sem dono","valor":"fica fora do índice e vira uma faixa possível (mínimo nivelando, máximo para quem tem mais)"}],"R06":[{"nome":"Eixo de tarefa","valor":"rótulo do cartão agrupado em Código (CODE, BUG, Fix, TEST, DEPLOY, CODE_REVIEW), Design (DESIGN), Documentação (DOCUMENTATION, REQUIREMENTS, user-story) e Negócio (NEGÓCIOS, Presentation)"},{"nome":"Cartões do integrante","valor":"os que têm o integrante como responsável, abertos e fechados; integrante é o mesmo do R05 (7 por grupo)"},{"nome":"Cartão de dois eixos","valor":"conta metade em cada eixo"},{"nome":"Foco num eixo só","valor":"75% ou mais dos cartões do integrante num mesmo eixo, ajustável para 60% ou 90% na tela"},{"nome":"Poucos cartões","valor":"aviso quando o integrante tem menos de 10 cartões com eixo no recorte"}]},"registro_mais_recente":"2026-08-07","telas":[{"id":"Início","nome":"Visão geral","arquivo":"visao_geral.html","url":"https://claude.ai/artifact/Jh4vnFxrMXM2oP9gE2jjsD"},{"id":"R01","nome":"Ritmo de registro","arquivo":"r01_ritmo_de_registro.html","url":"https://claude.ai/artifact/J8vMTWGFyRVzfqxYK9nNXo"},{"id":"R02","nome":"Acúmulo por etapa","arquivo":"r02_acumulo_por_etapa.html","url":"https://claude.ai/artifact/HTDPZKzttfVncZUGBU4kvv"},{"id":"R03","nome":"Cobertura do registro","arquivo":"r03_cobertura_registro.html","url":"https://claude.ai/artifact/6UznL9ZeRJR2973pazcdCG"},{"id":"R04","nome":"Planejado × realizado","arquivo":"r04_prazo_planejado_realizado.html","url":"https://claude.ai/artifact/X6Z8ZAoEurjtGkGagFE8my"},{"id":"R05","nome":"Concentração (Gini)","arquivo":"r05_concentracao_gini.html","url":"https://claude.ai/artifact/UFJ17FrDcetbwMGXCuqNRj"},{"id":"R06","nome":"Eixos de tarefa","arquivo":"r06_eixos_de_tarefa.html","url":"https://claude.ai/artifact/4tvQRwKfVW5JZs6p2cYRqv"}],"entrada_repositorio":"2026-09-18","premissas":[]};
+
+const L = D.leituras, P = D.padroes;
+const GRUPOS = Object.keys(L.R01.grupos).sort();
+const TELA = Object.fromEntries(D.telas.map((t) => [t.id, t]));
+const gTxt = (v) => v.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const dm = (iso) => iso.slice(8, 10) + "/" + iso.slice(5, 7);
+const faixa = (g) => g <= 0.2 ? "distribuído" : g <= 0.4 ? "moderado" : "concentrado";
+const lista = (xs) => xs.length <= 1 ? xs.join("") : xs.slice(0, -1).join(", ") + " e " + xs[xs.length - 1];
+
+// Uma linha por requisito: o valor que entra na comparação, a escala da barra e os textos da célula
+const LINHAS = [
+  { id: "R01", mede: `Silêncios de ${P.silencio} dias ou mais sem commit autoral, até ${fmt(L.R01.marco)}`,
+    criterio: "▲ mais silêncios", escala: () => Math.max(...GRUPOS.map((g) => L.R01.grupos[g].valor)),
+    valor: (x) => plural(x.silencios, "silêncio", "silêncios"),
+    texto: (x) => x.maior ? `maior: ${plural(x.maior.dias, "dia", "dias")} (${dm(x.maior.de)} a ${dm(x.maior.ate)})` : "commit em todos os dias" },
+  { id: "R02", mede: `Cartões que passaram de ${P.limite} h em alguma etapa do quadro`,
+    criterio: "▲ maior parte acima do limite", escala: () => 100,
+    valor: (x) => pct(x.valor),
+    texto: (x) => `${num(x.acima)} de ${num(x.cartoes)}; mais acúmulo em ${x.etapa}` },
+  { id: "R03", mede: `Campos usados pelas telas com menos de ${P.cobertura}% preenchido`,
+    criterio: "▲ mais campos abaixo do mínimo", escala: (x) => x.usados,
+    valor: (x) => `${x.valor} de ${x.usados}`,
+    texto: (x) => x.baixos.length ? lista(x.baixos.slice().sort((a, b) => a.pct - b.pct).slice(0, 2).map((b) => `${CAMPO_CURTO[b.chave] || b.chave} ${num(b.pct, 0)}%`)) + (x.baixos.length > 2 ? "…" : "") : "todos no mínimo ou acima" },
+  { id: "R04", mede: "Cartões fechados que levaram mais que o tamanho previa",
+    criterio: "▲ maior parte acima do planejado", escala: () => 100,
+    valor: (x) => pct(x.valor),
+    texto: (x) => `mediana de ${num(x.mediana, 1)}× o planejado; ${pct(100 * x.dobro / x.cartoes)} mais que o dobro` },
+  { id: "R05", mede: "Gini dos dias planejados concluídos entre os 7 integrantes",
+    criterio: "▲ registro mais concentrado", escala: () => 6 / 7,
+    valor: (x) => gTxt(x.valor), texto: (x) => faixa(x.valor) },
+  { id: "R06", mede: `Integrantes com ${P.foco}% ou mais dos cartões num eixo de tarefa só`,
+    criterio: "▲ mais integrantes focados", escala: () => 7,
+    valor: (x) => `${x.valor} de 7`,
+    texto: (x) => x.valor ? `em ${lista([...new Set(x.focados.map((f) => f.eixo))])}; perfil do grupo: ${x.eixo} ${num(x.eixo_pct, 0)}%` : `perfil do grupo: ${x.eixo} ${num(x.eixo_pct, 0)}%` },
+];
+// ▲: o maior valor da linha (empate marca todos; tudo zero não marca)
+for (const l of LINHAS) {
+  const vs = GRUPOS.map((g) => L[l.id].grupos[g].valor), topo = Math.max(...vs);
+  l.sinal = new Set(topo > 0 ? GRUPOS.filter((g, i) => vs[i] === topo) : []);
+}
+const sinaisDe = (g) => LINHAS.filter((l) => l.sinal.has(g));
+// Avisos do R03: campos abaixo do mínimo que a leitura daquela tela usa
+const avisos = (id, g) => L.R03.grupos[g].baixos.filter((b) => id !== "R03" && b.telas.includes(id));
+
+function cabecalho() {
+  const cont = GRUPOS.map((g) => [g, sinaisDe(g)]).sort((a, b) => b[1].length - a[1].length);
+  const [g1, s1] = cont[0];
+  const empatados = cont.filter(([, s]) => s.length === s1.length).map(([g]) => g);
+  const nomes = (s) => lista(s.map((l) => TELA[l.id].nome[0].toLowerCase() + TELA[l.id].nome.slice(1)));
+  $("titulo").textContent = empatados.length > 1
+    ? `${lista(empatados)} empatam como os grupos que mais se afastam, em ${s1.length} das 6 leituras cada`
+    : `Comece pelo ${g1}: é o grupo que mais se afasta em ${s1.length} das 6 leituras`;
+  const resto = cont.slice(1).map(([g, s]) => s.length ? `${g} em ${nomes(s)}` : `${g} em nenhuma`);
+  $("subtitulo").textContent = `${g1}: ${nomes(s1)}. ${maiuscula(lista(resto))}. Cada linha abaixo resume uma tela; a célula leva ao detalhe do grupo.`;
+  const c = D.contexto;
+  $("contexto").replaceChildren(...[
+    ["Período", `${fmt(L.R01.inicio)} a ${fmt(L.R01.fim)}`], ["Grupos", `${GRUPOS.length}, com 7 integrantes cada`],
+    ["Commits autorais", num(c.commits_autorais)], ["Cartões", num(c.cartoes)], ["Merge requests", num(c.mrs)],
+  ].map(([k, v]) => h("li", {}, [`${k}: `, h("strong", { text: v })])));
+}
+
+function placar() {
+  $("leg-cob").textContent = `◇ campo do registro abaixo de ${P.cobertura}% que esta leitura usa (R03)`;
+  const thead = h("thead", {}, [h("tr", {}, [h("th", { scope: "col", text: "Requisito" }),
+    ...GRUPOS.map((g) => h("th", { scope: "col", class: "grupo", text: g }))])]);
+  const corpo = LINHAS.map((l) => {
+    const t = TELA[l.id];
+    const req = h("th", { scope: "row", style: "font-weight: 400; text-align: left; padding: 0; border-bottom: 1px solid var(--grid)" }, [h("div", { class: "req" }, [
+      h("span", { class: "nome" }, [h("a", { href: hrefTela(t), text: `${l.id} · ${t.nome}` })]),
+      h("span", { class: "mede", text: l.mede }),
+      h("span", { class: "criterio", text: l.criterio })])]);
+    const cels = GRUPOS.map((g) => {
+      const x = L[l.id].grupos[g], s = l.sinal.has(g), escala = l.escala(x);
+      const larg = escala ? Math.min(100, 100 * x.valor / escala) : 0;
+      const av = avisos(l.id, g);
+      const a = h("a", { class: "cel" + (s ? " sinal" : ""), href: hrefTela(t, g),
+        "aria-label": `${l.id}, ${g}: ${l.valor(x)}, ${l.texto(x)}` + (s ? ". O grupo que mais se afasta nesta leitura" : "") + (av.length ? `. Registro abaixo de ${P.cobertura}%: ${av.map((b) => CAMPO_CURTO[b.chave]).join(", ")}` : "") }, [
+        h("span", { class: "g-mob", "aria-hidden": "true", text: g }),
+        h("span", { class: "v" }, [l.valor(x), s ? h("span", { class: "tri", "aria-hidden": "true", text: "▲" }) : null]),
+        h("span", { class: "barra", "aria-hidden": "true" }, [h("i", { style: `width: ${Math.max(larg, x.valor ? 2 : 0)}%` })]),
+        h("span", { class: "t", text: l.texto(x) }),
+        av.length ? h("span", { class: "cobertura", text: lista(av.map((b) => `${CAMPO_CURTO[b.chave] || b.chave} ${num(b.pct, 0)}%`)) }) : null]);
+      return h("td", {}, [a]);
+    });
+    return h("tr", {}, [req, ...cels]);
+  });
+  const pe = h("tfoot", {}, [h("tr", {}, [h("td", { text: "Leituras com ▲" }),
+    ...GRUPOS.map((g) => h("td", { text: `${g}: ${sinaisDe(g).length} de 6` }))])]);
+  $("placar").replaceChildren(h("caption", { class: "sr", text: "Leitura principal de cada requisito por grupo" }), thead, h("tbody", {}, corpo), pe);
+}
+
+// Frase curta do assunto, para o roteiro do grupo
+const ASSUNTO = {
+  R01: (x) => `Ritmo: ${plural(x.silencios, "silêncio", "silêncios")} de ${P.silencio}+ dias até ${dm(L.R01.marco)}, o maior de ${plural(x.maior.dias, "dia", "dias")}.`,
+  R02: (x) => `Acúmulo: ${pct(x.valor)} dos cartões passaram de ${P.limite} h numa etapa; o maior acúmulo é em ${x.etapa}.`,
+  R03: (x) => `Registro: ${x.valor} de ${x.usados} campos abaixo de ${P.cobertura}%.`,
+  R04: (x) => `Planejado × realizado: ${pct(x.valor)} dos cartões levaram mais que o tamanho previa.`,
+  R05: (x) => `Concentração: Gini ${gTxt(x.valor)}, ${faixa(x.valor)}.`,
+  R06: (x) => `Eixos: ${x.valor} de 7 integrantes com ${P.foco}%+ dos cartões em ${lista([...new Set(x.focados.map((f) => f.eixo))])}.`,
+};
+function roteiros() {
+  $("roteiros").replaceChildren(...GRUPOS.map((g) => {
+    const ss = sinaisDe(g);
+    const baixos = L.R03.grupos[g].baixos;
+    return h("article", { class: "roteiro", "aria-label": `Roteiro do ${g}` }, [
+      h("h3", {}, [g, h("small", { text: `${ss.length} de 6 leituras com ▲` })]),
+      ss.length
+        ? h("ol", {}, ss.map((l) => h("li", {}, [ASSUNTO[l.id](L[l.id].grupos[g]) + " ", h("a", { href: hrefTela(TELA[l.id], g), text: `abrir ${l.id}` })])))
+        : h("p", { class: "nada", text: "Em nenhuma leitura este grupo é o que mais se afasta. A conversa pode partir do que o grupo quiser mostrar; o detalhe de cada tela continua valendo." }),
+      h("p", { class: "antes", text: baixos.length
+        ? `Antes, conferir o registro: ${lista(baixos.map((b) => `${CAMPO_CURTO[b.chave] || b.chave} ${num(b.pct, 0)}%`))} (afeta ${lista([...new Set(baixos.flatMap((b) => b.telas))].sort())}).`
+        : `Registro: todos os campos usados pelas telas com ${P.cobertura}% ou mais.` }),
+    ]);
+  }));
+}
+
+function conclusoes() {
+  const por = (id, f) => GRUPOS.map((g) => f(L[id].grupos[g], g));
+  const r1 = L.R01.grupos, depois = GRUPOS.map((g) => r1[g].maior_depois).filter(Boolean).map((c) => c.dias);
+  const etapas = new Set(GRUPOS.map((g) => L.R02.grupos[g].etapa));
+  const r6 = L.R06.grupos, totFoco = GRUPOS.reduce((a, g) => a + r6[g].valor, 0);
+  const lider = GRUPOS.filter((g) => r6[g].eixo !== "Documentação");
+  const frases = {
+    R01: `Até ${fmt(L.R01.marco)}, fim da última sprint com data, os silêncios de ${P.silencio} dias ou mais foram ${lista(por("R01", (x, g) => `${x.silencios} no ${g}`))}. `
+      + (depois.length === GRUPOS.length ? `Depois dessa data os três param juntos por ${Math.min(...depois)} a ${Math.max(...depois)} dias: é o fim do calendário, não o silêncio de um grupo.` : ""),
+    R02: (etapas.size === 1 ? `Nos três grupos o maior acúmulo é em ${[...etapas][0]}: a espera por revisão pesa mais que a execução. ` : `Etapa de maior acúmulo: ${lista(por("R02", (x, g) => `${x.etapa} no ${g}`))}. `)
+      + `Cartões acima de ${P.limite} h em alguma etapa: ${lista(por("R02", (x, g) => `${pct(x.valor)} no ${g}`))}.`,
+    R03: `Campos abaixo de ${P.cobertura}%: ${lista(por("R03", (x, g) => `${x.valor} no ${g}`))}. `
+      + (() => { const r = L.R03.grupos.G01 && L.R03.grupos.G01.baixos.find((b) => b.chave === "merge_requests|revisores_ids");
+                 return r ? `No G01 só ${num(r.pct, 0)}% dos MRs têm revisor designado, o que pesa na leitura da espera em Waiting Review.` : ""; })(),
+    R04: `Nos três grupos a maioria dos cartões levou mais que o tamanho previa: ${lista(por("R04", (x, g) => `${pct(x.valor)} no ${g} (mediana ${num(x.mediana, 1)}×)`))}. Como os dias por tamanho são premissa nossa, a pergunta é sobre como o grupo estima, não sobre atraso.`,
+    R05: `Gini dos dias planejados concluídos: ${lista(por("R05", (x, g) => `${gTxt(x.valor)} no ${g} (${faixa(x.valor)})`))}. `
+      + (GRUPOS.some((g) => L.R05.grupos[g].valor > 0.4) ? "" : "Nenhum grupo passa da faixa de concentrado (acima de 0,4)."),
+    R06: `${plural(totFoco, "integrante ficou", "integrantes ficaram")} com ${P.foco}% ou mais dos cartões num eixo só: ${lista(por("R06", (x, g) => `${x.valor} no ${g}` + (x.valor ? ` (${lista([...new Set(x.focados.map((f) => f.eixo))])})` : "")))}. `
+      + (lider.length && lider.length < GRUPOS.length ? `O ${lista(lider)} é o único em que ${lista(lider.map((g) => r6[g].eixo.toLowerCase()))} lidera o perfil do grupo; nos outros, a documentação.` : ""),
+  };
+  $("conclusoes").replaceChildren(...LINHAS.map((l) => h("li", {}, [
+    h("span", { class: "qual" }, [h("a", { href: hrefTela(TELA[l.id]), text: `${l.id} · ${TELA[l.id].nome}` }), h("small", { text: [...l.sinal].length ? `▲ ${lista([...l.sinal])}` : "sem ▲" })]),
+    h("span", { text: frases[l.id] })])));
+}
+
+function premissasVG() {
+  const escolha = { R01: ["Silêncio", "Marco de fim de sprint"], R02: ["Acúmulo"], R03: ["Cobertura mínima"],
+    R04: ["Dias planejados por tamanho", "Levou mais que o planejado"], R05: ["Medida principal", "Faixas de leitura"],
+    R06: ["Eixo de tarefa", "Foco num eixo só"] };
+  const itens = [];
+  for (const [tela, nomes] of Object.entries(escolha))
+    for (const n of nomes) {
+      const p = (D.premissas_telas[tela] || []).find((x) => x.nome === n);
+      if (p) itens.push(h("li", {}, [h("a", { href: hrefTela(TELA[tela]), text: tela }), " · ", h("strong", { text: p.nome }), `: ${p.valor}.`]));
+    }
+  $("premissas-vg").replaceChildren(...itens);
+}
+
+function notas() {
+  $("nota-origem").replaceChildren(...[
+    "Fonte: os oito CSVs de csvs_originais/, carregados em sqlite/dados.db, pelas mesmas consultas das telas (t04, r02, r03, r04, r05 e r06).",
+    `Data de extração não registrada. Os arquivos entraram no repositório em ${fmt(D.entrada_repositorio)}; o registro mais recente do conjunto é de ${fmt(D.registro_mais_recente)}.`,
+  ].map((t) => h("li", { text: t })));
+}
+
+montarTelas("Início");
+cabecalho();
+placar();
+roteiros();
+conclusoes();
+premissasVG();
+notas();
+</script>
