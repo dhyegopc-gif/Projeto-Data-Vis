@@ -186,8 +186,7 @@ ficam também em `TELAS`, em `comum.py`, para a navegação entre telas.
 - **Premissas a confirmar**: dias por tamanho (R04), limite de 48 h (R02), mínimo
   de 80% (R03), critério de integrante e faixas de leitura do Gini (R05),
   agrupamento dos rótulos em eixos e limiar de foco de 75% (R06).
-- **Teste de aceite** de cada tela com uma pessoa que não a construiu, como o
-  roteiro do R01 (seção 9 de [05_fluxo_interacao_R01.md](05_fluxo_interacao_R01.md)).
+- **Validação externa:** a sessão de leitura T08 foi realizada e registrou impressões sobre a visão geral, R01, R02, R04 e R06. Ela não documenta o critério de aceite completo de cada tela; faltam evidências específicas de R03 e R05, além do reteste dos ajustes. Os resultados estão no [dossiê final](../README.md).
 
 ## R01 · Ritmo de registro
 
@@ -271,5 +270,4 @@ gravar. O total embutido também tem de ser igual à soma do t04.
 ### Pendências
 
 - **Limiar de silêncio**: confirmar os 3 dias com o grupo.
-- **Teste de aceite** com uma pessoa que não construiu a tela: ver o roteiro na
-  seção 9 de [05_fluxo_interacao_R01.md](05_fluxo_interacao_R01.md).
+- **Aceite formal do R01**: houve leitura externa do gráfico de commits na T08, mas as anotações não confirmam execução de todos os passos do roteiro da seção 9 de [05_fluxo_interacao_R01.md](05_fluxo_interacao_R01.md), especialmente localizar um dia zerado, abrir sua lista e explicar sem ajuda o que o gráfico não prova. O resultado permanece parcial, sem aprovação formal.

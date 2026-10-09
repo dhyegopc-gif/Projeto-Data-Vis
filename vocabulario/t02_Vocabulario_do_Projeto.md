@@ -17,7 +17,7 @@ Os arquivos CSV são as fontes descritas abaixo. Nomes de campos são apresentad
 **Definição do Dado**  
 Há dois sinais observáveis, que não devem ser tratados como equivalentes nem presumidos como vinculados entre si:
 
-- Em `kanban_eventos.csv`, cada registro representa um evento de quadro ou de rótulo; `grupo`, `cartao_numero`, `acao`, `coluna`, `pessoa_id` e `ocorrido_em` descrevem a movimentação. O cartão conta como sinal de entrega quando chega à coluna final do fluxo (`Done` ou equivalente).
+- Em `kanban_eventos.csv`, cada registro representa um evento de quadro ou de rótulo; `grupo`, `cartao_numero`, `acao`, `coluna`, `pessoa_id` e `ocorrido_em` descrevem o evento. No conjunto analisado, a coluna final configurada no quadro é `Review`; a fonte permite identificar a chegada a essa coluna, mas não permite afirmar que ela equivale a `Done` ou a uma entrega validada.
 - Em `merge_requests.csv`, cada registro representa um Merge Request por grupo e número (`grupo`, `mr_numero`); `situacao` e `merged_em` permitem identificar um MR integrado (`situacao = merged`).
 
 **Definição da Cliente / Premissa do Grupo**  
@@ -62,7 +62,7 @@ Os identificadores de revisores, a contagem de comentários e o estado do MR sã
 ## 5. Concluído
 
 **Definição do Dado**  
-`quadro_colunas.csv` tem um registro por coluna de quadro e grupo, com `grupo`, `quadro`, `coluna` e `posicao`. `kanban_eventos.csv` registra movimentações por evento, incluindo cartão, ação, coluna e instante. O critério operacional é o cartão estar na coluna final do fluxo (`Done` ou equivalente).
+`quadro_colunas.csv` tem um registro por coluna de quadro e grupo, com `grupo`, `quadro`, `coluna` e `posicao`. `kanban_eventos.csv` registra eventos por cartão, ação, coluna e instante. No conjunto analisado, a coluna de maior posição é `Review`; é possível identificar essa posição final configurada, mas não renomeá-la como `Done` nem concluir que houve validação do trabalho.
 
 **Definição da Cliente / Premissa do Grupo**  
 Concluído é interpretado como atividade finalizada pelo aluno. Mover um cartão para a coluna final não garante que o trabalho foi realizado. Ausência de commits ou de outras evidências vinculadas ao cartão no período é um indicativo de tarefa sem evidência, não prova definitiva de que nada foi feito. Esta leitura é **Premissa do Grupo**.
@@ -87,10 +87,10 @@ A existência de registro, sua autoria resolvida e sua data são **Definição d
 Em `commits.csv`, cada registro representa um commit e `autor_id` pode identificar a autoria sentinela `[bot]`. Em `kanban_eventos.csv`, cada registro representa um evento e `pessoa_id` identifica a pessoa registrada. Classificar um evento ou commit como automatizado depende de a identidade ou o tipo de ação automática estar explicitamente identificável na fonte; não se deve inferir bot apenas pelo padrão da atividade.
 
 **Definição da Cliente / Premissa do Grupo**  
-Bot/automação significa ação gerada por script ou robô, sem esforço humano direto. O dashboard deve permitir o filtro **Com Bot / Sem Bot** para apoiar a avaliação holística. O significado operacional e o uso do filtro são **Premissa do Grupo**; o filtro não transforma ações não identificadas em ações humanas ou automatizadas.
+Bot/automação significa ação gerada por script ou robô, sem esforço humano direto. O filtro **Com Bot / Sem Bot** foi considerado inicialmente, mas fica fora do escopo da versão atual: a classificação não é uniforme entre as fontes nem constitui um dos seis requisitos de tela. Esta decisão de escopo é do grupo, não uma definição confirmada pela cliente. Se o professor estabelecer o filtro como obrigatório, o escopo deverá ser reaberto e a regra definida por fonte antes da implementação.
 
 **Status e Classificação**  
-O identificador `[bot]` em autoria de commit é **Definição do Dado**. O que conta como esforço humano direto e a exigência do filtro são **Premissa do Grupo**. A cobertura de bots em eventos Kanban depende de a fonte fornecer uma identidade ou marcação reconhecível.
+O identificador `[bot]` em autoria de commit é **Definição do Dado**. A flag `is_bot` da T05 é derivada de marcadores reconhecíveis no identificador de pessoa de evento Kanban; não classifica todos os fatos do projeto. O filtro não está implementado nos dashboards e está fora do escopo desta versão por decisão do grupo. Identidade ausente ou não reconhecida permanece não classificada, nunca presumida humana.
 
 ## 8. Tamanho do Cartão (Size) e Prioridade
 

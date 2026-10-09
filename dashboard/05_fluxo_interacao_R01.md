@@ -1,6 +1,5 @@
 # 05 — Fluxo de Interação Anotado (Requisito R01)
 
-> **Link do Frame**: `[Cole aqui o link do frame do grupo no Miro]`
 >
 > **Painel**: [r01_ritmo_de_registro.html](r01_ritmo_de_registro.html) ·
 > gerado por [gerar_r01.py](gerar_r01.py) · decisões técnicas em [README.md](README.md)
@@ -83,16 +82,16 @@ Métrica: **commits autorais registrados por dia, por grupo**.
 
 ## 4. Teste de Vocabulário (Dado vs. Cliente)
 
-| Termo | O que o dado registra | O que a cliente entende (premissa do grupo) |
-| :--- | :--- | :--- |
-| **Commit** | Uma alteração salva no Git, de 1 a milhares de linhas; merges e o histórico do template ficam fora da contagem | Uma unidade de trabalho do aluno |
-| **Silêncio** | N dias seguidos sem commit autoral (premissa nossa: N = 3) | O grupo parou de trabalhar |
-| **Entrega** | MR com situação `merged` (500 de 540); 463 dos 540 têm destino `main` | Trabalho validado e pronto para o projeto |
-| **Atraso** | Cartão fechado depois de `prazo_em`, mas só 24 de 1.238 cartões (1,9%) têm prazo | Risco de não apresentar na sprint. **O dado não sustenta** |
-| **Participação** | Contagem de commits, linhas ou eventos; só 24 das 83 pessoas do cadastro produzem algum registro | Dedicação e presença nos ritos do grupo |
-| **Revisão** | Um identificador em `revisores_ids` do MR (417 de 540 preenchidos; só 24% no G01) | Análise crítica e discussão do código do colega |
-| **Concluído** | Cartão `closed` (1.174 de 1.238) ou MR `merged` | Artefato pronto e aceito pela orientadora |
-| **Ativo** | `situacao = active` em `pessoas.csv`, verdadeiro para as 83 pessoas | Aluno engajado. **O campo não distingue ninguém** |
+| Termo                    | O que o dado registra                                                                                             | O que a cliente entende (premissa do grupo)                       |
+| :----------------------- | :---------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------- |
+| **Commit**         | Uma alteração salva no Git, de 1 a milhares de linhas; merges e o histórico do template ficam fora da contagem | Uma unidade de trabalho do aluno                                  |
+| **Silêncio**      | N dias seguidos sem commit autoral (premissa nossa: N = 3)                                                        | O grupo parou de trabalhar                                        |
+| **Entrega**        | MR com situação`merged` (500 de 540); 463 dos 540 têm destino `main`                                       | Trabalho validado e pronto para o projeto                         |
+| **Atraso**         | Cartão fechado depois de`prazo_em`, mas só 24 de 1.238 cartões (1,9%) têm prazo                             | Risco de não apresentar na sprint.**O dado não sustenta** |
+| **Participação** | Contagem de commits, linhas ou eventos; só 24 das 83 pessoas do cadastro produzem algum registro                 | Dedicação e presença nos ritos do grupo                        |
+| **Revisão**       | Um identificador em`revisores_ids` do MR (417 de 540 preenchidos; só 24% no G01)                               | Análise crítica e discussão do código do colega               |
+| **Concluído**     | Cartão`closed` (1.174 de 1.238) ou MR `merged`                                                               | Artefato pronto e aceito pela orientadora                         |
+| **Ativo**          | `situacao = active` em `pessoas.csv`, verdadeiro para as 83 pessoas                                           | Aluno engajado.**O campo não distingue ninguém**          |
 
 ---
 
@@ -253,8 +252,13 @@ acompanhamento.
 
 ## 9. Teste de Interpretação Independente
 
-- **Situação**: não realizado. Fica como trabalho de casa, sujeito à auditoria
-  por pares da Aula 06.
+- **Situação**: houve uma sessão externa de leitura em voz alta (T08), mas as
+  anotações disponíveis não comprovam que o roteiro abaixo foi executado por
+  completo. A usuária compreendeu a evolução temporal das barras, mas teve
+  dificuldade de interpretar sozinha o significado pedagógico dos silêncios
+  superiores a três dias. Portanto, o aceite formal deste roteiro permanece
+  parcial e não pode ser marcado como aprovado. O resumo da sessão está no
+  [dossiê final](../README.md).
 - **Roteiro** (critério de aceite do R01):
   1. Uma pessoa que não construiu a tela recebe o painel sem explicação.
   2. Tarefa falada: "Escolha um grupo e um período. Diga quantos commits houve
@@ -268,6 +272,6 @@ acompanhamento.
 - **Falha se** conclui que um grupo "parou", que alguém "trabalhou mais", ou
   compara grupos pelo tamanho das colunas.
 
-| Participante | Frase literal | Divergência tocada | Resultado |
-| :--- | :--- | :--- | :--- |
-| | | | |
+| Participante                              | Frase literal                                                                                                       | Divergência tocada                                                                           | Resultado                                                                                                                                     |
+| :---------------------------------------- | :------------------------------------------------------------------------------------------------------------------ | :-------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------- |
+| Usuário externo, simulando a orientadora | A compilação registra compreensão da evolução temporal, mas não fornece fala literal específica sobre o R01. | Dificuldade em atribuir significado pedagógico ao silêncio superior a três dias sem ajuda. | Parcial: compreensão das barras registrada; não há evidência de execução integral dos passos nem de aprovação do critério de aceite. |
