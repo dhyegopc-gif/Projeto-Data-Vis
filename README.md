@@ -13,6 +13,8 @@ O projeto reúne uma visão geral e seis telas analíticas para apoiar conversas
 
 As telas cobrem ritmo de commits (R01), acúmulo por etapa (R02), cobertura dos registros (R03), tamanho planejado versus tempo decorrido (R04), concentração dos registros (R05) e distribuição por eixo de tarefa (R06). A visão geral resume esses requisitos sem criar uma métrica nova.
 
+**Dashboard final:** [abrir a versão HTML local](dashboard/visao_geral.html).
+
 ## 2. Dicionário e Vocabulário
 
 Os termos foram padronizados para separar o que as fontes efetivamente registram da interpretação de negócio adotada para construir as visualizações. A elicitação da cliente é uma fonte congelada: interpretações sem confirmação devem ser apresentadas como **Premissa do Grupo**, nunca atribuídas à cliente.
