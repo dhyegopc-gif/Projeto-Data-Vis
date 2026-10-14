@@ -4,21 +4,36 @@ Seis requisitos de tela, a tela de abertura que resume os seis e as perguntas qu
 citado aqui foi conferido nos CSVs de `csvs_originais/`; as regras de grão,
 chave e junção estão em [Contrato_de_dados.md](../modelagem/Contrato_de_dados.md).
 
-| requisito | situação | tela |
-| --------- | -------- | ---- |
-| [R01 — Ritmo de registro ao longo dos dias](#r01--ritmo-de-registro-ao-longo-dos-dias) | IMPLEMENTÁVEL | [r01_ritmo_de_registro.html](../dashboard/r01_ritmo_de_registro.html) |
-| [R02 — Acúmulo de cartões por etapa do quadro](#r02--acúmulo-de-cartões-por-etapa-do-quadro) | IMPLEMENTADO COM PREMISSAS (definição adotada; validação externa pendente) | [r02_acumulo_por_etapa.html](../dashboard/r02_acumulo_por_etapa.html) |
-| [R03 — Cobertura do próprio registro](#r03--cobertura-do-próprio-registro) | IMPLEMENTÁVEL | [r03_cobertura_registro.html](../dashboard/r03_cobertura_registro.html) |
-| [R04 — Tamanho planejado × tempo realizado dos cartões](#r04--tamanho-planejado--tempo-realizado-dos-cartões) | IMPLEMENTÁVEL COM PREMISSA | [r04_prazo_planejado_realizado.html](../dashboard/r04_prazo_planejado_realizado.html) |
-| [R05 — Concentração do trabalho registrado no grupo](#r05--concentração-do-trabalho-registrado-no-grupo) | IMPLEMENTÁVEL COM PREMISSA | [r05_concentracao_gini.html](../dashboard/r05_concentracao_gini.html) |
-| [R06 — Concentração por eixo de tarefa](#r06--concentração-por-eixo-de-tarefa) | IMPLEMENTÁVEL COM PREMISSA | [r06_eixos_de_tarefa.html](../dashboard/r06_eixos_de_tarefa.html) |
-| [Tela de abertura — Visão geral](#tela-de-abertura--visão-geral) | IMPLEMENTÁVEL (resume R01 a R06) | [visao_geral.html](../dashboard/visao_geral.html) |
+| prioridade | requisito | situação | tela |
+| :--------: | --------- | -------- | ---- |
+| abertura | [Tela de abertura — Visão geral](#tela-de-abertura--visão-geral) | IMPLEMENTÁVEL (resume R01 a R06) | [visao_geral.html](../dashboard/visao_geral.html) |
+| 1 | [R01 — Ritmo de registro ao longo dos dias](#r01--ritmo-de-registro-ao-longo-dos-dias-prioridade-1) | IMPLEMENTÁVEL | [r01_ritmo_de_registro.html](../dashboard/r01_ritmo_de_registro.html) |
+| 2 | [R03 — Cobertura do próprio registro](#r03--cobertura-do-próprio-registro-prioridade-2) | IMPLEMENTÁVEL | [r03_cobertura_registro.html](../dashboard/r03_cobertura_registro.html) |
+| 3 | [R02 — Acúmulo de cartões por etapa do quadro](#r02--acúmulo-de-cartões-por-etapa-do-quadro-prioridade-3) | IMPLEMENTADO COM PREMISSAS (definição adotada; validação externa pendente) | [r02_acumulo_por_etapa.html](../dashboard/r02_acumulo_por_etapa.html) |
+| 4 | [R06 — Divisão dos tipos de tarefa no grupo](#r06--divisão-dos-tipos-de-tarefa-no-grupo-prioridade-4) | IMPLEMENTÁVEL COM PREMISSA | [r06_eixos_de_tarefa.html](../dashboard/r06_eixos_de_tarefa.html) |
+| 5 | [R04 — Tamanho planejado × tempo realizado dos cartões](#r04--tamanho-planejado--tempo-realizado-dos-cartões-prioridade-5) | IMPLEMENTÁVEL COM PREMISSA | [r04_prazo_planejado_realizado.html](../dashboard/r04_prazo_planejado_realizado.html) |
+| 6 | [R05 — Concentração do trabalho registrado no grupo](#r05--concentração-do-trabalho-registrado-no-grupo-prioridade-6) | IMPLEMENTÁVEL COM PREMISSA | [r05_concentracao_gini.html](../dashboard/r05_concentracao_gini.html) |
+
+### Prioridade
+
+Premissa do grupo, a confirmar com a cliente: a orientação não ordenou os requisitos. A ordem vale para
+decidir o que a orientadora lê primeiro quando o tempo acaba (ela tem cerca de 4 minutos antes de cada
+reunião) e é a mesma que a visão geral usa para sugerir o assunto de abertura de cada grupo.
+
+| prioridade | requisito | por quê |
+| :--------: | --------- | ------- |
+| 1 | R01 | Requisito atribuído ao grupo desde a elicitação, e o único com fluxo anotado completo (D1 a D4). |
+| 2 | R03 | Condição para ler os outros: diz se a leitura de cada tela tem registro suficiente para ir à conversa. |
+| 3 | R02 | O professor, no papel de orientador, chamou o tempo de cada cartão em cada coluna de "importante" na Aula 07. |
+| 4 | R06 | Pergunta levantada pelo professor na Aula 07 ("teoricamente eles teriam que passar por todas as áreas"). |
+| 5 | R04 | Recomendação do professor (dispersão de planejado × realizado), mas apoiada numa premissa forte: os dias por tamanho. |
+| 6 | R05 | Pedido do próprio grupo; completa o R06 e depende de duas premissas (critério de integrante e faixas de leitura). |
 
 A visão geral é a primeira tela: em uma página, a leitura principal de cada requisito nos três grupos, com o link para o detalhe. Entre os requisitos, o R03 continua sendo a porta de entrada: ele diz qual leitura fica prejudicada em qual grupo, e a visão geral leva esse aviso para dentro de cada célula.
 
 
 
-## R01 — Ritmo de registro ao longo dos dias (PRIORIDADE)
+## R01 — Ritmo de registro ao longo dos dias (prioridade 1)
 
 > **IMPLEMENTÁVEL**
 
@@ -35,9 +50,9 @@ A visão geral é a primeira tela: em uma página, a leitura principal de cada r
 | **Lacunas**              | Não mede esforço, dedicação nem horas trabalhadas. Estudo, leitura, reunião e programação em dupla podem não gerar commit nenhum, então um dia sem commit não é um dia sem trabalho. A tela também não compara grupos de tamanhos diferentes, porque isso exigiria normalizar, e optamos por não fazer isso aqui.                                                                                                                                                                                   |
 | **Premissas do grupo**   | Todas a confirmar com o professor; a tela mostra a mesma lista.<br>• **Silêncio**: 3 dias seguidos sem commit autoral, ajustável de 2 a 7 na tela. Um dia a mais que um fim de semana.<br>• **Dia do commit**: a data de autoria, não a de commit. É quando a pessoa fez a alteração; em 10 commits contados o dia muda.<br>• **Marco de fim de sprint**: 26/06/2026 para os três grupos, fim da Sprint 05 do G03. É a única sprint do conjunto com data; G01 e G02 não têm datas de sprint. |
 
-## R02 — Acúmulo de cartões por etapa do quadro
+## R02 — Acúmulo de cartões por etapa do quadro (prioridade 3)
 
-> **DEPENDE DE UMA DECISÃO DE DEFINIÇÃO**
+> **IMPLEMENTADO COM PREMISSAS** (a definição de etapa e de acúmulo foi decidida pelo grupo; ver a linha "Decisão adotada")
 
 | item                           | definição                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -53,7 +68,7 @@ A visão geral é a primeira tela: em uma página, a leitura principal de cada r
 | **Lacunas**              | Tempo numa etapa não é tempo de trabalho. Um cartão pode ficar em "Doing" um fim de semana inteiro sem ninguém tocar nele, e não há como corrigir isso: `peso` está vazio em 100% dos cartões, `tempo_gasto_s` vem zerado em 100% e `tempo_estimado_s` em 98,6%.                                                                                                                                                                                                             |
 | **Premissas do grupo**   | Todas a confirmar com o professor; a tela mostra a mesma lista.<br>• **Etapa**: valor de coluna que casa com o Scrum Board do grupo (Backlog, Doing, Waiting Review, Review). Os outros valores da mesma coluna são rótulos, como CODE ou SIZE_M.<br>• **Acúmulo**: cartão que somou mais de 48 h na etapa, contando todas as passagens; 24 h e 72 h para comparar. A cliente não definiu um limite.<br>• **Passagem sem saída**: termina no fechamento do cartão; se ele não foi fechado, no último registro do conjunto. Assim a passagem não some da conta.<br>• **Etapa de maior acúmulo**: a que tem mais cartões acima do limite; no empate, a de mais horas somadas. Conta primeiro quantos cartões ficaram parados, depois quanto tempo. |
 
-## R03 — Cobertura do próprio registro
+## R03 — Cobertura do próprio registro (prioridade 2)
 
 > **IMPLEMENTÁVEL**
 
@@ -70,7 +85,7 @@ A visão geral é a primeira tela: em uma página, a leitura principal de cada r
 | **Lacunas**              | Cobertura baixa não é desleixo do grupo. Pode ser configuração da ferramenta, conta não vinculada ao cadastro ou processo combinado com o orientador. A tela aponta onde perguntar, não o que concluir. E ela não corrige nenhum dado, só torna o buraco visível.                                                                                                       |
 | **Premissas do grupo**   | Todas a confirmar com o professor; a tela mostra a mesma lista.<br>• **Cobertura mínima**: 80% de preenchimento para confiar na leitura; 70% e 90% para comparar. Corte nosso para separar sinal de registro incompleto.<br>• **Pessoa resolvida**: [externo] e [bot] contam como vazio em autoria e responsável. Não existem no cadastro de pessoas. |
 
-## R04 — Tamanho planejado × tempo realizado dos cartões
+## R04 — Tamanho planejado × tempo realizado dos cartões (prioridade 5)
 
 > **IMPLEMENTÁVEL COM PREMISSA** (dias planejados por tamanho)
 
@@ -87,7 +102,7 @@ A visão geral é a primeira tela: em uma página, a leitura principal de cada r
 | **Lacunas e premissas**    | Os dias por tamanho são **premissa do grupo**, tirada do exemplo do professor; a cliente não definiu. Tempo corrido inclui noite, fim de semana e a espera no Backlog antes de alguém pegar o cartão, e 411 cartões do conjunto, com ou sem tamanho, foram fechados em lote (5 ou mais no mesmo minuto), o que pode ser arrumação do quadro e não o fim do trabalho. 412 cartões do gráfico não têm commit ligado, o que não quer dizer que não houve trabalho. A tela não mede esforço individual: o responsável no quadro não é necessariamente quem fez. |
 | **Premissas do grupo**   | Todas a confirmar com o professor; a tela mostra a mesma lista.<br>• **Dias planejados por tamanho**: PP 0,25 · P 0,5 · M 1 · G 3 · GG 5. Tirado do exemplo do professor; a cliente não definiu.<br>• **Tempo realizado**: da criação ao fechamento do cartão, em dias corridos. Escolhido no lugar de entrada em Doing → fechamento; inclui a espera no Backlog.<br>• **Commit ligado ao cartão**: #N no título (ou na mensagem, se o título não cita número) é o cartão N do mesmo grupo. Sugestão do professor; 83,2% dos commits autorais citam um cartão.<br>• **Levou mais que o planejado**: tempo realizado acima dos dias planejados; o dobro, acima de 2 vezes. Não há prazo combinado, então a tela não fala em atraso. |
 
-## R05 — Concentração do trabalho registrado no grupo
+## R05 — Concentração do trabalho registrado no grupo (prioridade 6)
 
 > **IMPLEMENTÁVEL COM PREMISSA** (critério de integrante e faixas de leitura)
 
@@ -104,38 +119,50 @@ A visão geral é a primeira tela: em uma página, a leitura principal de cada r
 | **Lacunas e premissas**    | Registro não é trabalho: programação em dupla, estudo e reunião ficam no nome de uma pessoa só ou de ninguém. O responsável no quadro não é necessariamente quem executou. O critério de integrante e as faixas de leitura são **premissas do grupo**. Com poucos registros o índice sobe por construção: 4 MRs entre 7 pessoas não dão Gini abaixo de 0,43. Nas medidas de contagem, a tela avisa quando o recorte tem menos de 14 registros. A tela não é ranking de alunos: a unidade de análise continua sendo o grupo, e os identificadores aparecem só para ler a curva. |
 | **Premissas do grupo**   | Todas a confirmar com o professor; a tela mostra a mesma lista.<br>• **Integrante**: pessoa do cadastro do grupo com pelo menos um movimento no quadro do próprio grupo (7 por grupo). Deixa de fora 59 perfis sem registro e quem só atua em outro grupo.<br>• **Medida principal**: dias planejados dos cartões concluídos, somados por responsável. Pesa o cartão pelo tamanho e herda os dias por tamanho do R04.<br>• **Faixas de leitura**: até 0,2 distribuído; até 0,4 moderado; acima disso, concentrado. Orientam a conversa; não são régua oficial.<br>• **Poucos registros**: aviso quando uma medida de contagem tem menos de 14 registros no recorte. 2 por integrante; abaixo disso o índice sobe por construção.<br>• **Registro sem dono**: fica fora do índice e vira uma faixa possível (mínimo nivelando, máximo para quem tem mais). Não se sabe de quem é. |
 
-## R06 — Concentração por eixo de tarefa
+## R06 — Divisão dos tipos de tarefa no grupo (prioridade 4)
 
-> **IMPLEMENTÁVEL COM PREMISSA** (agrupamento dos rótulos em eixos e limiar de foco)
+> **IMPLEMENTÁVEL COM PREMISSA** (agrupamento dos rótulos em eixos e medida de concentração do eixo)
+>
+> Reformulado em 13/10/2026, depois da correção do professor (issue #1): a versão entregue em 10/10 tinha a
+> decisão no indivíduo ("perguntar por que um integrante ficou num eixo só") e abria a tela no integrante mais
+> concentrado. Agora a pergunta é sobre como o grupo divide cada tipo de tarefa, e a tela abre no grupo, sem
+> destacar ninguém. A versão anterior continua no histórico do git (commit `adb0393`).
 
 | item                           | definição |
 | ------------------------------ | --------- |
 | **Público**                | Orientadora pedagógica (Vanessa). |
-| **Decisão que apoia**      | Decidir se vale perguntar, na reunião, por que um integrante ficou o módulo inteiro (ou a sprint inteira) num tipo de tarefa só, e sugerir rodízio entre os eixos. Ficar num eixo só é prejudicial à formação: o aluno deixa de praticar os outros. |
-| **Frequência**             | A cada sprint, e ao fim do módulo para ver a trajetória de cada integrante. |
-| **Pergunta de decisão**    | Cada integrante passou por vários eixos de tarefa (código, design, documentação, negócio) ou ficou concentrado em um só? |
-| **Evidência**              | `cartoes.csv` (`rotulos`, `responsaveis_ids`, `sprint`, `fechado_em`), `kanban_eventos.csv` e `pessoas.csv` (critério de integrante do R05). Base conferida: dos 1.238 cartões, 1.196 têm rótulo de eixo e 42 não têm; 138 têm dois eixos e 6 têm três. 1.166 cartões estão com um integrante como responsável (G01 278, G02 450, G03 438); os outros 72 não têm responsável ou estão com quem não é integrante. Perfil do grupo, todas as sprints: G01 é o único com Código à frente (52,9%, Documentação 26,9%); G02 e G03 têm Documentação à frente (60,4% e 61,8%). Integrantes com 75% ou mais num eixo só: 2 no G01 (Código, 80,2% e 90,6%), 1 no G02 (Documentação, 83,3%) e 4 no G03 (Documentação, de 81,3% a 83,7%; um deles com só 12 cartões). Não há rótulo UX no conjunto. |
-| **Regra de cálculo**       | O grão é um cartão, identificado por (`grupo`, `cartao_numero`). O eixo vem dos rótulos de tipo de tarefa, em qualquer grafia: Código (CODE, BUG, Fix, TEST, DEPLOY, CODE_REVIEW), Design (DESIGN), Documentação (DOCUMENTATION, REQUIREMENTS, user-story) e Negócio (NEGÓCIOS, Presentation). Rótulo de tamanho, prioridade, artefato (ART.N), etapa do quadro e COMP não é eixo. Cartão com rótulos de dois eixos conta metade em cada (BUG e CODE são o mesmo eixo e não dividem). Parte do eixo = soma dos pesos do eixo ÷ cartões com eixo do integrante; cada integrante soma 100%. O perfil do grupo é a mesma conta com os cartões dos 7 integrantes juntos. Consultas: `r06_cartoes_por_eixo.sql` e `r06_eixo_por_integrante.sql`. |
-| **Critério de aceite**     | O leitor escolhe um grupo e uma sprint, aponta nos radares quais integrantes passaram do limiar de foco, abre o radar de um deles, compara com o perfil do grupo, abre a lista dos cartões daquele eixo e diz em voz alta que a tela mede alocação registrada no quadro, e não competência. |
-| **Suporte na tela**        | Pequenos múltiplos: um radar por integrante, todos na mesma escala de 0 a 100%, com o perfil do grupo tracejado por baixo e o anel do limiar de foco. Vértice acima do limiar vira triângulo laranja (forma e cor). Radar grande do integrante escolhido com o percentual de cada eixo escrito no rótulo, lista dos cartões filtrável por eixo e matriz integrante × eixo com os números exatos, que também serve de visão em tabela. |
-| **Lacunas e premissas**    | O rótulo é posto pelo próprio grupo, e cada grupo rotula do seu jeito: NEGÓCIOS só aparece no G01 e Presentation só no G02, então o eixo Negócio não compara grupos. O responsável do cartão não é necessariamente quem executou, e trabalho em dupla fica no nome de um só. O radar exagera diferenças de área, por isso a tela manda ler os vértices e traz a matriz. Foco num eixo pode ser divisão de papéis combinada com o grupo: a tela aponta onde perguntar. |
-| **Premissas do grupo**   | Todas a confirmar com o professor; a tela mostra a mesma lista.<br>• **Eixo de tarefa**: rótulo do cartão agrupado em Código (CODE, BUG, Fix, TEST, DEPLOY, CODE_REVIEW), Design (DESIGN), Documentação (DOCUMENTATION, REQUIREMENTS, user-story) e Negócio (NEGÓCIOS, Presentation). Não há rótulo UX no conjunto, e DESIGN é o mais próximo; os outros rótulos são tamanho, prioridade, artefato ou etapa.<br>• **Cartões do integrante**: os que têm o integrante como responsável, abertos e fechados; integrante é o mesmo do R05 (7 por grupo). O eixo mostra em que a pessoa foi alocada, não só o que ela concluiu.<br>• **Cartão de dois eixos**: conta metade em cada eixo. Assim a parte de cada integrante soma 100%.<br>• **Foco num eixo só**: 75% ou mais dos cartões do integrante num mesmo eixo, ajustável para 60% ou 90% na tela. Três de cada quatro cartões no mesmo tipo de tarefa.<br>• **Poucos cartões**: aviso quando o integrante tem menos de 10 cartões com eixo no recorte. Com menos de 10, um cartão só muda a parte de um eixo em mais de 10 pontos. |
+| **Decisão que apoia**      | Decidir se vale abrir, na reunião com o grupo, uma conversa sobre como ele divide os tipos de tarefa, e sobre qual eixo: se o código ou o design ficaram com uma ou duas pessoas, propor ao grupo um rodízio para que todos passem pelas áreas. A conversa é com o grupo, não com um aluno. |
+| **Frequência**             | A cada sprint, e ao fim do módulo para ver se a divisão mudou ao longo das sprints. |
+| **Pergunta de decisão**    | Os cartões de cada tipo de tarefa do grupo (código, design, documentação, negócio) passam pelos 7 integrantes ou ficam com poucos? |
+| **Evidência**              | `cartoes.csv` (`rotulos`, `responsaveis_ids`, `sprint`, `fechado_em`), `kanban_eventos.csv` e `pessoas.csv` (critério de integrante do R05). Base conferida: dos 1.238 cartões, 1.196 têm rótulo de eixo e 42 não têm; 138 têm dois eixos e 6 têm três. 1.166 cartões estão com um integrante como responsável (G01 278, G02 450, G03 438); os outros 72 não têm responsável ou estão com quem não é integrante. Todas as sprints, parte dos cartões do eixo com os 2 integrantes que mais têm cartões nele (divisão igual daria 29%): G01 Design 80,8%, Código 56,4%, Documentação 52,3%, Negócio 50,0%; G02 Design 65,3%, Código 63,8%, Documentação 54,6%, Negócio 48,0% (12,5 cartões, abaixo de 14); G03 Design 88,4%, Código 78,4%, Documentação 45,0%, e nenhum cartão de Negócio. Perfil do grupo: G01 é o único com Código à frente (52,9%); G02 e G03 têm Documentação à frente (60,4% e 61,8%). Não há rótulo UX no conjunto. |
+| **Regra de cálculo**       | O grão é um cartão, identificado por (`grupo`, `cartao_numero`). O eixo vem dos rótulos de tipo de tarefa, em qualquer grafia: Código (CODE, BUG, Fix, TEST, DEPLOY, CODE_REVIEW), Design (DESIGN), Documentação (DOCUMENTATION, REQUIREMENTS, user-story) e Negócio (NEGÓCIOS, Presentation). Rótulo de tamanho, prioridade, artefato (ART.N), etapa do quadro e COMP não é eixo. Cartão com rótulos de dois eixos conta metade em cada (BUG e CODE são o mesmo eixo e não dividem). Divisão do eixo: soma dos pesos de cada integrante no eixo ÷ cartões do eixo no grupo; concentração do eixo = parte dos 2 integrantes com mais cartões nele. Eixo mais concentrado: o de maior concentração entre os eixos com 14 cartões ou mais no recorte. O perfil de cada integrante (parte de cada eixo nos cartões dele, soma 100%) continua como detalhe. Consultas: `r06_divisao_do_eixo.sql` (leitura principal), `r06_eixo_por_integrante.sql` e `r06_cartoes_por_eixo.sql`. |
+| **Critério de aceite**     | O leitor escolhe um grupo e uma sprint, diz qual eixo está mais concentrado e em quantos dos 7 integrantes ele passou, abre a lista dos cartões desse eixo e diz em voz alta que a tela mede a alocação registrada no quadro, e não competência, e que a pergunta vai para o grupo. |
+| **Suporte na tela**        | Título que afirma o eixo mais concentrado do grupo e a parte dos 2 integrantes, com a referência da divisão igual (29%). Gráfico de uma linha por eixo, com uma barra por integrante na ordem do identificador (nunca do volume), na mesma escala em todas as linhas, e linha tracejada da divisão igual entre 7 (14%). Nenhum integrante vem destacado ao abrir; a seleção só acontece quando o leitor clica. Lista dos cartões do grupo filtrável por eixo e por integrante, que é a origem dos números. Tabela equivalente do gráfico, radares de perfil por integrante na mesma escala e matriz integrante × eixo com os números exatos. O limiar de foco aparece como contagem ("n de 7"), sem apontar quem. |
+| **Lacunas e premissas**    | O rótulo é posto pelo próprio grupo, e cada grupo rotula do seu jeito: NEGÓCIOS só aparece no G01 e Presentation só no G02, então o eixo Negócio não compara grupos. O responsável do cartão não é necessariamente quem executou, e trabalho em dupla fica no nome de um só. Divisão fixa de papéis pode ter sido combinada pelo grupo: a tela aponta onde perguntar, e a pergunta é feita ao grupo. |
+| **Premissas do grupo**   | Todas a confirmar com o professor; a tela mostra a mesma lista.<br>• **Eixo de tarefa**: rótulo do cartão agrupado em Código (CODE, BUG, Fix, TEST, DEPLOY, CODE_REVIEW), Design (DESIGN), Documentação (DOCUMENTATION, REQUIREMENTS, user-story) e Negócio (NEGÓCIOS, Presentation). Não há rótulo UX no conjunto, e DESIGN é o mais próximo; os outros rótulos são tamanho, prioridade, artefato ou etapa.<br>• **Cartões do integrante**: os que têm o integrante como responsável, abertos e fechados; integrante é o mesmo do R05 (7 por grupo). O eixo mostra em que a pessoa foi alocada, não só o que ela concluiu.<br>• **Cartão de dois eixos**: conta metade em cada eixo. Assim a parte de cada integrante soma 100%.<br>• **Concentração do eixo**: parte dos cartões do eixo que está com os 2 integrantes que mais têm cartões nele; com divisão igual entre os 7, seria 29%. Mede a divisão do eixo dentro do grupo sem ordenar pessoas; dois de sete já mostram o eixo nas mãos de poucos.<br>• **Eixo com poucos cartões**: aviso quando o eixo tem menos de 14 cartões no recorte; ele fica fora do eixo mais concentrado. 2 por integrante, o mesmo corte do R05; abaixo disso um cartão só muda a divisão.<br>• **Foco num eixo só**: 75% ou mais dos cartões do integrante num mesmo eixo, ajustável para 60% ou 90% na tela; a tela conta quantos, sem apontar quem. Três de cada quatro cartões no mesmo tipo de tarefa.<br>• **Poucos cartões**: aviso quando o integrante tem menos de 10 cartões com eixo no recorte. Com menos de 10, um cartão só muda a parte de um eixo em mais de 10 pontos. |
 
 ## Tela de abertura — Visão geral
 
 > **IMPLEMENTÁVEL** (resume R01 a R06; não cria medida nova)
+>
+> Revista em 13/10/2026, depois da correção do professor (issue #1). No teste em voz alta (T08), a leitora
+> leu a cor laranja e o ▲ como veredito: "eu como orientadora teria que começar pelo grupo um, que é o que
+> está assim, pior". O título ("Comece pelo G01: é o grupo que mais se afasta em N das 6 leituras") e a
+> contagem de ▲ por grupo somavam leituras diferentes numa nota implícita. A versão atual tira a soma, tira
+> a cor de alerta e muda a decisão: a orientadora conversa com os três grupos, e a tela sugere por qual
+> assunto começar com cada um.
 
 | item                           | definição |
 | ------------------------------ | --------- |
 | **Público**                | Orientadora pedagógica (Vanessa), com cerca de 4 minutos antes da reunião com cada grupo. |
-| **Decisão que apoia**      | Com qual grupo abrir a conversa e por qual assunto começar, antes de entrar no detalhe de cada tela. |
+| **Decisão que apoia**      | Por qual assunto abrir a conversa com cada grupo, antes de entrar no detalhe de cada tela. Não decide com qual grupo conversar: a orientadora encontra os três. |
 | **Frequência**             | Antes de cada rodada de reuniões de acompanhamento. |
-| **Pergunta de decisão**    | Em uma página: o que cada requisito diz de cada grupo, e onde está o sinal mais forte? |
+| **Pergunta de decisão**    | Em uma página: o que cada requisito diz de cada grupo, e por qual assunto começar com cada um? |
 | **Evidência**              | Os mesmos números das seis telas, recalculados pelas mesmas consultas de `sqlite/` (t04, r02, r03, r04, r05 e r06), todas as sprints. |
-| **Regra de cálculo**       | Uma leitura por requisito e grupo: R01, silêncios de 3 dias ou mais até o fim da última sprint com data (26/06/2026); R02, cartões que passaram de 48 h em alguma etapa e a etapa de maior acúmulo; R03, campos usados pelas telas abaixo de 80%; R04, cartões que levaram mais que o planejado; R05, Gini dos dias planejados concluídos; R06, integrantes com 75% ou mais dos cartões num eixo só. Em cada linha, o ▲ marca o grupo que mais se afasta entre os três (empate marca todos os empatados); é comparação relativa, não régua. Os três grupos têm 7 integrantes. Quando o R03 mostra campo abaixo de 80% num campo que a leitura usa, a célula traz o aviso de cobertura. |
-| **Critério de aceite**     | Em menos de um minuto, uma pessoa que não construiu a tela diz com qual grupo começaria e por qual assunto, e abre a tela do requisito, já no grupo, para conferir o número. |
-| **Suporte na tela**        | Título que afirma a conclusão principal, matriz requisito × grupo com barra na mesma escala por linha, marca ▲ com cor e forma, conclusões em uma frase por requisito com link, e as premissas resumidas com link para a lista completa de cada tela. |
-| **Lacunas**                | Herda as lacunas de cada requisito. A contagem de ▲ por grupo não é nota nem ranking: só diz em quantas leituras o grupo é o que mais se afasta dos outros dois. |
+| **Regra de cálculo**       | Uma leitura por requisito e grupo: R01, silêncios de 3 dias ou mais até o fim da última sprint com data (26/06/2026); R02, cartões que passaram de 48 h em alguma etapa e a etapa de maior acúmulo; R03, campos usados pelas telas abaixo de 80%; R04, cartões que levaram mais que o planejado; R05, Gini dos dias planejados concluídos; R06, parte dos cartões do eixo mais concentrado que está com 2 dos 7 integrantes. Em cada linha, o ◆ marca o maior valor (empate marca todos; tudo zero não marca ninguém). Não existe total de ◆ por grupo. O assunto sugerido para cada grupo é o primeiro requisito, na ordem de prioridade, em que ele tem o ◆; sem ◆, a conversa parte do que o grupo quiser mostrar. Os três grupos têm 7 integrantes. Quando o R03 mostra campo abaixo de 80% num campo que a leitura usa, a célula traz o aviso de cobertura (◇). |
+| **Critério de aceite**     | Em menos de um minuto, uma pessoa que não construiu a tela diz por qual assunto começaria com um grupo escolhido, abre a tela do requisito já nesse grupo para conferir o número, e diz, sem ajuda, que o ◆ marca o maior valor de uma linha e não um grupo pior. |
+| **Suporte na tela**        | Título que afirma o assunto de abertura de cada grupo. Frase de limite junto ao placar ("valor alto não quer dizer grupo pior"; as linhas não se somam). Marca ◆ em tinta neutra, com o texto "maior valor da linha" escrito na célula, sem cor de alerta. Barra na mesma escala por linha, na mesma cor para todos. Roteiro por grupo com o que conferir no registro antes da reunião, conclusões em uma frase por requisito com link e as premissas resumidas. |
+| **Lacunas**                | Herda as lacunas de cada requisito. O maior valor de uma linha é um assunto para perguntar, não um defeito: pode ter explicação que o registro não mostra (semana de provas, divisão de papéis combinada, revisão que depende da orientação). A versão revista ainda não passou por reteste com uma pessoa de fora do grupo. |
 
 ## Lacunas do recorte
 

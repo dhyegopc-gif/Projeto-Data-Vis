@@ -1,0 +1,8 @@
+# Reconstruíveis a partir dos quatro Excels (ver README.md); grandes demais para o git.
+entrada/
+*.sqlite
+*.sqlite-journal
+*.duckdb
+*.duckdb.wal
+.venv/
+__pycache__/

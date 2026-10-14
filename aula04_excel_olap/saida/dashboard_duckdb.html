@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Painel Olist DuckDB</title>
+<style>
+:root{--fundo:#fafaf7;--superficie:#ffffff;--texto:#141413;--texto-2:#52514e;--texto-3:#6f6e69;
+--borda:#dedcd5;--grade:#ebe9e3;--serie:#2a78d6;--serie-2:#9ec3ef;--zebra:#f4f3ee;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--fundo:#141413;--superficie:#1d1d1b;
+--texto:#f0efec;--texto-2:#c3c2b7;--texto-3:#9a998f;--borda:#3a3936;--grade:#2c2b29;--serie:#3987e5;
+--serie-2:#28507e;--zebra:#232321;color-scheme:dark}}
+:root[data-theme="dark"]{--fundo:#141413;--superficie:#1d1d1b;--texto:#f0efec;--texto-2:#c3c2b7;
+--texto-3:#9a998f;--borda:#3a3936;--grade:#2c2b29;--serie:#3987e5;--serie-2:#28507e;--zebra:#232321;
+color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fundo);color:var(--texto);
+font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+header,main,footer{max-width:1100px;margin:0 auto;padding:0 16px}
+header{padding-top:28px}
+h1{font-size:1.6rem;margin:0 0 4px}
+h2{font-size:1.15rem;margin:0 0 6px}
+h3{font-size:1rem;margin:14px 0 6px}
+p{margin:6px 0}
+.meta{color:var(--texto-2);font-size:.9rem;margin:2px 0}
+.nota{color:var(--texto-2);font-size:.88rem}
+code,.mono{font-family:ui-monospace,"Cascadia Mono",Consolas,Menlo,monospace;font-size:.85em;overflow-wrap:anywhere}
+.meta,p{overflow-wrap:anywhere}
+section{background:var(--superficie);border:1px solid var(--borda);border-radius:4px;padding:16px;margin:16px 0}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:0;padding:0;list-style:none}
+.kpis li{border:1px solid var(--borda);border-radius:4px;padding:12px}
+.kpis .rotulo{display:block;color:var(--texto-2);font-size:.85rem}
+.kpis .valor{display:block;font-size:1.3rem;white-space:nowrap;font-weight:650;font-variant-numeric:tabular-nums}
+.kpis .det{display:block;color:var(--texto-3);font-size:.8rem}
+.rolagem{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+caption{text-align:left;color:var(--texto-2);font-size:.85rem;padding-bottom:6px}
+th,td{padding:5px 8px;border-bottom:1px solid var(--borda);text-align:left;vertical-align:top}
+th{font-weight:600}
+td.num,th.num{text-align:right;white-space:nowrap}
+tbody tr:nth-child(even){background:var(--zebra)}
+tr.outros td{font-style:italic;color:var(--texto-2)}
+.barra{display:inline-block;height:10px;border-radius:0 4px 4px 0;background:var(--serie);vertical-align:middle}
+figure{margin:8px 0 12px}
+figcaption{color:var(--texto-2);font-size:.85rem}
+svg{display:block;width:100%;height:auto;overflow:visible}
+svg text{fill:var(--texto-2);font-size:11px;font-family:inherit}
+svg .eixo{stroke:var(--borda)}
+svg .grade{stroke:var(--grade)}
+svg rect.m{fill:var(--serie)}
+svg rect.m.parcial{fill:var(--serie-2)}
+svg rect.alvo{fill:transparent}
+svg g.ponto:hover rect.m,svg g.ponto:focus rect.m{opacity:.75}
+.dica{position:fixed;pointer-events:none;background:var(--superficie);color:var(--texto);border:1px solid var(--borda);
+border-radius:4px;padding:6px 8px;font-size:.82rem;box-shadow:0 2px 8px rgba(0,0,0,.18);display:none;z-index:5;
+white-space:pre-line}
+.ok{font-weight:600}
+.falha{font-weight:600;text-decoration:underline}
+footer{color:var(--texto-2);font-size:.85rem;padding-bottom:32px}
+</style>
+</head>
+<body>
+<header>
+<h1>Painel analítico do Olist em DuckDB</h1>
+<p class="meta">Fonte: <code>saida/olist.duckdb</code> (tabelas <code>fato_item_venda</code> e <code>mart_vendas_mensais</code>), aberto em modo somente leitura; v1.5.5.</p>
+<p class="meta">Gerado em <time datetime="2026-10-13T21:17:19-03:00">2026-10-13T21:17:19-03:00</time> por <code>src/05_html_duckdb.py</code>. Período das compras: 2016-09-04 21:15:19 a 2018-09-03 09:06:57.</p>
+</header>
+<main>
+<section aria-labelledby="t-kpis">
+<h2 id="t-kpis">Indicadores gerais</h2>
+<ul class="kpis">
+<li><span class="rotulo">Receita de produtos</span><span class="valor">R$ 13.591.643,70</span><span class="det">sum(price) na fato</span></li>
+<li><span class="rotulo">Pedidos</span><span class="valor">98.666</span><span class="det">count(DISTINCT order_id)</span></li>
+<li><span class="rotulo">Ticket médio de produtos</span><span class="valor">R$ 137,75</span><span class="det">receita / pedidos distintos</span></li>
+<li><span class="rotulo">Itens vendidos</span><span class="valor">112.650</span><span class="det">count(*) no grão do item</span></li>
+<li><span class="rotulo">Frete</span><span class="valor">R$ 2.251.909,54</span><span class="det">sum(freight_value), fora da receita</span></li>
+</ul>
+<p class="nota">Inclui itens de pedidos em todos os 7 status (entregues, cancelados, em trânsito etc.); a tabela de status no fim da página mostra a composição.</p>
+</section>
+
+<section aria-labelledby="t-mensal">
+<h2 id="t-mensal">Série mensal</h2>
+<figure>
+<figcaption id="g-receita">Receita de produtos por mês da compra, em R$. Colunas claras marcam meses com menos de 1% dos pedidos do maior mês (provável cobertura parcial): 2016-09, 2016-12, 2018-09. Meses sem nenhuma compra no dataset aparecem vazios, sem estimativa: 2016-11.</figcaption>
+<svg viewBox="0 0 960 260" role="img" aria-labelledby="g-receita"><line class="grade" x1="64" x2="952" y1="226.0" y2="226.0"/><text x="58" y="230.0" text-anchor="end">R$ 0</text><line class="grade" x1="64" x2="952" y1="154.0" y2="154.0"/><text x="58" y="158.0" text-anchor="end">R$ 500 mil</text><line class="grade" x1="64" x2="952" y1="82.0" y2="82.0"/><text x="58" y="86.0" text-anchor="end">R$ 1,0 mi</text><line class="grade" x1="64" x2="952" y1="10.0" y2="10.0"/><text x="58" y="14.0" text-anchor="end">R$ 1,5 mi</text><line class="eixo" x1="64" x2="952" y1="226" y2="226"/><g class="ponto" tabindex="0" data-dica="2016-09
+Receita R$ 267,36
+Pedidos 3
+mês parcial"><title>2016-09
+Receita R$ 267,36
+Pedidos 3
+mês parcial</title><rect class="m parcial" x="65.0" y="226.0" width="33.5" height="0.0" rx="0.0"/><rect class="alvo" x="64.0" y="10" width="35.5" height="216"/></g><text x="81.8" y="242" text-anchor="middle">2016-09</text><g class="ponto" tabindex="0" data-dica="2016-10
+Receita R$ 49.507,66
+Pedidos 308"><title>2016-10
+Receita R$ 49.507,66
+Pedidos 308</title><rect class="m" x="100.5" y="218.9" width="33.5" height="7.1" rx="4.0"/><rect class="m" x="100.5" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="99.5" y="10" width="35.5" height="216"/></g><g class="ponto" tabindex="0" data-dica="2016-11
+Receita R$ 0,00
+Pedidos 0
+sem compras no dataset"><title>2016-11
+Receita R$ 0,00
+Pedidos 0
+sem compras no dataset</title><rect class="m parcial" x="136.0" y="226.0" width="33.5" height="0.0" rx="0.0"/><rect class="alvo" x="135.0" y="10" width="35.5" height="216"/></g><text x="152.8" y="242" text-anchor="middle">2016-11</text><g class="ponto" tabindex="0" data-dica="2016-12
+Receita R$ 10,90
+Pedidos 1
+mês parcial"><title>2016-12
+Receita R$ 10,90
+Pedidos 1
+mês parcial</title><rect class="m parcial" x="171.6" y="226.0" width="33.5" height="0.0" rx="0.0"/><rect class="alvo" x="170.6" y="10" width="35.5" height="216"/></g><g class="ponto" tabindex="0" data-dica="2017-01
+Receita R$ 120.312,87
+Pedidos 789"><title>2017-01
+Receita R$ 120.312,87
+Pedidos 789</title><rect class="m" x="207.1" y="208.7" width="33.5" height="17.3" rx="4.0"/><rect class="m" x="207.1" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="206.1" y="10" width="35.5" height="216"/></g><text x="223.8" y="242" text-anchor="middle">2017-01</text><g class="ponto" tabindex="0" data-dica="2017-02
+Receita R$ 247.303,02
+Pedidos 1.733"><title>2017-02
+Receita R$ 247.303,02
+Pedidos 1.733</title><rect class="m" x="242.6" y="190.4" width="33.5" height="35.6" rx="4.0"/><rect class="m" x="242.6" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="241.6" y="10" width="35.5" height="216"/></g><g class="ponto" tabindex="0" data-dica="2017-03
+Receita R$ 374.344,30
+Pedidos 2.641"><title>2017-03
+Receita R$ 374.344,30
+Pedidos 2.641</title><rect class="m" x="278.1" y="172.1" width="33.5" height="53.9" rx="4.0"/><rect class="m" x="278.1" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="277.1" y="10" width="35.5" height="216"/></g><text x="294.9" y="242" text-anchor="middle">2017-03</text><g class="ponto" tabindex="0" data-dica="2017-04
+Receita R$ 359.927,23
+Pedidos 2.391"><title>2017-04
+Receita R$ 359.927,23
+Pedidos 2.391</title><rect class="m" x="313.6" y="174.2" width="33.5" height="51.8" rx="4.0"/><rect class="m" x="313.6" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="312.6" y="10" width="35.5" height="216"/></g><g class="ponto" tabindex="0" data-dica="2017-05
+Receita R$ 506.071,14
+Pedidos 3.660"><title>2017-05
+Receita R$ 506.071,14
+Pedidos 3.660</title><rect class="m" x="349.2" y="153.1" width="33.5" height="72.9" rx="4.0"/><rect class="m" x="349.2" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="348.2" y="10" width="35.5" height="216"/></g><text x="365.9" y="242" text-anchor="middle">2017-05</text><g class="ponto" tabindex="0" data-dica="2017-06
+Receita R$ 433.038,60
+Pedidos 3.217"><title>2017-06
+Receita R$ 433.038,60
+Pedidos 3.217</title><rect class="m" x="384.7" y="163.6" width="33.5" height="62.4" rx="4.0"/><rect class="m" x="384.7" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="383.7" y="10" width="35.5" height="216"/></g><g class="ponto" tabindex="0" data-dica="2017-07
+Receita R$ 498.031,48
+Pedidos 3.969"><title>2017-07
+Receita R$ 498.031,48
+Pedidos 3.969</title><rect class="m" x="420.2" y="154.3" width="33.5" height="71.7" rx="4.0"/><rect class="m" x="420.2" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="419.2" y="10" width="35.5" height="216"/></g><text x="437.0" y="242" text-anchor="middle">2017-07</text><g class="ponto" tabindex="0" data-dica="2017-08
+Receita R$ 573.971,68
+Pedidos 4.293"><title>2017-08
+Receita R$ 573.971,68
+Pedidos 4.293</title><rect class="m" x="455.7" y="143.3" width="33.5" height="82.7" rx="4.0"/><rect class="m" x="455.7" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="454.7" y="10" width="35.5" height="216"/></g><g class="ponto" tabindex="0" data-dica="2017-09
+Receita R$ 624.401,69
+Pedidos 4.243"><title>2017-09
+Receita R$ 624.401,69
+Pedidos 4.243</title><rect class="m" x="491.2" y="136.1" width="33.5" height="89.9" rx="4.0"/><rect class="m" x="491.2" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="490.2" y="10" width="35.5" height="216"/></g><text x="508.0" y="242" text-anchor="middle">2017-09</text><g class="ponto" tabindex="0" data-dica="2017-10
+Receita R$ 664.219,43
+Pedidos 4.568"><title>2017-10
+Receita R$ 664.219,43
+Pedidos 4.568</title><rect class="m" x="526.8" y="130.4" width="33.5" height="95.6" rx="4.0"/><rect class="m" x="526.8" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="525.8" y="10" width="35.5" height="216"/></g><g class="ponto" tabindex="0" data-dica="2017-11
+Receita R$ 1.010.271,37
+Pedidos 7.451"><title>2017-11
+Receita R$ 1.010.271,37
+Pedidos 7.451</title><rect class="m" x="562.3" y="80.5" width="33.5" height="145.5" rx="4.0"/><rect class="m" x="562.3" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="561.3" y="10" width="35.5" height="216"/></g><text x="579.0" y="242" text-anchor="middle">2017-11</text><g class="ponto" tabindex="0" data-dica="2017-12
+Receita R$ 743.914,17
+Pedidos 5.624"><title>2017-12
+Receita R$ 743.914,17
+Pedidos 5.624</title><rect class="m" x="597.8" y="118.9" width="33.5" height="107.1" rx="4.0"/><rect class="m" x="597.8" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="596.8" y="10" width="35.5" height="216"/></g><g class="ponto" tabindex="0" data-dica="2018-01
+Receita R$ 950.030,36
+Pedidos 7.220"><title>2018-01
+Receita R$ 950.030,36
+Pedidos 7.220</title><rect class="m" x="633.3" y="89.2" width="33.5" height="136.8" rx="4.0"/><rect class="m" x="633.3" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="632.3" y="10" width="35.5" height="216"/></g><text x="650.1" y="242" text-anchor="middle">2018-01</text><g class="ponto" tabindex="0" data-dica="2018-02
+Receita R$ 844.178,71
+Pedidos 6.694"><title>2018-02
+Receita R$ 844.178,71
+Pedidos 6.694</title><rect class="m" x="668.8" y="104.4" width="33.5" height="121.6" rx="4.0"/><rect class="m" x="668.8" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="667.8" y="10" width="35.5" height="216"/></g><g class="ponto" tabindex="0" data-dica="2018-03
+Receita R$ 983.213,44
+Pedidos 7.188"><title>2018-03
+Receita R$ 983.213,44
+Pedidos 7.188</title><rect class="m" x="704.4" y="84.4" width="33.5" height="141.6" rx="4.0"/><rect class="m" x="704.4" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="703.4" y="10" width="35.5" height="216"/></g><text x="721.1" y="242" text-anchor="middle">2018-03</text><g class="ponto" tabindex="0" data-dica="2018-04
+Receita R$ 996.647,75
+Pedidos 6.934"><title>2018-04
+Receita R$ 996.647,75
+Pedidos 6.934</title><rect class="m" x="739.9" y="82.5" width="33.5" height="143.5" rx="4.0"/><rect class="m" x="739.9" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="738.9" y="10" width="35.5" height="216"/></g><g class="ponto" tabindex="0" data-dica="2018-05
+Receita R$ 996.517,68
+Pedidos 6.853"><title>2018-05
+Receita R$ 996.517,68
+Pedidos 6.853</title><rect class="m" x="775.4" y="82.5" width="33.5" height="143.5" rx="4.0"/><rect class="m" x="775.4" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="774.4" y="10" width="35.5" height="216"/></g><text x="792.2" y="242" text-anchor="middle">2018-05</text><g class="ponto" tabindex="0" data-dica="2018-06
+Receita R$ 865.124,31
+Pedidos 6.160"><title>2018-06
+Receita R$ 865.124,31
+Pedidos 6.160</title><rect class="m" x="810.9" y="101.4" width="33.5" height="124.6" rx="4.0"/><rect class="m" x="810.9" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="809.9" y="10" width="35.5" height="216"/></g><g class="ponto" tabindex="0" data-dica="2018-07
+Receita R$ 895.507,22
+Pedidos 6.273"><title>2018-07
+Receita R$ 895.507,22
+Pedidos 6.273</title><rect class="m" x="846.4" y="97.0" width="33.5" height="129.0" rx="4.0"/><rect class="m" x="846.4" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="845.4" y="10" width="35.5" height="216"/></g><text x="863.2" y="242" text-anchor="middle">2018-07</text><g class="ponto" tabindex="0" data-dica="2018-08
+Receita R$ 854.686,33
+Pedidos 6.452"><title>2018-08
+Receita R$ 854.686,33
+Pedidos 6.452</title><rect class="m" x="882.0" y="102.9" width="33.5" height="123.1" rx="4.0"/><rect class="m" x="882.0" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="881.0" y="10" width="35.5" height="216"/></g><g class="ponto" tabindex="0" data-dica="2018-09
+Receita R$ 145,00
+Pedidos 1
+mês parcial"><title>2018-09
+Receita R$ 145,00
+Pedidos 1
+mês parcial</title><rect class="m parcial" x="917.5" y="226.0" width="33.5" height="0.0" rx="0.0"/><rect class="alvo" x="916.5" y="10" width="35.5" height="216"/></g><text x="934.2" y="242" text-anchor="middle">2018-09</text></svg>
+</figure>
+<figure>
+<figcaption id="g-pedidos">Pedidos distintos por mês da compra (count(DISTINCT order_id) no grão do mês).</figcaption>
+<svg viewBox="0 0 960 260" role="img" aria-labelledby="g-pedidos"><line class="grade" x1="64" x2="952" y1="226.0" y2="226.0"/><text x="58" y="230.0" text-anchor="end">0</text><line class="grade" x1="64" x2="952" y1="172.0" y2="172.0"/><text x="58" y="176.0" text-anchor="end">2.000</text><line class="grade" x1="64" x2="952" y1="118.0" y2="118.0"/><text x="58" y="122.0" text-anchor="end">4.000</text><line class="grade" x1="64" x2="952" y1="64.0" y2="64.0"/><text x="58" y="68.0" text-anchor="end">6.000</text><line class="grade" x1="64" x2="952" y1="10.0" y2="10.0"/><text x="58" y="14.0" text-anchor="end">8.000</text><line class="eixo" x1="64" x2="952" y1="226" y2="226"/><g class="ponto" tabindex="0" data-dica="2016-09
+Pedidos 3
+Ticket R$ 89,12
+mês parcial"><title>2016-09
+Pedidos 3
+Ticket R$ 89,12
+mês parcial</title><rect class="m parcial" x="65.0" y="225.9" width="33.5" height="0.1" rx="0.1"/><rect class="alvo" x="64.0" y="10" width="35.5" height="216"/></g><text x="81.8" y="242" text-anchor="middle">2016-09</text><g class="ponto" tabindex="0" data-dica="2016-10
+Pedidos 308
+Ticket R$ 160,74"><title>2016-10
+Pedidos 308
+Ticket R$ 160,74</title><rect class="m" x="100.5" y="217.7" width="33.5" height="8.3" rx="4.0"/><rect class="m" x="100.5" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="99.5" y="10" width="35.5" height="216"/></g><g class="ponto" tabindex="0" data-dica="2016-11
+Pedidos 0
+sem compras no dataset"><title>2016-11
+Pedidos 0
+sem compras no dataset</title><rect class="m parcial" x="136.0" y="226.0" width="33.5" height="0.0" rx="0.0"/><rect class="alvo" x="135.0" y="10" width="35.5" height="216"/></g><text x="152.8" y="242" text-anchor="middle">2016-11</text><g class="ponto" tabindex="0" data-dica="2016-12
+Pedidos 1
+Ticket R$ 10,90
+mês parcial"><title>2016-12
+Pedidos 1
+Ticket R$ 10,90
+mês parcial</title><rect class="m parcial" x="171.6" y="226.0" width="33.5" height="0.0" rx="0.0"/><rect class="alvo" x="170.6" y="10" width="35.5" height="216"/></g><g class="ponto" tabindex="0" data-dica="2017-01
+Pedidos 789
+Ticket R$ 152,49"><title>2017-01
+Pedidos 789
+Ticket R$ 152,49</title><rect class="m" x="207.1" y="204.7" width="33.5" height="21.3" rx="4.0"/><rect class="m" x="207.1" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="206.1" y="10" width="35.5" height="216"/></g><text x="223.8" y="242" text-anchor="middle">2017-01</text><g class="ponto" tabindex="0" data-dica="2017-02
+Pedidos 1.733
+Ticket R$ 142,70"><title>2017-02
+Pedidos 1.733
+Ticket R$ 142,70</title><rect class="m" x="242.6" y="179.2" width="33.5" height="46.8" rx="4.0"/><rect class="m" x="242.6" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="241.6" y="10" width="35.5" height="216"/></g><g class="ponto" tabindex="0" data-dica="2017-03
+Pedidos 2.641
+Ticket R$ 141,74"><title>2017-03
+Pedidos 2.641
+Ticket R$ 141,74</title><rect class="m" x="278.1" y="154.7" width="33.5" height="71.3" rx="4.0"/><rect class="m" x="278.1" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="277.1" y="10" width="35.5" height="216"/></g><text x="294.9" y="242" text-anchor="middle">2017-03</text><g class="ponto" tabindex="0" data-dica="2017-04
+Pedidos 2.391
+Ticket R$ 150,53"><title>2017-04
+Pedidos 2.391
+Ticket R$ 150,53</title><rect class="m" x="313.6" y="161.4" width="33.5" height="64.6" rx="4.0"/><rect class="m" x="313.6" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="312.6" y="10" width="35.5" height="216"/></g><g class="ponto" tabindex="0" data-dica="2017-05
+Pedidos 3.660
+Ticket R$ 138,27"><title>2017-05
+Pedidos 3.660
+Ticket R$ 138,27</title><rect class="m" x="349.2" y="127.2" width="33.5" height="98.8" rx="4.0"/><rect class="m" x="349.2" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="348.2" y="10" width="35.5" height="216"/></g><text x="365.9" y="242" text-anchor="middle">2017-05</text><g class="ponto" tabindex="0" data-dica="2017-06
+Pedidos 3.217
+Ticket R$ 134,61"><title>2017-06
+Pedidos 3.217
+Ticket R$ 134,61</title><rect class="m" x="384.7" y="139.1" width="33.5" height="86.9" rx="4.0"/><rect class="m" x="384.7" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="383.7" y="10" width="35.5" height="216"/></g><g class="ponto" tabindex="0" data-dica="2017-07
+Pedidos 3.969
+Ticket R$ 125,48"><title>2017-07
+Pedidos 3.969
+Ticket R$ 125,48</title><rect class="m" x="420.2" y="118.8" width="33.5" height="107.2" rx="4.0"/><rect class="m" x="420.2" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="419.2" y="10" width="35.5" height="216"/></g><text x="437.0" y="242" text-anchor="middle">2017-07</text><g class="ponto" tabindex="0" data-dica="2017-08
+Pedidos 4.293
+Ticket R$ 133,70"><title>2017-08
+Pedidos 4.293
+Ticket R$ 133,70</title><rect class="m" x="455.7" y="110.1" width="33.5" height="115.9" rx="4.0"/><rect class="m" x="455.7" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="454.7" y="10" width="35.5" height="216"/></g><g class="ponto" tabindex="0" data-dica="2017-09
+Pedidos 4.243
+Ticket R$ 147,16"><title>2017-09
+Pedidos 4.243
+Ticket R$ 147,16</title><rect class="m" x="491.2" y="111.4" width="33.5" height="114.6" rx="4.0"/><rect class="m" x="491.2" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="490.2" y="10" width="35.5" height="216"/></g><text x="508.0" y="242" text-anchor="middle">2017-09</text><g class="ponto" tabindex="0" data-dica="2017-10
+Pedidos 4.568
+Ticket R$ 145,41"><title>2017-10
+Pedidos 4.568
+Ticket R$ 145,41</title><rect class="m" x="526.8" y="102.7" width="33.5" height="123.3" rx="4.0"/><rect class="m" x="526.8" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="525.8" y="10" width="35.5" height="216"/></g><g class="ponto" tabindex="0" data-dica="2017-11
+Pedidos 7.451
+Ticket R$ 135,59"><title>2017-11
+Pedidos 7.451
+Ticket R$ 135,59</title><rect class="m" x="562.3" y="24.8" width="33.5" height="201.2" rx="4.0"/><rect class="m" x="562.3" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="561.3" y="10" width="35.5" height="216"/></g><text x="579.0" y="242" text-anchor="middle">2017-11</text><g class="ponto" tabindex="0" data-dica="2017-12
+Pedidos 5.624
+Ticket R$ 132,27"><title>2017-12
+Pedidos 5.624
+Ticket R$ 132,27</title><rect class="m" x="597.8" y="74.2" width="33.5" height="151.8" rx="4.0"/><rect class="m" x="597.8" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="596.8" y="10" width="35.5" height="216"/></g><g class="ponto" tabindex="0" data-dica="2018-01
+Pedidos 7.220
+Ticket R$ 131,58"><title>2018-01
+Pedidos 7.220
+Ticket R$ 131,58</title><rect class="m" x="633.3" y="31.1" width="33.5" height="194.9" rx="4.0"/><rect class="m" x="633.3" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="632.3" y="10" width="35.5" height="216"/></g><text x="650.1" y="242" text-anchor="middle">2018-01</text><g class="ponto" tabindex="0" data-dica="2018-02
+Pedidos 6.694
+Ticket R$ 126,11"><title>2018-02
+Pedidos 6.694
+Ticket R$ 126,11</title><rect class="m" x="668.8" y="45.3" width="33.5" height="180.7" rx="4.0"/><rect class="m" x="668.8" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="667.8" y="10" width="35.5" height="216"/></g><g class="ponto" tabindex="0" data-dica="2018-03
+Pedidos 7.188
+Ticket R$ 136,79"><title>2018-03
+Pedidos 7.188
+Ticket R$ 136,79</title><rect class="m" x="704.4" y="31.9" width="33.5" height="194.1" rx="4.0"/><rect class="m" x="704.4" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="703.4" y="10" width="35.5" height="216"/></g><text x="721.1" y="242" text-anchor="middle">2018-03</text><g class="ponto" tabindex="0" data-dica="2018-04
+Pedidos 6.934
+Ticket R$ 143,73"><title>2018-04
+Pedidos 6.934
+Ticket R$ 143,73</title><rect class="m" x="739.9" y="38.8" width="33.5" height="187.2" rx="4.0"/><rect class="m" x="739.9" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="738.9" y="10" width="35.5" height="216"/></g><g class="ponto" tabindex="0" data-dica="2018-05
+Pedidos 6.853
+Ticket R$ 145,41"><title>2018-05
+Pedidos 6.853
+Ticket R$ 145,41</title><rect class="m" x="775.4" y="41.0" width="33.5" height="185.0" rx="4.0"/><rect class="m" x="775.4" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="774.4" y="10" width="35.5" height="216"/></g><text x="792.2" y="242" text-anchor="middle">2018-05</text><g class="ponto" tabindex="0" data-dica="2018-06
+Pedidos 6.160
+Ticket R$ 140,44"><title>2018-06
+Pedidos 6.160
+Ticket R$ 140,44</title><rect class="m" x="810.9" y="59.7" width="33.5" height="166.3" rx="4.0"/><rect class="m" x="810.9" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="809.9" y="10" width="35.5" height="216"/></g><g class="ponto" tabindex="0" data-dica="2018-07
+Pedidos 6.273
+Ticket R$ 142,76"><title>2018-07
+Pedidos 6.273
+Ticket R$ 142,76</title><rect class="m" x="846.4" y="56.6" width="33.5" height="169.4" rx="4.0"/><rect class="m" x="846.4" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="845.4" y="10" width="35.5" height="216"/></g><text x="863.2" y="242" text-anchor="middle">2018-07</text><g class="ponto" tabindex="0" data-dica="2018-08
+Pedidos 6.452
+Ticket R$ 132,47"><title>2018-08
+Pedidos 6.452
+Ticket R$ 132,47</title><rect class="m" x="882.0" y="51.8" width="33.5" height="174.2" rx="4.0"/><rect class="m" x="882.0" y="222.0" width="33.5" height="4.0"/><rect class="alvo" x="881.0" y="10" width="35.5" height="216"/></g><g class="ponto" tabindex="0" data-dica="2018-09
+Pedidos 1
+Ticket R$ 145,00
+mês parcial"><title>2018-09
+Pedidos 1
+Ticket R$ 145,00
+mês parcial</title><rect class="m parcial" x="917.5" y="226.0" width="33.5" height="0.0" rx="0.0"/><rect class="alvo" x="916.5" y="10" width="35.5" height="216"/></g><text x="934.2" y="242" text-anchor="middle">2018-09</text></svg>
+</figure>
+<h3>Tabela equivalente</h3>
+<div class="rolagem"><table>
+<caption>Uma linha por mês; pedidos e ticket calculados na fato no grão do mês.</caption>
+<thead><tr><th scope="col">Mês</th><th scope="col" class="num">Receita (R$)</th><th scope="col" class="num">Pedidos</th>
+<th scope="col" class="num">Ticket (R$)</th><th scope="col" class="num">Itens</th><th scope="col">Observação</th></tr></thead>
+<tbody>
+<tr><td>2016-09</td><td class='num'>267,36</td><td class='num'>3</td><td class='num'>89,12</td><td class='num'>6</td><td>mês parcial</td></tr>
+<tr><td>2016-10</td><td class='num'>49.507,66</td><td class='num'>308</td><td class='num'>160,74</td><td class='num'>363</td><td></td></tr>
+<tr><td>2016-11</td><td class='num'>0,00</td><td class='num'>0</td><td class='num'>-</td><td class='num'>0</td><td>sem compras no dataset</td></tr>
+<tr><td>2016-12</td><td class='num'>10,90</td><td class='num'>1</td><td class='num'>10,90</td><td class='num'>1</td><td>mês parcial</td></tr>
+<tr><td>2017-01</td><td class='num'>120.312,87</td><td class='num'>789</td><td class='num'>152,49</td><td class='num'>955</td><td></td></tr>
+<tr><td>2017-02</td><td class='num'>247.303,02</td><td class='num'>1.733</td><td class='num'>142,70</td><td class='num'>1.951</td><td></td></tr>
+<tr><td>2017-03</td><td class='num'>374.344,30</td><td class='num'>2.641</td><td class='num'>141,74</td><td class='num'>3.000</td><td></td></tr>
+<tr><td>2017-04</td><td class='num'>359.927,23</td><td class='num'>2.391</td><td class='num'>150,53</td><td class='num'>2.684</td><td></td></tr>
+<tr><td>2017-05</td><td class='num'>506.071,14</td><td class='num'>3.660</td><td class='num'>138,27</td><td class='num'>4.136</td><td></td></tr>
+<tr><td>2017-06</td><td class='num'>433.038,60</td><td class='num'>3.217</td><td class='num'>134,61</td><td class='num'>3.583</td><td></td></tr>
+<tr><td>2017-07</td><td class='num'>498.031,48</td><td class='num'>3.969</td><td class='num'>125,48</td><td class='num'>4.519</td><td></td></tr>
+<tr><td>2017-08</td><td class='num'>573.971,68</td><td class='num'>4.293</td><td class='num'>133,70</td><td class='num'>4.910</td><td></td></tr>
+<tr><td>2017-09</td><td class='num'>624.401,69</td><td class='num'>4.243</td><td class='num'>147,16</td><td class='num'>4.831</td><td></td></tr>
+<tr><td>2017-10</td><td class='num'>664.219,43</td><td class='num'>4.568</td><td class='num'>145,41</td><td class='num'>5.322</td><td></td></tr>
+<tr><td>2017-11</td><td class='num'>1.010.271,37</td><td class='num'>7.451</td><td class='num'>135,59</td><td class='num'>8.665</td><td></td></tr>
+<tr><td>2017-12</td><td class='num'>743.914,17</td><td class='num'>5.624</td><td class='num'>132,27</td><td class='num'>6.308</td><td></td></tr>
+<tr><td>2018-01</td><td class='num'>950.030,36</td><td class='num'>7.220</td><td class='num'>131,58</td><td class='num'>8.208</td><td></td></tr>
+<tr><td>2018-02</td><td class='num'>844.178,71</td><td class='num'>6.694</td><td class='num'>126,11</td><td class='num'>7.672</td><td></td></tr>
+<tr><td>2018-03</td><td class='num'>983.213,44</td><td class='num'>7.188</td><td class='num'>136,79</td><td class='num'>8.217</td><td></td></tr>
+<tr><td>2018-04</td><td class='num'>996.647,75</td><td class='num'>6.934</td><td class='num'>143,73</td><td class='num'>7.975</td><td></td></tr>
+<tr><td>2018-05</td><td class='num'>996.517,68</td><td class='num'>6.853</td><td class='num'>145,41</td><td class='num'>7.925</td><td></td></tr>
+<tr><td>2018-06</td><td class='num'>865.124,31</td><td class='num'>6.160</td><td class='num'>140,44</td><td class='num'>7.078</td><td></td></tr>
+<tr><td>2018-07</td><td class='num'>895.507,22</td><td class='num'>6.273</td><td class='num'>142,76</td><td class='num'>7.092</td><td></td></tr>
+<tr><td>2018-08</td><td class='num'>854.686,33</td><td class='num'>6.452</td><td class='num'>132,47</td><td class='num'>7.248</td><td></td></tr>
+<tr><td>2018-09</td><td class='num'>145,00</td><td class='num'>1</td><td class='num'>145,00</td><td class='num'>1</td><td>mês parcial</td></tr>
+</tbody></table></div>
+</section>
+
+<section aria-labelledby="t-cat">
+<h2 id="t-cat">Top 10 categorias e cobertura</h2>
+<p>As 10 maiores categorias, entre 74, cobrem <strong>62,36%</strong> da receita de produtos.
+As outras 64 categorias somam R$ 5.115.686,14, ou 37,64% da receita.</p>
+<p class="nota">Receita e itens vêm do mart; pedidos e ticket de cada categoria vêm da fato. A soma dos pedidos por categoria (99.470) é maior que o total de pedidos (98.666) porque um pedido pode ter itens de mais de uma categoria; por isso não se somam pedidos entre categorias. Produtos sem categoria aparecem como <code>(sem categoria)</code>.</p>
+<div class="rolagem"><table>
+<caption>Ordenado por receita; cobertura acumulada calculada com janela no DuckDB.</caption>
+<thead><tr><th scope="col" class="num">#</th><th scope="col">Categoria</th><th scope="col" class="num">Receita (R$)</th>
+<th scope="col" class="num">% da receita</th><th scope="col" class="num">Cobertura acumulada</th><th scope="col">Participação</th>
+<th scope="col" class="num">Pedidos</th><th scope="col" class="num">Ticket (R$)</th><th scope="col" class="num">Itens</th></tr></thead>
+<tbody>
+<tr><td class='num'>1</td><td>beleza_saude</td><td class='num'>1.258.681,34</td><td class='num'>9,26%</td><td class='num'>9,26%</td><td><span class='barra' style='width:100.00%' aria-hidden='true'></span></td><td class='num'>8.836</td><td class='num'>142,45</td><td class='num'>9.670</td></tr>
+<tr><td class='num'>2</td><td>relogios_presentes</td><td class='num'>1.205.005,68</td><td class='num'>8,87%</td><td class='num'>18,13%</td><td><span class='barra' style='width:95.74%' aria-hidden='true'></span></td><td class='num'>5.624</td><td class='num'>214,26</td><td class='num'>5.991</td></tr>
+<tr><td class='num'>3</td><td>cama_mesa_banho</td><td class='num'>1.036.988,68</td><td class='num'>7,63%</td><td class='num'>25,76%</td><td><span class='barra' style='width:82.39%' aria-hidden='true'></span></td><td class='num'>9.417</td><td class='num'>110,12</td><td class='num'>11.115</td></tr>
+<tr><td class='num'>4</td><td>esporte_lazer</td><td class='num'>988.048,97</td><td class='num'>7,27%</td><td class='num'>33,03%</td><td><span class='barra' style='width:78.50%' aria-hidden='true'></span></td><td class='num'>7.720</td><td class='num'>127,99</td><td class='num'>8.641</td></tr>
+<tr><td class='num'>5</td><td>informatica_acessorios</td><td class='num'>911.954,32</td><td class='num'>6,71%</td><td class='num'>39,74%</td><td><span class='barra' style='width:72.45%' aria-hidden='true'></span></td><td class='num'>6.689</td><td class='num'>136,34</td><td class='num'>7.827</td></tr>
+<tr><td class='num'>6</td><td>moveis_decoracao</td><td class='num'>729.762,49</td><td class='num'>5,37%</td><td class='num'>45,10%</td><td><span class='barra' style='width:57.98%' aria-hidden='true'></span></td><td class='num'>6.449</td><td class='num'>113,16</td><td class='num'>8.334</td></tr>
+<tr><td class='num'>7</td><td>cool_stuff</td><td class='num'>635.290,85</td><td class='num'>4,67%</td><td class='num'>49,78%</td><td><span class='barra' style='width:50.47%' aria-hidden='true'></span></td><td class='num'>3.632</td><td class='num'>174,91</td><td class='num'>3.796</td></tr>
+<tr><td class='num'>8</td><td>utilidades_domesticas</td><td class='num'>632.248,66</td><td class='num'>4,65%</td><td class='num'>54,43%</td><td><span class='barra' style='width:50.23%' aria-hidden='true'></span></td><td class='num'>5.884</td><td class='num'>107,45</td><td class='num'>6.964</td></tr>
+<tr><td class='num'>9</td><td>automotivo</td><td class='num'>592.720,11</td><td class='num'>4,36%</td><td class='num'>58,79%</td><td><span class='barra' style='width:47.09%' aria-hidden='true'></span></td><td class='num'>3.897</td><td class='num'>152,10</td><td class='num'>4.235</td></tr>
+<tr><td class='num'>10</td><td>ferramentas_jardim</td><td class='num'>485.256,46</td><td class='num'>3,57%</td><td class='num'>62,36%</td><td><span class='barra' style='width:38.55%' aria-hidden='true'></span></td><td class='num'>3.518</td><td class='num'>137,94</td><td class='num'>4.347</td></tr>
+<tr class='outros'><td class='num'></td><td>outras 64 categorias</td><td class='num'>5.115.686,14</td><td class='num'>37,64%</td><td class='num'>100,00%</td><td></td><td class='num'>37.676</td><td class='num'>135,78</td><td class='num'>41.730</td></tr>
+</tbody></table></div>
+</section>
+
+<section aria-labelledby="t-uf">
+<h2 id="t-uf">Estados do cliente</h2>
+<div class="rolagem"><table>
+<caption>Receita e frete do mart; pedidos distintos e ticket da fato no grão do estado.</caption>
+<thead><tr><th scope="col">UF</th><th scope="col" class="num">Receita (R$)</th><th scope="col" class="num">% da receita</th>
+<th scope="col">Participação</th><th scope="col" class="num">Pedidos</th><th scope="col" class="num">Ticket (R$)</th>
+<th scope="col" class="num">Frete (R$)</th></tr></thead>
+<tbody>
+<tr><td>SP</td><td class='num'>5.202.955,05</td><td class='num'>38,28%</td><td><span class='barra' style='width:100.00%' aria-hidden='true'></span></td><td class='num'>41.375</td><td class='num'>125,75</td><td class='num'>718.723,07</td></tr>
+<tr><td>RJ</td><td class='num'>1.824.092,67</td><td class='num'>13,42%</td><td><span class='barra' style='width:35.06%' aria-hidden='true'></span></td><td class='num'>12.762</td><td class='num'>142,93</td><td class='num'>305.589,31</td></tr>
+<tr><td>MG</td><td class='num'>1.585.308,03</td><td class='num'>11,66%</td><td><span class='barra' style='width:30.47%' aria-hidden='true'></span></td><td class='num'>11.544</td><td class='num'>137,33</td><td class='num'>270.853,46</td></tr>
+<tr><td>RS</td><td class='num'>750.304,02</td><td class='num'>5,52%</td><td><span class='barra' style='width:14.42%' aria-hidden='true'></span></td><td class='num'>5.432</td><td class='num'>138,13</td><td class='num'>135.522,74</td></tr>
+<tr><td>PR</td><td class='num'>683.083,76</td><td class='num'>5,03%</td><td><span class='barra' style='width:13.13%' aria-hidden='true'></span></td><td class='num'>4.998</td><td class='num'>136,67</td><td class='num'>117.851,68</td></tr>
+<tr><td>SC</td><td class='num'>520.553,34</td><td class='num'>3,83%</td><td><span class='barra' style='width:10.00%' aria-hidden='true'></span></td><td class='num'>3.612</td><td class='num'>144,12</td><td class='num'>89.660,26</td></tr>
+<tr><td>BA</td><td class='num'>511.349,99</td><td class='num'>3,76%</td><td><span class='barra' style='width:9.83%' aria-hidden='true'></span></td><td class='num'>3.358</td><td class='num'>152,28</td><td class='num'>100.156,68</td></tr>
+<tr><td>DF</td><td class='num'>302.603,94</td><td class='num'>2,23%</td><td><span class='barra' style='width:5.82%' aria-hidden='true'></span></td><td class='num'>2.125</td><td class='num'>142,40</td><td class='num'>50.625,50</td></tr>
+<tr><td>GO</td><td class='num'>294.591,95</td><td class='num'>2,17%</td><td><span class='barra' style='width:5.66%' aria-hidden='true'></span></td><td class='num'>2.007</td><td class='num'>146,78</td><td class='num'>53.114,98</td></tr>
+<tr><td>ES</td><td class='num'>275.037,31</td><td class='num'>2,02%</td><td><span class='barra' style='width:5.29%' aria-hidden='true'></span></td><td class='num'>2.025</td><td class='num'>135,82</td><td class='num'>49.764,60</td></tr>
+<tr><td>PE</td><td class='num'>262.788,03</td><td class='num'>1,93%</td><td><span class='barra' style='width:5.05%' aria-hidden='true'></span></td><td class='num'>1.648</td><td class='num'>159,46</td><td class='num'>59.449,66</td></tr>
+<tr><td>CE</td><td class='num'>227.254,71</td><td class='num'>1,67%</td><td><span class='barra' style='width:4.37%' aria-hidden='true'></span></td><td class='num'>1.327</td><td class='num'>171,25</td><td class='num'>48.351,59</td></tr>
+<tr><td>PA</td><td class='num'>178.947,81</td><td class='num'>1,32%</td><td><span class='barra' style='width:3.44%' aria-hidden='true'></span></td><td class='num'>970</td><td class='num'>184,48</td><td class='num'>38.699,30</td></tr>
+<tr><td>MT</td><td class='num'>156.453,53</td><td class='num'>1,15%</td><td><span class='barra' style='width:3.01%' aria-hidden='true'></span></td><td class='num'>903</td><td class='num'>173,26</td><td class='num'>29.715,43</td></tr>
+<tr><td>MA</td><td class='num'>119.648,22</td><td class='num'>0,88%</td><td><span class='barra' style='width:2.30%' aria-hidden='true'></span></td><td class='num'>740</td><td class='num'>161,69</td><td class='num'>31.523,77</td></tr>
+<tr><td>MS</td><td class='num'>116.812,64</td><td class='num'>0,86%</td><td><span class='barra' style='width:2.25%' aria-hidden='true'></span></td><td class='num'>709</td><td class='num'>164,76</td><td class='num'>19.144,03</td></tr>
+<tr><td>PB</td><td class='num'>115.268,08</td><td class='num'>0,85%</td><td><span class='barra' style='width:2.22%' aria-hidden='true'></span></td><td class='num'>532</td><td class='num'>216,67</td><td class='num'>25.719,73</td></tr>
+<tr><td>PI</td><td class='num'>86.914,08</td><td class='num'>0,64%</td><td><span class='barra' style='width:1.67%' aria-hidden='true'></span></td><td class='num'>493</td><td class='num'>176,30</td><td class='num'>21.218,20</td></tr>
+<tr><td>RN</td><td class='num'>83.034,98</td><td class='num'>0,61%</td><td><span class='barra' style='width:1.60%' aria-hidden='true'></span></td><td class='num'>482</td><td class='num'>172,27</td><td class='num'>18.860,10</td></tr>
+<tr><td>AL</td><td class='num'>80.314,81</td><td class='num'>0,59%</td><td><span class='barra' style='width:1.54%' aria-hidden='true'></span></td><td class='num'>411</td><td class='num'>195,41</td><td class='num'>15.914,59</td></tr>
+<tr><td>SE</td><td class='num'>58.920,85</td><td class='num'>0,43%</td><td><span class='barra' style='width:1.13%' aria-hidden='true'></span></td><td class='num'>345</td><td class='num'>170,79</td><td class='num'>14.111,47</td></tr>
+<tr><td>TO</td><td class='num'>49.621,74</td><td class='num'>0,37%</td><td><span class='barra' style='width:0.95%' aria-hidden='true'></span></td><td class='num'>279</td><td class='num'>177,86</td><td class='num'>11.732,68</td></tr>
+<tr><td>RO</td><td class='num'>46.140,64</td><td class='num'>0,34%</td><td><span class='barra' style='width:0.89%' aria-hidden='true'></span></td><td class='num'>247</td><td class='num'>186,80</td><td class='num'>11.417,38</td></tr>
+<tr><td>AM</td><td class='num'>22.356,84</td><td class='num'>0,16%</td><td><span class='barra' style='width:0.43%' aria-hidden='true'></span></td><td class='num'>147</td><td class='num'>152,09</td><td class='num'>5.478,89</td></tr>
+<tr><td>AC</td><td class='num'>15.982,95</td><td class='num'>0,12%</td><td><span class='barra' style='width:0.31%' aria-hidden='true'></span></td><td class='num'>81</td><td class='num'>197,32</td><td class='num'>3.686,75</td></tr>
+<tr><td>AP</td><td class='num'>13.474,30</td><td class='num'>0,10%</td><td><span class='barra' style='width:0.26%' aria-hidden='true'></span></td><td class='num'>68</td><td class='num'>198,15</td><td class='num'>2.788,50</td></tr>
+<tr><td>RR</td><td class='num'>7.829,43</td><td class='num'>0,06%</td><td><span class='barra' style='width:0.15%' aria-hidden='true'></span></td><td class='num'>46</td><td class='num'>170,21</td><td class='num'>2.235,19</td></tr>
+</tbody></table></div>
+</section>
+
+<section aria-labelledby="t-rec">
+<h2 id="t-rec">Reconciliação</h2>
+<div class="rolagem"><table>
+<caption>Comparações calculadas a partir das próprias consultas desta página.</caption>
+<thead><tr><th scope="col">Verificação</th><th scope="col" class="num">Obtido</th><th scope="col" class="num">Referência</th>
+<th scope="col">Resultado</th></tr></thead>
+<tbody>
+<tr><td>Receita do KPI (fato) = soma do mart</td><td class='num'>R$ 13.591.643,70</td><td class='num'>R$ 13.591.643,70</td><td class='ok'>confere</td></tr>
+<tr><td>Itens da fato = soma de itens do mart</td><td class='num'>112.650</td><td class='num'>112.650</td><td class='ok'>confere</td></tr>
+<tr><td>Soma da receita por estado = KPI</td><td class='num'>R$ 13.591.643,70</td><td class='num'>R$ 13.591.643,70</td><td class='ok'>confere</td></tr>
+<tr><td>Soma da receita mensal = KPI</td><td class='num'>R$ 13.591.643,70</td><td class='num'>R$ 13.591.643,70</td><td class='ok'>confere</td></tr>
+<tr><td>Top 10 + outros = KPI</td><td class='num'>R$ 13.591.643,70</td><td class='num'>R$ 13.591.643,70</td><td class='ok'>confere</td></tr>
+<tr><td>Pedidos do KPI = pedidos distintos em olist_order_items</td><td class='num'>98.666</td><td class='num'>98.666</td><td class='ok'>confere</td></tr>
+<tr><td>Soma de pedidos por estado = KPI (cada pedido tem um só cliente)</td><td class='num'>98.666</td><td class='num'>98.666</td><td class='ok'>confere</td></tr>
+<tr><td>Soma de pedidos por mês = KPI (cada pedido tem uma só data)</td><td class='num'>98.666</td><td class='num'>98.666</td><td class='ok'>confere</td></tr>
+</tbody></table></div>
+<h3>Itens por status do pedido</h3>
+<div class="rolagem"><table>
+<caption>Composição da fato por status; nenhum status foi filtrado.</caption>
+<thead><tr><th scope="col">Status</th><th scope="col" class="num">Itens</th><th scope="col" class="num">Pedidos</th>
+<th scope="col" class="num">Receita (R$)</th></tr></thead>
+<tbody>
+<tr><td>delivered</td><td class='num'>110.197</td><td class='num'>96.478</td><td class='num'>13.221.498,11</td></tr>
+<tr><td>shipped</td><td class='num'>1.185</td><td class='num'>1.106</td><td class='num'>150.727,44</td></tr>
+<tr><td>canceled</td><td class='num'>542</td><td class='num'>461</td><td class='num'>95.235,27</td></tr>
+<tr><td>invoiced</td><td class='num'>359</td><td class='num'>312</td><td class='num'>61.526,37</td></tr>
+<tr><td>processing</td><td class='num'>357</td><td class='num'>301</td><td class='num'>60.439,22</td></tr>
+<tr><td>unavailable</td><td class='num'>7</td><td class='num'>6</td><td class='num'>2.007,69</td></tr>
+<tr><td>approved</td><td class='num'>3</td><td class='num'>2</td><td class='num'>209,60</td></tr>
+</tbody></table></div>
+</section>
+
+<section aria-labelledby="t-consultas">
+<h2 id="t-consultas">Consultas executadas</h2>
+<div class="rolagem"><table>
+<caption>Uma execução de cada consulta, medida com <code>time.perf_counter</code>, incluindo a transferência das linhas para o Python.</caption>
+<thead><tr><th scope="col">Consulta</th><th scope="col" class="num">Linhas</th><th scope="col" class="num">ms</th><th scope="col">SQL resumido</th></tr></thead>
+<tbody>
+<tr><td>KPIs</td><td class='num'>1</td><td class='num'>28,2</td><td><code>SELECT sum(CAST(price AS DECIMAL(18,2))) AS receita, sum(CAST(freight_value AS DECIMAL(18,2))) AS frete, count(DISTINCT order_id) AS pedidos, sum(CAST(price AS DECIMAL(18,2))) / count(DISTINCT orde...</code></td></tr>
+<tr><td>série mensal</td><td class='num'>25</td><td class='num'>34,1</td><td><code>WITH m AS (SELECT mes, sum(CAST(price AS DECIMAL(18,2))) AS receita, count(DISTINCT order_id) AS pedidos, count(*) AS itens FROM fato_item_venda GROUP BY mes), cal AS (SELECT CAST(range AS DATE) AS...</code></td></tr>
+<tr><td>top categorias com cobertura (mart)</td><td class='num'>10</td><td class='num'>5,9</td><td><code>WITH cat AS (SELECT categoria, sum(receita_produtos) AS receita, sum(itens) AS itens FROM mart_vendas_mensais GROUP BY categoria), r AS (SELECT categoria, receita, itens, row_number() OVER (ORDER B...</code></td></tr>
+<tr><td>pedidos e ticket do top 10 (fato)</td><td class='num'>10</td><td class='num'>31,9</td><td><code>SELECT categoria, count(DISTINCT order_id) AS pedidos, sum(CAST(price AS DECIMAL(18,2))) / count(DISTINCT order_id) AS ticket FROM fato_item_venda WHERE categoria IN (&#x27;beleza_saude&#x27;, &#x27;relogios_pres...</code></td></tr>
+<tr><td>cauda fora do top 10 (mart e fato)</td><td class='num'>1</td><td class='num'>20,5</td><td><code>WITH m AS (SELECT count(DISTINCT categoria) AS categorias, sum(receita_produtos) AS receita, sum(itens) AS itens FROM mart_vendas_mensais WHERE categoria NOT IN (&#x27;beleza_saude&#x27;, &#x27;relogios_presentes...</code></td></tr>
+<tr><td>estados (mart + fato)</td><td class='num'>27</td><td class='num'>27,6</td><td><code>WITH m AS (SELECT estado_cliente, sum(receita_produtos) AS receita, sum(frete) AS frete FROM mart_vendas_mensais GROUP BY estado_cliente), f AS (SELECT estado_cliente, count(DISTINCT order_id) AS p...</code></td></tr>
+<tr><td>reconciliação fato x mart</td><td class='num'>1</td><td class='num'>43,5</td><td><code>SELECT (SELECT sum(CAST(price AS DECIMAL(18,2))) FROM fato_item_venda) AS receita_fato, (SELECT sum(receita_produtos) FROM mart_vendas_mensais) AS receita_mart, (SELECT count(*) FROM fato_item_vend...</code></td></tr>
+<tr><td>itens por status do pedido (fato)</td><td class='num'>7</td><td class='num'>28,1</td><td><code>SELECT order_status, count(*) AS itens, count(DISTINCT order_id) AS pedidos, sum(CAST(price AS DECIMAL(18,2))) AS receita FROM fato_item_venda GROUP BY order_status ORDER BY itens DESC</code></td></tr>
+</tbody></table></div>
+</section>
+</main>
+<footer>
+<p>Limitações: espelho educacional do dataset público Olist (Kaggle, 2018, CC BY-NC-SA 4.0), carregado dos quatro Excels da Aula 04.
+Receita aqui é a soma de <code>price</code> dos itens, sem frete, sem pagamentos e sem descontos; pagamentos e avaliações não entram na fato.
+O mês é o da data de compra. Meses nas pontas da série têm poucos pedidos e não devem ser lidos como tendência.
+Os tempos valem para esta máquina e esta execução.</p>
+</footer>
+<script>
+(function(){
+  var dica=document.createElement('div');dica.className='dica';dica.setAttribute('role','status');
+  document.body.appendChild(dica);
+  function mostrar(ev,el){dica.textContent=el.getAttribute('data-dica');dica.style.display='block';
+    var x=(ev.clientX||el.getBoundingClientRect().left)+12,y=(ev.clientY||el.getBoundingClientRect().top)+12;
+    var w=dica.offsetWidth;if(x+w>window.innerWidth-8){x=window.innerWidth-w-8;}
+    dica.style.left=x+'px';dica.style.top=y+'px';}
+  document.querySelectorAll('[data-dica]').forEach(function(el){
+    el.addEventListener('pointermove',function(ev){mostrar(ev,el);});
+    el.addEventListener('focus',function(ev){mostrar(ev,el);});
+    el.addEventListener('pointerleave',function(){dica.style.display='none';});
+    el.addEventListener('blur',function(){dica.style.display='none';});
+  });
+})();
+</script>
+</body>
+</html>

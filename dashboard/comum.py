@@ -25,23 +25,16 @@ BANCO = SQLITE / "dados.db"
 ENTRADA_NO_REPOSITORIO = "2026-09-18"  # primeiro commit de csvs_originais/ no git
 
 # Telas do projeto: a visão geral primeiro, depois os requisitos em ordem numérica
-# (a navegação do topo segue esta ordem). url = versão publicada (privada) quando
-# houver (None até publicar); a navegação usa o arquivo local quando a página é aberta do disco.
+# (a navegação do topo segue esta ordem). A navegação usa sempre o arquivo vizinho,
+# com endereço relativo: nenhuma tela depende de cópia publicada fora do repositório.
 TELAS = [
-    {"id": "Início", "nome": "Visão geral", "arquivo": "visao_geral.html",
-     "url": "https://claude.ai/artifact/Jh4vnFxrMXM2oP9gE2jjsD"},
-    {"id": "R01", "nome": "Ritmo de registro", "arquivo": "r01_ritmo_de_registro.html",
-     "url": "https://claude.ai/artifact/J8vMTWGFyRVzfqxYK9nNXo"},
-    {"id": "R02", "nome": "Acúmulo por etapa", "arquivo": "r02_acumulo_por_etapa.html",
-     "url": "https://claude.ai/artifact/HTDPZKzttfVncZUGBU4kvv"},
-    {"id": "R03", "nome": "Cobertura do registro", "arquivo": "r03_cobertura_registro.html",
-     "url": "https://claude.ai/artifact/6UznL9ZeRJR2973pazcdCG"},
-    {"id": "R04", "nome": "Planejado × realizado", "arquivo": "r04_prazo_planejado_realizado.html",
-     "url": "https://claude.ai/artifact/X6Z8ZAoEurjtGkGagFE8my"},
-    {"id": "R05", "nome": "Concentração (Gini)", "arquivo": "r05_concentracao_gini.html",
-     "url": "https://claude.ai/artifact/UFJ17FrDcetbwMGXCuqNRj"},
-    {"id": "R06", "nome": "Eixos de tarefa", "arquivo": "r06_eixos_de_tarefa.html",
-     "url": "https://claude.ai/artifact/4tvQRwKfVW5JZs6p2cYRqv"},
+    {"id": "Início", "nome": "Visão geral", "arquivo": "visao_geral.html"},
+    {"id": "R01", "nome": "Ritmo de registro", "arquivo": "r01_ritmo_de_registro.html"},
+    {"id": "R02", "nome": "Acúmulo por etapa", "arquivo": "r02_acumulo_por_etapa.html"},
+    {"id": "R03", "nome": "Cobertura do registro", "arquivo": "r03_cobertura_registro.html"},
+    {"id": "R04", "nome": "Planejado × realizado", "arquivo": "r04_prazo_planejado_realizado.html"},
+    {"id": "R05", "nome": "Concentração (Gini)", "arquivo": "r05_concentracao_gini.html"},
+    {"id": "R06", "nome": "Eixos no grupo", "arquivo": "r06_eixos_de_tarefa.html"},
 ]
 
 # Premissas de cada tela: escolhas do grupo, não definições da orientação.
@@ -103,7 +96,11 @@ PREMISSAS = {
          "o eixo mostra em que a pessoa foi alocada, não só o que ela concluiu"),
         ("Cartão de dois eixos", "conta metade em cada eixo",
          "assim a parte de cada integrante soma 100%"),
-        ("Foco num eixo só", "75% ou mais dos cartões do integrante num mesmo eixo, ajustável para 60% ou 90% na tela",
+        ("Concentração do eixo", "parte dos cartões do eixo que está com os 2 integrantes que mais têm cartões nele; com divisão igual entre os 7, seria 29%",
+         "mede a divisão do eixo dentro do grupo sem ordenar pessoas; dois de sete já mostram o eixo nas mãos de poucos"),
+        ("Eixo com poucos cartões", "aviso quando o eixo tem menos de 14 cartões no recorte; ele fica fora do eixo mais concentrado",
+         "2 por integrante, o mesmo corte do R05; abaixo disso um cartão só muda a divisão"),
+        ("Foco num eixo só", "75% ou mais dos cartões do integrante num mesmo eixo, ajustável para 60% ou 90% na tela; a tela conta quantos, sem apontar quem",
          "três de cada quatro cartões no mesmo tipo de tarefa"),
         ("Poucos cartões", "aviso quando o integrante tem menos de 10 cartões com eixo no recorte",
          "com menos de 10, um cartão só muda a parte de um eixo em mais de 10 pontos"),

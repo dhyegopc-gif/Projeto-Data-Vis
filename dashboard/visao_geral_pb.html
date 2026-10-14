@@ -217,12 +217,12 @@ a.cel {
 }
 a.cel:hover { background: var(--hover); border-color: var(--border); }
 a.cel .v { font-size: 20px; font-weight: 600; line-height: 1.2; font-variant-numeric: tabular-nums; display: flex; align-items: center; gap: 6px; }
-a.cel .v .tri { color: var(--series-2); font-size: 13px; }
+a.cel .v .tri { color: var(--ink); font-size: 12px; }
 a.cel .t { font-size: 12px; color: var(--ink-2); }
-a.cel.sinal { background: var(--wash-2); }
+a.cel.sinal { border-color: var(--axis); border-style: dashed; }
+a.cel .maior { font-size: 11px; color: var(--ink-2); }
 .barra { position: relative; height: 6px; border-radius: 3px; background: var(--grid); max-width: 160px; }
 .barra > i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 3px; background: var(--series); }
-.sinal .barra > i { background: var(--series-2); }
 .cobertura { font-size: 11px; color: var(--ink-2); }
 .cobertura::before { content: "◇ "; color: var(--muted); }
 .placar tfoot td { padding: 10px 12px 2px; font-size: 12px; color: var(--ink-2); border: 0; }
@@ -251,6 +251,7 @@ a.cel.sinal { background: var(--wash-2); }
 .roteiro ol { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 13px; }
 .roteiro .antes { font-size: 12px; color: var(--ink-2); border-top: 1px solid var(--grid); padding-top: 8px; margin: 0; }
 .roteiro .nada { font-size: 13px; color: var(--ink-2); margin: 0; }
+.roteiro .observar { display: block; font-size: 12px; color: var(--ink-2); margin-top: 2px; }
 
 .conclusoes { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
 .conclusoes li { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 4px 14px; border-bottom: 1px solid var(--grid); padding-bottom: 10px; font-size: 14px; }
@@ -295,7 +296,7 @@ a.cel.sinal { background: var(--wash-2); }
   <nav aria-label="Telas do painel"><ul class="telas" id="telas"></ul></nav>
   <header>
     <p class="eyebrow">Visão geral · R01 a R06 em uma página · para a orientação pedagógica</p>
-    <h1 id="titulo">Com qual grupo começar, e por qual assunto</h1>
+    <h1 id="titulo">Por qual assunto começar a conversa com cada grupo</h1>
     <p class="pergunta" id="subtitulo"></p>
   </header>
   <ul class="contexto" id="contexto" aria-label="Recorte dos dados"></ul>
@@ -304,12 +305,12 @@ a.cel.sinal { background: var(--wash-2); }
     <div class="card-topo">
       <div>
         <h2 id="h-placar">Leitura principal de cada requisito, nos três grupos</h2>
-        <p class="limite"><strong>Registro não é trabalho, e o ▲ não é nota.</strong> Ele marca, em cada linha, o grupo que mais se afasta dos outros dois naquela leitura. Os três grupos têm 7 integrantes, o que deixa a comparação justa.</p>
+        <p class="limite"><strong>Registro não é trabalho, e valor alto não quer dizer grupo pior.</strong> O ◆ só marca o maior valor de cada linha: um assunto para perguntar ao grupo, não um defeito nem uma nota. As linhas não se somam; cada uma é uma pergunta separada. Os três grupos têm 7 integrantes, o que deixa a comparação de cada linha justa.</p>
       </div>
     </div>
     <div class="legenda" aria-hidden="true">
       <span><i class="chave s1"></i>leitura do grupo, na mesma escala da linha</span>
-      <span><i class="chave s2"></i>▲ o grupo que mais se afasta na linha</span>
+      <span>◆ maior valor da linha (sem cor: não é alerta)</span>
       <span id="leg-cob"></span>
     </div>
     <div class="rolagem"><table class="placar" id="placar"></table></div>
@@ -319,7 +320,7 @@ a.cel.sinal { background: var(--wash-2); }
   <section aria-labelledby="h-roteiro" class="pilha" style="gap: 10px">
     <div>
       <h2 id="h-roteiro" style="font-size: 16px; margin: 0">Por onde começar a conversa com cada grupo</h2>
-      <p class="contagem">Os assuntos com ▲, na ordem dos requisitos, e o que conferir no registro antes de levar o número para a reunião.</p>
+      <p class="contagem">Para cada grupo, os assuntos em que ele tem o maior valor da linha, na ordem de prioridade dos requisitos, e o que conferir no registro antes de levar o número para a reunião. É ponto de partida da conversa, não diagnóstico.</p>
     </div>
     <div class="roteiros" id="roteiros"></div>
   </section>
@@ -346,13 +347,14 @@ a.cel.sinal { background: var(--wash-2); }
       <h3>Como ler</h3>
       <ul>
         <li>Cada célula é a leitura principal da tela do requisito, com os padrões da própria tela, todas as sprints.</li>
-        <li>A barra usa a escala natural da medida (0 a 100%, 0 ao máximo do Gini, 0 a 7 integrantes); nas contagens sem teto, o maior valor da linha.</li>
-        <li>Empate na linha marca todos os empatados; linha com tudo em zero não marca ninguém.</li>
+        <li>A barra usa a escala natural da medida (0 a 100%, 0 ao máximo do Gini, 0 a 100% na parte dos 2 integrantes); nas contagens sem teto, o maior valor da linha.</li>
+        <li>O ◆ marca o maior valor da linha; empate marca todos os empatados, e linha com tudo em zero não marca ninguém.</li>
+        <li>Não existe total de ◆ por grupo: somar leituras diferentes daria uma nota que nenhuma tela sustenta.</li>
       </ul>
     </div>
     <div><h3>O que esta tela não sustenta</h3>
       <ul>
-        <li>Um ranking ou uma nota de grupo. A contagem de ▲ diz em quantas leituras o grupo é o que mais se afasta, não quanto ele trabalhou ou aprendeu.</li>
+        <li>Um ranking ou uma nota de grupo, nem que um grupo está pior. O maior valor de uma linha é um assunto para perguntar; ele pode ter explicação que o registro não mostra (semana de provas, divisão de papéis combinada, revisão que depende da orientação).</li>
         <li>Uma conclusão sem conferir o detalhe. Cada número tem limites que só a tela do requisito mostra por inteiro.</li>
       </ul>
     </div>
@@ -463,14 +465,13 @@ function tabela(colunas, linhas, legenda) {
   return tb;
 }
 
-// Navegação entre as telas: arquivo local quando aberto do disco, URL publicada
-// quando aberto na web (se já houver uma).
+// Navegação entre as telas: sempre o arquivo vizinho, com endereço relativo.
+// Funciona aberto do disco, do clone do repositório ou de qualquer servidor
+// estático (GitHub Pages incluído), sem depender de cópia publicada.
 function montarTelas(atual) {
   const lista = $("telas");
-  const local = location.protocol === "file:";
   for (const t of D.telas) {
-    const href = local || !t.url ? t.arquivo : t.url;
-    const a = h("a", { href, text: `${t.id} · ${t.nome}` });
+    const a = h("a", { href: t.arquivo, text: `${t.id} · ${t.nome}` });
     if (t.id === atual) a.setAttribute("aria-current", "page");
     lista.appendChild(h("li", {}, [a]));
   }
@@ -512,14 +513,12 @@ function grupoDoEndereco(grupos, padrao) {
   return grupos.includes(g) ? g : padrao;
 }
 function hrefTela(t, grupo) {
-  const local = location.protocol === "file:";
-  return (local || !t.url ? t.arquivo : t.url) + (grupo ? "#" + grupo : "");
+  return t.arquivo + (grupo ? "#" + grupo : "");
 }
 function linkTela(id) {
   const t = D.telas.find((x) => x.id === id);
   if (!t) return null;
-  const local = location.protocol === "file:";
-  return h("a", { href: local || !t.url ? t.arquivo : t.url, text: id });
+  return h("a", { href: t.arquivo, text: id });
 }
 
 // Marcas por forma (forma + cor: a identidade nunca depende só da cor)
@@ -551,7 +550,7 @@ function montarPremissas() {
     "Premissas desta tela"));
 }
 
-const D = {"leituras":{"R01":{"marco":"2026-06-26","grupos":{"G01":{"silencios":5,"maior":{"dias":8,"de":"2026-05-31","ate":"2026-06-07"},"maior_depois":{"dias":16,"de":"2026-06-27","ate":"2026-07-12"},"commits":403,"dias":65,"dias_com":37,"valor":5},"G02":{"silencios":1,"maior":{"dias":4,"de":"2026-06-17","ate":"2026-06-20"},"maior_depois":{"dias":17,"de":"2026-06-27","ate":"2026-07-13"},"commits":706,"dias":65,"dias_com":47,"valor":1},"G03":{"silencios":4,"maior":{"dias":8,"de":"2026-06-14","ate":"2026-06-21"},"maior_depois":{"dias":16,"de":"2026-06-27","ate":"2026-07-12"},"commits":632,"dias":65,"dias_com":40,"valor":4}},"inicio":"2026-04-23","fim":"2026-07-13"},"R02":{"grupos":{"G01":{"cartoes":298,"acima":175,"valor":58.7,"etapa":"Waiting Review","etapa_acima":82},"G02":{"cartoes":487,"acima":181,"valor":37.2,"etapa":"Waiting Review","etapa_acima":134},"G03":{"cartoes":398,"acima":124,"valor":31.2,"etapa":"Waiting Review","etapa_acima":95}}},"R03":{"grupos":{"G01":{"baixos":[{"chave":"commits|autor_id resolvido (arquivo inteiro)","pct":70.1,"telas":["R01"]},{"chave":"commits|autor_id resolvido (base do R01)","pct":72.5,"telas":["R01","R05"]},{"chave":"commits|número do cartão (#N) na base do R01","pct":78.5,"telas":["R04"]},{"chave":"merge_requests|revisores_ids","pct":24.0,"telas":["R02"]},{"chave":"merge_requests|sprint","pct":66.7,"telas":["R05"]},{"chave":"sprints|inicio_em e prazo_em","pct":0.0,"telas":["R01","R02"]}],"usados":11,"valor":6},"G02":{"baixos":[{"chave":"sprints|inicio_em e prazo_em","pct":0.0,"telas":["R01","R02"]}],"usados":11,"valor":1},"G03":{"baixos":[{"chave":"commits|autor_id resolvido (arquivo inteiro)","pct":77.5,"telas":["R01"]},{"chave":"commits|autor_id resolvido (base do R01)","pct":77.4,"telas":["R01","R05"]}],"usados":11,"valor":2}}},"R04":{"grupos":{"G01":{"cartoes":263,"acima":193,"dobro":159,"valor":73.4,"mediana":2.73},"G02":{"cartoes":456,"acima":268,"dobro":196,"valor":58.8,"mediana":1.3},"G03":{"cartoes":388,"acima":227,"dobro":187,"valor":58.5,"mediana":1.85}}},"R05":{"grupos":{"G01":{"valor":0.276},"G02":{"valor":0.143},"G03":{"valor":0.356}}},"R06":{"grupos":{"G01":{"valor":2,"focados":[{"pessoa":"G01-A14","eixo":"Código","pct":80.2,"cartoes":48},{"pessoa":"G01-A17","eixo":"Código","pct":90.6,"cartoes":48}],"eixo":"Código","eixo_pct":52.9,"perfil":{"Código":52.9,"Design":14.8,"Documentação":26.9,"Negócio":5.3}},"G02":{"valor":1,"focados":[{"pessoa":"G02-A19","eixo":"Documentação","pct":83.3,"cartoes":78}],"eixo":"Documentação","eixo_pct":60.4,"perfil":{"Código":25.2,"Design":11.5,"Documentação":60.4,"Negócio":2.9}},"G03":{"valor":4,"focados":[{"pessoa":"G03-A13","eixo":"Documentação","pct":83.3,"cartoes":12},{"pessoa":"G03-A14","eixo":"Documentação","pct":82.4,"cartoes":34},{"pessoa":"G03-A18","eixo":"Documentação","pct":83.7,"cartoes":49},{"pessoa":"G03-A19","eixo":"Documentação","pct":81.3,"cartoes":24}],"eixo":"Documentação","eixo_pct":61.8,"perfil":{"Código":22.8,"Design":15.5,"Documentação":61.8,"Negócio":0.0}}}}},"padroes":{"silencio":3,"limite":48,"cobertura":80,"foco":75},"contexto":{"cartoes":1238,"mrs":540,"commits_autorais":1743,"integrantes":21},"premissas_telas":{"R01":[{"nome":"Silêncio","valor":"3 dias seguidos sem commit autoral, ajustável de 2 a 7 na tela"},{"nome":"Dia do commit","valor":"a data de autoria, não a de commit"},{"nome":"Marco de fim de sprint","valor":"26/06/2026 para os três grupos, fim da Sprint 05 do G03"}],"R02":[{"nome":"Etapa","valor":"valor de coluna que casa com o Scrum Board do grupo (Backlog, Doing, Waiting Review, Review)"},{"nome":"Acúmulo","valor":"cartão que somou mais de 48 h na etapa, contando todas as passagens; 24 h e 72 h para comparar"},{"nome":"Passagem sem saída","valor":"termina no fechamento do cartão; se ele não foi fechado, no último registro do conjunto"},{"nome":"Etapa de maior acúmulo","valor":"a que tem mais cartões acima do limite; no empate, a de mais horas somadas"}],"R03":[{"nome":"Cobertura mínima","valor":"80% de preenchimento para confiar na leitura; 70% e 90% para comparar"},{"nome":"Pessoa resolvida","valor":"[externo] e [bot] contam como vazio em autoria e responsável"}],"R04":[{"nome":"Dias planejados por tamanho","valor":"PP 0,25 · P 0,5 · M 1 · G 3 · GG 5"},{"nome":"Tempo realizado","valor":"da criação ao fechamento do cartão, em dias corridos"},{"nome":"Commit ligado ao cartão","valor":"#N no título (ou na mensagem, se o título não cita número) é o cartão N do mesmo grupo"},{"nome":"Levou mais que o planejado","valor":"tempo realizado acima dos dias planejados; o dobro, acima de 2 vezes"}],"R05":[{"nome":"Integrante","valor":"pessoa do cadastro do grupo com pelo menos um movimento no quadro do próprio grupo (7 por grupo)"},{"nome":"Medida principal","valor":"dias planejados dos cartões concluídos, somados por responsável"},{"nome":"Faixas de leitura","valor":"até 0,2 distribuído; até 0,4 moderado; acima disso, concentrado"},{"nome":"Poucos registros","valor":"aviso quando uma medida de contagem tem menos de 14 registros no recorte"},{"nome":"Registro sem dono","valor":"fica fora do índice e vira uma faixa possível (mínimo nivelando, máximo para quem tem mais)"}],"R06":[{"nome":"Eixo de tarefa","valor":"rótulo do cartão agrupado em Código (CODE, BUG, Fix, TEST, DEPLOY, CODE_REVIEW), Design (DESIGN), Documentação (DOCUMENTATION, REQUIREMENTS, user-story) e Negócio (NEGÓCIOS, Presentation)"},{"nome":"Cartões do integrante","valor":"os que têm o integrante como responsável, abertos e fechados; integrante é o mesmo do R05 (7 por grupo)"},{"nome":"Cartão de dois eixos","valor":"conta metade em cada eixo"},{"nome":"Foco num eixo só","valor":"75% ou mais dos cartões do integrante num mesmo eixo, ajustável para 60% ou 90% na tela"},{"nome":"Poucos cartões","valor":"aviso quando o integrante tem menos de 10 cartões com eixo no recorte"}]},"registro_mais_recente":"2026-08-07","telas":[{"id":"Início","nome":"Visão geral","arquivo":"visao_geral.html","url":"https://claude.ai/artifact/Jh4vnFxrMXM2oP9gE2jjsD"},{"id":"R01","nome":"Ritmo de registro","arquivo":"r01_ritmo_de_registro.html","url":"https://claude.ai/artifact/J8vMTWGFyRVzfqxYK9nNXo"},{"id":"R02","nome":"Acúmulo por etapa","arquivo":"r02_acumulo_por_etapa.html","url":"https://claude.ai/artifact/HTDPZKzttfVncZUGBU4kvv"},{"id":"R03","nome":"Cobertura do registro","arquivo":"r03_cobertura_registro.html","url":"https://claude.ai/artifact/6UznL9ZeRJR2973pazcdCG"},{"id":"R04","nome":"Planejado × realizado","arquivo":"r04_prazo_planejado_realizado.html","url":"https://claude.ai/artifact/X6Z8ZAoEurjtGkGagFE8my"},{"id":"R05","nome":"Concentração (Gini)","arquivo":"r05_concentracao_gini.html","url":"https://claude.ai/artifact/UFJ17FrDcetbwMGXCuqNRj"},{"id":"R06","nome":"Eixos de tarefa","arquivo":"r06_eixos_de_tarefa.html","url":"https://claude.ai/artifact/4tvQRwKfVW5JZs6p2cYRqv"}],"entrada_repositorio":"2026-09-18","premissas":[]};
+const D = {"leituras":{"R01":{"marco":"2026-06-26","grupos":{"G01":{"silencios":5,"maior":{"dias":8,"de":"2026-05-31","ate":"2026-06-07"},"maior_depois":{"dias":16,"de":"2026-06-27","ate":"2026-07-12"},"commits":403,"dias":65,"dias_com":37,"valor":5},"G02":{"silencios":1,"maior":{"dias":4,"de":"2026-06-17","ate":"2026-06-20"},"maior_depois":{"dias":17,"de":"2026-06-27","ate":"2026-07-13"},"commits":706,"dias":65,"dias_com":47,"valor":1},"G03":{"silencios":4,"maior":{"dias":8,"de":"2026-06-14","ate":"2026-06-21"},"maior_depois":{"dias":16,"de":"2026-06-27","ate":"2026-07-12"},"commits":632,"dias":65,"dias_com":40,"valor":4}},"inicio":"2026-04-23","fim":"2026-07-13"},"R02":{"grupos":{"G01":{"cartoes":298,"acima":175,"valor":58.7,"etapa":"Waiting Review","etapa_acima":82},"G02":{"cartoes":487,"acima":181,"valor":37.2,"etapa":"Waiting Review","etapa_acima":134},"G03":{"cartoes":398,"acima":124,"valor":31.2,"etapa":"Waiting Review","etapa_acima":95}}},"R03":{"grupos":{"G01":{"baixos":[{"chave":"commits|autor_id resolvido (arquivo inteiro)","pct":70.1,"telas":["R01"]},{"chave":"commits|autor_id resolvido (base do R01)","pct":72.5,"telas":["R01","R05"]},{"chave":"commits|número do cartão (#N) na base do R01","pct":78.5,"telas":["R04"]},{"chave":"merge_requests|revisores_ids","pct":24.0,"telas":["R02"]},{"chave":"merge_requests|sprint","pct":66.7,"telas":["R05"]},{"chave":"sprints|inicio_em e prazo_em","pct":0.0,"telas":["R01","R02"]}],"usados":11,"valor":6},"G02":{"baixos":[{"chave":"sprints|inicio_em e prazo_em","pct":0.0,"telas":["R01","R02"]}],"usados":11,"valor":1},"G03":{"baixos":[{"chave":"commits|autor_id resolvido (arquivo inteiro)","pct":77.5,"telas":["R01"]},{"chave":"commits|autor_id resolvido (base do R01)","pct":77.4,"telas":["R01","R05"]}],"usados":11,"valor":2}}},"R04":{"grupos":{"G01":{"cartoes":263,"acima":193,"dobro":159,"valor":73.4,"mediana":2.73},"G02":{"cartoes":456,"acima":268,"dobro":196,"valor":58.8,"mediana":1.3},"G03":{"cartoes":388,"acima":227,"dobro":187,"valor":58.5,"mediana":1.85}}},"R05":{"grupos":{"G01":{"valor":0.276},"G02":{"valor":0.143},"G03":{"valor":0.356}}},"R06":{"grupos":{"G01":{"valor":80.8,"eixo":"Design","pessoas":6,"cartoes":40.8333,"perfil_eixo":"Código","perfil_pct":52.9},"G02":{"valor":65.3,"eixo":"Design","pessoas":6,"cartoes":50.5,"perfil_eixo":"Documentação","perfil_pct":60.4},"G03":{"valor":88.4,"eixo":"Design","pessoas":6,"cartoes":64.5,"perfil_eixo":"Documentação","perfil_pct":61.8}}}},"padroes":{"silencio":3,"limite":48,"cobertura":80,"poucos_eixo":14},"contexto":{"cartoes":1238,"mrs":540,"commits_autorais":1743,"integrantes":21},"premissas_telas":{"R01":[{"nome":"Silêncio","valor":"3 dias seguidos sem commit autoral, ajustável de 2 a 7 na tela"},{"nome":"Dia do commit","valor":"a data de autoria, não a de commit"},{"nome":"Marco de fim de sprint","valor":"26/06/2026 para os três grupos, fim da Sprint 05 do G03"}],"R02":[{"nome":"Etapa","valor":"valor de coluna que casa com o Scrum Board do grupo (Backlog, Doing, Waiting Review, Review)"},{"nome":"Acúmulo","valor":"cartão que somou mais de 48 h na etapa, contando todas as passagens; 24 h e 72 h para comparar"},{"nome":"Passagem sem saída","valor":"termina no fechamento do cartão; se ele não foi fechado, no último registro do conjunto"},{"nome":"Etapa de maior acúmulo","valor":"a que tem mais cartões acima do limite; no empate, a de mais horas somadas"}],"R03":[{"nome":"Cobertura mínima","valor":"80% de preenchimento para confiar na leitura; 70% e 90% para comparar"},{"nome":"Pessoa resolvida","valor":"[externo] e [bot] contam como vazio em autoria e responsável"}],"R04":[{"nome":"Dias planejados por tamanho","valor":"PP 0,25 · P 0,5 · M 1 · G 3 · GG 5"},{"nome":"Tempo realizado","valor":"da criação ao fechamento do cartão, em dias corridos"},{"nome":"Commit ligado ao cartão","valor":"#N no título (ou na mensagem, se o título não cita número) é o cartão N do mesmo grupo"},{"nome":"Levou mais que o planejado","valor":"tempo realizado acima dos dias planejados; o dobro, acima de 2 vezes"}],"R05":[{"nome":"Integrante","valor":"pessoa do cadastro do grupo com pelo menos um movimento no quadro do próprio grupo (7 por grupo)"},{"nome":"Medida principal","valor":"dias planejados dos cartões concluídos, somados por responsável"},{"nome":"Faixas de leitura","valor":"até 0,2 distribuído; até 0,4 moderado; acima disso, concentrado"},{"nome":"Poucos registros","valor":"aviso quando uma medida de contagem tem menos de 14 registros no recorte"},{"nome":"Registro sem dono","valor":"fica fora do índice e vira uma faixa possível (mínimo nivelando, máximo para quem tem mais)"}],"R06":[{"nome":"Eixo de tarefa","valor":"rótulo do cartão agrupado em Código (CODE, BUG, Fix, TEST, DEPLOY, CODE_REVIEW), Design (DESIGN), Documentação (DOCUMENTATION, REQUIREMENTS, user-story) e Negócio (NEGÓCIOS, Presentation)"},{"nome":"Cartões do integrante","valor":"os que têm o integrante como responsável, abertos e fechados; integrante é o mesmo do R05 (7 por grupo)"},{"nome":"Cartão de dois eixos","valor":"conta metade em cada eixo"},{"nome":"Concentração do eixo","valor":"parte dos cartões do eixo que está com os 2 integrantes que mais têm cartões nele; com divisão igual entre os 7, seria 29%"},{"nome":"Eixo com poucos cartões","valor":"aviso quando o eixo tem menos de 14 cartões no recorte; ele fica fora do eixo mais concentrado"},{"nome":"Foco num eixo só","valor":"75% ou mais dos cartões do integrante num mesmo eixo, ajustável para 60% ou 90% na tela; a tela conta quantos, sem apontar quem"},{"nome":"Poucos cartões","valor":"aviso quando o integrante tem menos de 10 cartões com eixo no recorte"}]},"registro_mais_recente":"2026-08-07","telas":[{"id":"Início","nome":"Visão geral","arquivo":"visao_geral.html"},{"id":"R01","nome":"Ritmo de registro","arquivo":"r01_ritmo_de_registro.html"},{"id":"R02","nome":"Acúmulo por etapa","arquivo":"r02_acumulo_por_etapa.html"},{"id":"R03","nome":"Cobertura do registro","arquivo":"r03_cobertura_registro.html"},{"id":"R04","nome":"Planejado × realizado","arquivo":"r04_prazo_planejado_realizado.html"},{"id":"R05","nome":"Concentração (Gini)","arquivo":"r05_concentracao_gini.html"},{"id":"R06","nome":"Eixos no grupo","arquivo":"r06_eixos_de_tarefa.html"}],"entrada_repositorio":"2026-09-18","premissas":[]};
 
 const L = D.leituras, P = D.padroes;
 const GRUPOS = Object.keys(L.R01.grupos).sort();
@@ -564,48 +563,46 @@ const lista = (xs) => xs.length <= 1 ? xs.join("") : xs.slice(0, -1).join(", ") 
 // Uma linha por requisito: o valor que entra na comparação, a escala da barra e os textos da célula
 const LINHAS = [
   { id: "R01", mede: `Silêncios de ${P.silencio} dias ou mais sem commit autoral, até ${fmt(L.R01.marco)}`,
-    criterio: "▲ mais silêncios", escala: () => Math.max(...GRUPOS.map((g) => L.R01.grupos[g].valor)),
+    criterio: "◆ mais silêncios", escala: () => Math.max(...GRUPOS.map((g) => L.R01.grupos[g].valor)),
     valor: (x) => plural(x.silencios, "silêncio", "silêncios"),
     texto: (x) => x.maior ? `maior: ${plural(x.maior.dias, "dia", "dias")} (${dm(x.maior.de)} a ${dm(x.maior.ate)})` : "commit em todos os dias" },
   { id: "R02", mede: `Cartões que passaram de ${P.limite} h em alguma etapa do quadro`,
-    criterio: "▲ maior parte acima do limite", escala: () => 100,
+    criterio: "◆ maior parte acima do limite", escala: () => 100,
     valor: (x) => pct(x.valor),
     texto: (x) => `${num(x.acima)} de ${num(x.cartoes)}; mais acúmulo em ${x.etapa}` },
   { id: "R03", mede: `Campos usados pelas telas com menos de ${P.cobertura}% preenchido`,
-    criterio: "▲ mais campos abaixo do mínimo", escala: (x) => x.usados,
+    criterio: "◆ mais campos abaixo do mínimo", escala: (x) => x.usados,
     valor: (x) => `${x.valor} de ${x.usados}`,
     texto: (x) => x.baixos.length ? lista(x.baixos.slice().sort((a, b) => a.pct - b.pct).slice(0, 2).map((b) => `${CAMPO_CURTO[b.chave] || b.chave} ${num(b.pct, 0)}%`)) + (x.baixos.length > 2 ? "…" : "") : "todos no mínimo ou acima" },
   { id: "R04", mede: "Cartões fechados que levaram mais que o tamanho previa",
-    criterio: "▲ maior parte acima do planejado", escala: () => 100,
+    criterio: "◆ maior parte acima do planejado", escala: () => 100,
     valor: (x) => pct(x.valor),
     texto: (x) => `mediana de ${num(x.mediana, 1)}× o planejado; ${pct(100 * x.dobro / x.cartoes)} mais que o dobro` },
   { id: "R05", mede: "Gini dos dias planejados concluídos entre os 7 integrantes",
-    criterio: "▲ registro mais concentrado", escala: () => 6 / 7,
+    criterio: "◆ registro mais concentrado", escala: () => 6 / 7,
     valor: (x) => gTxt(x.valor), texto: (x) => faixa(x.valor) },
-  { id: "R06", mede: `Integrantes com ${P.foco}% ou mais dos cartões num eixo de tarefa só`,
-    criterio: "▲ mais integrantes focados", escala: () => 7,
-    valor: (x) => `${x.valor} de 7`,
-    texto: (x) => x.valor ? `em ${lista([...new Set(x.focados.map((f) => f.eixo))])}; perfil do grupo: ${x.eixo} ${num(x.eixo_pct, 0)}%` : `perfil do grupo: ${x.eixo} ${num(x.eixo_pct, 0)}%` },
+  { id: "R06", mede: "Parte dos cartões do eixo mais concentrado que está com 2 dos 7 integrantes (divisão igual: 29%)",
+    criterio: "◆ eixo mais concentrado", escala: () => 100,
+    valor: (x) => pct(x.valor),
+    texto: (x) => `em ${x.eixo}; ${x.pessoas} de 7 com cartão no eixo` },
 ];
-// ▲: o maior valor da linha (empate marca todos; tudo zero não marca)
+// ◆: o maior valor da linha (empate marca todos; tudo zero não marca)
 for (const l of LINHAS) {
   const vs = GRUPOS.map((g) => L[l.id].grupos[g].valor), topo = Math.max(...vs);
   l.sinal = new Set(topo > 0 ? GRUPOS.filter((g, i) => vs[i] === topo) : []);
 }
-const sinaisDe = (g) => LINHAS.filter((l) => l.sinal.has(g));
 // Avisos do R03: campos abaixo do mínimo que a leitura daquela tela usa
 const avisos = (id, g) => L.R03.grupos[g].baixos.filter((b) => id !== "R03" && b.telas.includes(id));
 
+// Ordem de prioridade dos requisitos (Requisitos.MD): o primeiro assunto de cada grupo sai daqui
+const PRIORIDADE = ["R01", "R03", "R02", "R06", "R04", "R05"];
+const nomeAssunto = (id) => TELA[id].nome[0].toLowerCase() + TELA[id].nome.slice(1);
+const assuntosDe = (g) => PRIORIDADE.map((id) => LINHAS.find((l) => l.id === id)).filter((l) => l.sinal.has(g));
+
 function cabecalho() {
-  const cont = GRUPOS.map((g) => [g, sinaisDe(g)]).sort((a, b) => b[1].length - a[1].length);
-  const [g1, s1] = cont[0];
-  const empatados = cont.filter(([, s]) => s.length === s1.length).map(([g]) => g);
-  const nomes = (s) => lista(s.map((l) => TELA[l.id].nome[0].toLowerCase() + TELA[l.id].nome.slice(1)));
-  $("titulo").textContent = empatados.length > 1
-    ? `${lista(empatados)} empatam como os grupos que mais se afastam, em ${s1.length} das 6 leituras cada`
-    : `Comece pelo ${g1}: é o grupo que mais se afasta em ${s1.length} das 6 leituras`;
-  const resto = cont.slice(1).map(([g, s]) => s.length ? `${g} em ${nomes(s)}` : `${g} em nenhuma`);
-  $("subtitulo").textContent = `${g1}: ${nomes(s1)}. ${maiuscula(lista(resto))}. Cada linha abaixo resume uma tela; a célula leva ao detalhe do grupo.`;
+  const partes = GRUPOS.map((g) => { const a = assuntosDe(g); return a.length ? `${g} por ${nomeAssunto(a[0].id)}` : `${g} pelo que o grupo quiser mostrar`; });
+  $("titulo").textContent = `Um assunto para abrir cada conversa: ${lista(partes)}`;
+  $("subtitulo").textContent = "A orientadora conversa com os três grupos; esta página sugere por onde começar com cada um. O assunto sugerido é o primeiro, na ordem de prioridade dos requisitos, em que o grupo tem o maior valor da linha. Não é ordem de urgência entre os grupos nem nota.";
   const c = D.contexto;
   $("contexto").replaceChildren(...[
     ["Período", `${fmt(L.R01.inicio)} a ${fmt(L.R01.fim)}`], ["Grupos", `${GRUPOS.length}, com 7 integrantes cada`],
@@ -628,9 +625,10 @@ function placar() {
       const larg = escala ? Math.min(100, 100 * x.valor / escala) : 0;
       const av = avisos(l.id, g);
       const a = h("a", { class: "cel" + (s ? " sinal" : ""), href: hrefTela(t, g),
-        "aria-label": `${l.id}, ${g}: ${l.valor(x)}, ${l.texto(x)}` + (s ? ". O grupo que mais se afasta nesta leitura" : "") + (av.length ? `. Registro abaixo de ${P.cobertura}%: ${av.map((b) => CAMPO_CURTO[b.chave]).join(", ")}` : "") }, [
+        "aria-label": `${l.id}, ${g}: ${l.valor(x)}, ${l.texto(x)}` + (s ? ". Maior valor da linha" : "") + (av.length ? `. Registro abaixo de ${P.cobertura}%: ${av.map((b) => CAMPO_CURTO[b.chave]).join(", ")}` : "") }, [
         h("span", { class: "g-mob", "aria-hidden": "true", text: g }),
-        h("span", { class: "v" }, [l.valor(x), s ? h("span", { class: "tri", "aria-hidden": "true", text: "▲" }) : null]),
+        h("span", { class: "v" }, [l.valor(x), s ? h("span", { class: "tri", "aria-hidden": "true", text: "◆" }) : null]),
+        s ? h("span", { class: "maior", "aria-hidden": "true", text: "maior valor da linha" }) : null,
         h("span", { class: "barra", "aria-hidden": "true" }, [h("i", { style: `width: ${Math.max(larg, x.valor ? 2 : 0)}%` })]),
         h("span", { class: "t", text: l.texto(x) }),
         av.length ? h("span", { class: "cobertura", text: lista(av.map((b) => `${CAMPO_CURTO[b.chave] || b.chave} ${num(b.pct, 0)}%`)) }) : null]);
@@ -638,9 +636,7 @@ function placar() {
     });
     return h("tr", {}, [req, ...cels]);
   });
-  const pe = h("tfoot", {}, [h("tr", {}, [h("td", { text: "Leituras com ▲" }),
-    ...GRUPOS.map((g) => h("td", { text: `${g}: ${sinaisDe(g).length} de 6` }))])]);
-  $("placar").replaceChildren(h("caption", { class: "sr", text: "Leitura principal de cada requisito por grupo" }), thead, h("tbody", {}, corpo), pe);
+  $("placar").replaceChildren(h("caption", { class: "sr", text: "Leitura principal de cada requisito por grupo" }), thead, h("tbody", {}, corpo));
 }
 
 // Frase curta do assunto, para o roteiro do grupo
@@ -650,17 +646,29 @@ const ASSUNTO = {
   R03: (x) => `Registro: ${x.valor} de ${x.usados} campos abaixo de ${P.cobertura}%.`,
   R04: (x) => `Planejado × realizado: ${pct(x.valor)} dos cartões levaram mais que o tamanho previa.`,
   R05: (x) => `Concentração: Gini ${gTxt(x.valor)}, ${faixa(x.valor)}.`,
-  R06: (x) => `Eixos: ${x.valor} de 7 integrantes com ${P.foco}%+ dos cartões em ${lista([...new Set(x.focados.map((f) => f.eixo))])}.`,
+  R06: (x) => `Divisão das tarefas: 2 dos 7 integrantes têm ${pct(x.valor)} dos cartões de ${x.eixo} (divisão igual: 29%).`,
+};
+// O que observar na sprint seguinte, para a orientadora saber se a conversa mudou algo.
+// Uma sprint só varia por acaso (regressão à média): o sinal é para acompanhar, não prova de efeito.
+const OBSERVAR = {
+  R01: "Observar: silêncios de 3+ dias dentro da sprint seguinte.",
+  R02: "Observar: parte dos cartões acima do limite na etapa de maior acúmulo.",
+  R03: "Observar: os campos citados voltando a 80% ou mais.",
+  R04: "Observar: a mediana de realizado ÷ planejado se aproximando de 1.",
+  R05: "Observar: o Gini da sprint seguinte, na tela do R05 (Gini por sprint).",
+  R06: "Observar: a parte dos 2 integrantes nesse eixo se aproximando de 29%.",
 };
 function roteiros() {
   $("roteiros").replaceChildren(...GRUPOS.map((g) => {
-    const ss = sinaisDe(g);
+    const ss = assuntosDe(g);
     const baixos = L.R03.grupos[g].baixos;
     return h("article", { class: "roteiro", "aria-label": `Roteiro do ${g}` }, [
-      h("h3", {}, [g, h("small", { text: `${ss.length} de 6 leituras com ▲` })]),
+      h("h3", {}, [g, h("small", { text: ss.length ? `começar por: ${nomeAssunto(ss[0].id)}` : "sem maior valor de linha" })]),
       ss.length
-        ? h("ol", {}, ss.map((l) => h("li", {}, [ASSUNTO[l.id](L[l.id].grupos[g]) + " ", h("a", { href: hrefTela(TELA[l.id], g), text: `abrir ${l.id}` })])))
-        : h("p", { class: "nada", text: "Em nenhuma leitura este grupo é o que mais se afasta. A conversa pode partir do que o grupo quiser mostrar; o detalhe de cada tela continua valendo." }),
+        ? h("ol", {}, ss.map((l) => h("li", {}, [ASSUNTO[l.id](L[l.id].grupos[g]) + " ", h("a", { href: hrefTela(TELA[l.id], g), text: `abrir ${l.id}` }),
+            h("span", { class: "observar", text: OBSERVAR[l.id] })])))
+        : h("p", { class: "nada", text: "Em nenhuma linha este grupo tem o maior valor. A conversa pode partir do que o grupo quiser mostrar; o detalhe de cada tela continua valendo." }),
+      ss.length ? h("p", { class: "antes", text: "Uma sprint só varia por acaso: se o número mudar depois da conversa, isso não prova que foi a conversa." }) : null,
       h("p", { class: "antes", text: baixos.length
         ? `Antes, conferir o registro: ${lista(baixos.map((b) => `${CAMPO_CURTO[b.chave] || b.chave} ${num(b.pct, 0)}%`))} (afeta ${lista([...new Set(baixos.flatMap((b) => b.telas))].sort())}).`
         : `Registro: todos os campos usados pelas telas com ${P.cobertura}% ou mais.` }),
@@ -672,8 +680,8 @@ function conclusoes() {
   const por = (id, f) => GRUPOS.map((g) => f(L[id].grupos[g], g));
   const r1 = L.R01.grupos, depois = GRUPOS.map((g) => r1[g].maior_depois).filter(Boolean).map((c) => c.dias);
   const etapas = new Set(GRUPOS.map((g) => L.R02.grupos[g].etapa));
-  const r6 = L.R06.grupos, totFoco = GRUPOS.reduce((a, g) => a + r6[g].valor, 0);
-  const lider = GRUPOS.filter((g) => r6[g].eixo !== "Documentação");
+  const r6 = L.R06.grupos;
+  const lider = GRUPOS.filter((g) => r6[g].perfil_eixo !== "Documentação");
   const frases = {
     R01: `Até ${fmt(L.R01.marco)}, fim da última sprint com data, os silêncios de ${P.silencio} dias ou mais foram ${lista(por("R01", (x, g) => `${x.silencios} no ${g}`))}. `
       + (depois.length === GRUPOS.length ? `Depois dessa data os três param juntos por ${Math.min(...depois)} a ${Math.max(...depois)} dias: é o fim do calendário, não o silêncio de um grupo.` : ""),
@@ -685,18 +693,18 @@ function conclusoes() {
     R04: `Nos três grupos a maioria dos cartões levou mais que o tamanho previa: ${lista(por("R04", (x, g) => `${pct(x.valor)} no ${g} (mediana ${num(x.mediana, 1)}×)`))}. Como os dias por tamanho são premissa nossa, a pergunta é sobre como o grupo estima, não sobre atraso.`,
     R05: `Gini dos dias planejados concluídos: ${lista(por("R05", (x, g) => `${gTxt(x.valor)} no ${g} (${faixa(x.valor)})`))}. `
       + (GRUPOS.some((g) => L.R05.grupos[g].valor > 0.4) ? "" : "Nenhum grupo passa da faixa de concentrado (acima de 0,4)."),
-    R06: `${plural(totFoco, "integrante ficou", "integrantes ficaram")} com ${P.foco}% ou mais dos cartões num eixo só: ${lista(por("R06", (x, g) => `${x.valor} no ${g}` + (x.valor ? ` (${lista([...new Set(x.focados.map((f) => f.eixo))])})` : "")))}. `
-      + (lider.length && lider.length < GRUPOS.length ? `O ${lista(lider)} é o único em que ${lista(lider.map((g) => r6[g].eixo.toLowerCase()))} lidera o perfil do grupo; nos outros, a documentação.` : ""),
+    R06: `Eixo mais concentrado de cada grupo: ${lista(por("R06", (x, g) => `${x.eixo} no ${g}, com ${pct(x.valor)} em 2 integrantes`))}; com divisão igual seria 29%. `
+      + (lider.length && lider.length < GRUPOS.length ? `O ${lista(lider)} é o único em que ${lista(lider.map((g) => r6[g].perfil_eixo.toLowerCase()))} lidera o perfil do grupo; nos outros, a documentação.` : ""),
   };
   $("conclusoes").replaceChildren(...LINHAS.map((l) => h("li", {}, [
-    h("span", { class: "qual" }, [h("a", { href: hrefTela(TELA[l.id]), text: `${l.id} · ${TELA[l.id].nome}` }), h("small", { text: [...l.sinal].length ? `▲ ${lista([...l.sinal])}` : "sem ▲" })]),
+    h("span", { class: "qual" }, [h("a", { href: hrefTela(TELA[l.id]), text: `${l.id} · ${TELA[l.id].nome}` }), h("small", { text: [...l.sinal].length ? `◆ maior valor: ${lista([...l.sinal])}` : "sem maior valor" })]),
     h("span", { text: frases[l.id] })])));
 }
 
 function premissasVG() {
   const escolha = { R01: ["Silêncio", "Marco de fim de sprint"], R02: ["Acúmulo"], R03: ["Cobertura mínima"],
     R04: ["Dias planejados por tamanho", "Levou mais que o planejado"], R05: ["Medida principal", "Faixas de leitura"],
-    R06: ["Eixo de tarefa", "Foco num eixo só"] };
+    R06: ["Eixo de tarefa", "Concentração do eixo"] };
   const itens = [];
   for (const [tela, nomes] of Object.entries(escolha))
     for (const n of nomes) {

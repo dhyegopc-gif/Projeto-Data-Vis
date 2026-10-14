@@ -1,37 +1,64 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Eixos de tarefa</title>
+<title>Eixos no grupo</title>
 <style>
 /*__CSS_COMUM__*/
+/* divisão de cada eixo entre os integrantes: uma linha por eixo, uma barra por integrante */
+.divisao { display: grid; gap: 4px; }
+.div-linha {
+  display: grid; grid-template-columns: 170px minmax(0, 1fr) 190px; gap: 6px 16px; align-items: end;
+  padding: 10px 0; border-bottom: 1px solid var(--grid);
+}
+.div-linha:last-child { border-bottom: 0; }
+@media (max-width: 760px) {
+  .div-linha { grid-template-columns: minmax(0, 1fr); grid-template-areas: "rot" "res" "barras"; }
+  .div-linha .div-rot { grid-area: rot; } .div-linha .div-res { grid-area: res; } .div-linha .barras { grid-area: barras; }
+}
+.div-rot { display: grid; gap: 2px; align-self: center; }
+.div-rot button.link { font-weight: 600; font-size: 15px; text-align: left; }
+.div-rot small { color: var(--muted); font-size: 12px; }
+.div-res { display: grid; gap: 2px; align-self: center; font-size: 13px; color: var(--ink-2); }
+.div-res strong { color: var(--ink); font-size: 18px; font-variant-numeric: tabular-nums; }
+.div-linha.poucos .div-res strong { color: var(--ink-2); }
+.barras { position: relative; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; height: 112px; align-items: end; }
+.barras .igual { position: absolute; left: 0; right: 0; border-top: 1px dashed var(--ink-2); pointer-events: none; }
+.barra-p {
+  font: inherit; display: flex; flex-direction: column; justify-content: flex-end; align-items: stretch; gap: 2px;
+  height: 100%; padding: 0; border: 0; background: none; cursor: pointer; color: var(--ink); min-width: 0;
+}
+.barra-p .val { font-size: 11px; height: 14px; line-height: 14px; text-align: center; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.barra-p .col { background: var(--series); border-radius: 3px 3px 0 0; min-height: 1px; }
+.barra-p .col.zero { background: none; border-top: 2px solid var(--axis); border-radius: 0; }
+.div-linha.poucos .barra-p .col { background: var(--wash-2); border: 1px dashed var(--series); }
+.barra-p .quem { font-size: 11px; height: 18px; line-height: 14px; box-sizing: border-box; text-align: center; color: var(--muted); padding-top: 3px; border-top: 1px solid var(--axis); }
+.barra-p:hover .col, .barra-p:focus-visible .col { filter: brightness(0.85); }
+.barra-p[aria-pressed="true"] .col { box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--ink); }
+.barra-p[aria-pressed="true"] .quem { color: var(--ink); font-weight: 600; }
+
 .multiplos { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; }
 @media (max-width: 1000px) { .multiplos { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .multiplos { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-.duas.r06 { grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); }
-@media (max-width: 900px) { .duas.r06 { grid-template-columns: minmax(0, 1fr); } }
-.lista-max td:nth-child(2) { min-width: 220px; }
 .mini {
   font: inherit; color: var(--ink); background: var(--surface); text-align: left;
   border: 1px solid var(--border); border-radius: 10px; padding: 8px 8px 10px; cursor: pointer;
   display: grid; gap: 2px; min-width: 0;
 }
 .mini:hover { border-color: var(--ink-2); }
-.mini[aria-pressed="true"] { border-color: var(--series); box-shadow: inset 0 0 0 1px var(--series); }
+.mini[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
 .mini .quem { font-weight: 600; font-size: 13px; display: flex; justify-content: space-between; gap: 6px; }
 .mini .quem small { font-weight: 400; color: var(--muted); font-size: 11px; }
 .mini .foco { font-size: 12px; color: var(--ink-2); }
-.mini .foco.alerta::before { content: "▲ "; color: var(--series-2); font-size: 10px; }
 .mini svg { display: block; width: 100%; height: auto; }
-.radar-grande { max-width: 460px; margin-inline: auto; width: 100%; }
-.seletor { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.lista-max td:nth-child(3) { min-width: 220px; }
 .calor td.c { text-align: right; font-variant-numeric: tabular-nums; min-width: 92px; }
 .calor td.c.forte { color: #fff; font-weight: 600; }
 .calor tr.ref td { border-top: 1px solid var(--axis); color: var(--ink-2); font-style: italic; }
 .calor tr.ref td.c.forte { color: #fff; }
-.calor tr.sel td:first-child { box-shadow: inset 3px 0 0 var(--series); }
+.calor tr.sel td:first-child { box-shadow: inset 3px 0 0 var(--ink); }
 .calor button.link { font-weight: 600; }
-.alerta-txt::before { content: "▲ "; color: var(--series-2); font-size: 10px; }
 .eixo-chip { display: inline-block; font-size: 11px; border: 1px solid var(--axis); border-radius: 999px; padding: 0 7px; margin: 0 4px 2px 0; white-space: nowrap; color: var(--ink-2); }
 .lista-max { max-height: 420px; overflow: auto; }
+.filtros-lista { display: grid; gap: 8px; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .calor td.c.forte { color: var(--ink); } }
 :root[data-theme="dark"] .calor td.c.forte { color: var(--ink); }
 </style>
@@ -39,9 +66,9 @@
 <div class="wrap">
   <nav aria-label="Telas do painel"><ul class="telas" id="telas"></ul></nav>
   <header>
-    <p class="eyebrow">R06 · Concentração por eixo de tarefa · para a orientação pedagógica</p>
-    <h1 id="titulo">Em que tipo de tarefa cada integrante trabalhou</h1>
-    <p class="pergunta">Cada integrante passou por vários eixos de tarefa (código, design, documentação, negócio) ou ficou preso a um só? Ficar o módulo inteiro num eixo só tira do aluno a chance de praticar os outros, e é isso que a tela ajuda a ver.</p>
+    <p class="eyebrow">R06 · Divisão dos tipos de tarefa no grupo · para a orientação pedagógica</p>
+    <h1 id="titulo">Como o grupo divide os tipos de tarefa entre os integrantes</h1>
+    <p class="pergunta">Os cartões de cada tipo de tarefa (código, design, documentação, negócio) passam pelos 7 integrantes ou ficam com poucos? Em PBL a expectativa é que todos passem pelas áreas. Quando um eixo fica com duas pessoas, a conversa é com o grupo, sobre como ele divide o trabalho.</p>
   </header>
 
   <section class="filtros" aria-label="Filtros">
@@ -51,50 +78,54 @@
   </section>
 
   <section class="tiles" aria-label="Resumo do grupo">
-    <div class="tile"><span class="rotulo">Focados num eixo só</span><span class="valor" id="t-foco">–</span><span class="sub" id="t-foco-sub"></span></div>
+    <div class="tile"><span class="rotulo">Eixo mais concentrado</span><span class="valor" id="t-conc">–</span><span class="sub" id="t-conc-sub"></span></div>
     <div class="tile"><span class="rotulo">Eixo mais comum no grupo</span><span class="valor" id="t-eixo">–</span><span class="sub" id="t-eixo-sub"></span></div>
+    <div class="tile"><span class="rotulo">Integrantes num eixo só</span><span class="valor" id="t-foco">–</span><span class="sub" id="t-foco-sub"></span></div>
     <div class="tile"><span class="rotulo">Cartões com eixo</span><span class="valor" id="t-n">–</span><span class="sub" id="t-n-sub"></span></div>
-    <div class="tile"><span class="rotulo">Fora do radar</span><span class="valor" id="t-fora">–</span><span class="sub" id="t-fora-sub"></span></div>
+  </section>
+
+  <section class="card" aria-labelledby="h-div">
+    <div class="card-topo">
+      <div>
+        <h2 id="h-div">Como os cartões de cada eixo se dividem entre os 7 integrantes</h2>
+        <p class="limite"><strong>Mede como o grupo distribuiu o trabalho registrado no quadro, não o que cada um sabe fazer.</strong> O responsável do cartão nem sempre é quem executou, e trabalho em dupla fica no nome de um só.</p>
+        <p class="recorte" id="recorte"></p>
+      </div>
+      <button type="button" class="botao" id="bt-tabela" aria-expanded="false" aria-controls="tabela-div">Ver como tabela</button>
+    </div>
+    <div class="legenda" aria-hidden="true" id="legenda"></div>
+    <div class="divisao" id="divisao" role="group" aria-label="Divisão de cada eixo entre os integrantes"></div>
+    <p class="dica">Cada barra é a parte de um integrante nos cartões do eixo; os integrantes vêm sempre na mesma ordem, a do identificador, e não do volume. Clique numa barra para listar os cartões dele naquele eixo, ou no nome do eixo para listar os do grupo inteiro.</p>
+    <div class="rolagem" id="tabela-div" hidden></div>
+  </section>
+
+  <section class="card" aria-labelledby="h-lista">
+    <div>
+      <h2 id="h-lista">Cartões do grupo</h2>
+      <p class="contagem" id="lista-sub"></p>
+    </div>
+    <div class="filtros-lista">
+      <div class="presets" id="f-eixo" role="group" aria-label="Eixo da lista"></div>
+      <div class="presets" id="f-pessoa" role="group" aria-label="Integrante da lista"></div>
+    </div>
+    <div class="rolagem lista-max" id="lista"></div>
   </section>
 
   <section class="card" aria-labelledby="h-mult">
-    <div class="card-topo">
-      <div>
-        <h2 id="h-mult">Perfil de cada integrante, na mesma escala</h2>
-        <p class="limite"><strong>Mede onde o integrante foi alocado no quadro, não o que ele sabe fazer.</strong> O responsável do cartão nem sempre é quem executou, e trabalho em dupla fica no nome de um só.</p>
-        <p class="recorte" id="recorte"></p>
-      </div>
+    <div>
+      <h2 id="h-mult">Perfil de cada integrante, na mesma escala</h2>
+      <p class="contagem" id="mult-sub"></p>
     </div>
-    <div class="legenda" aria-hidden="true" id="legenda"></div>
+    <div class="legenda" aria-hidden="true" id="legenda-radar"></div>
     <div class="legenda" role="note" aria-label="Significado das siglas dos eixos">
-      <span><strong>Cod</strong> = Código</span>
+      <span><strong>Cód</strong> = Código</span>
       <span><strong>Des</strong> = Design</span>
       <span><strong>Doc</strong> = Documentação</span>
       <span><strong>Neg</strong> = Negócio</span>
     </div>
     <div class="multiplos" id="multiplos" role="group" aria-label="Integrantes do grupo"></div>
-    <p class="dica">Clique num integrante (ou Tab e Enter) para abrir o radar e os cartões dele. Os integrantes vêm na ordem do identificador, não do volume.</p>
+    <p class="dica">Leia os vértices, não a área: o radar exagera a diferença de área. Clique num integrante (ou Tab e Enter) para listar os cartões dele.</p>
   </section>
-
-  <div class="duas r06">
-    <section class="card" aria-labelledby="h-radar">
-      <div>
-        <h2 id="h-radar">Radar do integrante</h2>
-        <p class="contagem" id="radar-sub"></p>
-      </div>
-      <div class="seletor presets" id="seletor" role="group" aria-label="Integrante em destaque"></div>
-      <div class="grafico radar-grande" id="g-radar"></div>
-      <p class="dica">Leia os vértices, não a área: cada vértice é a parte do eixo nos cartões da pessoa. A linha tracejada é o grupo inteiro, para comparar.</p>
-    </section>
-    <section class="card" aria-labelledby="h-lista">
-      <div>
-        <h2 id="h-lista">Cartões do integrante</h2>
-        <p class="contagem" id="lista-sub"></p>
-      </div>
-      <div class="presets" id="f-eixo" role="group" aria-label="Eixo da lista"></div>
-      <div class="rolagem lista-max" id="lista"></div>
-    </section>
-  </div>
 
   <section class="card" aria-labelledby="h-calor">
     <div>
@@ -117,18 +148,18 @@
     <div>
       <h3>Como ler</h3>
       <ul>
-        <li>Parte do eixo = cartões do eixo ÷ cartões com eixo do integrante. Cartão de dois eixos conta metade em cada um.</li>
-        <li>Todos os radares usam a mesma escala, de 0 (centro) a 100% (borda). O anel tracejado marca o limiar de foco.</li>
-        <li>Um vértice além do anel vira triângulo laranja: a pessoa passou do limiar naquele eixo.</li>
-        <li>O radar exagera a diferença de área; a tabela de partes traz os números exatos.</li>
+        <li>Parte do integrante no eixo = cartões dele no eixo ÷ cartões do eixo no grupo. Cartão de dois eixos conta metade em cada um.</li>
+        <li>A linha tracejada é a divisão igual entre os 7 (14%). Barras perto dela: o eixo passou por todos; poucas barras altas: o eixo ficou com poucos.</li>
+        <li>"2 integrantes têm X%" soma as duas maiores barras do eixo; com divisão igual seria 29%.</li>
+        <li>Todos os radares usam a mesma escala, de 0 (centro) a 100% (borda); o anel tracejado é o limiar de foco.</li>
       </ul>
     </div>
     <div><h3>Qualidade do registro</h3><ul id="nota-qualidade"></ul></div>
     <div>
       <h3>O que esta tela não sustenta</h3>
       <ul>
-        <li>Competência ou aprendizagem do aluno. Rótulo é registro de alocação, um indicador indireto.</li>
-        <li>Um ranking. Foco num eixo pode ser divisão de papéis combinada com o grupo; a tela aponta onde perguntar.</li>
+        <li>Competência ou aprendizagem do aluno. Rótulo é registro de alocação no quadro, um indicador indireto.</li>
+        <li>Um ranking ou uma conclusão sobre uma pessoa. A divisão fixa de papéis pode ter sido combinada pelo grupo; a tela diz onde perguntar, e a pergunta é feita ao grupo.</li>
         <li>Comparar a parte de Negócio entre grupos: o G03 não usa nenhum rótulo desse eixo, o que não quer dizer que não fez a tarefa.</li>
       </ul>
     </div>
@@ -141,22 +172,37 @@
 const D = __DADOS__;
 
 const EIXOS = D.eixos.map((e) => e.id);
+const CURTOS = ["Cód", "Des", "Doc", "Neg"];
 const GRUPOS = Object.keys(D.integrantes).sort();
 const LIMIARES = [60, 75, 90];
-const POUCOS = 10;
+const POUCOS = 10;        // cartões de um integrante
+const POUCOS_EIXO = 14;   // cartões de um eixo no grupo (2 por integrante)
+const IGUAL = 100 / 7;
+// Sem integrante escolhido: a tela abre no grupo, sem destacar ninguém
 const estado = { grupo: grupoDoEndereco(GRUPOS, GRUPOS[0]), sprint: "(todas)", limiar: 75, pessoa: null, eixo: "*" };
+const curto = (p) => p.slice(4);   // "G03-A12" -> "A12"
 
-function recorte(pessoa, grupo, sprint) {
-  const r = D.recortes[`${grupo ?? estado.grupo}|${sprint ?? estado.sprint}|${pessoa}`];
+function recorte(pessoa) {
+  const r = D.recortes[`${estado.grupo}|${estado.sprint}|${pessoa}`];
   if (!r || !r.n) return null;
   const tot = r.v.reduce((a, v) => a + v, 0);
   const pcts = r.v.map((v) => 100 * v / tot);
   const iMax = pcts.indexOf(Math.max(...pcts));
   return { n: r.n, sem: r.sem, v: r.v, pcts, iMax, max: pcts[iMax] };
 }
+const divisao = (eixo) => D.divisao[`${estado.grupo}|${estado.sprint}|${eixo}`] || { n: 0, pessoas: 0, dois: 0, pct2: null, parte: 0 };
 const focado = (r) => r && r.max >= estado.limiar;
 const poucos = (r) => r && r.n < POUCOS;
 const pctCurto = (v) => num(v, 0) + "%";
+const cartoes1 = (v) => num(v, 1);
+
+// Eixo mais concentrado: maior parte dos 2 integrantes que mais têm, entre os eixos com cartões suficientes
+function maisConcentrado() {
+  const ok = EIXOS.map((e) => [e, divisao(e)]).filter(([, d]) => d.n >= POUCOS_EIXO && d.pct2 != null);
+  if (!ok.length) return null;
+  ok.sort((a, b) => b[1].pct2 - a[1].pct2 || b[1].n - a[1].n);
+  return { eixo: ok[0][0], ...ok[0][1] };
+}
 
 // ---------- filtros ----------
 function botoes(id, itens, atual, rotulo, ao) {
@@ -172,6 +218,10 @@ function montarFiltros() {
   botoes("f-sprint", ["(todas)", ...D.sprints], estado.sprint, (s) => s === "(todas)" ? "Todas" : s, (s) => { estado.sprint = s; atualizar(); });
   botoes("f-limiar", LIMIARES, estado.limiar, (l) => `${l}%` + (l === 75 ? " (padrão)" : ""), (l) => { estado.limiar = l; atualizar(); });
 }
+function escolher(pessoa, eixo) {
+  estado.pessoa = pessoa; estado.eixo = eixo;
+  atualizar();
+}
 
 // ---------- render ----------
 function atualizar() { comFoco(renderizar); }
@@ -179,146 +229,164 @@ function renderizar() {
   montarFiltros();
   const pessoas = D.integrantes[estado.grupo];
   const rs = pessoas.map((p) => [p, recorte(p)]);
-  if (!estado.pessoa) {
-    // abre no integrante mais focado: a tela começa mostrando o que faz
-    const com = rs.filter(([, r]) => r).sort((a, b) => b[1].max - a[1].max);
-    estado.pessoa = com.length ? com[0][0] : pessoas[0];
-  }
   const sprintTxt = estado.sprint === "(todas)" ? "todas as sprints" : estado.sprint;
-  $("titulo").textContent = `Em que tipo de tarefa cada integrante do ${estado.grupo} trabalhou, ${sprintTxt}`;
+  const mc = maisConcentrado();
+  $("titulo").textContent = mc
+    ? `No ${estado.grupo}, ${sprintTxt}, o eixo mais concentrado é ${mc.eixo}: 2 dos 7 integrantes têm ${pctCurto(mc.pct2)} dos cartões dele`
+    : `No ${estado.grupo}, ${sprintTxt}, nenhum eixo tem cartões suficientes para ler a divisão`;
 
   const g = recorte("(grupo)");
+  $("t-conc").textContent = mc ? mc.eixo : "–";
+  $("t-conc-sub").textContent = mc
+    ? `2 integrantes têm ${pctCurto(mc.pct2)} dos ${cartoes1(mc.n)} cartões do eixo; com divisão igual seria 29%`
+    : `nenhum eixo com ${POUCOS_EIXO} cartões ou mais neste recorte`;
   const foc = rs.filter(([, r]) => focado(r));
   const comCartao = rs.filter(([, r]) => r).length;
   $("t-foco").textContent = `${foc.length} de 7`;
-  $("t-foco-sub").textContent = foc.length
-    ? `com ${estado.limiar}% ou mais dos cartões num mesmo eixo` + (comCartao < 7 ? `; ${plural(7 - comCartao, "integrante sem", "integrantes sem")} cartão no recorte` : "")
-    : `ninguém com ${estado.limiar}% ou mais num mesmo eixo`;
+  $("t-foco-sub").textContent = `com ${estado.limiar}% ou mais dos cartões num mesmo eixo; a tela conta, não aponta quem`
+    + (comCartao < 7 ? `. ${plural(7 - comCartao, "integrante sem", "integrantes sem")} cartão no recorte` : "");
+  const f = D.fora[estado.grupo];
   if (g) {
     $("t-eixo").textContent = EIXOS[g.iMax];
     $("t-eixo-sub").textContent = `${pct(g.max)} dos cartões com eixo dos 7 integrantes`;
     $("t-n").textContent = num(g.n);
-    $("t-n-sub").textContent = `dos integrantes, abertos e fechados, ${sprintTxt}`;
+    $("t-n-sub").textContent = estado.sprint === "(todas)"
+      ? `fora da conta: ${plural(g.sem, "cartão", "cartões")} sem rótulo de eixo, ${num(f.sem_responsavel)} sem responsável e ${num(f.nao_integrante)} de quem não é integrante`
+      : `fora da conta: ${plural(g.sem, "cartão", "cartões")} sem rótulo de eixo na sprint`;
   } else {
     for (const id of ["t-eixo", "t-n"]) $(id).textContent = "–";
     $("t-eixo-sub").textContent = $("t-n-sub").textContent = "nenhum cartão neste recorte";
   }
-  const f = D.fora[estado.grupo];
-  const sem = g ? g.sem : 0;
-  $("t-fora").textContent = num(sem + (estado.sprint === "(todas)" ? f.sem_responsavel + f.nao_integrante : 0));
-  $("t-fora-sub").textContent = estado.sprint === "(todas)"
-    ? `${plural(sem, "cartão", "cartões")} sem rótulo de eixo; ${num(f.sem_responsavel)} sem responsável e ${num(f.nao_integrante)} de quem não é integrante`
-    : `${plural(sem, "cartão", "cartões")} sem rótulo de eixo na sprint`;
-  $("recorte").textContent = `${estado.grupo}, ${sprintTxt}. Foco num eixo só: ${estado.limiar}% ou mais dos cartões do integrante num mesmo eixo (premissa nossa). Com menos de ${POUCOS} cartões a leitura é frágil e o radar aparece tracejado.`;
-  const leg = $("legenda");
-  leg.replaceChildren(
-    h("span", {}, [h("i", { class: "chave s1" }), "integrante"]),
-    h("span", {}, [h("i", { class: "chave linha", style: "width: 14px; background: var(--muted)" }), "grupo inteiro (tracejado)"]),
-    h("span", {}, [marcaLegenda("triangulo", "var(--series-2)"), `eixo com ${estado.limiar}% ou mais`]),
+  $("recorte").textContent = `${estado.grupo}, ${sprintTxt}: ${g ? plural(g.n, "cartão", "cartões") : "nenhum cartão"} com eixo dos 7 integrantes. Eixo com menos de ${POUCOS_EIXO} cartões aparece tracejado e fica fora do "mais concentrado" (premissa nossa).`;
+  $("legenda").replaceChildren(
+    h("span", {}, [h("i", { class: "chave s1" }), "parte do integrante nos cartões do eixo"]),
+    h("span", {}, [h("i", { class: "chave linha", style: "width: 14px; background: var(--ink-2)" }), "divisão igual entre os 7 (14%)"]),
   );
+  desenharDivisao(pessoas);
+  tabelaDivisao(pessoas);
+  lista(pessoas);
   desenharMultiplos(rs, g);
-  seletor(pessoas);
-  desenharRadarGrande(g);
-  lista();
   calor(rs, g);
   notas();
 }
 
+function desenharDivisao(pessoas) {
+  const linhas = EIXOS.map((e, i) => {
+    const d = divisao(e);
+    const partes = pessoas.map((p) => {
+      const r = D.recortes[`${estado.grupo}|${estado.sprint}|${p}`];
+      const v = r ? r.v[i] : 0;
+      return { p, v, pct: d.n ? 100 * v / d.n : 0 };
+    });
+    return { e, d, partes };
+  });
+  // a mesma escala em todas as linhas: do zero ao maior valor do recorte, arredondado para cima de 10 em 10.
+  // Cada barra tem 112 px: 14 do valor, 18 do identificador e 4 de espaço; a coluna usa os 76 restantes.
+  const topo = Math.max(30, Math.ceil(Math.max(...linhas.flatMap((l) => l.partes.map((x) => x.pct))) / 10) * 10);
+  $("divisao").replaceChildren(...linhas.map(({ e, d, partes }) => {
+    const frag = d.n < POUCOS_EIXO;
+    const nome = h("button", { type: "button", class: "link", "data-foco": `eixo:${e}`, text: e });
+    nome.addEventListener("click", () => escolher(null, e));
+    const barras = h("div", { class: "barras" }, [
+      h("i", { class: "igual", style: `bottom: ${18 + (112 - 36) * IGUAL / topo}px` }),
+      ...partes.map(({ p, v, pct: pp }) => {
+        const sel = estado.pessoa === p && estado.eixo === e;
+        const b = h("button", { type: "button", class: "barra-p", "data-foco": `barra:${e}:${p}`, "aria-pressed": String(sel),
+          "aria-label": `${p}, ${e}: ${cartoes1(v)} de ${cartoes1(d.n)} cartões do eixo (${pctCurto(pp)})` }, [
+          h("span", { class: "val", "aria-hidden": "true", text: d.n ? pctCurto(pp) : "" }),
+          h("span", { class: "col" + (v ? "" : " zero"), style: `height: ${(112 - 36) * Math.min(pp, topo) / topo}px` }),
+          h("span", { class: "quem", "aria-hidden": "true", text: curto(p) })]);
+        b.addEventListener("click", () => escolher(p, e));
+        b.addEventListener("pointermove", (ev) => dica.mostrar([["v", pctCurto(pp)], ["d", `${p}, ${e}: ${cartoes1(v)} de ${cartoes1(d.n)} cartões do eixo`]], ev.clientX, ev.clientY));
+        b.addEventListener("pointerleave", () => dica.esconder());
+        return b;
+      })]);
+    const resumo = h("div", { class: "div-res" }, d.n
+      ? [h("span", {}, ["2 integrantes têm ", h("strong", { text: pctCurto(d.pct2) })]),
+         h("span", { text: `${d.pessoas} de 7 com cartão no eixo` + (frag ? "; poucos cartões, leitura frágil" : "") })]
+      : [h("span", { text: "nenhum cartão neste eixo no recorte" })]);
+    return h("div", { class: "div-linha" + (frag ? " poucos" : "") }, [
+      h("div", { class: "div-rot" }, [nome, h("small", { text: `${cartoes1(d.n)} cartões · ${pctCurto(d.parte)} do grupo` })]),
+      barras, resumo]);
+  }));
+}
+
+function tabelaDivisao(pessoas) {
+  $("tabela-div").replaceChildren(tabela(
+    [{ t: "Eixo" }, { t: "Cartões", num: true }, { t: "Parte do grupo", num: true }, { t: "Com cartão", num: true },
+     { t: "2 integrantes têm", num: true }, ...pessoas.map((p) => ({ t: p, num: true }))],
+    EIXOS.map((e, i) => {
+      const d = divisao(e);
+      return [e, cartoes1(d.n), pctCurto(d.parte), `${d.pessoas} de 7`, d.n ? pctCurto(d.pct2) : "–",
+        ...pessoas.map((p) => { const r = D.recortes[`${estado.grupo}|${estado.sprint}|${p}`]; const v = r ? r.v[i] : 0; return d.n ? `${pctCurto(100 * v / d.n)} (${cartoes1(v)})` : "–"; })];
+    }),
+    "Divisão de cada eixo entre os integrantes"));
+}
+
 // Um radar: 4 eixos fixos (Código no alto, depois sentido horário), raio linear 0–100%.
-function radar(svg, cx, cy, R, r, g, grande) {
+function radar(svg, cx, cy, R, r, g) {
   const ang = (i) => -Math.PI / 2 + i * 2 * Math.PI / EIXOS.length;
   const ponto = (i, p) => [cx + Math.cos(ang(i)) * R * p / 100, cy + Math.sin(ang(i)) * R * p / 100];
   const poli = (ps) => ps.map((p, i) => ponto(i, p).join(",")).join(" ");
   for (const p of [25, 50, 100]) el("polygon", { points: poli(EIXOS.map(() => p)), fill: "none", stroke: "var(--grid)", "stroke-width": 1 }, svg);
   el("polygon", { points: poli(EIXOS.map(() => estado.limiar)), fill: "none", stroke: "var(--ink-2)", "stroke-width": 1, "stroke-dasharray": "2 3" }, svg);
   EIXOS.forEach((_, i) => { const [x, y] = ponto(i, 100); el("line", { x1: cx, y1: cy, x2: x, y2: y, stroke: "var(--grid)", "stroke-width": 1 }, svg); });
-  if (grande) texto(svg, cx + 4, cy - R * estado.limiar / 100 - 3, `${estado.limiar}%`, { class: "eixo" });
   if (g) el("polygon", { points: poli(g.pcts), fill: "none", stroke: "var(--muted)", "stroke-width": 1.5, "stroke-dasharray": "5 3" }, svg);
-  if (!r) return { ponto };
+  if (!r) return;
   el("polygon", { points: poli(r.pcts), fill: "var(--wash)", stroke: "var(--series)", "stroke-width": 2, "stroke-linejoin": "round",
     "stroke-dasharray": poucos(r) ? "4 3" : "none" }, svg);
-  r.pcts.forEach((p, i) => {
-    const [x, y] = ponto(i, p);
-    if (p >= estado.limiar) marca(svg, "triangulo", x, y, grande ? 5.5 : 4, { fill: "var(--series-2)", stroke: "var(--surface)", "stroke-width": 1.5 });
-    else el("circle", { cx: x, cy: y, r: grande ? 4 : 2.5, fill: "var(--series)", stroke: "var(--surface)", "stroke-width": 1.5 }, svg);
-  });
-  return { ponto };
+  r.pcts.forEach((p, i) => { const [x, y] = ponto(i, p); el("circle", { cx: x, cy: y, r: 2.5, fill: "var(--series)", stroke: "var(--surface)", "stroke-width": 1.5 }, svg); });
 }
 
 function desenharMultiplos(rs, g) {
-  const caixa = $("multiplos");
-  caixa.replaceChildren(...rs.map(([p, r]) => {
-    const sel = p === estado.pessoa;
+  $("mult-sub").textContent = `${estado.grupo}, ${estado.sprint === "(todas)" ? "todas as sprints" : estado.sprint}. Cada radar mostra em que eixos estão os cartões de um integrante; a linha tracejada é o grupo inteiro e o anel, o limiar de foco (${estado.limiar}%). Com menos de ${POUCOS} cartões o radar aparece tracejado.`;
+  $("legenda-radar").replaceChildren(
+    h("span", {}, [h("i", { class: "chave s1" }), "integrante"]),
+    h("span", {}, [h("i", { class: "chave linha", style: "width: 14px; background: var(--muted)" }), "grupo inteiro (tracejado)"]),
+    h("span", {}, [h("i", { class: "chave linha", style: "width: 14px; background: var(--ink-2)" }), `anel: ${estado.limiar}%`]),
+  );
+  $("multiplos").replaceChildren(...rs.map(([p, r]) => {
+    const sel = p === estado.pessoa && estado.eixo === "*";
     const b = h("button", { type: "button", class: "mini", "data-foco": `pessoa:${p}`, "aria-pressed": String(sel),
       "aria-label": `${p}: ` + (r ? EIXOS.map((e, i) => `${e} ${pctCurto(r.pcts[i])}`).join(", ") + `, ${plural(r.n, "cartão", "cartões")}` : "sem cartão neste recorte") });
     const W = 150, H = 136, cx = W / 2, cy = 68, R = 52;
     const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, "aria-hidden": "true" });
-    radar(svg, cx, cy, R, r, g, false);
-    const curtos = ["Cód", "Des", "Doc", "Neg"];
+    radar(svg, cx, cy, R, r, g);
     [[cx, cy - R - 6, "middle"], [cx + R + 4, cy + 4, "start"], [cx, cy + R + 14, "middle"], [cx - R - 4, cy + 4, "end"]]
-      .forEach(([x, y, a], i) => texto(svg, x, y, curtos[i], { class: "eixo", "text-anchor": a }));
-    const foco = r ? `${EIXOS[r.iMax]} ${pctCurto(r.max)}` + (poucos(r) ? " · poucos cartões" : "") : "sem cartão no recorte";
+      .forEach(([x, y, a], i) => texto(svg, x, y, CURTOS[i], { class: "eixo", "text-anchor": a }));
     b.append(
       h("span", { class: "quem" }, [p, h("small", { text: r ? plural(r.n, "cartão", "cartões") : "" })]),
       svg,
-      h("span", { class: "foco" + (focado(r) ? " alerta-txt" : ""), text: foco }));
-    b.addEventListener("click", () => { estado.pessoa = p; estado.eixo = "*"; atualizar(); });
+      h("span", { class: "foco", text: r ? `maior parte: ${EIXOS[r.iMax]} ${pctCurto(r.max)}` + (poucos(r) ? " · poucos cartões" : "") : "sem cartão no recorte" }));
+    b.addEventListener("click", () => escolher(p, "*"));
     return b;
   }));
 }
 
-function seletor(pessoas) {
-  botoes("seletor", pessoas, estado.pessoa, (p) => p, (p) => { estado.pessoa = p; estado.eixo = "*"; atualizar(); });
-}
-
-function desenharRadarGrande(g) {
-  const caixa = $("g-radar"), r = recorte(estado.pessoa);
-  $("radar-sub").textContent = r
-    ? `${estado.pessoa}: ${plural(r.n, "cartão", "cartões")} com eixo` + (r.sem ? ` e ${plural(r.sem, "sem", "sem")} eixo, fora do radar` : "") + (poucos(r) ? `. Poucos cartões: leitura frágil.` : ".")
-    : `${estado.pessoa} não tem cartão neste recorte.`;
-  const W = Math.min(Math.max(caixa.clientWidth, 280), 460), estreito = W < 380;
-  const R = estreito ? W * 0.26 : W * 0.3, cx = W / 2, cy = R + 44, H = cy + R + 50;
-  const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, height: H, role: "img",
-    "aria-label": r ? `Radar de ${estado.pessoa}: ` + EIXOS.map((e, i) => `${e} ${pct(r.pcts[i])}` + (g ? ` (grupo ${pct(g.pcts[i])})` : "")).join(", ") : `${estado.pessoa} sem cartão neste recorte` });
-  const { ponto } = radar(svg, cx, cy, R, r, g, true);
-  // rótulo de cada eixo: nome, parte da pessoa e do grupo
-  const pos = [[cx, cy - R - 30, "middle"], [cx + R + 10, cy - 6, "start"], [cx, cy + R + 20, "middle"], [cx - R - 10, cy - 6, "end"]];
-  EIXOS.forEach((e, i) => {
-    const [x, y, a] = pos[i];
-    texto(svg, x, y, e, { class: "rot-forte", "text-anchor": a });
-    if (r) texto(svg, x, y + 15, pct(r.pcts[i]) + (g ? ` · grupo ${pctCurto(g.pcts[i])}` : ""), { class: "rot", "text-anchor": a });
-    else if (g) texto(svg, x, y + 15, `grupo ${pctCurto(g.pcts[i])}`, { class: "rot", "text-anchor": a });
-    if (!r) return;
-    const [px, py] = ponto(i, r.pcts[i]);
-    const alvo = el("circle", { cx: px, cy: py, r: 14, fill: "transparent", tabindex: "-1" }, svg);
-    alvo.addEventListener("pointermove", (ev) => dica.mostrar([
-      ["v", pct(r.pcts[i])], ["d", `${estado.pessoa}, ${e}: ${num(r.v[i], 1)} de ${plural(r.n, "cartão", "cartões")}`],
-      ["s", g ? `no grupo inteiro: ${pct(g.pcts[i])}` : ""]], ev.clientX, ev.clientY));
-    alvo.addEventListener("pointerleave", () => dica.esconder());
-    alvo.addEventListener("click", () => { estado.eixo = e; atualizar(); });
-  });
-  caixa.replaceChildren(svg);
-}
-
-function lista() {
-  const cs = D.cartoes.filter(([g, , , s, , resp]) => g === estado.grupo && resp === estado.pessoa && (estado.sprint === "(todas)" || s === estado.sprint));
-  const conta = (e) => e === "*" ? cs.length : e === "" ? cs.filter((c) => !c[6]).length : cs.filter((c) => c[6].split(";").includes(e)).length;
-  const opcoes = ["*", ...EIXOS, ""].filter((e) => e === "*" || conta(e));
-  if (!opcoes.includes(estado.eixo)) estado.eixo = "*";
-  botoes("f-eixo", opcoes, estado.eixo, (e) => `${e === "*" ? "Todos" : e || "Sem eixo"} (${conta(e)})`, (e) => { estado.eixo = e; atualizar(); });
-  const vis = cs.filter((c) => estado.eixo === "*" || (estado.eixo === "" ? !c[6] : c[6].split(";").includes(estado.eixo)));
-  $("lista-sub").textContent = `${estado.pessoa}, ${estado.sprint === "(todas)" ? "todas as sprints" : estado.sprint}: ${plural(vis.length, "cartão", "cartões")} como responsável. Clique num vértice do radar para filtrar pelo eixo.`;
+function lista(pessoas) {
+  const doGrupo = D.cartoes.filter(([g, , , s]) => g === estado.grupo && (estado.sprint === "(todas)" || s === estado.sprint));
+  const temEixo = (c, e) => e === "*" || (e === "" ? !c[6] : c[6].split(";").includes(e));
+  const daPessoa = (c, p) => p === null || c[5] === p;
+  const contaE = (e) => doGrupo.filter((c) => daPessoa(c, estado.pessoa) && temEixo(c, e)).length;
+  const opcoes = ["*", ...EIXOS, ""].filter((e) => e === "*" || contaE(e) || e === estado.eixo);
+  botoes("f-eixo", opcoes, estado.eixo, (e) => `${e === "*" ? "Todos os eixos" : e || "Sem eixo"} (${contaE(e)})`, (e) => escolher(estado.pessoa, e));
+  const contaP = (p) => doGrupo.filter((c) => daPessoa(c, p) && temEixo(c, estado.eixo)).length;
+  botoes("f-pessoa", [null, ...pessoas], estado.pessoa, (p) => `${p === null ? "Todo o grupo" : p} (${contaP(p)})`, (p) => escolher(p, estado.eixo));
+  const vis = doGrupo.filter((c) => daPessoa(c, estado.pessoa) && temEixo(c, estado.eixo));
+  const quem = estado.pessoa === null ? "os 7 integrantes" : estado.pessoa;
+  const eixoTxt = estado.eixo === "*" ? "todos os eixos" : estado.eixo || "sem eixo";
+  $("lista-sub").textContent = `${estado.grupo}, ${estado.sprint === "(todas)" ? "todas as sprints" : estado.sprint}, ${eixoTxt}: ${plural(vis.length, "cartão", "cartões")} com ${quem} como responsável. A lista é a origem dos números acima; o cartão de dois eixos aparece nos dois filtros, enquanto no gráfico conta metade em cada eixo.`;
   if (!vis.length) { $("lista").replaceChildren(h("p", { class: "vazio", text: "Nenhum cartão neste recorte." })); return; }
   $("lista").replaceChildren(tabela(
-    [{ t: "Cartão", num: true }, { t: "Título" }, { t: "Eixo" }, { t: "Sprint", classe: "nw" }, { t: "Situação" }],
-    vis.map(([, n, titulo, s, sit, , eixos]) => [`#${n}`, titulo,
+    [{ t: "Cartão", num: true }, { t: "Responsável", classe: "nw" }, { t: "Título" }, { t: "Eixo" }, { t: "Sprint", classe: "nw" }, { t: "Situação" }],
+    vis.map(([, n, titulo, s, sit, resp, eixos]) => [`#${n}`, resp, titulo,
       eixos ? h("span", {}, eixos.split(";").map((e) => h("span", { class: "eixo-chip", text: e }))) : h("span", { class: "chip", text: "sem eixo" }),
       s, sit]),
-    `Cartões de ${estado.pessoa}`));
+    `Cartões do ${estado.grupo}`));
 }
 
 function calor(rs, g) {
-  $("calor-sub").textContent = `${estado.grupo}, ${estado.sprint === "(todas)" ? "todas as sprints" : estado.sprint}. Cada linha soma 100%; quanto mais escura a célula, maior a parte do eixo. A última linha é o grupo inteiro.`;
+  $("calor-sub").textContent = `${estado.grupo}, ${estado.sprint === "(todas)" ? "todas as sprints" : estado.sprint}. Cada linha é o perfil de um integrante e soma 100%; quanto mais escura a célula, maior a parte do eixo. A última linha é o grupo inteiro. Ordem do identificador.`;
   const cel = (p) => {
     const td = h("td", { class: "c" + (p >= 55 ? " forte" : ""), text: pct(p) });
     td.style.background = `color-mix(in srgb, var(--series) ${Math.round(p)}%, var(--surface))`;
@@ -330,27 +398,26 @@ function calor(rs, g) {
     if (r) for (const p of r.pcts) tr.appendChild(cel(p));
     else for (const _ of EIXOS) tr.appendChild(h("td", { class: "c", text: "–" }));
     tr.appendChild(h("td", { class: "num", text: r ? num(r.n) : "0" }));
-    tr.appendChild(h("td", { class: focado(r) ? "alerta-txt" : "", text: r ? `${EIXOS[r.iMax]} ${pctCurto(r.max)}` + (poucos(r) ? " · poucos cartões" : "") : "sem cartão" }));
+    tr.appendChild(h("td", { text: r ? `${EIXOS[r.iMax]} ${pctCurto(r.max)}` + (poucos(r) ? " · poucos cartões" : "") : "sem cartão" }));
     return tr;
   };
   const corpo = rs.map(([p, r]) => {
     const b = h("button", { type: "button", class: "link", "data-foco": `calor:${p}`, text: p });
-    b.addEventListener("click", () => { estado.pessoa = p; estado.eixo = "*"; atualizar(); });
+    b.addEventListener("click", () => escolher(p, "*"));
     return linha(b, r, p === estado.pessoa ? "sel" : "");
   });
   corpo.push(linha("Grupo inteiro", g, "ref"));
-  const tb = h("table", { class: "calor" }, [
+  $("calor").replaceChildren(h("table", { class: "calor" }, [
     h("caption", { class: "sr", text: "Parte de cada eixo de tarefa por integrante" }),
     h("thead", {}, [h("tr", {}, [h("th", { scope: "col", text: "Integrante" }), ...EIXOS.map((e) => h("th", { class: "num", scope: "col", text: e })),
-      h("th", { class: "num", scope: "col", text: "Cartões" }), h("th", { scope: "col", text: "Eixo principal" })])]),
-    h("tbody", {}, corpo)]);
-  $("calor").replaceChildren(tb);
+      h("th", { class: "num", scope: "col", text: "Cartões" }), h("th", { scope: "col", text: "Maior parte" })])]),
+    h("tbody", {}, corpo)]));
 }
 
 function notas() {
   const li = (id, itens) => $(id).replaceChildren(...itens.map((t) => h("li", { text: t })));
   li("nota-origem", [
-    "Fonte: cartoes.csv (rótulos, responsável, sprint e fechamento), kanban_eventos.csv e pessoas.csv, pelas consultas r06_*.sql de sqlite/.",
+    "Fonte: cartoes.csv (rótulos, responsável, sprint e fechamento), kanban_eventos.csv e pessoas.csv, pelas consultas r06_*.sql de sqlite/ (a divisão vem de r06_divisao_do_eixo.sql).",
     `Data de extração não registrada. Os arquivos entraram no repositório em ${fmt(D.entrada_repositorio)}; o registro mais recente do conjunto é de ${fmt(D.registro_mais_recente)}.`,
   ]);
   const f = D.fora[estado.grupo];
@@ -364,7 +431,7 @@ function notas() {
 function iniciar() {
   montarTelas("R06");
   montarPremissas();
-  addEventListener("resize", () => { const g = recorte("(grupo)"); desenharRadarGrande(g); });
+  alternarTabela("bt-tabela", "tabela-div");
   atualizar();
 }
 iniciar();

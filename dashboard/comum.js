@@ -97,14 +97,13 @@ function tabela(colunas, linhas, legenda) {
   return tb;
 }
 
-// Navegação entre as telas: arquivo local quando aberto do disco, URL publicada
-// quando aberto na web (se já houver uma).
+// Navegação entre as telas: sempre o arquivo vizinho, com endereço relativo.
+// Funciona aberto do disco, do clone do repositório ou de qualquer servidor
+// estático (GitHub Pages incluído), sem depender de cópia publicada.
 function montarTelas(atual) {
   const lista = $("telas");
-  const local = location.protocol === "file:";
   for (const t of D.telas) {
-    const href = local || !t.url ? t.arquivo : t.url;
-    const a = h("a", { href, text: `${t.id} · ${t.nome}` });
+    const a = h("a", { href: t.arquivo, text: `${t.id} · ${t.nome}` });
     if (t.id === atual) a.setAttribute("aria-current", "page");
     lista.appendChild(h("li", {}, [a]));
   }
@@ -146,14 +145,12 @@ function grupoDoEndereco(grupos, padrao) {
   return grupos.includes(g) ? g : padrao;
 }
 function hrefTela(t, grupo) {
-  const local = location.protocol === "file:";
-  return (local || !t.url ? t.arquivo : t.url) + (grupo ? "#" + grupo : "");
+  return t.arquivo + (grupo ? "#" + grupo : "");
 }
 function linkTela(id) {
   const t = D.telas.find((x) => x.id === id);
   if (!t) return null;
-  const local = location.protocol === "file:";
-  return h("a", { href: local || !t.url ? t.arquivo : t.url, text: id });
+  return h("a", { href: t.arquivo, text: id });
 }
 
 // Marcas por forma (forma + cor: a identidade nunca depende só da cor)

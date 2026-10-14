@@ -1,0 +1,218 @@
+{
+  "gerado_em": "2026-10-13T21:17:17-03:00",
+  "script": "src/03_sqlite_para_duckdb.py",
+  "origem": "saida/olist.sqlite (ATTACH ... AS sqlite_src (TYPE sqlite, READ_ONLY))",
+  "destino": "saida/olist.duckdb",
+  "bytes_destino": 40906752,
+  "duckdb_version": "v1.5.5",
+  "extensao_sqlite": {
+    "nome": "sqlite_scanner",
+    "carregada": true,
+    "instalada": true,
+    "versao": "f79b1db",
+    "segundos_install_load": 0.04
+  },
+  "tabelas_sqlite": 9,
+  "tabelas_nativas_duckdb": 9,
+  "tabelas": [
+    {
+      "tabela": "olist_customers",
+      "linhas_sqlite": 99441,
+      "linhas_duckdb": 99441,
+      "confere": true,
+      "tipos_duckdb": {
+        "customer_id": "VARCHAR",
+        "customer_unique_id": "VARCHAR",
+        "customer_zip_code_prefix": "BIGINT",
+        "customer_city": "VARCHAR",
+        "customer_state": "VARCHAR"
+      },
+      "colunas_convertidas_para_timestamp": [],
+      "segundos_copia": 0.077
+    },
+    {
+      "tabela": "olist_geolocation",
+      "linhas_sqlite": 1000163,
+      "linhas_duckdb": 1000163,
+      "confere": true,
+      "tipos_duckdb": {
+        "geolocation_zip_code_prefix": "BIGINT",
+        "geolocation_lat": "DOUBLE",
+        "geolocation_lng": "DOUBLE",
+        "geolocation_city": "VARCHAR",
+        "geolocation_state": "VARCHAR"
+      },
+      "colunas_convertidas_para_timestamp": [],
+      "segundos_copia": 0.777
+    },
+    {
+      "tabela": "olist_order_items",
+      "linhas_sqlite": 112650,
+      "linhas_duckdb": 112650,
+      "confere": true,
+      "tipos_duckdb": {
+        "order_id": "VARCHAR",
+        "order_item_id": "BIGINT",
+        "product_id": "VARCHAR",
+        "seller_id": "VARCHAR",
+        "shipping_limit_date": "TIMESTAMP",
+        "price": "DOUBLE",
+        "freight_value": "DOUBLE"
+      },
+      "colunas_convertidas_para_timestamp": [
+        {
+          "coluna": "shipping_limit_date",
+          "nulos_sqlite": 0,
+          "nulos_duckdb": 0,
+          "confere": true
+        }
+      ],
+      "segundos_copia": 0.305
+    },
+    {
+      "tabela": "olist_order_payments",
+      "linhas_sqlite": 103886,
+      "linhas_duckdb": 103886,
+      "confere": true,
+      "tipos_duckdb": {
+        "order_id": "VARCHAR",
+        "payment_sequential": "BIGINT",
+        "payment_type": "VARCHAR",
+        "payment_installments": "BIGINT",
+        "payment_value": "DOUBLE"
+      },
+      "colunas_convertidas_para_timestamp": [],
+      "segundos_copia": 0.072
+    },
+    {
+      "tabela": "olist_order_reviews",
+      "linhas_sqlite": 99224,
+      "linhas_duckdb": 99224,
+      "confere": true,
+      "tipos_duckdb": {
+        "review_id": "VARCHAR",
+        "order_id": "VARCHAR",
+        "review_score": "BIGINT",
+        "review_comment_title": "VARCHAR",
+        "review_comment_message": "VARCHAR",
+        "review_creation_date": "TIMESTAMP",
+        "review_answer_timestamp": "TIMESTAMP"
+      },
+      "colunas_convertidas_para_timestamp": [
+        {
+          "coluna": "review_answer_timestamp",
+          "nulos_sqlite": 0,
+          "nulos_duckdb": 0,
+          "confere": true
+        },
+        {
+          "coluna": "review_creation_date",
+          "nulos_sqlite": 0,
+          "nulos_duckdb": 0,
+          "confere": true
+        }
+      ],
+      "segundos_copia": 0.105
+    },
+    {
+      "tabela": "olist_orders",
+      "linhas_sqlite": 99441,
+      "linhas_duckdb": 99441,
+      "confere": true,
+      "tipos_duckdb": {
+        "order_id": "VARCHAR",
+        "customer_id": "VARCHAR",
+        "order_status": "VARCHAR",
+        "order_purchase_timestamp": "TIMESTAMP",
+        "order_approved_at": "TIMESTAMP",
+        "order_delivered_carrier_date": "TIMESTAMP",
+        "order_delivered_customer_date": "TIMESTAMP",
+        "order_estimated_delivery_date": "TIMESTAMP"
+      },
+      "colunas_convertidas_para_timestamp": [
+        {
+          "coluna": "order_approved_at",
+          "nulos_sqlite": 160,
+          "nulos_duckdb": 160,
+          "confere": true
+        },
+        {
+          "coluna": "order_delivered_carrier_date",
+          "nulos_sqlite": 1783,
+          "nulos_duckdb": 1783,
+          "confere": true
+        },
+        {
+          "coluna": "order_delivered_customer_date",
+          "nulos_sqlite": 2965,
+          "nulos_duckdb": 2965,
+          "confere": true
+        },
+        {
+          "coluna": "order_estimated_delivery_date",
+          "nulos_sqlite": 0,
+          "nulos_duckdb": 0,
+          "confere": true
+        },
+        {
+          "coluna": "order_purchase_timestamp",
+          "nulos_sqlite": 0,
+          "nulos_duckdb": 0,
+          "confere": true
+        }
+      ],
+      "segundos_copia": 0.379
+    },
+    {
+      "tabela": "olist_products",
+      "linhas_sqlite": 32951,
+      "linhas_duckdb": 32951,
+      "confere": true,
+      "tipos_duckdb": {
+        "product_id": "VARCHAR",
+        "product_category_name": "VARCHAR",
+        "product_name_lenght": "BIGINT",
+        "product_description_lenght": "BIGINT",
+        "product_photos_qty": "BIGINT",
+        "product_weight_g": "BIGINT",
+        "product_length_cm": "BIGINT",
+        "product_height_cm": "BIGINT",
+        "product_width_cm": "BIGINT"
+      },
+      "colunas_convertidas_para_timestamp": [],
+      "segundos_copia": 0.029
+    },
+    {
+      "tabela": "olist_sellers",
+      "linhas_sqlite": 3095,
+      "linhas_duckdb": 3095,
+      "confere": true,
+      "tipos_duckdb": {
+        "seller_id": "VARCHAR",
+        "seller_zip_code_prefix": "BIGINT",
+        "seller_city": "VARCHAR",
+        "seller_state": "VARCHAR"
+      },
+      "colunas_convertidas_para_timestamp": [],
+      "segundos_copia": 0.004
+    },
+    {
+      "tabela": "product_category_name_translation",
+      "linhas_sqlite": 71,
+      "linhas_duckdb": 71,
+      "confere": true,
+      "tipos_duckdb": {
+        "product_category_name": "VARCHAR",
+        "product_category_name_english": "VARCHAR"
+      },
+      "colunas_convertidas_para_timestamp": [],
+      "segundos_copia": 0.002
+    }
+  ],
+  "segundos_analyze": 0.0,
+  "gate": {
+    "falhas": [],
+    "passou": true
+  },
+  "segundos_total": 2.267
+}

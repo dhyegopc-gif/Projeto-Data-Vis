@@ -465,7 +465,11 @@ function atualizar() {
   $("leg-silencio").textContent = `silêncio de ${estado.limiar}+ dias`;
   $("leg-marco").textContent = `${FIM_TXT} (${fmtC(FIM.data)}), a última sprint com data`;
   const merges = mergesNoPeriodo();
-  $("recorte").textContent = `Commits autorais: ficam fora ${plural(merges, "commit de merge", "commits de merge")} do grupo neste período e o histórico herdado do repositório-template.`;
+  // a parte sem autoria resolvida fica junto ao gráfico, não só no rodapé (Aula 08)
+  const doPeriodo = serie.flatMap((p) => MAPA[estado.grupo].get(p.d) || []);
+  const naoAtrib = doPeriodo.filter((c) => SENT.has(c.autor)).length;
+  $("recorte").textContent = `Commits autorais: ficam fora ${plural(merges, "commit de merge", "commits de merge")} do grupo neste período e o histórico herdado do repositório-template.`
+    + (doPeriodo.length ? ` Não atribuídos ([externo] ou [bot]): ${num(naoAtrib)} de ${num(doPeriodo.length)} (${(Math.round(1000 * naoAtrib / doPeriodo.length) / 10).toLocaleString("pt-BR")}%); contam no dia, mas não têm autor.` : "");
 
   desenharDias(sil);
   tabelaDias(sil);
@@ -730,11 +734,10 @@ function montarPremissas() {
     h("tbody", {}, linhas)]));
 }
 
-// Navegação entre as telas: arquivo local quando aberto do disco, URL publicada na web
+// Navegação entre as telas: sempre o arquivo vizinho, com endereço relativo
 function montarTelas() {
-  const local = location.protocol === "file:";
   $("telas").replaceChildren(...D.telas.map((t) => {
-    const a = h("a", { href: local || !t.url ? t.arquivo : t.url, text: `${t.id} · ${t.nome}` });
+    const a = h("a", { href: t.arquivo, text: `${t.id} · ${t.nome}` });
     if (t.id === "R01") a.setAttribute("aria-current", "page");
     return h("li", {}, [a]);
   }));

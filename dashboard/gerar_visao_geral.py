@@ -21,7 +21,7 @@ from gerar_r02 import PARAMETROS_PADRAO, PARAMETROS_TODOS  # noqa: E402
 SILENCIO_DIAS = 3        # R01
 LIMITE_HORAS = 48        # R02
 COBERTURA_MIN = 80       # R03
-FOCO_PCT = 75            # R06
+POUCOS_EIXO = 14         # R06: eixo com menos cartões fica fora do mais concentrado
 
 
 def premissa(tela: str, nome: str) -> str:
@@ -138,28 +138,21 @@ def r05(con) -> dict:
 
 
 def r06(con) -> dict:
+    divisao = consultar(con, ler_sql("r06_divisao_do_eixo.sql"))
     partes = consultar(con, ler_sql("r06_eixo_por_integrante.sql"))
-    cartoes = consultar(con, ler_sql("r06_cartoes_por_eixo.sql"))
-    por = defaultdict(dict)
-    for p in partes:
-        if p["sprint"] == "(todas)" and p["cartoes_total"]:
-            por[(p["grupo"], p["pessoa_id"])][p["eixo"]] = (p["pct"], p["cartoes_total"])
     out = {}
-    for g in sorted({k[0] for k in por}):
-        focados = []
-        for (gg, pessoa), eixos in sorted(por.items()):
-            if gg != g or pessoa == "(grupo)":
-                continue
-            e = max(eixos, key=lambda k: eixos[k][0])
-            if eixos[e][0] >= FOCO_PCT:
-                focados.append({"pessoa": pessoa, "eixo": e, "pct": eixos[e][0], "cartoes": eixos[e][1]})
-        perfil = por[(g, "(grupo)")]
-        principal = max(perfil, key=lambda k: perfil[k][0])
-        # segundo caminho: total do grupo = cartões com eixo dos integrantes na lista de cartões
-        conferir(perfil[principal][1] == sum(1 for c in cartoes if c["grupo"] == g and c["e_integrante"] and c["eixos"]),
-                 f"R06 {g}: cartões com eixo")
-        out[g] = {"valor": len(focados), "focados": focados, "eixo": principal, "eixo_pct": perfil[principal][0],
-                  "perfil": {e: v[0] for e, v in perfil.items()}}
+    for g in sorted({d["grupo"] for d in divisao}):
+        ds = [d for d in divisao if d["grupo"] == g and d["sprint"] == "(todas)"]
+        for d in ds:
+            # segundo caminho: os 2 maiores refeitos da parte de cada integrante
+            pesos = sorted((p["cartoes"] for p in partes if p["grupo"] == g and p["sprint"] == "(todas)"
+                            and p["e_integrante"] and p["eixo"] == d["eixo"]), reverse=True)
+            conferir(len(pesos) == 7 and abs(sum(pesos[:2]) - d["dois_maiores"]) < 0.001, f"R06 {g} {d['eixo']}")
+        elegiveis = [d for d in ds if d["cartoes_eixo"] >= POUCOS_EIXO]   # mesma regra da tela
+        mc = max(elegiveis, key=lambda d: (d["pct_dois_maiores"], d["cartoes_eixo"]))
+        principal = max(ds, key=lambda d: d["parte_do_grupo"])
+        out[g] = {"valor": mc["pct_dois_maiores"], "eixo": mc["eixo"], "pessoas": mc["integrantes_no_eixo"],
+                  "cartoes": mc["cartoes_eixo"], "perfil_eixo": principal["eixo"], "perfil_pct": principal["parte_do_grupo"]}
     return {"grupos": out}
 
 
@@ -168,7 +161,7 @@ def main() -> None:
     conferir(f"{SILENCIO_DIAS} dias" in premissa("R01", "Silêncio"), "R01: silêncio")
     conferir(f"{LIMITE_HORAS} h" in premissa("R02", "Acúmulo"), "R02: limite")
     conferir(f"{COBERTURA_MIN}%" in premissa("R03", "Cobertura mínima"), "R03: mínimo")
-    conferir(f"{FOCO_PCT}%" in premissa("R06", "Foco num eixo só"), "R06: foco")
+    conferir(f"menos de {POUCOS_EIXO} cartões" in premissa("R06", "Eixo com poucos cartões"), "R06: poucos cartões")
     leituras = {"R01": r01(con), "R02": r02(con), "R03": r03(con), "R04": r04(con), "R05": r05(con), "R06": r06(con)}
     contexto = dict(zip(("cartoes", "mrs", "commits_autorais", "integrantes"), con.execute("""
         SELECT (SELECT COUNT(*) FROM cartoes), (SELECT COUNT(*) FROM merge_requests),
@@ -178,7 +171,7 @@ def main() -> None:
                  JOIN pessoas p ON p.pessoa_id = k.pessoa_id WHERE p.grupo = k.grupo))""").fetchone()))
     dados = {
         "leituras": leituras,
-        "padroes": {"silencio": SILENCIO_DIAS, "limite": LIMITE_HORAS, "cobertura": COBERTURA_MIN, "foco": FOCO_PCT},
+        "padroes": {"silencio": SILENCIO_DIAS, "limite": LIMITE_HORAS, "cobertura": COBERTURA_MIN, "poucos_eixo": POUCOS_EIXO},
         "contexto": contexto,
         "premissas_telas": {t: [{"nome": n, "valor": v} for n, v, _ in ps] for t, ps in PREMISSAS.items()},
         "registro_mais_recente": registro_mais_recente(con),

@@ -1,0 +1,505 @@
+{
+  "gerado_em": "2026-10-13T21:17:11-03:00",
+  "script": "src/01_excel_para_sqlite.py",
+  "banco": "saida/olist.sqlite",
+  "bytes_banco": 176566272,
+  "versoes": {
+    "python": "3.13.15",
+    "sqlite": "3.50.4",
+    "openpyxl": "3.1.5"
+  },
+  "parametros": {
+    "lote": 5000,
+    "transacao": "uma por aba",
+    "foreign_keys": 1,
+    "ordem_carga": [
+      "olist_customers",
+      "olist_sellers",
+      "olist_products",
+      "product_category_name_translation",
+      "olist_geolocation",
+      "olist_orders",
+      "olist_order_items",
+      "olist_order_payments",
+      "olist_order_reviews"
+    ],
+    "datas": "TEXT ISO 8601 (AAAA-MM-DDTHH:MM:SS)"
+  },
+  "ddl": {
+    "olist_customers": "CREATE TABLE olist_customers (\n  customer_id TEXT NOT NULL,\n  customer_unique_id TEXT NOT NULL,\n  customer_zip_code_prefix INTEGER,\n  customer_city TEXT,\n  customer_state TEXT,\n  PRIMARY KEY (customer_id)\n)",
+    "olist_sellers": "CREATE TABLE olist_sellers (\n  seller_id TEXT NOT NULL,\n  seller_zip_code_prefix INTEGER,\n  seller_city TEXT,\n  seller_state TEXT,\n  PRIMARY KEY (seller_id)\n)",
+    "olist_products": "CREATE TABLE olist_products (\n  product_id TEXT NOT NULL,\n  product_category_name TEXT,\n  product_name_lenght INTEGER,\n  product_description_lenght INTEGER,\n  product_photos_qty INTEGER,\n  product_weight_g INTEGER,\n  product_length_cm INTEGER,\n  product_height_cm INTEGER,\n  product_width_cm INTEGER,\n  PRIMARY KEY (product_id)\n)",
+    "product_category_name_translation": "CREATE TABLE product_category_name_translation (\n  product_category_name TEXT NOT NULL,\n  product_category_name_english TEXT,\n  PRIMARY KEY (product_category_name)\n)",
+    "olist_geolocation": "CREATE TABLE olist_geolocation (\n  geolocation_zip_code_prefix INTEGER,\n  geolocation_lat REAL,\n  geolocation_lng REAL,\n  geolocation_city TEXT,\n  geolocation_state TEXT\n)",
+    "olist_orders": "CREATE TABLE olist_orders (\n  order_id TEXT NOT NULL,\n  customer_id TEXT NOT NULL,\n  order_status TEXT,\n  order_purchase_timestamp TEXT,\n  order_approved_at TEXT,\n  order_delivered_carrier_date TEXT,\n  order_delivered_customer_date TEXT,\n  order_estimated_delivery_date TEXT,\n  PRIMARY KEY (order_id),\n  FOREIGN KEY (customer_id) REFERENCES olist_customers(customer_id)\n)",
+    "olist_order_items": "CREATE TABLE olist_order_items (\n  order_id TEXT NOT NULL,\n  order_item_id INTEGER NOT NULL,\n  product_id TEXT NOT NULL,\n  seller_id TEXT NOT NULL,\n  shipping_limit_date TEXT,\n  price REAL,\n  freight_value REAL,\n  PRIMARY KEY (order_id, order_item_id),\n  FOREIGN KEY (order_id) REFERENCES olist_orders(order_id),\n  FOREIGN KEY (product_id) REFERENCES olist_products(product_id),\n  FOREIGN KEY (seller_id) REFERENCES olist_sellers(seller_id)\n)",
+    "olist_order_payments": "CREATE TABLE olist_order_payments (\n  order_id TEXT NOT NULL,\n  payment_sequential INTEGER NOT NULL,\n  payment_type TEXT,\n  payment_installments INTEGER,\n  payment_value REAL,\n  PRIMARY KEY (order_id, payment_sequential),\n  FOREIGN KEY (order_id) REFERENCES olist_orders(order_id)\n)",
+    "olist_order_reviews": "CREATE TABLE olist_order_reviews (\n  review_id TEXT NOT NULL,\n  order_id TEXT NOT NULL,\n  review_score INTEGER,\n  review_comment_title TEXT,\n  review_comment_message TEXT,\n  review_creation_date TEXT,\n  review_answer_timestamp TEXT,\n  PRIMARY KEY (review_id, order_id),\n  FOREIGN KEY (order_id) REFERENCES olist_orders(order_id)\n)"
+  },
+  "indices_criados_apos_carga": [
+    {
+      "nome": "idx_orders_customer",
+      "tabela": "olist_orders",
+      "colunas": [
+        "customer_id"
+      ]
+    },
+    {
+      "nome": "idx_orders_purchase",
+      "tabela": "olist_orders",
+      "colunas": [
+        "order_purchase_timestamp"
+      ]
+    },
+    {
+      "nome": "idx_orders_status",
+      "tabela": "olist_orders",
+      "colunas": [
+        "order_status"
+      ]
+    },
+    {
+      "nome": "idx_items_product",
+      "tabela": "olist_order_items",
+      "colunas": [
+        "product_id"
+      ]
+    },
+    {
+      "nome": "idx_items_seller",
+      "tabela": "olist_order_items",
+      "colunas": [
+        "seller_id"
+      ]
+    },
+    {
+      "nome": "idx_reviews_order",
+      "tabela": "olist_order_reviews",
+      "colunas": [
+        "order_id"
+      ]
+    },
+    {
+      "nome": "idx_customers_state",
+      "tabela": "olist_customers",
+      "colunas": [
+        "customer_state"
+      ]
+    },
+    {
+      "nome": "idx_products_category",
+      "tabela": "olist_products",
+      "colunas": [
+        "product_category_name"
+      ]
+    },
+    {
+      "nome": "idx_geolocation_prefix",
+      "tabela": "olist_geolocation",
+      "colunas": [
+        "geolocation_zip_code_prefix"
+      ]
+    }
+  ],
+  "segundos_indices_e_analyze": 1.158,
+  "cargas": [
+    {
+      "tabela": "olist_customers",
+      "arquivo": "olist_pedidos_clientes.xlsx",
+      "aba": "olist_customers",
+      "linhas_inseridas": 99441,
+      "lotes": 20,
+      "conversoes": {
+        "texto_de_outro_tipo": 0,
+        "inteiro_de_float": 0,
+        "inteiro_de_texto": 0,
+        "real_de_texto": 0,
+        "data_normalizada_iso8601": 0
+      },
+      "segundos": 13.026
+    },
+    {
+      "tabela": "olist_sellers",
+      "arquivo": "olist_catalogo.xlsx",
+      "aba": "olist_sellers",
+      "linhas_inseridas": 3095,
+      "lotes": 1,
+      "conversoes": {
+        "texto_de_outro_tipo": 1,
+        "inteiro_de_float": 0,
+        "inteiro_de_texto": 0,
+        "real_de_texto": 0,
+        "data_normalizada_iso8601": 0
+      },
+      "segundos": 1.169
+    },
+    {
+      "tabela": "olist_products",
+      "arquivo": "olist_catalogo.xlsx",
+      "aba": "olist_products",
+      "linhas_inseridas": 32951,
+      "lotes": 7,
+      "conversoes": {
+        "texto_de_outro_tipo": 0,
+        "inteiro_de_float": 0,
+        "inteiro_de_texto": 0,
+        "real_de_texto": 0,
+        "data_normalizada_iso8601": 0
+      },
+      "segundos": 2.477
+    },
+    {
+      "tabela": "product_category_name_translation",
+      "arquivo": "olist_catalogo.xlsx",
+      "aba": "product_category_name_translati",
+      "linhas_inseridas": 71,
+      "lotes": 1,
+      "conversoes": {
+        "texto_de_outro_tipo": 0,
+        "inteiro_de_float": 0,
+        "inteiro_de_texto": 0,
+        "real_de_texto": 0,
+        "data_normalizada_iso8601": 0
+      },
+      "segundos": 1.021
+    },
+    {
+      "tabela": "olist_geolocation",
+      "arquivo": "olist_geolocalizacao.xlsx",
+      "aba": "olist_geolocation",
+      "linhas_inseridas": 1000163,
+      "lotes": 201,
+      "conversoes": {
+        "texto_de_outro_tipo": 0,
+        "inteiro_de_float": 0,
+        "inteiro_de_texto": 0,
+        "real_de_texto": 0,
+        "data_normalizada_iso8601": 0
+      },
+      "segundos": 30.606
+    },
+    {
+      "tabela": "olist_orders",
+      "arquivo": "olist_pedidos_clientes.xlsx",
+      "aba": "olist_orders",
+      "linhas_inseridas": 99441,
+      "lotes": 20,
+      "conversoes": {
+        "texto_de_outro_tipo": 0,
+        "inteiro_de_float": 0,
+        "inteiro_de_texto": 0,
+        "real_de_texto": 0,
+        "data_normalizada_iso8601": 492297
+      },
+      "segundos": 15.784
+    },
+    {
+      "tabela": "olist_order_items",
+      "arquivo": "olist_itens_pagamentos_avaliacoes.xlsx",
+      "aba": "olist_order_items",
+      "linhas_inseridas": 112650,
+      "lotes": 23,
+      "conversoes": {
+        "texto_de_outro_tipo": 0,
+        "inteiro_de_float": 0,
+        "inteiro_de_texto": 0,
+        "real_de_texto": 0,
+        "data_normalizada_iso8601": 112650
+      },
+      "segundos": 16.494
+    },
+    {
+      "tabela": "olist_order_payments",
+      "arquivo": "olist_itens_pagamentos_avaliacoes.xlsx",
+      "aba": "olist_order_payments",
+      "linhas_inseridas": 103886,
+      "lotes": 21,
+      "conversoes": {
+        "texto_de_outro_tipo": 0,
+        "inteiro_de_float": 0,
+        "inteiro_de_texto": 0,
+        "real_de_texto": 0,
+        "data_normalizada_iso8601": 0
+      },
+      "segundos": 14.185
+    },
+    {
+      "tabela": "olist_order_reviews",
+      "arquivo": "olist_itens_pagamentos_avaliacoes.xlsx",
+      "aba": "olist_order_reviews",
+      "linhas_inseridas": 99224,
+      "lotes": 20,
+      "conversoes": {
+        "texto_de_outro_tipo": 344,
+        "inteiro_de_float": 0,
+        "inteiro_de_texto": 0,
+        "real_de_texto": 0,
+        "data_normalizada_iso8601": 198448
+      },
+      "segundos": 15.288
+    }
+  ],
+  "contagens": [
+    {
+      "tabela": "olist_customers",
+      "linhas_sqlite": 99441,
+      "linhas_manifesto": 99441,
+      "chave_candidata": [
+        "customer_id"
+      ],
+      "chaves_distintas": 99441,
+      "chave_unica": true,
+      "confere": true
+    },
+    {
+      "tabela": "olist_sellers",
+      "linhas_sqlite": 3095,
+      "linhas_manifesto": 3095,
+      "chave_candidata": [
+        "seller_id"
+      ],
+      "chaves_distintas": 3095,
+      "chave_unica": true,
+      "confere": true
+    },
+    {
+      "tabela": "olist_products",
+      "linhas_sqlite": 32951,
+      "linhas_manifesto": 32951,
+      "chave_candidata": [
+        "product_id"
+      ],
+      "chaves_distintas": 32951,
+      "chave_unica": true,
+      "confere": true
+    },
+    {
+      "tabela": "product_category_name_translation",
+      "linhas_sqlite": 71,
+      "linhas_manifesto": 71,
+      "chave_candidata": [
+        "product_category_name"
+      ],
+      "chaves_distintas": 71,
+      "chave_unica": true,
+      "confere": true
+    },
+    {
+      "tabela": "olist_geolocation",
+      "linhas_sqlite": 1000163,
+      "linhas_manifesto": 1000163,
+      "chave_candidata": [],
+      "chaves_distintas": null,
+      "chave_unica": null,
+      "confere": true
+    },
+    {
+      "tabela": "olist_orders",
+      "linhas_sqlite": 99441,
+      "linhas_manifesto": 99441,
+      "chave_candidata": [
+        "order_id"
+      ],
+      "chaves_distintas": 99441,
+      "chave_unica": true,
+      "confere": true
+    },
+    {
+      "tabela": "olist_order_items",
+      "linhas_sqlite": 112650,
+      "linhas_manifesto": 112650,
+      "chave_candidata": [
+        "order_id",
+        "order_item_id"
+      ],
+      "chaves_distintas": 112650,
+      "chave_unica": true,
+      "confere": true
+    },
+    {
+      "tabela": "olist_order_payments",
+      "linhas_sqlite": 103886,
+      "linhas_manifesto": 103886,
+      "chave_candidata": [
+        "order_id",
+        "payment_sequential"
+      ],
+      "chaves_distintas": 103886,
+      "chave_unica": true,
+      "confere": true
+    },
+    {
+      "tabela": "olist_order_reviews",
+      "linhas_sqlite": 99224,
+      "linhas_manifesto": 99224,
+      "chave_candidata": [
+        "review_id",
+        "order_id"
+      ],
+      "chaves_distintas": 99224,
+      "chave_unica": true,
+      "confere": true
+    }
+  ],
+  "integrity_check": [
+    "ok"
+  ],
+  "fks_declaradas": [
+    {
+      "tabela": "olist_orders",
+      "coluna": "customer_id",
+      "referencia": "olist_customers(customer_id)"
+    },
+    {
+      "tabela": "olist_order_items",
+      "coluna": "seller_id",
+      "referencia": "olist_sellers(seller_id)"
+    },
+    {
+      "tabela": "olist_order_items",
+      "coluna": "product_id",
+      "referencia": "olist_products(product_id)"
+    },
+    {
+      "tabela": "olist_order_items",
+      "coluna": "order_id",
+      "referencia": "olist_orders(order_id)"
+    },
+    {
+      "tabela": "olist_order_payments",
+      "coluna": "order_id",
+      "referencia": "olist_orders(order_id)"
+    },
+    {
+      "tabela": "olist_order_reviews",
+      "coluna": "order_id",
+      "referencia": "olist_orders(order_id)"
+    }
+  ],
+  "foreign_key_check_linhas": 0,
+  "orfaos_por_relacao": [
+    {
+      "relacao": "olist_orders.customer_id -> olist_customers.customer_id",
+      "linhas_orfas": 0
+    },
+    {
+      "relacao": "olist_order_items.order_id -> olist_orders.order_id",
+      "linhas_orfas": 0
+    },
+    {
+      "relacao": "olist_order_items.product_id -> olist_products.product_id",
+      "linhas_orfas": 0
+    },
+    {
+      "relacao": "olist_order_items.seller_id -> olist_sellers.seller_id",
+      "linhas_orfas": 0
+    },
+    {
+      "relacao": "olist_order_payments.order_id -> olist_orders.order_id",
+      "linhas_orfas": 0
+    },
+    {
+      "relacao": "olist_order_reviews.order_id -> olist_orders.order_id",
+      "linhas_orfas": 0
+    }
+  ],
+  "nulos_por_coluna": [
+    {
+      "tabela": "olist_products",
+      "coluna": "product_category_name",
+      "nulos_sqlite": 610,
+      "nulos_excel": 610
+    },
+    {
+      "tabela": "olist_products",
+      "coluna": "product_name_lenght",
+      "nulos_sqlite": 610,
+      "nulos_excel": 610
+    },
+    {
+      "tabela": "olist_products",
+      "coluna": "product_description_lenght",
+      "nulos_sqlite": 610,
+      "nulos_excel": 610
+    },
+    {
+      "tabela": "olist_products",
+      "coluna": "product_photos_qty",
+      "nulos_sqlite": 610,
+      "nulos_excel": 610
+    },
+    {
+      "tabela": "olist_products",
+      "coluna": "product_weight_g",
+      "nulos_sqlite": 2,
+      "nulos_excel": 2
+    },
+    {
+      "tabela": "olist_products",
+      "coluna": "product_length_cm",
+      "nulos_sqlite": 2,
+      "nulos_excel": 2
+    },
+    {
+      "tabela": "olist_products",
+      "coluna": "product_height_cm",
+      "nulos_sqlite": 2,
+      "nulos_excel": 2
+    },
+    {
+      "tabela": "olist_products",
+      "coluna": "product_width_cm",
+      "nulos_sqlite": 2,
+      "nulos_excel": 2
+    },
+    {
+      "tabela": "olist_orders",
+      "coluna": "order_approved_at",
+      "nulos_sqlite": 160,
+      "nulos_excel": 160
+    },
+    {
+      "tabela": "olist_orders",
+      "coluna": "order_delivered_carrier_date",
+      "nulos_sqlite": 1783,
+      "nulos_excel": 1783
+    },
+    {
+      "tabela": "olist_orders",
+      "coluna": "order_delivered_customer_date",
+      "nulos_sqlite": 2965,
+      "nulos_excel": 2965
+    },
+    {
+      "tabela": "olist_order_reviews",
+      "coluna": "review_comment_title",
+      "nulos_sqlite": 87656,
+      "nulos_excel": 87656
+    },
+    {
+      "tabela": "olist_order_reviews",
+      "coluna": "review_comment_message",
+      "nulos_sqlite": 58247,
+      "nulos_excel": 58247
+    }
+  ],
+  "entrada_sha256_antes": {
+    "olist_pedidos_clientes.xlsx": "14cd1619a42622ac95dafadb846e4a1e720bb0fd48e9c89e2274a497e51ae16d",
+    "olist_itens_pagamentos_avaliacoes.xlsx": "09bd9e6ab018159a397be00e9508d2ac7bd50362ec33e69bf47c5b5b289aa816",
+    "olist_catalogo.xlsx": "66fef4320d2a3283da6844477867878d442caec9e5d3f4e090cbbad07ca4cf70",
+    "olist_geolocalizacao.xlsx": "a18970cbc82583a2e6194f1e934831fca8e8c06bec2546f99599c0783f8dafa2"
+  },
+  "entrada_sha256_depois": {
+    "olist_pedidos_clientes.xlsx": "14cd1619a42622ac95dafadb846e4a1e720bb0fd48e9c89e2274a497e51ae16d",
+    "olist_itens_pagamentos_avaliacoes.xlsx": "09bd9e6ab018159a397be00e9508d2ac7bd50362ec33e69bf47c5b5b289aa816",
+    "olist_catalogo.xlsx": "66fef4320d2a3283da6844477867878d442caec9e5d3f4e090cbbad07ca4cf70",
+    "olist_geolocalizacao.xlsx": "a18970cbc82583a2e6194f1e934831fca8e8c06bec2546f99599c0783f8dafa2"
+  },
+  "entrada_intacta": true,
+  "gate": {
+    "tabelas": 9,
+    "falhas": [],
+    "passou": true
+  },
+  "segundos_total": 116.162
+}

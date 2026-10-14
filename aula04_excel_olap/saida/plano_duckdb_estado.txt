@@ -1,0 +1,123 @@
+-- EXPLAIN ANALYZE SELECT estado_cliente, sum(receita_produtos) AS receita FROM mart_vendas_mensais GROUP BY estado_cliente ORDER BY receita DESC
+
+┌─────────────────────────────────────┐
+│┌───────────────────────────────────┐│
+││    Query Profiling Information    ││
+│└───────────────────────────────────┘│
+└─────────────────────────────────────┘
+ EXPLAIN ANALYZE SELECT estado_cliente, sum(receita_produtos) AS receita FROM mart_vendas_mensais GROUP BY estado_cliente ORDER BY receita DESC 
+┌────────────────────────────────────────────────┐
+│┌──────────────────────────────────────────────┐│
+││              Total Time: 0.0037s             ││
+│└──────────────────────────────────────────────┘│
+└────────────────────────────────────────────────┘
+┌───────────────────────────┐
+│           QUERY           │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│      EXPLAIN_ANALYZE      │
+│    ────────────────────   │
+│                           │
+│           0 rows          │
+│           0.00s           │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│__internal_decompress_strin│
+│           g(#0)           │
+│             #1            │
+│                           │
+│                           │
+│                           │
+│          27 rows          │
+│           0.00s           │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│          ORDER_BY         │
+│    ────────────────────   │
+│       sum(olist.main      │
+│    .mart_vendas_mensais   │
+│  .receita_produtos) DESC  │
+│                           │
+│                           │
+│                           │
+│          27 rows          │
+│           0.00s           │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│__internal_compress_string_│
+│        uinteger(#0)       │
+│             #1            │
+│                           │
+│                           │
+│                           │
+│          27 rows          │
+│           0.00s           │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│__internal_decompress_strin│
+│           g(#0)           │
+│             #1            │
+│                           │
+│                           │
+│                           │
+│          27 rows          │
+│           0.00s           │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│       HASH_GROUP_BY       │
+│    ────────────────────   │
+│         Groups: #0        │
+│    Aggregates: sum(#1)    │
+│                           │
+│                           │
+│                           │
+│          27 rows          │
+│           0.01s           │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│       estado_cliente      │
+│      receita_produtos     │
+│                           │
+│                           │
+│                           │
+│        11,823 rows        │
+│           0.00s           │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│__internal_compress_string_│
+│        uinteger(#0)       │
+│             #1            │
+│                           │
+│                           │
+│                           │
+│        11,823 rows        │
+│           0.00s           │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         TABLE_SCAN        │
+│    ────────────────────   │
+│           Table:          │
+│         olist.main        │
+│    .mart_vendas_mensais   │
+│                           │
+│   Type: Sequential Scan   │
+│                           │
+│        Projections:       │
+│       estado_cliente      │
+│      receita_produtos     │
+│                           │
+│                           │
+│                           │
+│        11,823 rows        │
+│           0.00s           │
+└───────────────────────────┘

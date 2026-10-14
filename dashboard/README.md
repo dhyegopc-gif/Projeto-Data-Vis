@@ -6,19 +6,20 @@ internet, com a versão em preto, branco e cinza ao lado (`_pb`).
 
 | ordem de leitura | tela | arquivo | pergunta |
 | --- | --- | --- | --- |
-| 0 | Visão geral | `visao_geral.html` | com qual grupo começar, e por qual assunto? (R01 a R06 em uma página) |
+| 0 | Visão geral | `visao_geral.html` | por qual assunto começar a conversa com cada grupo? (R01 a R06 em uma página) |
 | 1 | R03 · Cobertura do registro | `r03_cobertura_registro.html` | o registro deste grupo sustenta as leituras das outras telas? |
 | 2 | R01 · Ritmo de registro | `r01_ritmo_de_registro.html` | em quais dias o registro se concentra, e há silêncio prolongado? |
 | 3 | R02 · Acúmulo por etapa | `r02_acumulo_por_etapa.html` | em qual etapa do quadro os cartões se acumulam? |
 | 4 | R04 · Planejado × realizado | `r04_prazo_planejado_realizado.html` | os cartões levam o tempo que o tamanho prometia? |
 | 5 | R05 · Concentração (Gini) | `r05_concentracao_gini.html` | o trabalho registrado está distribuído ou concentrado em poucos? |
-| 6 | R06 · Eixos de tarefa | `r06_eixos_de_tarefa.html` | cada integrante passou por vários eixos de tarefa ou ficou num só? |
+| 6 | R06 · Eixos no grupo | `r06_eixos_de_tarefa.html` | os cartões de cada tipo de tarefa passam pelos 7 integrantes ou ficam com poucos? |
 
 A visão geral abre o painel: a leitura principal de cada requisito nos três grupos,
 numa página, com link para cada tela já no grupo. Entre os requisitos, o R03 vem
 primeiro porque diz qual leitura fica prejudicada em qual grupo. Todas as telas
-têm a mesma faixa de navegação no topo (Início, depois R01 a R06): aberta do
-disco, ela leva ao arquivo local; aberta na web, à versão publicada. As telas R01,
+têm a mesma faixa de navegação no topo (Início, depois R01 a R06), sempre com
+endereço relativo para o arquivo vizinho: funciona aberta do disco, de um clone do
+repositório ou de qualquer servidor estático. As telas R01,
 R02, R04, R05 e R06 aceitam o grupo no endereço (`r02_acumulo_por_etapa.html#G03`),
 que é como a visão geral abre o detalhe.
 
@@ -39,7 +40,7 @@ py -3 dashboard/gerar_visao_geral.py   # por último: resume as outras
 | `gerar_rNN.py` | roda os `.sql` de `sqlite/`, reconta o essencial em Python e só grava se bater |
 | `rNN_modelo.html` | o modelo da página (layout, gráficos e código); o gerador injeta os dados |
 | `comum.css`, `comum.js` | estilo e funções comuns, injetados em cada modelo; mesmos tokens do R01 |
-| `comum.py` | leitura do banco, conferência, lista das telas (com as URLs publicadas) e tema P&B |
+| `comum.py` | leitura do banco, conferência, lista das telas e tema P&B |
 
 O `gerar_r01.py` é anterior a esse arranjo e continua independente.
 
@@ -63,13 +64,16 @@ que vai para a tela não bater com uma segunda conta:
 | R03 | autoria dos commits, tamanho do cartão e revisor de MR, contados direto das tabelas |
 | R04 | o vínculo `#N` refeito com regex em Python tem de dar os mesmos pares do SQL; commits por cartão e medianas por tamanho também |
 | R05 | o Gini refeito em Python a partir das contribuições, e 7 integrantes em todo recorte |
-| R06 | o eixo de cada cartão refeito dos rótulos crus em Python tem de dar as mesmas partes do SQL, por integrante, sprint e eixo; 7 integrantes por grupo |
-| Visão geral | cada leitura por um segundo caminho: t04 contra os commits autorais, o detalhe do R02 contra o resumo, o % do R04 contra o resumo por tamanho, o Gini do R05 refeito, o total do R06 contra a lista de cartões; e os padrões (3 dias, 48 h, 80%, 75%) contra as premissas |
+| R06 | o eixo de cada cartão refeito dos rótulos crus em Python tem de dar as mesmas partes do SQL, por integrante, sprint e eixo; a divisão de cada eixo (total, integrantes com cartão, 2 maiores e parte do grupo) refeita dos mesmos pesos tem de dar o `r06_divisao_do_eixo.sql`; 7 integrantes por grupo |
+| Visão geral | cada leitura por um segundo caminho: t04 contra os commits autorais, o detalhe do R02 contra o resumo, o % do R04 contra o resumo por tamanho, o Gini do R05 refeito, os 2 maiores de cada eixo do R06 refeitos da parte de cada integrante; e os padrões (3 dias, 48 h, 80%, 14 cartões) contra as premissas |
 
 **Cor.** Azul é "dentro do limite ou do planejado"; laranja é "passou". O par
 passa no validador de daltonismo nos temas claro e escuro. A cor nunca é o único
 canal: o laranja vem com triângulo (R02, R04), marca ▲ (R03) ou rótulo. Na
 versão P&B as duas cores viram cinza e quase preto, e a forma segue separando.
+O R06 e a visão geral não usam o laranja: no R06 nenhum integrante é marcado, e
+na visão geral o maior valor da linha leva um ◆ em tinta neutra, porque a cor de
+alerta foi lida como veredito no teste com usuário (ver o dossiê, seção 6).
 
 ## R02 · Acúmulo por etapa
 
@@ -132,65 +136,73 @@ versão P&B as duas cores viram cinza e quase preto, e a forma segue separando.
 - Também: a linha de divisão igual (14,3%), a **curva de Lorenz**, o **Gini por
   sprint** e o mesmo grupo nas quatro medidas.
 
-## R06 · Eixos de tarefa
+## R06 · Eixos no grupo
+
+Reformulado em 13/10/2026, depois da correção do professor: a tela antiga abria no
+integrante mais concentrado e tinha a decisão no indivíduo. Agora a unidade é o
+grupo, e a tela abre sem nenhum integrante destacado.
 
 - **Eixos**: os rótulos de tipo de tarefa do cartão em quatro grupos (premissa):
   Código (CODE, BUG, Fix, TEST, DEPLOY, CODE_REVIEW), Design (DESIGN),
   Documentação (DOCUMENTATION, REQUIREMENTS, user-story) e Negócio (NEGÓCIOS,
   Presentation). Não existe rótulo UX no conjunto; DESIGN é o mais próximo.
 - **Filtros**: grupo, sprint e o limiar de foco (60, 75 ou 90%; 75 é o padrão).
-- **Pequenos múltiplos**: um radar por integrante, na ordem do identificador,
-  todos na mesma escala (0 a 100%), com o perfil do grupo tracejado por baixo e o
-  anel do limiar. Vértice além do limiar vira triângulo laranja; com menos de 10
-  cartões o contorno fica tracejado.
-- **Radar do integrante**: o escolhido em tamanho grande, com o percentual dele e
-  o do grupo no rótulo de cada eixo. Clicar num vértice filtra a lista.
-- **Cartões do integrante**: os cartões em que ele é o responsável, filtráveis
-  por eixo.
-- **Parte de cada eixo**: matriz integrante × eixo em tom único (mais escuro, maior
-  a parte), com os números escritos; é também a visão em tabela dos radares.
-- Por que radar com cuidados: com 4 eixos fixos e escala igual, a forma mostra
-  de relance para onde a pessoa pende. O radar exagera área, então a tela manda
-  ler os vértices, sempre põe o grupo como referência e traz a matriz exata.
+- **Resumo**: eixo mais concentrado (parte dos 2 integrantes que mais têm cartões
+  nele, com a referência de 29% da divisão igual), eixo mais comum no grupo,
+  quantos integrantes estão num eixo só (só a contagem, sem dizer quem) e cartões
+  com eixo, com o que ficou fora.
+- **Divisão de cada eixo** (gráfico principal): uma linha por eixo, uma barra por
+  integrante na ordem do identificador, todas na mesma escala, com a linha
+  tracejada da divisão igual (14%). Eixo com menos de 14 cartões fica tracejado.
+  Clicar numa barra lista os cartões daquele integrante no eixo; clicar no eixo,
+  os do grupo inteiro. Tabela equivalente no botão "Ver como tabela".
+- **Cartões do grupo**: a origem dos números, filtrável por eixo e por integrante;
+  abre com o grupo inteiro.
+- **Perfil de cada integrante**: um radar por integrante, na mesma escala, com o
+  grupo tracejado por baixo e o anel do limiar, sem marca de alerta. Os radares
+  ficam como detalhe, abaixo da divisão.
+- **Parte de cada eixo**: matriz integrante × eixo com os números escritos.
+- Por que barras por eixo e não radar como leitura principal: a pergunta é como o
+  grupo divide cada tipo de tarefa, e a barra na mesma escala, com a divisão igual
+  marcada, mostra isso sem pedir que o leitor compare áreas.
 
 ## Visão geral
 
-- **Título que afirma** a conclusão (o grupo que mais se afasta e em quantas leituras).
+Revista em 13/10/2026, depois da correção do professor e do teste em voz alta,
+em que a leitora tomou o ▲ laranja e a contagem de ▲ por grupo como "o grupo pior".
+
+- **Título que afirma** o assunto de abertura de cada grupo: o primeiro requisito,
+  na ordem de prioridade, em que o grupo tem o maior valor da linha. Não há mais
+  "comece pelo grupo X" nem soma de marcas.
 - **Placar requisito × grupo**: a leitura principal de cada tela com os padrões
-  dela, todas as sprints, com barra na escala natural da medida. O ▲ laranja marca,
-  em cada linha, o grupo que mais se afasta dos outros dois (comparação relativa;
-  os três têm 7 integrantes). O ◇ traz, da matriz do R03, o campo abaixo de 80%
-  que aquela leitura usa naquele grupo. A célula abre a tela já no grupo.
-- **Por onde começar**: para cada grupo, os assuntos com ▲ e o que conferir no
-  registro antes.
+  dela, todas as sprints, com barra na escala natural da medida, na mesma cor para
+  todos. O ◆, em tinta neutra e com o texto "maior valor da linha", marca o maior
+  valor de cada linha. O ◇ traz, da matriz do R03, o campo abaixo de 80% que
+  aquela leitura usa naquele grupo. A célula abre a tela já no grupo.
+- **Por onde começar**: para cada grupo, os assuntos em que ele tem o maior valor
+  da linha e o que conferir no registro antes.
 - **O que cada requisito mostra**: uma frase por tela, montada a partir dos números.
 - **Premissas** que mudam a página, com link para a lista completa de cada tela.
 
-## Publicação
+## Como abrir
 
-Versões coloridas publicadas (privadas; compartilhar pelo menu Share). As URLs
-ficam também em `TELAS`, em `comum.py`, para a navegação entre telas.
-
-| tela | URL |
-| --- | --- |
-| R01 | <https://claude.ai/artifact/J8vMTWGFyRVzfqxYK9nNXo> (P&B: <https://claude.ai/artifact/McKykihF3fN4L9pgwgynS2>) |
-| R02 | <https://claude.ai/artifact/HTDPZKzttfVncZUGBU4kvv> |
-| R03 | <https://claude.ai/artifact/6UznL9ZeRJR2973pazcdCG> |
-| R04 | <https://claude.ai/artifact/X6Z8ZAoEurjtGkGagFE8my> |
-| R05 | <https://claude.ai/artifact/UFJ17FrDcetbwMGXCuqNRj> |
-| R06 | <https://claude.ai/artifact/4tvQRwKfVW5JZs6p2cYRqv> |
-| Visão geral | <https://claude.ai/artifact/Jh4vnFxrMXM2oP9gE2jjsD> |
+As telas são HTML estático gerado a partir do SQLite: não precisam de servidor,
+login nem internet. Do repositório clonado, abra `dashboard/visao_geral.html` no
+navegador; a faixa do topo leva às outras telas. Se o GitHub Pages estiver ligado
+no repositório (Settings → Pages → branch `main`, pasta raiz), o mesmo arquivo
+abre em `https://dhyegopc-gif.github.io/Projeto-Data-Vis/dashboard/visao_geral.html`.
 
 ## Pendências
 
 - **Premissas a confirmar**: dias por tamanho (R04), limite de 48 h (R02), mínimo
   de 80% (R03), critério de integrante e faixas de leitura do Gini (R05),
-  agrupamento dos rótulos em eixos e limiar de foco de 75% (R06).
+  agrupamento dos rótulos em eixos, concentração do eixo e limiar de foco de 75% (R06).
 - **Validação externa:** a sessão de leitura T08 foi realizada e registrou impressões sobre a visão geral, R01, R02, R04 e R06. Ela não documenta o critério de aceite completo de cada tela; faltam evidências específicas de R03 e R05, além do reteste dos ajustes. Os resultados estão no [dossiê final](../README.md).
+- **Reteste das telas revistas em 13/10/2026**: o R06 reformulado e a visão geral sem a cor de alerta ainda não foram lidos por uma pessoa de fora do grupo.
 
 ## R01 · Ritmo de registro
 
-Tela do requisito [R01 — Ritmo de registro ao longo dos dias](../requisitos/Requisitos.MD#r01--ritmo-de-registro-ao-longo-dos-dias),
+Tela do requisito [R01 — Ritmo de registro ao longo dos dias](../requisitos/Requisitos.MD#r01--ritmo-de-registro-ao-longo-dos-dias-prioridade-1),
 para a orientadora pedagógica escolher com qual grupo conversar sobre ritmo de
 trabalho e sobre qual período.
 
@@ -209,11 +221,6 @@ py -3 dashboard/gerar_r01.py
 O gerador grava as duas versões de uma vez, a partir do mesmo modelo: a P&B
 só troca a paleta (tema `TEMA_PB` em `gerar_r01.py`), então dados, textos e
 comportamento são sempre idênticos.
-
-Versões publicadas (privadas; compartilhar pelo menu Share):
-
-- colorida: <https://claude.ai/artifact/J8vMTWGFyRVzfqxYK9nNXo>
-- preto, branco e cinza: <https://claude.ai/artifact/McKykihF3fN4L9pgwgynS2>
 
 ### De onde vêm os números
 
