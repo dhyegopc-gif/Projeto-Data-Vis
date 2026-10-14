@@ -1,0 +1,3 @@
+sqlite: fria mediana 185.936 ms | aquecida mediana 180.567 ms
+duckdb: fria mediana 62.925 ms | aquecida mediana 60.881 ms
+gravado saida\medicoes_tempo.json | mesmo resultado nos dois bancos: True

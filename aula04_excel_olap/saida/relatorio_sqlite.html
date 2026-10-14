@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inventário Olist SQLite</title>
+<style>
+:root{--fundo:#fafaf7;--superficie:#ffffff;--texto:#141413;--texto-2:#52514e;--borda:#dedcd5;
+--barra:#2a78d6;--zebra:#f4f3ee;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--fundo:#141413;--superficie:#1d1d1b;
+--texto:#f0efec;--texto-2:#c3c2b7;--borda:#3a3936;--barra:#3987e5;--zebra:#232321;color-scheme:dark}}
+:root[data-theme="dark"]{--fundo:#141413;--superficie:#1d1d1b;--texto:#f0efec;--texto-2:#c3c2b7;
+--borda:#3a3936;--barra:#3987e5;--zebra:#232321;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fundo);color:var(--texto);
+font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+header,main,footer{max-width:1100px;margin:0 auto;padding:0 16px}
+header{padding-top:28px}
+h1{font-size:1.6rem;margin:0 0 4px}
+h2{font-size:1.15rem;margin:0 0 10px}
+.meta{color:var(--texto-2);font-size:.9rem;margin:2px 0}
+code,.mono{font-family:ui-monospace,"Cascadia Mono",Consolas,Menlo,monospace;font-size:.85em;overflow-wrap:anywhere}
+.meta,p{overflow-wrap:anywhere}
+section{background:var(--superficie);border:1px solid var(--borda);border-radius:4px;padding:16px;margin:16px 0}
+.rolagem{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+caption{text-align:left;color:var(--texto-2);font-size:.85rem;padding-bottom:6px}
+th,td{padding:6px 8px;border-bottom:1px solid var(--borda);text-align:left;vertical-align:top}
+th{font-weight:600}
+td.num,th.num{text-align:right;white-space:nowrap}
+tbody tr:nth-child(even){background:var(--zebra)}
+.barra{display:inline-block;height:10px;border-radius:0 4px 4px 0;background:var(--barra);vertical-align:middle}
+footer{color:var(--texto-2);font-size:.85rem;padding-bottom:32px}
+</style>
+</head>
+<body>
+<header>
+<h1>Inventário operacional do Olist em SQLite</h1>
+<p class="meta">Fonte: <code>saida/olist.sqlite</code>, aberto em modo somente leitura (<code>mode=ro</code>).</p>
+<p class="meta">Gerado em <time datetime="2026-10-13T21:17:15-03:00">2026-10-13T21:17:15-03:00</time> por <code>src/02_html_sqlite.py</code>.</p>
+</header>
+<main>
+<section aria-labelledby="t-contagens">
+<h2 id="t-contagens">Contagem das tabelas</h2>
+<div class="rolagem"><table>
+<caption>9 tabelas lidas do catálogo <code>sqlite_master</code>; contagem por <code>count(*)</code>.</caption>
+<thead><tr><th scope="col">Tabela</th><th scope="col" class="num">Linhas</th></tr></thead>
+<tbody>
+<tr><td><code>olist_customers</code></td><td class='num'>99.441</td></tr>
+<tr><td><code>olist_geolocation</code></td><td class='num'>1.000.163</td></tr>
+<tr><td><code>olist_order_items</code></td><td class='num'>112.650</td></tr>
+<tr><td><code>olist_order_payments</code></td><td class='num'>103.886</td></tr>
+<tr><td><code>olist_order_reviews</code></td><td class='num'>99.224</td></tr>
+<tr><td><code>olist_orders</code></td><td class='num'>99.441</td></tr>
+<tr><td><code>olist_products</code></td><td class='num'>32.951</td></tr>
+<tr><td><code>olist_sellers</code></td><td class='num'>3.095</td></tr>
+<tr><td><code>product_category_name_translation</code></td><td class='num'>71</td></tr>
+</tbody></table></div>
+</section>
+<section aria-labelledby="t-relacoes">
+<h2 id="t-relacoes">Relações declaradas e integridade</h2>
+<p><code>PRAGMA integrity_check</code>: <strong>ok</strong>.
+<code>PRAGMA foreign_key_check</code>: 0 linhas com violação.
+Chaves estrangeiras declaradas: 6.</p>
+<div class="rolagem"><table>
+<caption>Lidas de <code>pragma_foreign_key_list</code>.</caption>
+<thead><tr><th scope="col">Tabela filha</th><th scope="col">Coluna</th><th scope="col">Referência</th></tr></thead>
+<tbody>
+<tr><td><code>olist_order_items</code></td><td><code>order_id</code></td><td><code>olist_orders(order_id)</code></td></tr>
+<tr><td><code>olist_order_items</code></td><td><code>product_id</code></td><td><code>olist_products(product_id)</code></td></tr>
+<tr><td><code>olist_order_items</code></td><td><code>seller_id</code></td><td><code>olist_sellers(seller_id)</code></td></tr>
+<tr><td><code>olist_order_payments</code></td><td><code>order_id</code></td><td><code>olist_orders(order_id)</code></td></tr>
+<tr><td><code>olist_order_reviews</code></td><td><code>order_id</code></td><td><code>olist_orders(order_id)</code></td></tr>
+<tr><td><code>olist_orders</code></td><td><code>customer_id</code></td><td><code>olist_customers(customer_id)</code></td></tr>
+</tbody></table></div>
+</section>
+<section aria-labelledby="t-status">
+<h2 id="t-status">Pedidos por status</h2>
+<div class="rolagem"><table>
+<caption>99.441 pedidos em <code>olist_orders</code>; o percentual é calculado no banco com janela.</caption>
+<thead><tr><th scope="col">Status</th><th scope="col" class="num">Pedidos</th><th scope="col" class="num">%</th>
+<th scope="col">Participação</th></tr></thead>
+<tbody>
+<tr><td>delivered</td><td class='num'>96.478</td><td class='num'>97,02</td><td><span class='barra' style='width:100.00%' aria-hidden='true'></span></td></tr>
+<tr><td>shipped</td><td class='num'>1.107</td><td class='num'>1,11</td><td><span class='barra' style='width:1.15%' aria-hidden='true'></span></td></tr>
+<tr><td>canceled</td><td class='num'>625</td><td class='num'>0,63</td><td><span class='barra' style='width:0.65%' aria-hidden='true'></span></td></tr>
+<tr><td>unavailable</td><td class='num'>609</td><td class='num'>0,61</td><td><span class='barra' style='width:0.63%' aria-hidden='true'></span></td></tr>
+<tr><td>invoiced</td><td class='num'>314</td><td class='num'>0,32</td><td><span class='barra' style='width:0.33%' aria-hidden='true'></span></td></tr>
+<tr><td>processing</td><td class='num'>301</td><td class='num'>0,30</td><td><span class='barra' style='width:0.31%' aria-hidden='true'></span></td></tr>
+<tr><td>created</td><td class='num'>5</td><td class='num'>0,01</td><td><span class='barra' style='width:0.01%' aria-hidden='true'></span></td></tr>
+<tr><td>approved</td><td class='num'>2</td><td class='num'>0,00</td><td><span class='barra' style='width:0.00%' aria-hidden='true'></span></td></tr>
+</tbody></table></div>
+</section>
+<section aria-labelledby="t-recentes">
+<h2 id="t-recentes">Cinco pedidos mais recentes</h2>
+<div class="rolagem"><table>
+<caption>Ordenados por <code>order_purchase_timestamp</code> decrescente; uma linha por pedido, porque <code>customer_id</code> é único em clientes.</caption>
+<thead><tr><th scope="col">Pedido</th><th scope="col">Status</th><th scope="col">Compra</th>
+<th scope="col">Cidade</th><th scope="col">UF</th></tr></thead>
+<tbody>
+<tr><td class='mono'>10a045cdf6a5650c21e9cfeb60384c16</td><td>canceled</td><td class='mono'>2018-10-17T17:30:18</td><td>sorocaba</td><td>SP</td></tr>
+<tr><td class='mono'>b059ee4de278302d550a3035c4cdb740</td><td>canceled</td><td class='mono'>2018-10-16T20:16:02</td><td>picos</td><td>PI</td></tr>
+<tr><td class='mono'>a2ac6dad85cf8af5b0afb510a240fe8c</td><td>canceled</td><td class='mono'>2018-10-03T18:55:29</td><td>registro</td><td>SP</td></tr>
+<tr><td class='mono'>616fa7d4871b87832197b2a137a115d2</td><td>canceled</td><td class='mono'>2018-10-01T15:30:09</td><td>pirai</td><td>RJ</td></tr>
+<tr><td class='mono'>392ed9afd714e3c74767d0c4d3e3f477</td><td>canceled</td><td class='mono'>2018-09-29T09:13:03</td><td>guarulhos</td><td>SP</td></tr>
+</tbody></table></div>
+</section>
+<section aria-labelledby="t-consultas">
+<h2 id="t-consultas">Consultas executadas</h2>
+<div class="rolagem"><table>
+<caption>Duração medida com <code>time.perf_counter</code> em uma execução, incluindo a leitura das linhas pelo Python.</caption>
+<thead><tr><th scope="col">Consulta</th><th scope="col" class="num">Linhas</th><th scope="col" class="num">ms</th>
+<th scope="col">SQL resumido</th></tr></thead>
+<tbody>
+<tr><td>catálogo</td><td class='num'>9</td><td class='num'>0,6</td><td><code>SELECT name FROM sqlite_master WHERE type=&#x27;table&#x27; AND name NOT LIKE &#x27;sqlite_%&#x27; ORDER BY name</code></td></tr>
+<tr><td>contagem das tabelas</td><td class='num'>9</td><td class='num'>40,7</td><td><code>SELECT &#x27;olist_customers&#x27;, count(*) FROM olist_customers UNION ALL SELECT &#x27;olist_geolocation&#x27;, count(*) FROM olist_geolocation UNION ALL SELECT &#x27;olist_order_i...</code></td></tr>
+<tr><td>relações declaradas</td><td class='num'>6</td><td class='num'>0,3</td><td><code>SELECT m.name, f.&quot;from&quot;, f.&quot;table&quot;, f.&quot;to&quot; FROM sqlite_master m, pragma_foreign_key_list(m.name) f WHERE m.type = &#x27;table&#x27; ORDER BY m.name, f.&quot;from&quot;</code></td></tr>
+<tr><td>foreign_key_check</td><td class='num'>0</td><td class='num'>857,5</td><td><code>PRAGMA foreign_key_check</code></td></tr>
+<tr><td>integrity_check</td><td class='num'>1</td><td class='num'>2.827,0</td><td><code>PRAGMA integrity_check</code></td></tr>
+<tr><td>pedidos por status</td><td class='num'>8</td><td class='num'>6,7</td><td><code>SELECT order_status, count(*) AS pedidos, 100.0 * count(*) / sum(count(*)) OVER () AS percentual FROM olist_orders GROUP BY order_status ORDER BY pedidos DESC</code></td></tr>
+<tr><td>cinco pedidos recentes</td><td class='num'>5</td><td class='num'>0,4</td><td><code>SELECT o.order_id, o.order_status, o.order_purchase_timestamp, c.customer_city, c.customer_state FROM olist_orders AS o JOIN olist_customers AS c ON c.custom...</code></td></tr>
+</tbody></table></div>
+</section>
+</main>
+<footer>
+<p>Limitações: inventário de um espelho educacional do dataset público Olist (Kaggle, 2018, CC BY-NC-SA 4.0),
+carregado dos quatro Excels da Aula 04. Os tempos valem para esta máquina e esta execução.</p>
+</footer>
+</body>
+</html>

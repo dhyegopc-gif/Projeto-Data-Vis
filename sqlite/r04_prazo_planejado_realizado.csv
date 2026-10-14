@@ -1,0 +1,1108 @@
+﻿grupo;cartao_numero;titulo;sprint;responsaveis_ids;tamanho;ordem_tamanho;dias_planejados;criado_em;fechado_em;dias_realizados;razao_realizado_planejado;faixa;commits_ligados;autores_distintos;linhas_alteradas
+G01;48;Representar composição entre as classes - Seção 3.2.3;Sprint 02;G01-A17;PP;1;0.25;2026-05-04T11:24:10.919;2026-05-12T15:39:39.643;8.1774;32.71;mais que o dobro;0;0;0
+G01;49;Representar herança entre as classes - Seção 3.2.3;Sprint 02;G01-A17;PP;1;0.25;2026-05-04T11:27:05.029;2026-05-12T15:39:28.188;8.1753;32.701;mais que o dobro;0;0;0
+G01;54;Diagrama de Classes 3.2.3;Sprint 02;G01-A17;PP;1;0.25;2026-05-04T11:33:15.004;2026-05-12T15:40:02.752;8.1714;32.686;mais que o dobro;0;0;0
+G01;60;Inserir o diagrama finalizado na seção 3.2.4 do WAD;Sprint 02;G01-A15;PP;1;0.25;2026-05-04T11:37:03.305;2026-05-06T14:50:54.789;2.1346;8.538;mais que o dobro;0;0;0
+G01;106;Adicionar modelo de MVC;Sprint 02;G01-A17;PP;1;0.25;2026-05-11T11:52:05.067;2026-05-13T21:32:24.237;2.403;9.612;mais que o dobro;1;1;3650
+G01;205;Refazer a seção 3.2.3.1(foi apagada);(sem sprint);G01-A15;PP;1;0.25;2026-06-09T15:24:40.543;2026-06-10T15:47:52.755;1.0161;4.064;mais que o dobro;1;1;151
+G01;258;corrige campos de preenchimento do cadastro;Sprint 05;G01-A14;PP;1;0.25;2026-06-22T16:28:53.648;2026-06-23T10:07:24.030;0.7351;2.94;mais que o dobro;1;1;212
+G01;270;Revisão do código atual;Sprint 05;G01-A14;PP;1;0.25;2026-06-24T14:04:49.069;2026-06-24T16:15:47.532;0.091;0.364;dentro do planejado;0;0;0
+G01;291;Preencher relatório da primeira leva de testes;Sprint 05;G01-A12;PP;1;0.25;2026-06-25T16:54:17.072;2026-06-25T22:18:36.450;0.2252;0.901;dentro do planejado;3;1;25
+G01;292;Preencher relatório da segunda leva de testes;Sprint 05;G01-A12;PP;1;0.25;2026-06-25T16:54:43.500;2026-06-25T22:18:26.164;0.2248;0.899;dentro do planejado;2;1;20
+G01;293;Preencher relatório do teste SUS;Sprint 05;G01-A12;PP;1;0.25;2026-06-25T16:55:03.547;2026-06-25T22:18:29.145;0.2246;0.898;dentro do planejado;3;1;23
+G01;294;Preencher relatório das avaliações heurísticas;Sprint 05;G01-A12;PP;1;0.25;2026-06-25T16:55:21.963;2026-06-25T22:18:30.632;0.2244;0.898;dentro do planejado;1;1;16
+G01;295;Preencher formulario da primeira leva de testes;Sprint 05;G01-A12;PP;1;0.25;2026-06-25T16:56:21.566;2026-06-25T22:18:33.651;0.2238;0.895;dentro do planejado;1;1;18
+G01;296;Preencher formulário da segunda leva de testes;Sprint 05;G01-A12;PP;1;0.25;2026-06-25T16:56:38.300;2026-06-25T22:18:35.008;0.2236;0.894;dentro do planejado;1;1;7
+G01;297;Preencher formulário com perguntas do teste SUS;Sprint 05;G01-A12;PP;1;0.25;2026-06-25T16:57:06.802;2026-06-25T22:18:32.112;0.2232;0.893;dentro do planejado;0;0;0
+G01;302;Correções na seção 5.2;Sprint 05;G01-A12;PP;1;0.25;2026-06-25T22:37:12.211;2026-06-25T23:01:41.092;0.017;0.068;dentro do planejado;1;1;1
+G01;1;Análise das 5 forças de Porter;Sprint 01;G01-A13;P;2;0.5;2026-04-22T14:38:42.296;2026-04-22T14:50:07.148;0.0079;0.016;dentro do planejado;0;0;0
+G01;15;Análise SWOT( Informações);Sprint 01;G01-A23;P;2;0.5;2026-04-23T14:34:00.437;2026-04-23T16:36:35.078;0.0851;0.17;dentro do planejado;0;0;0
+G01;19;Fluxo de telas;Sprint 01;G01-A14;P;2;0.5;2026-04-27T14:10:23.483;2026-05-01T22:50:16.428;4.361;8.722;mais que o dobro;0;0;0
+G01;27;Criar a imagem do canvas de valor;Sprint 01;G01-A15;P;2;0.5;2026-04-28T14:00:40.516;2026-05-01T20:43:01.028;3.2794;6.559;mais que o dobro;0;0;0
+G01;32;Organizar documents e assets;Sprint 01;G01-A17;P;2;0.5;2026-04-29T14:12:02.391;2026-05-01T22:50:17.062;2.3599;4.72;mais que o dobro;1;1;63
+G01;33;Introdução da Regra de negócio;Sprint 01;G01-A17;P;2;0.5;2026-04-29T14:40:47.316;2026-05-01T22:50:19.915;2.34;4.68;mais que o dobro;1;1;8
+G01;36;Realizar Identação dosartefatos 1, 2 e 3 do wad;Sprint 01;G01-A12;P;2;0.5;2026-04-30T02:41:03.464;2026-05-01T22:51:36.280;1.8407;3.681;mais que o dobro;1;1;61
+G01;42;Organiza a ordem dos User stories de acordo com a prioridade;(sem sprint);G01-A15;P;2;0.5;2026-05-01T22:49:15.307;2026-05-02T00:02:48.427;0.0511;0.102;dentro do planejado;1;1;415
+G01;43;Adiciona as fontes nas imagens e revisa wad;Sprint 01;G01-A15;P;2;0.5;2026-05-01T23:54:24.357;2026-05-04T10:36:16.730;2.4457;4.891;mais que o dobro;1;1;58
+G01;44;Criar o diagrama de classes com notação UML - Seção 3.2.3;Sprint 02;G01-A17;P;2;0.5;2026-05-04T11:11:56.043;2026-05-11T14:05:01.562;7.1202;14.24;mais que o dobro;0;0;0
+G01;51;Inserir o diagrama finalizado na Seção 3.2.3 do WAD;Sprint 02;G01-A17;P;2;0.5;2026-05-04T11:28:21.186;2026-05-13T21:32:32.467;9.4196;18.839;mais que o dobro;1;1;1221
+G01;56;Identificar e marcar as mensagens assíncronas - Seção 3.2.4;Sprint 02;G01-A15;P;2;0.5;2026-05-04T11:34:57.159;2026-05-07T15:22:44.261;3.1582;6.316;mais que o dobro;0;0;0
+G01;59;Representar todos os retornos com linhas tracejadas - Seção 3.2.4;Sprint 02;G01-A15;P;2;0.5;2026-05-04T11:36:03.622;2026-05-07T15:20:37.482;3.1559;6.312;mais que o dobro;0;0;0
+G01;62;Identificar e listar todas as entidades do domínio - Seção 3.6.1;Sprint 02;G01-A23;P;2;0.5;2026-05-04T11:39:49.887;2026-05-07T14:54:45.237;3.1354;6.271;mais que o dobro;0;0;0
+G01;68;Identificar e marcar todas as PKs (Primary keys) - Seção 3.6.2;Sprint 02;G01-A14;P;2;0.5;2026-05-04T11:48:01.926;2026-05-12T15:40:48.276;8.1616;16.323;mais que o dobro;0;0;0
+G01;69;Identificar e marcar todas as FKs (Foreign keys) - Seção 3.6.2;Sprint 02;G01-A14;P;2;0.5;2026-05-04T11:49:04.455;2026-05-12T15:40:47.263;8.1609;16.322;mais que o dobro;0;0;0
+G01;70;Verificar coerência com o diagrama de classes (seção 3.2.3) - Seção 3.6.2;Sprint 02;G01-A14;P;2;0.5;2026-05-04T11:50:05.627;2026-05-11T11:39:23.031;6.9926;13.985;mais que o dobro;0;0;0
+G01;91;Escrever a consulta SELECT com condição AND no WHERE - Seção 3.6.4;Sprint 03;G01-A15;P;2;0.5;2026-05-04T15:11:16.900;2026-05-11T11:39:20.580;6.8528;13.706;mais que o dobro;0;0;0
+G01;93;Escrever a consulta SELECT com NOT e LIKE no WHERE - Seção 3.6.4;Sprint 03;G01-A15;P;2;0.5;2026-05-04T15:42:02.630;2026-05-12T15:41:16.343;7.9995;15.999;mais que o dobro;0;0;0
+G01;94;Escrever a consulta SELECT com IN combinado com AND no WHERE- Seção 3.6.4;Sprint 03;G01-A15;P;2;0.5;2026-05-04T15:42:54.297;2026-05-11T11:39:23.547;6.8309;13.662;mais que o dobro;0;0;0
+G01;95;Formalizar a expressão lógica proposicional com conectivos - Seção 3.6.4;Sprint 03;G01-A15;P;2;0.5;2026-05-04T15:43:55.611;2026-05-11T11:39:22.391;6.8302;13.66;mais que o dobro;1;1;12
+G01;96;Construir tabela-verdade da expressão lógica - Seção 3.6.4;Sprint 03;G01-A15;P;2;0.5;2026-05-04T15:44:40.200;2026-05-11T11:39:21.464;6.8296;13.659;mais que o dobro;1;1;8
+G01;139;3.6.4 Consultas SQL e lógica proposicional;Sprint 02;G01-A23;P;2;0.5;2026-05-19T15:41:32.933;2026-05-29T22:47:43.698;10.296;20.592;mais que o dobro;0;0;0
+G01;144;gerenciamento de solicitaçao;Sprint 02;;P;2;0.5;2026-05-20T15:44:31.045;2026-06-01T14:19:03.929;11.9407;23.881;mais que o dobro;2;1;561
+G01;149;Aprovar merges requests da ponderada;Sprint 03;G01-A17;P;2;0.5;2026-05-25T14:15:04.395;2026-06-11T21:00:49.708;17.2818;34.564;mais que o dobro;1;1;2208
+G01;158;Atualizar os Requisitos funcionais do sistema;(sem sprint);G01-A15;P;2;0.5;2026-05-27T15:09:47.324;2026-05-29T19:32:35.054;2.1825;4.365;mais que o dobro;1;1;44
+G01;166;Relatório de Desenvolvimento (seção 4.1) - c e d;Sprint 03;G01-A23;P;2;0.5;2026-05-28T15:35:29.954;2026-06-01T14:19:06.590;3.947;7.894;mais que o dobro;0;0;0
+G01;208;3.2.6    Diagrama de Implantação;Sprint 04;G01-A23;P;2;0.5;2026-06-11T15:11:20.304;2026-06-11T20:58:45.360;0.2413;0.483;dentro do planejado;0;0;0
+G01;211;Fazer a seção 3.2.6;Sprint 04;G01-A15;P;2;0.5;2026-06-12T07:24:26.510;2026-06-14T13:40:32.029;2.2612;4.522;mais que o dobro;2;1;96
+G01;212;Atualizar a seção 3.2.7;Sprint 04;G01-A15;P;2;0.5;2026-06-12T07:30:21.933;2026-06-14T13:40:35.635;2.2571;4.514;mais que o dobro;2;1;90
+G01;214;Atualizar modelo ER 3.6.2;Sprint 04;G01-A15;P;2;0.5;2026-06-12T08:09:25.787;2026-06-14T13:40:33.849;2.23;4.46;mais que o dobro;1;1;200
+G01;215;Atualizar o Diagrama Entidade-Relacionamento (DER);Sprint 04;G01-A15;P;2;0.5;2026-06-12T08:18:05.581;2026-06-14T13:40:39.180;2.224;4.448;mais que o dobro;1;1;91
+G01;216;Atualizar a seção 3.6.3;Sprint 04;G01-A15;P;2;0.5;2026-06-12T08:30:33.941;2026-06-14T13:40:37.261;2.2153;4.431;mais que o dobro;1;1;277
+G01;244;Fix do historico (ajuste no codigo);Sprint 05;G01-A16;P;2;0.5;2026-06-16T16:21:45.499;2026-06-25T19:05:07.845;9.1135;18.227;mais que o dobro;1;1;333
+G01;246;Gerar Licensa do G01-A26 - README;(sem sprint);G01-A13;P;2;0.5;2026-06-22T14:12:55.124;2026-06-23T18:02:29.899;1.1594;2.319;mais que o dobro;1;1;6
+G01;247;Refazer e ajustar a seção 2.1.1;Sprint 05;G01-A15;P;2;0.5;2026-06-22T14:21:31.477;2026-06-22T14:54:23.154;0.0228;0.046;dentro do planejado;0;0;0
+G01;249;Refazer e ajustar a seção 2.1.2;Sprint 05;G01-A15;P;2;0.5;2026-06-22T14:22:31.797;2026-06-22T14:54:14.092;0.022;0.044;dentro do planejado;0;0;0
+G01;250;Correção dos testes automatizados;Sprint 05;G01-A14;P;2;0.5;2026-06-22T15:30:31.921;2026-06-23T10:07:24.697;0.7756;1.551;até o dobro;0;0;0
+G01;251;Refazer e reajustar a seção 2.1.1;Sprint 05;G01-A15;P;2;0.5;2026-06-22T15:40:25.026;2026-06-24T11:17:24.196;1.8174;3.635;mais que o dobro;1;1;68
+G01;252;Refazer e reajustar a seção 2.1.2;Sprint 05;G01-A15;P;2;0.5;2026-06-22T15:41:10.142;2026-06-24T11:17:26.056;1.8169;3.634;mais que o dobro;1;1;35
+G01;266;Atualiza a seção 3.6;Sprint 05;G01-A15;P;2;0.5;2026-06-23T18:33:25.166;2026-06-24T10:13:16.060;0.6527;1.305;até o dobro;2;1;448
+G01;268;implementar funcionalidade no botão de sair da barra lateral;Sprint 05;G01-A14;P;2;0.5;2026-06-24T08:30:46.909;2026-06-24T16:15:50.578;0.323;0.646;dentro do planejado;1;1;46
+G01;269;implementar formatação de campos de preenchimento;Sprint 05;G01-A14;P;2;0.5;2026-06-24T09:04:20.388;2026-06-24T16:15:44.286;0.2996;0.599;dentro do planejado;1;1;274
+G01;272;Atualizar as Instruções de Execução - README;Sprint 05;G01-A13;P;2;0.5;2026-06-24T14:19:29.360;2026-06-25T21:00:37.800;1.2786;2.557;mais que o dobro;1;1;11
+G01;275;Alterar Fontes para o Formato ABNT - WAD;Sprint 05;G01-A23;P;2;0.5;2026-06-24T14:47:10.420;2026-06-25T22:18:37.952;1.3135;2.627;mais que o dobro;1;1;50
+G01;282;"Mover Documentos Adicionais para a Pasta ""outros""";Sprint 05;G01-A13;P;2;0.5;2026-06-25T10:50:46.554;2026-06-25T11:46:25.576;0.0386;0.077;dentro do planejado;0;0;0
+G01;284;Inserir Links dos Integrantes do Grupo na Licensa - README;Sprint 05;G01-A13;P;2;0.5;2026-06-25T10:53:27.135;2026-06-25T21:00:38.796;0.4217;0.843;dentro do planejado;1;1;2
+G01;301;Correções na seção de testes;Sprint 05;G01-A12;P;2;0.5;2026-06-25T22:07:36.104;2026-06-25T22:55:05.988;0.033;0.066;dentro do planejado;1;1;20
+G01;2;Redação de introdução - Seção 1;Sprint 01;[externo];M;3;1.0;2026-04-22T14:39:16.797;2026-04-27T15:37:53.737;5.0407;5.041;mais que o dobro;1;1;12
+G01;3;Análise das 5 Forças de Porter - Seção 2.1.1;Sprint 01;G01-A13;M;3;1.0;2026-04-22T14:45:25.243;2026-04-24T08:59:31.326;1.7598;1.76;até o dobro;1;1;31
+G01;4;Matriz SWOT - Seção 2.1.2;Sprint 01;G01-A23;M;3;1.0;2026-04-22T14:47:07.492;2026-05-01T22:50:21.177;9.3356;9.336;mais que o dobro;0;0;0
+G01;5;Descrição da solução - Seção 2.1.3;Sprint 01;G01-A15;M;3;1.0;2026-04-22T14:48:41.064;2026-05-04T11:25:19.607;11.8588;11.859;mais que o dobro;0;0;0
+G01;6;Canvas de proposta de valor - Seção 2.1.4;Sprint 01;G01-A17;M;3;1.0;2026-04-22T14:50:37.160;2026-05-01T22:50:15.551;9.3331;9.333;mais que o dobro;2;1;210
+G01;7;Matriz de Riscos - Seção 2.1.5;Sprint 01;G01-A14;M;3;1.0;2026-04-22T14:51:33.506;2026-05-01T23:56:10.764;9.3782;9.378;mais que o dobro;0;0;0
+G01;8;Criação de personas - Seção 2.2;Sprint 01;[externo];M;3;1.0;2026-04-23T14:17:42.111;2026-05-01T20:43:52.898;8.2682;8.268;mais que o dobro;0;0;0
+G01;10;Criação de User Storie 2 - Seção 2.3;Sprint 01;G01-A23;M;3;1.0;2026-04-23T14:21:58.465;2026-05-01T20:43:49.248;8.2652;8.265;mais que o dobro;0;0;0
+G01;11;Requisitos Funcionais - Seção 3.1;Sprint 01;G01-A15;M;3;1.0;2026-04-23T14:25:16.329;2026-05-01T20:43:03.241;8.2623;8.262;mais que o dobro;2;1;50
+G01;12;Regras de negócio - Seção 3.1.2;Sprint 01;G01-A17;M;3;1.0;2026-04-23T14:27:58.346;2026-05-01T22:50:20.584;8.3489;8.349;mais que o dobro;1;1;42
+G01;13;Requisitos Não Funcionais (ISO 25010) - Seção 3.1.2;Sprint 01;G01-A16;M;3;1.0;2026-04-23T14:30:51.215;2026-05-01T20:43:05.135;8.2585;8.258;mais que o dobro;1;1;18
+G01;14;Diagrama de casos de uso - Seção 3.2.2;Sprint 01;G01-A13;M;3;1.0;2026-04-23T14:32:58.898;2026-05-01T20:42:50.657;8.2568;8.257;mais que o dobro;0;0;0
+G01;16;User Case - Seção 3.2.2;Sprint 01;G01-A14;M;3;1.0;2026-04-23T14:34:32.708;2026-05-01T20:43:51.693;8.2565;8.256;mais que o dobro;0;0;0
+G01;17;Criação da imagem da matriz SWOT;Sprint 01;G01-A15;M;3;1.0;2026-04-23T15:35:47.365;2026-04-27T21:54:37.397;4.2631;4.263;mais que o dobro;1;1;15
+G01;18;Criação de imagem da Matriz de risco;Sprint 01;G01-A14;M;3;1.0;2026-04-23T23:41:39.203;2026-05-01T22:50:19.295;7.9644;7.964;mais que o dobro;0;0;0
+G01;20;Criar as Personas;Sprint 01;G01-A15;M;3;1.0;2026-04-27T14:18:10.820;2026-04-29T08:37:28.020;1.7634;1.763;até o dobro;0;0;0
+G01;21;Criação da imagem das 5 forças de Poter's;Sprint 01;G01-A12;M;3;1.0;2026-04-27T14:18:52.870;2026-05-01T22:51:32.095;4.356;4.356;mais que o dobro;1;1;2
+G01;22;Identação e modificação para voz passiva analítica da análise das 5 forças de Poter's;Sprint 01;G01-A12;M;3;1.0;2026-04-27T14:22:18.041;2026-05-01T22:51:29.162;4.3536;4.354;mais que o dobro;1;1;21
+G01;23;Idealização do fluxo de telas;(sem sprint);G01-A16;M;3;1.0;2026-04-27T14:45:09.228;2026-04-28T13:52:33.281;0.9635;0.963;dentro do planejado;0;0;0
+G01;25;Criação da Persona 3 - Coordenador;Sprint 01;G01-A12;M;3;1.0;2026-04-27T23:31:52.659;2026-05-01T22:51:41.769;3.9721;3.972;mais que o dobro;0;0;0
+G01;28;Preencher a seção 2.2 do wad refrente as personas da solução;Sprint 01;G01-A12;M;3;1.0;2026-04-28T15:06:30.659;2026-05-01T22:51:40.479;3.323;3.323;mais que o dobro;0;0;0
+G01;29;Relacionar Requisitos Funcionais com Regras de Negócios na Seção 3.1.2;Sprint 01;G01-A15;M;3;1.0;2026-04-28T15:50:52.405;2026-05-04T10:36:19.950;5.7816;5.782;mais que o dobro;0;0;0
+G01;30;Use Case 2 - Seção 3.2.2;Sprint 01;G01-A14;M;3;1.0;2026-04-29T14:03:50.462;2026-05-01T20:42:58.197;2.2772;2.277;mais que o dobro;1;1;151
+G01;31;Redigir User Stories no WAD - Seção 2.3;Sprint 01;[externo];M;3;1.0;2026-04-29T14:10:34.844;2026-05-01T22:50:18.562;2.3609;2.361;mais que o dobro;2;1;197
+G01;34;Use Case alterações;Sprint 01;G01-A14;M;3;1.0;2026-04-29T22:31:34.019;2026-05-01T20:42:56.869;1.9246;1.925;até o dobro;0;0;0
+G01;35;Realizar a revisão do wad;Sprint 01;G01-A15;M;3;1.0;2026-04-29T22:37:54.454;2026-05-01T20:42:49.464;1.9201;1.92;até o dobro;5;2;1280
+G01;38;Use Case - alteração de imagens;Sprint 01;G01-A12;M;3;1.0;2026-04-30T07:12:41.131;2026-05-01T22:51:37.970;1.652;1.652;até o dobro;0;0;0
+G01;41;Atualizar wad colocando fonte nas imagens e tabelas faltantes e adiciona-las a seção Anexos;Sprint 01;G01-A12;M;3;1.0;2026-05-01T17:20:05.689;2026-05-01T22:51:39.394;0.2303;0.23;dentro do planejado;0;0;0
+G01;45;Adicionar multiplicidades em todos os relacionamentos - Seção 3.2.3;Sprint 02;G01-A17;M;3;1.0;2026-05-04T11:14:05.671;2026-05-12T15:39:20.705;8.1842;8.184;mais que o dobro;0;0;0
+G01;47;Representar agregação entre as classes - Seção 3.2.3;Sprint 02;G01-A17;M;3;1.0;2026-05-04T11:23:14.272;2026-05-11T14:05:03.231;7.1124;7.112;mais que o dobro;0;0;0
+G01;52;Criar o diagrama de sequência UML - Seção 3.2.4;Sprint 02;G01-A15;M;3;1.0;2026-05-04T11:30:57.370;2026-05-11T11:39:49.628;7.0062;7.006;mais que o dobro;1;1;47
+G01;53;Representar o fluxo Controller -> Service -> Repository -> Banco - Seção 3.2.4;Sprint 02;G01-A15;M;3;1.0;2026-05-04T11:32:42.349;2026-05-06T15:09:30.702;2.1506;2.151;mais que o dobro;0;0;0
+G01;55;Identificar e marcar as mensagens síncronas - Seção 3.2.4;Sprint 02;G01-A15;M;3;1.0;2026-05-04T11:33:46.828;2026-05-11T11:39:24.592;7.0039;7.004;mais que o dobro;2;1;9
+G01;63;Definir os atributos de cada entidade - Seção 3.6.1;Sprint 02;G01-A23;M;3;1.0;2026-05-04T11:40:59.862;2026-05-07T14:54:42.929;3.1345;3.135;mais que o dobro;0;0;0
+G01;71;Inserir o diagrama finalizado na Seção 3.6.2 no WAD;Sprint 02;G01-A14;M;3;1.0;2026-05-04T11:51:03.963;2026-05-12T15:40:46.150;8.1595;8.16;mais que o dobro;0;0;0
+G01;72;Preencher a seção 3.2.1 e criar o diagrama de arquitetura;Sprint 02;G01-A15;M;3;1.0;2026-05-04T11:52:08.520;2026-05-29T19:32:23.929;25.3196;25.32;mais que o dobro;0;0;0
+G01;89;Revisão geral artefato 4;Sprint 02;G01-A14;M;3;1.0;2026-05-04T14:17:07.974;2026-05-29T22:46:58.680;25.3541;25.354;mais que o dobro;0;0;0
+G01;90;Revisão geral artefato 5;Sprint 02;G01-A14;M;3;1.0;2026-05-04T14:17:30.183;2026-05-15T04:26:15.114;10.5894;10.589;mais que o dobro;1;1;244
+G01;103;Mapeamento de WebAPI;Sprint 03;G01-A14;M;3;1.0;2026-05-04T15:53:57.610;2026-05-29T22:47:59.613;25.2875;25.288;mais que o dobro;0;0;0
+G01;104;Criacao do Modelo Logico Secao 3.6.3;(sem sprint);[externo];M;3;1.0;2026-05-05T14:42:48.542;2026-05-07T14:54:41.056;2.0082;2.008;mais que o dobro;1;1;0
+G01;107;Revisar o wad;Sprint 03;G01-A15;M;3;1.0;2026-05-11T14:05:15.245;2026-05-15T17:37:57.212;4.1477;4.148;mais que o dobro;0;0;0
+G01;109;Revisão da documentação com base no feedback da sprint 1;Sprint 02;G01-A14;M;3;1.0;2026-05-11T14:40:19.603;2026-05-13T21:32:12.271;2.286;2.286;mais que o dobro;0;0;0
+G01;110;Alterar Pasta Raiz para se adequar ao template;Sprint 02;[externo];M;3;1.0;2026-05-11T15:03:42.826;2026-05-13T21:32:13.675;2.2698;2.27;mais que o dobro;1;1;6489
+G01;111;Adiciona Modelo Fisico/Reformula template;Sprint 02;[externo];M;3;1.0;2026-05-12T14:30:07.664;2026-05-15T17:37:55.214;3.1304;3.13;mais que o dobro;1;1;693
+G01;112;Revisão de documentação geral;Sprint 02;G01-A14;M;3;1.0;2026-05-12T14:41:09.831;2026-05-13T21:32:18.313;1.2855;1.286;até o dobro;0;0;0
+G01;113;Criar telas de cadastro;Sprint 02;G01-A12;M;3;1.0;2026-05-13T00:38:11.647;2026-05-15T23:21:30.313;2.9467;2.947;mais que o dobro;0;0;0
+G01;114;Criar telas de visualizar contratos;Sprint 02;G01-A12;M;3;1.0;2026-05-13T00:38:28.037;2026-05-15T23:21:31.998;2.9466;2.947;mais que o dobro;2;1;1020
+G01;115;Criar telas de aprovar solicitações;Sprint 02;G01-A12;M;3;1.0;2026-05-13T00:38:58.315;2026-05-15T23:21:35.725;2.9463;2.946;mais que o dobro;0;0;0
+G01;116;Slides;Sprint 02;G01-A17;M;3;1.0;2026-05-13T10:07:39.390;2026-05-15T17:37:45.024;2.3126;2.313;mais que o dobro;0;0;0
+G01;117;diagrama entidade de relacionamento;Sprint 02;G01-A23;M;3;1.0;2026-05-13T14:37:13.929;2026-05-15T17:37:51.202;2.1254;2.125;mais que o dobro;2;1;23
+G01;118;Adicionar as mudanças no wad (De acordo com as avaliações);Sprint 03;G01-A15;M;3;1.0;2026-05-13T15:01:18.730;2026-05-15T17:37:53.280;2.1087;2.109;mais que o dobro;1;1;74
+G01;120;Construir tasks dos fluxos de telas do wireframes;Sprint 02;G01-A12;M;3;1.0;2026-05-14T14:37:14.013;2026-05-15T23:21:37.919;1.3642;1.364;até o dobro;0;0;0
+G01;124;Documentar a introdução e conclusão da seção do Wireframe no wad;Sprint 02;G01-A12;M;3;1.0;2026-05-15T23:04:46.766;2026-05-15T23:21:29.163;0.0116;0.012;dentro do planejado;1;1;4
+G01;125;Testagem de Endpoints;Sprint 03;G01-A14;M;3;1.0;2026-05-18T14:11:18.250;2026-06-11T21:00:52.808;24.2844;24.284;mais que o dobro;1;1;2741
+G01;126;refatoração na estrutura de pastas;Sprint 03;G01-A14;M;3;1.0;2026-05-18T14:12:44.163;2026-06-11T21:00:02.289;24.2828;24.283;mais que o dobro;0;0;0
+G01;133;Buscar inspirações de guias de estilos para uso no protótipo;Sprint 03;G01-A12;M;3;1.0;2026-05-18T15:04:51.948;2026-05-29T22:47:44.646;11.3214;11.321;mais que o dobro;0;0;0
+G01;138;Definir cores usadas no guia de estilos;Sprint 03;G01-A12;M;3;1.0;2026-05-19T15:10:53.205;2026-06-01T11:34:27.689;12.8497;12.85;mais que o dobro;0;0;0
+G01;143;Implementação do sistema web- teste-Cadastro de fornecedor;(sem sprint);G01-A15;M;3;1.0;2026-05-20T15:44:05.224;2026-05-29T19:32:25.499;9.1586;9.159;mais que o dobro;0;0;0
+G01;150;Aprovação de marge request e revisão dos testes;Sprint 03;G01-A14;M;3;1.0;2026-05-25T14:17:16.377;2026-06-11T21:00:46.651;17.2802;17.28;mais que o dobro;0;0;0
+G01;151;Transformando wireframe e página web;Sprint 03;G01-A17;M;3;1.0;2026-05-26T11:44:29.813;2026-06-05T00:36:57.572;9.5364;9.536;mais que o dobro;3;1;110
+G01;152;Configurando endpoints;Sprint 03;G01-A17;M;3;1.0;2026-05-26T14:36:54.101;2026-06-11T21:00:50.532;16.2666;16.267;mais que o dobro;0;0;0
+G01;153;arquitetura em Camadas (seção 3.2.7)- ART 9;Sprint 03;G01-A23;M;3;1.0;2026-05-26T14:39:13.288;2026-06-11T21:00:27.978;16.2648;16.265;mais que o dobro;1;1;99
+G01;154;Preencher a seção 3.6.4;Sprint 03;G01-A15;M;3;1.0;2026-05-26T15:12:13.883;2026-05-28T15:13:17.471;2.0007;2.001;mais que o dobro;3;1;301
+G01;155;Documentação seção 3.7;Sprint 03;G01-A14;M;3;1.0;2026-05-26T15:45:58.162;2026-06-05T00:36:57.438;9.3687;9.369;mais que o dobro;0;0;0
+G01;157;Atualizar a seção 3.1.3;(sem sprint);G01-A15;M;3;1.0;2026-05-27T15:00:38.101;2026-05-29T19:32:30.620;2.1888;2.189;mais que o dobro;0;0;0
+G01;159;Criar a matriz de rastreabilidade do sistema;(sem sprint);G01-A15;M;3;1.0;2026-05-27T15:18:30.535;2026-05-29T19:32:33.145;2.1764;2.176;mais que o dobro;1;1;64
+G01;160;Aplicar boas práticas;Sprint 03;G01-A17;M;3;1.0;2026-05-27T15:23:24.298;2026-06-05T00:36:57.590;8.3844;8.384;mais que o dobro;1;1;1054
+G01;161;Preencher a seção 3.2.7;(sem sprint);G01-A15;M;3;1.0;2026-05-27T15:42:47.100;2026-05-29T19:32:37.051;2.1596;2.16;mais que o dobro;0;0;0
+G01;165;Revisar todo o wad;(sem sprint);G01-A15;M;3;1.0;2026-05-28T14:19:54.025;2026-06-01T11:32:53.186;3.884;3.884;mais que o dobro;9;1;1166
+G01;167;Refatoração de código - retirar duplicatas;Sprint 03;G01-A14;M;3;1.0;2026-05-28T17:12:52.697;2026-06-11T21:00:08.204;14.1578;14.158;mais que o dobro;0;0;0
+G01;169;Refatoração de codigo;Sprint 03;G01-A14;M;3;1.0;2026-05-29T13:19:30.605;2026-06-11T20:59:31.870;13.3195;13.319;mais que o dobro;0;0;0
+G01;172;Definir Tipograia usada no guia de estilo;Sprint 03;G01-A12;M;3;1.0;2026-05-30T01:01:58.319;2026-06-01T11:34:26.901;2.4392;2.439;mais que o dobro;1;1;62
+G01;173;Definir Icones usados no guia de estilos;Sprint 03;G01-A12;M;3;1.0;2026-05-30T01:06:11.207;2026-06-01T11:34:26.227;2.4363;2.436;mais que o dobro;1;1;92
+G01;174;Criação do guia de estilos (parte 1: cores);Sprint 03;G01-A12;M;3;1.0;2026-05-30T01:17:36.006;2026-06-01T11:34:25.352;2.4283;2.428;mais que o dobro;1;1;7
+G01;175;Criação do guia de estilos (parte 2: tipografia);Sprint 03;G01-A12;M;3;1.0;2026-05-30T01:18:17.900;2026-06-01T11:34:19.631;2.4278;2.428;mais que o dobro;1;1;6
+G01;176;Criação do guia de estilos (parte 3: ícones);Sprint 03;G01-A12;M;3;1.0;2026-05-30T01:19:08.859;2026-06-01T11:34:18.643;2.4272;2.427;mais que o dobro;1;1;6
+G01;179;Atualizar fluxo 1 wireframe;Sprint 03;G01-A12;M;3;1.0;2026-05-31T23:02:02.381;2026-06-01T14:05:35.180;0.6275;0.627;dentro do planejado;1;1;18
+G01;180;Atualizar fluxo 2 wireframe;Sprint 03;G01-A12;M;3;1.0;2026-05-31T23:02:21.316;2026-06-01T14:05:34.224;0.6272;0.627;dentro do planejado;1;1;24
+G01;181;Atualizar fluxo 3 wireframe;Sprint 03;G01-A12;M;3;1.0;2026-05-31T23:02:32.257;2026-06-01T14:05:33.493;0.6271;0.627;dentro do planejado;2;1;26
+G01;182;Atualizar fluxo 4 wireframe;Sprint 03;G01-A12;M;3;1.0;2026-05-31T23:02:39.889;2026-06-01T14:05:32.715;0.627;0.627;dentro do planejado;0;0;0
+G01;183;Atualizar fluxo 5 wireframe;Sprint 03;G01-A12;M;3;1.0;2026-05-31T23:02:47.663;2026-06-01T14:05:31.939;0.6269;0.627;dentro do planejado;1;1;12
+G01;184;Atualizar fluxo 6 wireframe;Sprint 03;G01-A12;M;3;1.0;2026-05-31T23:02:56.780;2026-06-01T14:05:31.101;0.6268;0.627;dentro do planejado;1;1;38
+G01;185;Atualizar fluxo 7 wireframe;Sprint 03;G01-A12;M;3;1.0;2026-05-31T23:03:05.287;2026-06-01T14:05:30.220;0.6267;0.627;dentro do planejado;1;1;10
+G01;186;Atualizar seção dos Wireframes;Sprint 03;G01-A12;M;3;1.0;2026-05-31T23:07:47.491;2026-06-01T14:05:29.307;0.6234;0.623;dentro do planejado;2;1;20
+G01;195;Iniciar o ART.12;Sprint 04;G01-A15;M;3;1.0;2026-06-08T14:07:19.731;2026-06-14T13:40:26.917;5.9813;5.981;mais que o dobro;4;1;145
+G01;198;- 3.2.1    Diagrama de Arquitetura;Sprint 04;G01-A23;M;3;1.0;2026-06-08T14:23:26.391;2026-06-10T15:47:55.881;2.0587;2.059;mais que o dobro;0;0;0
+G01;200;Preencher seção 6.1 referente ao resumo executivo;Sprint 04;G01-A12;M;3;1.0;2026-06-09T14:15:50.052;2026-06-14T13:32:45.238;4.9701;4.97;mais que o dobro;1;1;78
+G01;201;Preencher seção 6.2 referente a análise de mercado;Sprint 04;G01-A12;M;3;1.0;2026-06-09T14:17:27.053;2026-06-14T13:32:43.341;4.9689;4.969;mais que o dobro;3;1;56
+G01;202;Preencher seção 6.3 referente ao público alvo;Sprint 04;G01-A12;M;3;1.0;2026-06-09T14:19:07.023;2026-06-14T13:32:46.962;4.9678;4.968;mais que o dobro;3;2;38
+G01;204;Refazer a seção 3.2.1 (foi apagada);Sprint 04;G01-A15;M;3;1.0;2026-06-09T15:08:19.600;2026-06-14T13:40:25.483;4.939;4.939;mais que o dobro;1;1;150
+G01;213;Arrumar tela de cadastro e consulta;Sprint 04;G01-A17;M;3;1.0;2026-06-12T07:43:10.188;2026-06-14T13:33:01.159;2.243;2.243;mais que o dobro;9;2;1648
+G01;218;Corrigir bugs de conflito com merge;Sprint 04;G01-A17;M;3;1.0;2026-06-12T08:43:01.293;2026-06-14T13:32:47.649;2.2012;2.201;mais que o dobro;0;0;0
+G01;220;Construir Imagem do Canvas;Sprint 04;G01-A12;M;3;1.0;2026-06-12T17:18:11.951;2026-06-14T13:32:48.838;1.8435;1.843;até o dobro;1;1;15
+G01;221;Preencher documentação relacionada ao Canvas;Sprint 04;G01-A12;M;3;1.0;2026-06-12T17:19:02.551;2026-06-14T13:33:03.417;1.8431;1.843;até o dobro;1;1;24
+G01;222;Fazer a seção 4.2;Sprint 04;G01-A15;M;3;1.0;2026-06-12T20:41:21.598;2026-06-14T13:40:42.883;1.7079;1.708;até o dobro;1;1;249
+G01;224;Implementar página de solicitação;Sprint 05;G01-A14;M;3;1.0;2026-06-15T11:43:06.302;2026-06-23T18:02:30.578;8.2635;8.263;mais que o dobro;1;1;2517
+G01;230;Corrigir endpoints reais da WebAPI;Sprint 05;G01-A16;M;3;1.0;2026-06-16T12:25:46.101;2026-06-22T22:09:20.165;6.4053;6.405;mais que o dobro;1;1;69
+G01;231;Remover entidades fantasmas do DER;Sprint 05;G01-A16;M;3;1.0;2026-06-16T12:46:39.281;2026-06-22T22:09:34.991;6.3909;6.391;mais que o dobro;1;1;41
+G01;232;Corrigir contagem de controllers no diagrama;Sprint 05;G01-A16;M;3;1.0;2026-06-16T12:55:53.923;2026-06-22T22:09:18.269;6.3843;6.384;mais que o dobro;1;1;6
+G01;233;Alinhar método HTTP no diagrama sequência;Sprint 05;G01-A16;M;3;1.0;2026-06-16T12:57:28.096;2026-06-22T22:09:20.894;6.3832;6.383;mais que o dobro;1;1;16
+G01;235;Gravar Video de Demonstração da Aplicação;Sprint 05;G01-A23;M;3;1.0;2026-06-16T14:13:11.677;2026-06-26T00:07:51.797;9.413;9.413;mais que o dobro;1;1;2
+G01;236;Remover testes fantasmas LoginService do relatório;Sprint 05;G01-A16;M;3;1.0;2026-06-16T14:43:43.763;2026-06-22T22:09:22.580;6.3095;6.309;mais que o dobro;1;1;45
+G01;237;Correção de erros com base na avaliação dos artefatos;Sprint 05;G01-A14;M;3;1.0;2026-06-16T14:44:03.970;2026-06-24T16:15:53.936;8.0638;8.064;mais que o dobro;2;1;1195
+G01;238;Adicionar cenários 404 nos testes de integração;Sprint 05;G01-A16;M;3;1.0;2026-06-16T14:48:44.746;2026-06-22T22:09:21.582;6.306;6.306;mais que o dobro;1;1;46
+G01;240;Padronizar nomenclatura dos arquivos de teste;Sprint 05;G01-A16;M;3;1.0;2026-06-16T14:53:51.627;2026-06-23T11:49:23.967;6.8719;6.872;mais que o dobro;1;1;21
+G01;241;Elevar cobertura de Service para 80%;Sprint 05;G01-A16;M;3;1.0;2026-06-16T15:04:40.129;2026-06-23T11:49:22.803;6.8644;6.864;mais que o dobro;1;1;357
+G01;242;Corrigir migration 12 e schema fornecedores;Sprint 05;G01-A16;M;3;1.0;2026-06-16T15:11:57.765;2026-06-23T11:49:23.369;6.8593;6.859;mais que o dobro;1;1;29
+G01;243;Corrigir cookie de sessão e proteger /inicio;Sprint 05;G01-A16;M;3;1.0;2026-06-16T16:17:10.861;2026-06-23T11:49:25.530;6.8141;6.814;mais que o dobro;0;0;0
+G01;245;Revisão da estrutura atual do código;Sprint 05;G01-A14;M;3;1.0;2026-06-17T12:37:31.687;2026-06-23T11:49:24.643;5.9666;5.967;mais que o dobro;0;0;0
+G01;253;Refazer e reajustar a seção 2.1.3 até a 2.1.4;Sprint 05;G01-A15;M;3;1.0;2026-06-22T15:42:25.623;2026-06-24T11:17:22.595;1.8159;1.816;até o dobro;1;1;217
+G01;255;Refazer e reajustar a seção 3.7;Sprint 05;G01-A15;M;3;1.0;2026-06-22T15:45:10.966;2026-06-24T11:17:21.416;1.814;1.814;até o dobro;7;1;6523
+G01;256;Preencher a seção de conclusão e trabalhos futuros;Sprint 05;G01-A15;M;3;1.0;2026-06-22T15:46:32.219;2026-06-24T11:17:29.585;1.8132;1.813;até o dobro;2;1;62
+G01;259;Criação de usuários de login;Sprint 05;G01-A14;M;3;1.0;2026-06-23T11:25:26.001;2026-06-23T18:07:49.245;0.2794;0.279;dentro do planejado;1;1;717
+G01;260;Correção de fluxo de solicitação;Sprint 05;G01-A14;M;3;1.0;2026-06-23T11:29:00.451;2026-06-24T16:15:59.334;1.1993;1.199;até o dobro;1;1;356
+G01;264;Fazer descrição do G01-A26 - README;Sprint 05;G01-A13;M;3;1.0;2026-06-23T15:28:34.650;2026-06-23T18:02:32.699;0.1069;0.107;dentro do planejado;1;1;10
+G01;265;Atualizar a seção 3.1;Sprint 05;G01-A15;M;3;1.0;2026-06-23T17:39:59.731;2026-06-24T11:17:31.685;0.7344;0.734;dentro do planejado;1;1;165
+G01;271;Refatorar código atual;Sprint 05;G01-A14;M;3;1.0;2026-06-24T14:10:05.844;2026-06-26T00:08:00.558;1.4152;1.415;até o dobro;0;0;0
+G01;273;Preencher a seção 3.8;Sprint 05;G01-A15;M;3;1.0;2026-06-24T14:20:23.638;2026-06-24T16:15:40.618;0.0801;0.08;dentro do planejado;3;1;272
+G01;274;Corrigir barra lateral;Sprint 05;G01-A17;M;3;1.0;2026-06-24T14:26:23.491;2026-06-25T22:12:28.438;1.3237;1.324;até o dobro;3;1;15
+G01;276;Corrigindo header;Sprint 05;G01-A17;M;3;1.0;2026-06-24T14:47:17.140;2026-06-25T22:12:33.783;1.3092;1.309;até o dobro;1;1;13
+G01;277;correção de endpoints de visualização, edição e histórico;Sprint 05;G01-A14;M;3;1.0;2026-06-24T21:45:32.679;2026-06-24T22:51:11.638;0.0456;0.046;dentro do planejado;0;0;0
+G01;283;Arrumar Links não Acessíveis - WAD;Sprint 05;G01-A13;M;3;1.0;2026-06-25T10:52:33.768;2026-06-25T21:00:41.337;0.4223;0.422;dentro do planejado;1;1;10
+G01;288;Colocar Arquivos de Configuração na pasta src;Sprint 05;G01-A13;M;3;1.0;2026-06-25T14:03:37.029;2026-06-25T21:00:38.337;0.2896;0.29;dentro do planejado;0;0;0
+G01;290;Preencher a seção 5.2 refente aos Testes de Usabilidade;Sprint 05;G01-A12;M;3;1.0;2026-06-25T16:41:40.060;2026-06-25T22:18:27.687;0.2339;0.234;dentro do planejado;0;0;0
+G01;298;Corrigir coerência final do WAD: testes, endpoints e referências;Sprint 05;G01-A15;M;3;1.0;2026-06-25T21:13:54.690;2026-06-26T00:08:51.950;0.1215;0.121;dentro do planejado;3;1;268
+G01;299;remove historico button do sidebar lateral;Sprint 05;G01-A16;M;3;1.0;2026-06-25T21:24:18.626;2026-06-26T00:21:31.896;0.1231;0.123;dentro do planejado;4;1;372
+G01;303;ajustes finais;Sprint 05;G01-A16;M;3;1.0;2026-06-25T23:17:30.351;2026-06-26T00:21:33.169;0.0445;0.044;dentro do planejado;2;1;15101
+G01;9;Criação de User Storie 1 - Seção 2.3;Sprint 01;[externo];G;4;3.0;2026-04-23T14:20:23.299;2026-05-01T20:43:50.487;8.2663;2.755;mais que o dobro;0;0;0
+G01;24;Descrição da solução - 2.1.3;(sem sprint);G01-A13;G;4;3.0;2026-04-27T14:47:45.685;2026-05-01T22:50:14.656;4.3351;1.445;até o dobro;1;1;41
+G01;26;Criação dos templates das 3 personas;Sprint 01;G01-A12;G;4;3.0;2026-04-27T23:32:52.787;2026-05-01T22:50:17.799;3.9704;1.323;até o dobro;0;0;0
+G01;37;Use Case - alteração de diagramas de caso de uso;Sprint 01;G01-A14;G;4;3.0;2026-04-30T02:43:26.261;2026-05-01T20:43:00.005;1.7497;0.583;dentro do planejado;0;0;0
+G01;39;Use Case - Correção de imagens;Sprint 01;G01-A14;G;4;3.0;2026-04-30T13:27:33.500;2026-05-02T00:00:15.249;1.4394;0.48;dentro do planejado;0;0;0
+G01;40;Atulizações na seção 3.2.2 referente as casos de uso;Sprint 01;G01-A12;G;4;3.0;2026-05-01T14:23:34.796;2026-05-01T22:51:34.143;0.3528;0.118;dentro do planejado;0;0;0
+G01;105;Diagrama Fisico (70%) 3.6.3;(sem sprint);[externo];G;4;3.0;2026-05-06T14:05:32.180;2026-05-11T11:39:23.791;4.8985;1.633;até o dobro;0;0;0
+G01;108;Adicionar-modelo-fisico no migrations.sql(30%);Sprint 02;[externo];G;4;3.0;2026-05-11T14:23:43.059;2026-05-13T21:32:12.961;2.2976;0.766;dentro do planejado;0;0;0
+G01;119;Fazer a notação UML com multiplicidades, associação e agregação;Sprint 03;G01-A15;G;4;3.0;2026-05-13T17:35:24.877;2026-05-15T17:37:48.978;2.0017;0.667;dentro do planejado;0;0;0
+G01;121;Fazer modificações completas no wad;Sprint 02;G01-A15;G;4;3.0;2026-05-14T14:52:32.293;2026-05-18T19:11:53.134;4.1801;1.393;até o dobro;4;1;164
+G01;122;Correção de diagramas e texto da seção 3;Sprint 02;G01-A14;G;4;3.0;2026-05-14T15:03:32.326;2026-05-15T17:37:42.626;1.1071;0.369;dentro do planejado;0;0;0
+G01;123;Revisar pasta Source;Sprint 02;[externo];G;4;3.0;2026-05-15T11:12:31.791;2026-06-01T14:19:01.562;17.1295;5.71;mais que o dobro;2;1;5962
+G01;127;Diagrama de sequência: aprovar/rejeitar solicitações de alterações - Seção 3.2.4;Sprint 03;G01-A13;G;4;3.0;2026-05-18T14:27:06.331;2026-05-29T22:47:52.173;11.3478;3.783;mais que o dobro;1;1;11
+G01;128;Diagrama de sequência: Vizualizar dashboards - Seção 3.2.4;Sprint 03;G01-A13;G;4;3.0;2026-05-18T14:29:50.338;2026-05-28T15:13:12.448;10.0301;3.343;mais que o dobro;1;1;8
+G01;129;Diagrama de sequência: Gerenciamento de Contrato - Seção 3.2.4;Sprint 03;G01-A13;G;4;3.0;2026-05-18T14:31:12.712;2026-05-28T15:13:14.296;10.0292;3.343;mais que o dobro;2;1;26
+G01;135;Diagrama de Classes Arquitetural - Seção 3.2.3.1;Sprint 03;G01-A13;G;4;3.0;2026-05-19T10:07:55.192;2026-06-11T21:00:14.563;23.453;7.818;mais que o dobro;1;1;151
+G01;136;Atualização da Matriz de Rastreabilidade - Seção 3.1.4;Sprint 03;G01-A13;G;4;3.0;2026-05-19T10:10:20.474;2026-06-11T20:59:55.762;23.4511;7.817;mais que o dobro;1;1;199
+G01;140;Criar template para o sistema com base no tutorial do [externo];Sprint 03;G01-A17;G;4;3.0;2026-05-19T23:31:04.331;2026-05-29T22:48:00.985;9.9701;3.323;mais que o dobro;2;1;2381
+G01;141;Implementação do sistema web - teste - atualização de dados;Sprint 03;G01-A14;G;4;3.0;2026-05-20T15:28:18.681;2026-06-11T21:00:30.124;22.2307;7.41;mais que o dobro;0;0;0
+G01;142;Testes automatizados para fluxo de Consulta de Fornecedores;Sprint 03;G01-A17;G;4;3.0;2026-05-20T15:28:22.752;2026-06-11T21:00:44.827;22.2308;7.41;mais que o dobro;3;1;127
+G01;145;Implementar o back-end da vizualização do dashboard;Sprint 03;G01-A13;G;4;3.0;2026-05-20T21:26:41.438;2026-06-11T21:00:41.012;21.9819;7.327;mais que o dobro;4;1;576
+G01;146;Cria os testes de gerenciamento de contrato;(sem sprint);G01-A16;G;4;3.0;2026-05-21T10:11:10.942;2026-06-14T13:27:28.064;24.1363;8.045;mais que o dobro;1;1;416
+G01;147;teste de implementação - atualização de produção;Sprint 03;G01-A14;G;4;3.0;2026-05-21T10:11:47.772;2026-06-05T00:36:57.595;14.6008;4.867;mais que o dobro;0;0;0
+G01;148;Cria os testes de cadastro de fornecedor;(sem sprint);G01-A15;G;4;3.0;2026-05-21T10:18:33.140;2026-05-29T19:32:28.748;8.3847;2.795;mais que o dobro;1;1;6539
+G01;156;Configurar endpoints;Sprint 03;G01-A17;G;4;3.0;2026-05-27T14:48:41.210;2026-06-11T21:00:29.185;15.2582;5.086;mais que o dobro;1;1;186
+G01;162;Refactor na estrutura de código;Sprint 03;G01-A14;G;4;3.0;2026-05-27T20:04:48.296;2026-06-05T00:36:57.534;8.189;2.73;mais que o dobro;0;0;0
+G01;163;Revisão de código;Sprint 03;G01-A14;G;4;3.0;2026-05-28T09:35:16.393;2026-06-11T21:00:15.317;14.4757;4.825;mais que o dobro;0;0;0
+G01;164;Revisão de código;Sprint 03;G01-A17;G;4;3.0;2026-05-28T14:13:50.463;2026-06-11T20:59:47.482;14.2819;4.761;mais que o dobro;1;1;34
+G01;168;Adicionar testes testes automatizados;Sprint 03;G01-A17;G;4;3.0;2026-05-29T08:53:25.938;2026-06-11T20:59:40.313;13.5043;4.501;mais que o dobro;2;1;343
+G01;171;Preencher seção do Guia de Estilos;Sprint 03;G01-A12;G;4;3.0;2026-05-29T19:54:40.974;2026-06-01T11:34:28.485;2.6526;0.884;dentro do planejado;1;1;12
+G01;177;Preencher seção do Protótipo de alta fidelidade;Sprint 03;G01-A12;G;4;3.0;2026-05-30T01:31:58.861;2026-06-01T11:34:17.699;2.4183;0.806;dentro do planejado;1;1;26
+G01;178;Construção do protótipo de alta fidelidade no figma;Sprint 03;G01-A12;G;4;3.0;2026-05-30T01:37:56.889;2026-06-01T11:34:16.605;2.4141;0.805;dentro do planejado;1;1;41
+G01;189;Documentar Testes de Integração de Endpoints - Seção 5.1.3;Sprint 04;G01-A13;G;4;3.0;2026-06-02T14:24:35.851;2026-06-10T18:58:01.538;8.1899;2.73;mais que o dobro;3;1;1157
+G01;190;Documentar Evidências de Execução - Seção 5.1.4;Sprint 04;G01-A13;G;4;3.0;2026-06-02T14:25:30.688;2026-06-11T20:59:04.396;9.2733;3.091;mais que o dobro;2;1;197
+G01;191;Criar arquivos html para o front-end;Sprint 04;G01-A17;G;4;3.0;2026-06-08T14:03:49.624;2026-06-11T20:58:58.593;3.2883;1.096;até o dobro;0;0;0
+G01;192;Conectar front-end com back-end;Sprint 04;G01-A14;G;4;3.0;2026-06-08T14:04:24.253;2026-06-14T13:27:54.201;5.9747;1.992;até o dobro;0;0;0
+G01;193;Conectar front-end com os endpoints;Sprint 04;G01-A17;G;4;3.0;2026-06-08T14:05:02.746;2026-06-14T13:32:55.576;5.9777;1.993;até o dobro;0;0;0
+G01;194;Refatoração de backend a partir de correção do último artefato;Sprint 04;G01-A14;G;4;3.0;2026-06-08T14:06:02.373;2026-06-14T13:32:28.572;5.9767;1.992;até o dobro;0;0;0
+G01;196;Configurar icones no front end;Sprint 04;G01-A17;G;4;3.0;2026-06-08T14:12:39.891;2026-06-14T13:32:45.762;5.9723;1.991;até o dobro;0;0;0
+G01;197;Implementação do front-end;(sem sprint);G01-A17;G;4;3.0;2026-06-08T14:18:09.169;2026-06-14T13:32:44.344;5.9685;1.989;até o dobro;50;1;18257
+G01;199;Preencher seção 6 do WAD referentes ao estudo de análise de mercado e estratégias de marketing.;Sprint 04;G01-A12;G;4;3.0;2026-06-09T14:13:03.525;2026-06-14T13:33:02.276;4.9722;1.657;até o dobro;0;0;0
+G01;203;Configurar métodos GET, POST e etc com o Front;Sprint 04;G01-A14;G;4;3.0;2026-06-09T14:42:05.512;2026-06-14T13:32:42.284;4.9518;1.651;até o dobro;0;0;0
+G01;206;Atualizar Diagramas Restantes - Artefato 13;Sprint 04;G01-A15;G;4;3.0;2026-06-10T10:10:41.568;2026-06-14T13:40:28.640;4.1457;1.382;até o dobro;0;0;0
+G01;209;Ajuste de Frontend com Backend;Sprint 04;G01-A14;G;4;3.0;2026-06-11T21:53:08.570;2026-06-14T13:28:18.498;2.6494;0.883;dentro do planejado;0;0;0
+G01;210;Consertar erros do wad;Sprint 04;G01-A15;G;4;3.0;2026-06-11T21:59:36.279;2026-06-14T13:40:30.206;2.6534;0.884;dentro do planejado;0;0;0
+G01;217;Atualizar todos o RF, RNF e RN;Sprint 04;G01-A15;G;4;3.0;2026-06-12T08:42:28.243;2026-06-14T13:40:40.978;2.2071;0.736;dentro do planejado;1;1;295
+G01;219;Navegação entre telas;Sprint 04;G01-A14;G;4;3.0;2026-06-12T14:07:36.197;2026-06-14T13:52:34.892;1.9896;0.663;dentro do planejado;0;0;0
+G01;223;Implementar página de notificação;Sprint 05;G01-A14;G;4;3.0;2026-06-15T11:41:08.142;2026-06-23T18:02:33.535;8.2649;2.755;mais que o dobro;1;1;1229
+G01;225;atualizar seções desatualizadas;Sprint 05;G01-A16;G;4;3.0;2026-06-15T19:16:58.529;2026-06-25T19:05:11.010;9.9918;3.331;mais que o dobro;0;0;0
+G01;226;limpar seção 8, remover duplicatas e padronizar APA;Sprint 05;G01-A16;G;4;3.0;2026-06-15T19:21:38.010;2026-06-24T15:12:38.794;8.8271;2.942;mais que o dobro;0;0;0
+G01;227;seção 7 conclusões: objetivos atingidos vs seção 2;Sprint 05;G01-A16;G;4;3.0;2026-06-15T19:25:46.182;2026-06-24T15:12:26.958;8.8241;2.941;mais que o dobro;0;0;0
+G01;228;seção 7 trabalhos futuros: melhorias priorizadas + features futuras;Sprint 05;G01-A16;G;4;3.0;2026-06-15T19:26:53.171;2026-06-24T15:12:33.568;8.8234;2.941;mais que o dobro;0;0;0
+G01;229;Adicionar funcionalidade do card consultar;Sprint 05;G01-A17;G;4;3.0;2026-06-16T07:52:15.677;2026-06-22T22:09:19.276;6.5952;2.198;mais que o dobro;1;1;4
+G01;234;Atualizar o Readme;Sprint 05;G01-A13;G;4;3.0;2026-06-16T14:11:15.647;2026-06-23T18:02:31.950;7.1606;2.387;mais que o dobro;2;1;107
+G01;239;Criar base de um dashboard;Sprint 05;G01-A17;G;4;3.0;2026-06-16T14:52:58.998;2026-06-22T22:09:28.809;6.3031;2.101;mais que o dobro;0;0;0
+G01;248;Criando Dashboard;Sprint 05;G01-A17;G;4;3.0;2026-06-22T14:22:01.409;2026-06-23T11:49:26.813;0.894;0.298;dentro do planejado;6;1;1557
+G01;254;Refazer e atualizar todas as matrizes e diagramas;Sprint 05;G01-A15;G;4;3.0;2026-06-22T15:43:56.036;2026-06-26T00:09:09.831;3.3509;1.117;até o dobro;2;1;1354
+G01;257;Revisar todo o wad;Sprint 05;G01-A15;G;4;3.0;2026-06-22T15:47:40.485;2026-06-25T19:05:06.828;3.1371;1.046;até o dobro;4;1;1455
+G01;261;Atualizando Dashboard;Sprint 05;G01-A17;G;4;3.0;2026-06-23T11:41:23.260;2026-06-23T18:02:31.326;0.2647;0.088;dentro do planejado;0;0;0
+G01;262;Atualizar a seção 3.9 do wad;Sprint 05;G01-A15;G;4;3.0;2026-06-23T11:47:54.593;2026-06-24T11:17:27.799;0.9789;0.326;dentro do planejado;1;1;189
+G01;263;Atualizando filtros do dashboard;Sprint 05;G01-A17;G;4;3.0;2026-06-23T13:43:59.886;2026-06-25T22:59:27.477;2.3857;0.795;dentro do planejado;0;0;0
+G01;267;Corrigir sidebar;Sprint 05;G01-A17;G;4;3.0;2026-06-23T20:38:37.187;2026-06-25T12:16:50.055;1.6515;0.551;dentro do planejado;1;1;39
+G01;278;Adicionar tela de visualização de parceiro;Sprint 05;G01-A17;G;4;3.0;2026-06-25T08:37:11.095;2026-06-25T12:16:53.294;0.1526;0.051;dentro do planejado;0;0;0
+G01;279;Adicionar tela de edição de parceiro;Sprint 05;G01-A17;G;4;3.0;2026-06-25T08:37:42.947;2026-06-25T12:16:52.168;0.1522;0.051;dentro do planejado;0;0;0
+G01;280;Adicionar tela de histórico de edição;Sprint 05;G01-A17;G;4;3.0;2026-06-25T08:38:16.667;2026-06-25T12:16:51.282;0.1518;0.051;dentro do planejado;2;1;647
+G01;281;Corrigir telas do parceiro;Sprint 05;G01-A17;G;4;3.0;2026-06-25T08:39:18.116;2026-06-25T22:12:34.529;0.5648;0.188;dentro do planejado;6;1;365
+G01;285;Arrumando estilo das telas;Sprint 05;G01-A17;G;4;3.0;2026-06-25T11:07:20.779;2026-06-25T22:12:36.255;0.462;0.154;dentro do planejado;1;1;7
+G01;286;Adicionando tela de historico;Sprint 05;G01-A17;G;4;3.0;2026-06-25T11:08:02.199;2026-06-25T22:12:35.181;0.4615;0.154;dentro do planejado;1;1;284
+G01;287;Implementar tela de histórico funcional;Sprint 05;G01-A14;G;4;3.0;2026-06-25T11:38:48.468;2026-06-26T00:08:00.148;0.5203;0.173;dentro do planejado;1;1;493
+G01;289;Historico funcional;Sprint 05;G01-A17;G;4;3.0;2026-06-25T14:35:37.494;2026-06-26T00:07:44.565;0.3973;0.132;dentro do planejado;0;0;0
+G01;300;Historico Funcional;Sprint 05;G01-A17;G;4;3.0;2026-06-25T21:42:44.006;2026-06-26T00:07:43.699;0.1007;0.034;dentro do planejado;0;0;0
+G01;304;Ajustes finais;Sprint 05;G01-A17;G;4;3.0;2026-06-26T10:21:44.712;2026-06-26T15:42:39.558;0.2229;0.074;dentro do planejado;7;1;30097
+G02;19;|WAD| Adicionar no WAD a proposta de valor (Seção 2.1.4);Sprint 01;G02-A18;PP;1;0.25;2026-04-24T08:26:15.768;2026-04-26T17:17:05.311;2.3686;9.475;mais que o dobro;1;1;7
+G02;24;|WAD| Adicionando Introdução na seção 2.1.5 e acrescentando referencia 1 na seção 8;Sprint 01;G02-A12;PP;1;0.25;2026-04-26T14:42:50.200;2026-04-27T09:28:39.084;0.7818;3.127;mais que o dobro;1;1;11
+G02;25;|WAD| Adicionando tabela de Ameaças e tabela de Oportunidades na Matriz de Riscos (seção 2.1.5);Sprint 01;G02-A12;PP;1;0.25;2026-04-26T15:36:48.652;2026-04-27T09:28:39.657;0.7443;2.977;mais que o dobro;1;1;34
+G02;26;|WAD| Adicionando texto explicativo e imagem da matriz de riscos na seção 2.1.5;Sprint 01;G02-A12;PP;1;0.25;2026-04-26T16:03:12.356;2026-04-27T09:28:40.279;0.726;2.904;mais que o dobro;1;1;11
+G02;27;|PASTAS| Criação da pasta wad_assets no repositório do grupo;Sprint 01;G02-A12;PP;1;0.25;2026-04-26T16:27:57.143;2026-04-27T09:28:54.301;0.709;2.836;mais que o dobro;1;1;0
+G02;28;|WAD| Adicionando conclusão da seção 2.1.5;Sprint 01;G02-A12;PP;1;0.25;2026-04-26T16:41:25.559;2026-04-27T09:28:41.694;0.6995;2.798;mais que o dobro;1;1;2
+G02;30;|WAD| Atualizar o template da Matriz de Risco na pasta wad_assets;Sprint 01;G02-A12;PP;1;0.25;2026-04-27T09:22:00.596;2026-04-27T09:28:34.998;0.0046;0.018;dentro do planejado;1;1;0
+G02;41;|WAD| Inclusão Readme, membros e Nome do G01-A26;Sprint 01;G02-A15;PP;1;0.25;2026-04-28T14:07:20.972;2026-04-28T15:05:52.850;0.0406;0.163;dentro do planejado;1;1;52
+G02;47;|WAD| Colocar fotos das descrições das personas na seção 2.2;Sprint 01;G02-A12;PP;1;0.25;2026-04-28T15:43:53.384;2026-04-29T14:49:22.173;0.9621;3.849;mais que o dobro;1;1;18
+G02;51;|WAD| Organizar fontes da seção 2.1.1;Sprint 01;G02-A19;PP;1;0.25;2026-04-29T14:14:49.773;2026-05-01T17:33:30.086;2.138;8.552;mais que o dobro;0;0;0
+G02;54;|WAD| Atualizar Ameaça A3 e Oportunidade O3 na seção 2.1.5 (Matriz de Riscos) no WAD;Sprint 01;G02-A12;PP;1;0.25;2026-04-29T14:38:03.140;2026-04-29T14:49:18.325;0.0078;0.031;dentro do planejado;1;1;6
+G02;59;|WAD| Ajustar tabela de requisitos funcionais;Sprint 01;G02-A19;PP;1;0.25;2026-04-29T15:04:01.791;2026-05-01T14:15:11.336;1.9661;7.864;mais que o dobro;1;1;2
+G02;64;|WAD| Revisão da seção de introdução;Sprint 01;G02-A19;PP;1;0.25;2026-04-30T17:44:20.903;2026-05-01T17:46:41.791;1.0016;4.007;mais que o dobro;1;1;9
+G02;65;|WAD| Revisão da análise SWOT;Sprint 01;G02-A19;PP;1;0.25;2026-04-30T18:08:18.864;2026-05-01T17:46:42.685;0.985;3.94;mais que o dobro;0;0;0
+G02;87;|WAD| Acrescentar fontes na seção 2.2;Sprint 01;G02-A12;PP;1;0.25;2026-05-01T13:57:20.256;2026-05-01T16:51:01.776;0.1206;0.482;dentro do planejado;1;1;10
+G02;89;|WAD| Correção de uma letra no segundo parágrafo da seção 2.1.4;Sprint 01;G02-A12;PP;1;0.25;2026-05-01T17:55:25.328;2026-05-01T18:03:30.517;0.0056;0.022;dentro do planejado;1;1;2
+G02;91;|WAD| Atualizar foto das personas;Sprint 02;G02-A12;PP;1;0.25;2026-05-03T17:55:31.616;2026-05-04T11:09:12.778;0.7178;2.871;mais que o dobro;1;1;0
+G02;105;|WAD| Ajustar use stories (seção 3.2.2);Sprint 02;G02-A18;PP;1;0.25;2026-05-05T14:21:04.139;2026-05-05T20:25:09.764;0.2528;1.011;até o dobro;2;1;7
+G02;126;|ESTRUTURA| Alteração na estrutura das pastas;(sem sprint);G02-A19;PP;1;0.25;2026-05-07T15:32:13.545;2026-05-08T00:03:10.241;0.3548;1.419;até o dobro;1;1;1
+G02;131;|WAD| Correção da seção 2.1.5;Sprint 02;G02-A12;PP;1;0.25;2026-05-08T00:03:25.717;2026-05-15T21:38:11.441;7.8991;31.597;mais que o dobro;2;1;36
+G02;173;|WAD| adicona RN013;Sprint 02;G02-A12;PP;1;0.25;2026-05-15T16:18:20.078;2026-05-15T21:48:24.285;0.2292;0.917;dentro do planejado;1;1;1
+G02;174;|WAD| Correção da seção 3.2.4;Sprint 02;G02-A12;PP;1;0.25;2026-05-15T22:17:07.054;2026-05-15T22:53:24.018;0.0252;0.101;dentro do planejado;1;1;2
+G02;175;|WAD| atualizar seçã 3.3;Sprint 02;G02-A12;PP;1;0.25;2026-05-15T22:28:39.694;2026-05-15T22:53:23.384;0.0172;0.069;dentro do planejado;1;1;35
+G02;176;|WAD| atualiza foto 04 do wireframe;Sprint 02;G02-A12;PP;1;0.25;2026-05-15T22:53:42.403;2026-05-15T23:33:11.342;0.0274;0.11;dentro do planejado;1;1;0
+G02;177;|WAD| atualiza foto do wireframe 04;Sprint 02;G02-A12;PP;1;0.25;2026-05-15T23:12:31.262;2026-05-15T23:33:13.093;0.0144;0.057;dentro do planejado;2;2;48
+G02;178;|WAD| atualiza reademe com data de hoje na sprint 2;Sprint 02;G02-A12;PP;1;0.25;2026-05-15T23:15:04.972;2026-05-15T23:33:10.089;0.0126;0.05;dentro do planejado;1;1;2
+G02;184;|WAD| Diagrama de Sequência UML (atualizar) (Seção 3.2.4);Sprint 03;G02-A19;PP;1;0.25;2026-05-18T14:43:38.653;2026-05-29T21:42:24.174;11.2908;45.163;mais que o dobro;0;0;0
+G02;185;|WAD| Padrões de G01-A26 aplicados (Seção 3.2.7);Sprint 03;G02-A19;PP;1;0.25;2026-05-18T14:44:35.710;2026-05-29T21:42:23.034;11.2901;45.161;mais que o dobro;0;0;0
+G02;187;|WAD| Modelagem de Dados (seção 3.6);Sprint 03;G02-A19;PP;1;0.25;2026-05-18T14:45:51.055;2026-05-29T21:12:07.338;11.2682;45.073;mais que o dobro;0;0;0
+G02;189;|WAD| Atualização da Matriz de Rastreabilidade;Sprint 03;G02-A19;PP;1;0.25;2026-05-18T14:47:05.073;2026-05-29T21:42:20.105;11.2884;45.153;mais que o dobro;0;0;0
+G02;229;|WAD| Corrigir inconsistências no nome do G01-A26 ao longo do WAD;Sprint 03;G02-A12;PP;1;0.25;2026-05-24T19:40:04.727;2026-05-25T09:39:42.078;0.5831;2.332;mais que o dobro;1;1;28
+G02;266;|WAD| Acrescentando link do vídeo do fluxo de interações na seção 3.5;Sprint 03;G02-A12;PP;1;0.25;2026-05-28T23:24:46.065;2026-05-29T11:40:12.659;0.5107;2.043;mais que o dobro;1;1;2
+G02;294;|WAD| Ajusta numeração de imagens;Sprint 04;G02-A18;PP;1;0.25;2026-06-03T11:27:48.070;2026-06-08T09:15:44.514;4.9083;19.633;mais que o dobro;1;1;14
+G02;309;|CODE| Atualizar organização de pastas dos testes automatizados;Sprint 04;G02-A12;PP;1;0.25;2026-06-09T07:45:28.495;2026-06-09T14:18:23.230;0.2729;1.091;até o dobro;1;1;42
+G02;369;|WAD| atualizar link pages do index.html na seção 3.7;Sprint 04;G02-A12;PP;1;0.25;2026-06-12T20:44:05.737;2026-06-12T22:44:14.752;0.0834;0.334;dentro do planejado;1;1;2
+G02;483;|DOCS| Atualizar modelo físico do banco de dados;Sprint 05;G02-A19;PP;1;0.25;2026-06-25T20:56:38.104;2026-06-25T23:21:58.652;0.1009;0.404;dentro do planejado;1;1;30
+G02;485;|CHORE|Higienizar a raiz do repositório;Sprint 05;G02-A15;PP;1;0.25;2026-06-25T21:08:08.016;2026-06-25T23:16:10.052;0.0889;0.356;dentro do planejado;1;1;16647
+G02;490;|CHORE| Inclusão do package-lock.json na pasta src para versionamento determinístico;Sprint 05;G02-A15;PP;1;0.25;2026-06-25T23:06:41.553;2026-06-25T23:21:39.283;0.0104;0.042;dentro do planejado;1;1;14863
+G02;2;|WAD| Iniciar Value Proposition Canvas (Seção 2.1.4);Sprint 01;G02-A18;P;2;0.5;2026-04-22T15:48:47.679;2026-04-26T19:00:21.560;4.133;8.266;mais que o dobro;1;1;82
+G02;3;|WAD| Fazer 5 Forças de Porter (Seção 2.1.1) parte 1;Sprint 01;G02-A19;P;2;0.5;2026-04-22T15:54:27.288;2026-04-27T15:58:18.812;5.0027;10.005;mais que o dobro;1;1;3
+G02;6;|WAD| Requisitos funcionais (Seção 3.1.1) parte 1;Sprint 01;G02-A19;P;2;0.5;2026-04-22T16:00:38.120;2026-04-28T19:37:48.835;6.1508;12.302;mais que o dobro;1;1;3
+G02;14;|WAD| Fazer 5 Forças de Porter (Seção 2.1.1) | pt.01;Sprint 01;G02-A13;P;2;0.5;2026-04-23T10:26:10.169;2026-04-23T16:02:10.514;0.2333;0.467;dentro do planejado;2;1;19
+G02;18;|WAD| Fazer 5 Forças de Porter (Seção 2.1.1) parte 2;Sprint 01;G02-A19;P;2;0.5;2026-04-23T15:16:24.287;2026-04-28T14:28:58.748;4.9671;9.934;mais que o dobro;1;1;8
+G02;20;|G01-A26| Criar documento para tutorial e padronização de commits;Sprint 01;[externo];P;2;0.5;2026-04-24T08:34:01.625;2026-04-24T10:39:06.232;0.0869;0.174;dentro do planejado;1;1;0
+G02;21;|G01-A26| Criar pastas Canvas de organização do G01-A26 no Slack do grupo;Sprint 01;G02-A12;P;2;0.5;2026-04-25T22:32:42.752;2026-04-27T09:28:35.878;1.4555;2.911;mais que o dobro;0;0;0
+G02;22;"|G01-A26| Organizar tarefas no Canvas ""Backlog Sprint1"" do Slack do grupo";Sprint 01;G02-A12;P;2;0.5;2026-04-25T23:17:31.340;2026-04-27T09:28:38.234;1.4244;2.849;mais que o dobro;0;0;0
+G02;34;|WAD| Fazer Forças de Porter (Seção 2.1.1) parte 3;Sprint 01;G02-A19;P;2;0.5;2026-04-27T14:32:09.465;2026-04-28T14:29:00.808;0.9978;1.996;até o dobro;1;1;2
+G02;38;|WAD| Criação do texto de introdução da seção 2.2;Sprint 01;G02-A12;P;2;0.5;2026-04-28T13:26:04.752;2026-04-29T14:49:24.663;1.0579;2.116;mais que o dobro;1;1;4
+G02;43;|WAD| Requisitos funcionais (Seção 3.1.1) parte 2;Sprint 01;G02-A19;P;2;0.5;2026-04-28T14:38:29.655;2026-04-28T19:37:50.426;0.2079;0.416;dentro do planejado;1;1;3
+G02;57;|WAD| Adicionar a versão final da seção 1 (Introdução);Sprint 01;G02-A15;P;2;0.5;2026-04-29T14:54:36.096;2026-04-30T10:44:48.835;0.8265;1.653;até o dobro;1;1;32
+G02;60;|WAD| Fazer ajustes finais na proposta de valor;Sprint 01;G02-A18;P;2;0.5;2026-04-29T15:20:03.056;2026-05-01T17:33:23.072;2.0926;4.185;mais que o dobro;3;1;14
+G02;62;|Apresentação| Acrescentar personas nos slides da sprint 01;Sprint 01;G02-A12;P;2;0.5;2026-04-29T20:25:26.096;2026-05-01T16:51:00.677;1.8511;3.702;mais que o dobro;0;0;0
+G02;63;|WAD| Refinamento de regras de negócio parte 2;Sprint 01;[externo];P;2;0.5;2026-04-30T10:27:50.336;2026-04-30T11:42:05.590;0.0516;0.103;dentro do planejado;1;1;29
+G02;88;|WAD| Refinar conclusão da seção 2.2 com análise da evolução do entendimento do problema via personas;Sprint 01;G02-A12;P;2;0.5;2026-05-01T14:24:44.956;2026-05-01T16:51:02.548;0.1016;0.203;dentro do planejado;1;1;6
+G02;95;|WAD| Criar diagrama de sequencia UML PT1;Sprint 02;G02-A16;P;2;0.5;2026-05-04T14:35:20.844;2026-05-15T22:40:20.324;11.3368;22.674;mais que o dobro;0;0;0
+G02;102;|Monitoria| Realizar uma reunião  com a Monitora de Documentação: G03-A25;Sprint 02;G02-A13;P;2;0.5;2026-05-04T14:51:02.523;2026-05-06T15:55:53.049;2.045;4.09;mais que o dobro;0;0;0
+G02;108;|WAD| Criar diagrama de sequencia UML PT2;Sprint 02;G02-A16;P;2;0.5;2026-05-05T14:32:26.539;2026-05-15T22:40:19.298;10.3388;20.678;mais que o dobro;0;0;0
+G02;116;|Monitoria| Realizar uma reunião  com a Monitora de Documentação: G03-A25;Sprint 02;G02-A13;P;2;0.5;2026-05-06T14:31:09.632;2026-05-13T09:05:21.367;6.7737;13.547;mais que o dobro;0;0;0
+G02;124;|WAD| Modelar o diagrama entidade-relacionamento (seção 3.6.2);Sprint 02;G02-A18;P;2;0.5;2026-05-07T14:58:13.821;2026-05-11T13:02:59.250;3.92;7.84;mais que o dobro;0;0;0
+G02;127;|WAD| Criar parágrafo introdutório para o Escopo do G01-A26(2.1);Sprint 02;G02-A13;P;2;0.5;2026-05-07T15:41:27.803;2026-05-07T16:04:03.679;0.0157;0.031;dentro do planejado;0;0;0
+G02;128;|Reunião| Reunião com a [externo], professora de Design;Sprint 02;G02-A13;P;2;0.5;2026-05-07T15:51:26.075;2026-05-15T22:49:53.563;8.2906;16.581;mais que o dobro;0;0;0
+G02;135;|WAD| Fazer ajustes finais no diagrama entidade-relacionamento;Sprint 02;G02-A18;P;2;0.5;2026-05-11T08:35:52.551;2026-05-11T13:02:58.227;0.1855;0.371;dentro do planejado;1;1;12
+G02;136;|WAD| Atualizar textos da matriz da seção 3.1.4  (Matriz RF → RN → Endpoint);Sprint 02;G02-A12;P;2;0.5;2026-05-11T11:07:01.181;2026-05-15T15:52:48.130;4.1985;8.397;mais que o dobro;1;1;8
+G02;137;|G01-A26| Organização da pasta src;Sprint 02;[externo];P;2;0.5;2026-05-11T11:40:15.682;2026-05-12T09:54:07.741;0.9263;1.853;até o dobro;1;1;1
+G02;142;|WAD| Atualiza matriz da seção 3.1.4 e implementa tabela de resumo na seção 3.2.4;Sprint 02;G02-A12;P;2;0.5;2026-05-12T00:17:55.358;2026-05-15T21:38:15.115;3.8891;7.778;mais que o dobro;1;1;84
+G02;163;|WAD| Atualizar Modelo Físico;Sprint 02;G02-A19;P;2;0.5;2026-05-13T16:03:02.241;2026-05-15T22:49:54.838;2.2826;4.565;mais que o dobro;0;0;0
+G02;186;|WAD| Documentação da WebAPI (Seção 3.7);Sprint 03;G02-A19;P;2;0.5;2026-05-18T14:45:16.821;2026-05-29T22:18:01.466;11.3144;22.629;mais que o dobro;0;0;0
+G02;188;|WAD| Evolução dos RNFs (Atualização da seção 3.1.3);Sprint 03;G02-A19;P;2;0.5;2026-05-18T14:46:13.437;2026-05-29T20:30:56.869;11.2394;22.479;mais que o dobro;0;0;0
+G02;190;|WAD| Relatório de Desenvolvimento (Seção 4.1);Sprint 03;G02-A19;P;2;0.5;2026-05-18T14:47:20.359;2026-05-29T21:42:13.943;11.2881;22.576;mais que o dobro;0;0;0
+G02;191;|CODE| Versão funcional Backend com WEB API operante - Diagrama 03 PT.01;Sprint 03;G02-A15;P;2;0.5;2026-05-18T14:47:38.484;2026-05-27T16:00:37.235;9.0507;18.101;mais que o dobro;0;0;0
+G02;199;|WAD| Coerência geral entre artefatos;Sprint 03;G02-A19;P;2;0.5;2026-05-19T14:34:41.526;2026-05-29T21:42:21.467;10.297;20.594;mais que o dobro;0;0;0
+G02;222;|WAD|Criação e implementação do texto de introdução de seção 3.6.4 justificando o motivo de não usarmos o DELETE no nosso G01-A26;Sprint 03;G02-A12;P;2;0.5;2026-05-24T19:16:40.135;2026-05-29T20:18:39.551;5.043;10.086;mais que o dobro;1;1;6569
+G02;223;|WAD| fazer + colocar no WAD a tabela 2 da seção 3.6.4;Sprint 03;G02-A12;P;2;0.5;2026-05-24T19:21:22.733;2026-05-25T09:39:54.069;0.5962;1.192;até o dobro;1;1;13
+G02;224;|WAD| fazer + colocar no WAD a tabela 3 da seção 3.6.4;Sprint 03;G02-A12;P;2;0.5;2026-05-24T19:23:41.898;2026-05-25T09:39:51.864;0.5946;1.189;até o dobro;1;1;12
+G02;225;|WAD| fazer + colocar no WAD a tabela 4 da seção 3.6.4;Sprint 03;G02-A12;P;2;0.5;2026-05-24T19:24:40.946;2026-05-25T09:39:49.556;0.5938;1.188;até o dobro;1;1;11
+G02;226;|WAD| fazer + colocar no WAD a tabela 5 da seção 3.6.4;Sprint 03;G02-A12;P;2;0.5;2026-05-24T19:25:07.732;2026-05-25T09:39:48.222;0.5935;1.187;até o dobro;1;1;13
+G02;227;|WAD| fazer + colocar no WAD a tabela 6 da seção 3.6.4;Sprint 03;G02-A12;P;2;0.5;2026-05-24T19:25:34.257;2026-05-25T09:39:45.356;0.5932;1.186;até o dobro;1;1;13
+G02;228;|WAD| Criar e adicionar conclusão na seção 3.6.4;Sprint 03;G02-A12;P;2;0.5;2026-05-24T19:31:34.707;2026-05-25T09:39:43.753;0.589;1.178;até o dobro;1;1;21
+G02;230;|WAD| Pequenas correções da seção 3.6.4;Sprint 03;G02-A12;P;2;0.5;2026-05-24T19:54:35.877;2026-05-25T08:58:53.738;0.5447;1.089;até o dobro;1;1;40
+G02;231;|WAD| Atualizar seção 3.6.4 de acordo com o feedbak da [externo];Sprint 03;G02-A12;P;2;0.5;2026-05-25T10:38:06.271;2026-05-26T15:57:45.947;1.222;2.444;mais que o dobro;0;0;0
+G02;249;|CODE| Versão funcional Backend com WEB API operante - Diagrama 10;Sprint 03;G02-A15;P;2;0.5;2026-05-26T15:43:57.263;2026-05-27T16:00:43.776;1.0116;2.023;mais que o dobro;0;0;0
+G02;256;|WAD| Inserindo interações no protótipo de alta fidelidade;Sprint 03;G02-A12;P;2;0.5;2026-05-28T14:01:14.816;2026-05-29T20:31:36.494;1.2711;2.542;mais que o dobro;0;0;0
+G02;265;|WAD| Colocando conclusão na seção 3.4;Sprint 03;G02-A12;P;2;0.5;2026-05-28T23:11:21.085;2026-05-29T11:40:10.330;0.52;1.04;até o dobro;1;1;25
+G02;268;|WAD| Atualizar foto daTela 01, 02, 03, 04, 05, 06, 07, 08, 09, 10 com base no feedback da [externo];Sprint 03;G02-A12;P;2;0.5;2026-05-29T11:37:55.589;2026-05-29T14:39:21.704;0.126;0.252;dentro do planejado;1;1;0
+G02;272;|WAD| Ajustar tamanho das imagens das telas 06 e 07 na seção 3.5 do WAD;Sprint 03;G02-A12;P;2;0.5;2026-05-29T20:03:07.096;2026-05-29T22:14:45.482;0.0914;0.183;dentro do planejado;1;1;8
+G02;273;|WAD| Atualizar formatação das tabelas da seção 3.6.4;Sprint 03;G02-A12;P;2;0.5;2026-05-29T21:29:53.066;2026-05-29T22:13:02.309;0.03;0.06;dentro do planejado;2;1;72
+G02;284;|WAD| Análise da concorrência - Seção 6.3;Sprint 04;G02-A14;P;2;0.5;2026-06-01T17:55:58.381;2026-06-05T15:54:38.067;3.9157;7.831;mais que o dobro;2;1;14
+G02;308;|WAD| Preencher seção 5.1.1 do WAD;Sprint 04;G02-A12;P;2;0.5;2026-06-08T22:37:55.234;2026-06-09T14:24:01.252;0.657;1.314;até o dobro;1;1;19
+G02;312;|CODE| Implementação Front-End - Tela 02;Sprint 04;G02-A15;P;2;0.5;2026-06-09T11:19:25.534;2026-06-12T11:36:55.820;3.0122;6.024;mais que o dobro;0;0;0
+G02;314;|CODE| Implementação Front-End - Tela 07;Sprint 04;G02-A12;P;2;0.5;2026-06-09T11:47:42.884;2026-06-12T13:09:30.998;3.0568;6.114;mais que o dobro;0;0;0
+G02;315;|CODE| Implementação Front-End - Tela 06 - Parte 1;Sprint 04;G02-A12;P;2;0.5;2026-06-09T11:48:01.392;2026-06-12T13:12:02.545;3.0583;6.117;mais que o dobro;0;0;0
+G02;316;|CODE| Implementação Front-End - Tela 08;Sprint 04;G02-A15;P;2;0.5;2026-06-09T11:48:08.955;2026-06-12T07:56:01.688;2.8388;5.678;mais que o dobro;4;1;3390
+G02;317;|CODE| Implementação Front-End - Tela 09;Sprint 04;G02-A15;P;2;0.5;2026-06-09T11:48:14.682;2026-06-12T07:56:03.167;2.8388;5.678;mais que o dobro;4;1;3046
+G02;318;|CODE| Implementação Front-End - Tela 05;Sprint 04;G02-A15;P;2;0.5;2026-06-09T11:48:20.263;2026-06-11T14:32:55.316;2.1143;4.229;mais que o dobro;1;1;469
+G02;319;|CODE| Implementação Front-End - Tela 10;Sprint 04;G02-A15;P;2;0.5;2026-06-09T11:48:26.393;2026-06-11T14:32:54.335;2.1142;4.228;mais que o dobro;1;1;274
+G02;323;|CODE| Implementação Front-End - Tela 09;Sprint 04;G02-A16;P;2;0.5;2026-06-09T14:17:22.188;2026-06-12T11:36:20.217;2.8882;5.776;mais que o dobro;0;0;0
+G02;324;|CODE| Implementação Front-End - Tela 09;Sprint 04;G02-A16;P;2;0.5;2026-06-09T14:17:29.655;2026-06-12T07:56:06.521;2.7351;5.47;mais que o dobro;0;0;0
+G02;325;|CODE| Implementação Front-End - Tela 03;Sprint 04;G02-A16;P;2;0.5;2026-06-09T14:17:35.703;2026-06-12T07:56:08.020;2.7351;5.47;mais que o dobro;0;0;0
+G02;326;|CODE| Implementação Front-End - Tela 03;Sprint 04;G02-A16;P;2;0.5;2026-06-09T14:17:40.661;2026-06-12T07:55:57.870;2.7349;5.47;mais que o dobro;1;1;37
+G02;327;|CODE| Implementação Front-End - Tela 03;Sprint 04;G02-A16;P;2;0.5;2026-06-09T14:17:46.854;2026-06-12T07:55:56.680;2.7348;5.47;mais que o dobro;1;1;32
+G02;328;|CODE| Implementação Front-End - Tela 03;Sprint 04;G02-A16;P;2;0.5;2026-06-09T14:17:55.190;2026-06-12T07:55:55.235;2.7347;5.469;mais que o dobro;1;1;18
+G02;329;|CODE| Implementação Front-End - Tela 03;Sprint 04;G02-A16;P;2;0.5;2026-06-09T14:18:01.521;2026-06-12T07:55:31.441;2.7344;5.469;mais que o dobro;1;1;17
+G02;330;|CODE| Implementação Front-End - Tela 04;Sprint 04;G02-A16;P;2;0.5;2026-06-09T14:18:12.718;2026-06-12T07:55:29.312;2.7342;5.468;mais que o dobro;1;1;188
+G02;346;|CODE| Implementação Front-End - Tela 04;Sprint 04;G02-A16;P;2;0.5;2026-06-11T15:40:57.225;2026-06-12T07:55:26.201;0.6767;1.353;até o dobro;1;1;17
+G02;347;|CODE| Implementação Front-End - Tela 04;Sprint 04;G02-A16;P;2;0.5;2026-06-11T15:41:04.908;2026-06-12T07:55:27.067;0.6766;1.353;até o dobro;1;1;34
+G02;348;|CODE| Implementação Front-End - Tela 04;Sprint 04;G02-A16;P;2;0.5;2026-06-11T15:41:15.260;2026-06-12T07:55:28.378;0.6765;1.353;até o dobro;1;1;84
+G02;349;|CODE| Implementação Front-End - Tela 04;Sprint 04;G02-A16;P;2;0.5;2026-06-11T15:41:23.347;2026-06-12T07:55:25.419;0.6764;1.353;até o dobro;1;1;56
+G02;350;|CODE| Implementação Front-End - Tela 04;Sprint 04;G02-A16;P;2;0.5;2026-06-11T15:42:09.744;2026-06-12T07:55:21.531;0.6758;1.352;até o dobro;1;1;33
+G02;370;|CODE| atualiza vulnerabilidade dos tests;Sprint 04;G02-A12;P;2;0.5;2026-06-12T21:13:14.970;2026-06-12T22:44:07.289;0.0631;0.126;dentro do planejado;1;1;224
+G02;373;|wad| Atualização de todos os diagramas da seção 3.2.4;Sprint 04;G02-A12;P;2;0.5;2026-06-12T22:47:02.005;2026-06-12T23:37:46.518;0.0352;0.07;dentro do planejado;10;1;110
+G02;374;|WAD| Atualização Readme e ajustes WAD;Sprint 04;G02-A15;P;2;0.5;2026-06-12T23:25:33.263;2026-06-12T23:45:35.415;0.0139;0.028;dentro do planejado;1;1;20
+G02;380;|CODE| Configurar as políticas de CORS no middleware global;Sprint 05;G02-A15;P;2;0.5;2026-06-15T18:39:33.915;2026-06-21T21:00:24.878;6.0978;12.196;mais que o dobro;1;1;5
+G02;381;|CODE| Remover fallback hardcoded do segredo JWT no ambiente;Sprint 05;G02-A15;P;2;0.5;2026-06-15T18:41:13.803;2026-06-21T21:00:26.800;6.0967;12.193;mais que o dobro;1;1;2
+G02;388;|TEST| Elevar a cobertura de Branch para 100% nos Services;Sprint 05;G02-A15;P;2;0.5;2026-06-15T18:50:50.593;2026-06-22T10:09:15.123;6.6378;13.276;mais que o dobro;2;1;167
+G02;389;|DOCS| Atualizar os snapshots e as métricas do WAD (5.1.4);Sprint 05;G02-A15;P;2;0.5;2026-06-15T18:52:16.956;2026-06-22T14:49:54.236;6.8317;13.663;mais que o dobro;4;1;422
+G02;390;|DOCS| Incluir a rota de listagem de alterações no WAD;Sprint 05;G02-A15;P;2;0.5;2026-06-15T18:53:56.488;2026-06-22T14:50:01.404;6.8306;13.661;mais que o dobro;4;1;9
+G02;391;|DOCS| Atualizar o HTML de documentação da WebAPI;Sprint 05;G02-A15;P;2;0.5;2026-06-15T18:55:00.323;2026-06-22T14:50:03.100;6.8299;13.66;mais que o dobro;4;1;164
+G02;392;|DOCS| Publicar o index.html da WebAPI em URL Pública;Sprint 05;G02-A15;P;2;0.5;2026-06-15T18:55:58.041;2026-06-22T14:50:04.507;6.8292;13.658;mais que o dobro;5;1;15
+G02;394;|DOCS| Atualizar README com a Estrutura da Sprint 5 e LinkedIn;Sprint 05;G02-A15;P;2;0.5;2026-06-15T18:58:41.599;2026-06-22T14:50:07.976;6.8274;13.655;mais que o dobro;7;1;629
+G02;414;"|WAD| Preencher ""Priorização de Melhorias"" na seção 5.2";Sprint 05;G02-A12;P;2;0.5;2026-06-22T09:35:32.185;2026-06-24T12:44:47.825;2.1314;4.263;mais que o dobro;1;1;36
+G02;416;|CODE| Fazer pequenas correções para garantir que os testes ainda rodem todos com a mesma qualidade;Sprint 05;G02-A12;P;2;0.5;2026-06-22T09:39:39.725;2026-06-24T14:04:50.455;2.1842;4.368;mais que o dobro;2;1;334
+G02;427;|APRESENTAÇÃO| Montar slides + roterio da apresentação da sprint 5 - Parte 3;Sprint 05;G02-A12;P;2;0.5;2026-06-23T11:28:24.888;2026-06-23T16:31:19.271;0.2104;0.421;dentro do planejado;0;0;0
+G02;431;|WAD| Refinar relatório de testes de usabilidade conforme revisão;Sprint 05;G02-A19;P;2;0.5;2026-06-23T14:25:43.509;2026-06-24T15:48:52.875;1.0577;2.115;mais que o dobro;1;1;19
+G02;440;|PRESENTATION| Criar roteiro das minahs falas para apresentação da sprint final;Sprint 05;G02-A12;P;2;0.5;2026-06-24T10:19:51.242;2026-06-24T15:43:04.295;0.2245;0.449;dentro do planejado;0;0;0
+G02;441;|DESIGN| Finalizar o guia de estilo;Sprint 05;G02-A18;P;2;0.5;2026-06-24T12:16:00.316;2026-06-24T15:02:06.068;0.1153;0.231;dentro do planejado;1;1;0
+G02;442;|WAD| Corrigir seção 5.2.2 com base no feedbck da [externo];Sprint 05;G02-A12;P;2;0.5;2026-06-24T14:05:57.872;2026-06-24T14:59:25.746;0.0371;0.074;dentro do planejado;0;0;0
+G02;460;|DOCS| Corrigir rastreabilidade e numeração dos requisitos funcionais;Sprint 05;G02-A19;P;2;0.5;2026-06-25T12:44:25.746;2026-06-25T14:14:24.779;0.0625;0.125;dentro do planejado;0;0;0
+G02;462;|DOCS| Atualiza textos de MER e DER;Sprint 05;G02-A18;P;2;0.5;2026-06-25T14:15:02.962;2026-06-25T14:45:08.180;0.0209;0.042;dentro do planejado;1;1;26
+G02;468;|DOCS| Atualiza Diagrama de classes conforme implementação atual;Sprint 05;G02-A18;P;2;0.5;2026-06-25T14:38:27.840;2026-06-25T15:16:16.921;0.0263;0.053;dentro do planejado;2;1;28
+G02;470;|DOCS| Atualiza WebApi conforme implementação atual;Sprint 05;G02-A18;P;2;0.5;2026-06-25T15:14:22.956;2026-06-25T15:35:19.226;0.0145;0.029;dentro do planejado;1;1;3
+G02;472;|DOCS| Atualizar texto descritivo das telas e inconsistências do WAD;Sprint 05;G02-A18;P;2;0.5;2026-06-25T15:44:15.804;2026-06-25T17:12:33.878;0.0613;0.123;dentro do planejado;2;1;12
+G02;473;|WAD e README| Remover marcadores de sprint da documentação + Garantir que o número das fotos no WAD;Sprint 05;G02-A12;P;2;0.5;2026-06-25T15:52:08.635;2026-06-25T21:58:44.655;0.2546;0.509;dentro do planejado;2;1;107
+G02;478;|WAD| Colocar imagens dos testes de usabilidades na seção 5.2 do WAD;Sprint 05;G02-A12;P;2;0.5;2026-06-25T19:18:34.149;2026-06-25T20:54:34.464;0.0667;0.133;dentro do planejado;3;1;18
+G02;481;|WAD| Atualização da seção 5.1 com base no estado atual do código;Sprint 05;G02-A12;P;2;0.5;2026-06-25T20:45:57.074;2026-06-25T23:56:26.038;0.1323;0.265;dentro do planejado;1;1;72
+G02;482;|CODE| Substituir console.log nativo por implementação de Logger;Sprint 05;G02-A15;P;2;0.5;2026-06-25T20:54:58.264;2026-06-25T23:16:03.300;0.098;0.196;dentro do planejado;1;1;36
+G02;486;|DOCS| Atualizar arquitetura em camadas e diagrama de classes arquitetural - PARTE 3;Sprint 05;G02-A19;P;2;0.5;2026-06-25T21:15:04.223;2026-06-25T22:21:23.276;0.0461;0.092;dentro do planejado;2;1;444
+G02;488;|DOCS| Corrigir inconsistências do WAD e atualizar seção 3.8;Sprint 05;G02-A19;P;2;0.5;2026-06-25T22:08:47.307;2026-06-25T23:21:59.929;0.0508;0.102;dentro do planejado;1;1;600
+G02;489;|WAD| Atualiza seção 7 baseado em atualizações dos testes;Sprint 05;G02-A13;P;2;0.5;2026-06-25T22:51:07.954;2026-06-25T23:28:49.965;0.0262;0.052;dentro do planejado;1;1;4
+G02;491;|DOCS| Corrigir documentação do WAD conforme revisão WEB;Sprint 05;G02-A19;P;2;0.5;2026-06-25T23:26:23.440;2026-06-25T23:56:26.094;0.0209;0.042;dentro do planejado;2;2;93
+G02;1;|WAD| Fazer a análise SWOT (Seção 2.1.2);Sprint 01;[externo];M;3;1.0;2026-04-22T15:45:42.615;2026-04-23T15:49:38.488;1.0027;1.003;até o dobro;3;3;96
+G02;4;|WAD| Iniciar desenvolvimento da Matriz de Riscos (seção 2.1.5) - Parte I;Sprint 01;G02-A12;M;3;1.0;2026-04-22T15:54:31.046;2026-04-27T09:28:36.610;4.732;4.732;mais que o dobro;1;1;82
+G02;5;|WAD| Descrição da solução (Seção 2.1.3);Sprint 01;G02-A14;M;3;1.0;2026-04-22T16:00:18.331;2026-04-28T20:28:26.954;6.1862;6.186;mais que o dobro;3;1;40
+G02;7;|WAD| Descrição da solução (Seção 2.1.3);Sprint 01;G02-A15;M;3;1.0;2026-04-22T16:38:10.184;2026-04-28T20:28:28.964;6.1599;6.16;mais que o dobro;0;0;0
+G02;8;|WAD| Iniciar a Introdução (Seção 1);Sprint 01;G02-A14;M;3;1.0;2026-04-22T17:03:56.664;2026-04-23T15:51:12.781;0.9495;0.949;dentro do planejado;0;0;0
+G02;9;|WAD| Requisitos Não Funcionais (Seção 3.1.3);Sprint 01;G02-A15;M;3;1.0;2026-04-22T17:07:46.554;2026-05-01T18:17:40.285;9.0485;9.049;mais que o dobro;0;0;0
+G02;10;|WAD| Criar personas na seção 2.2 - Parte I;Sprint 01;G02-A12;M;3;1.0;2026-04-22T21:12:44.587;2026-04-27T09:28:40.974;4.5111;4.511;mais que o dobro;0;0;0
+G02;11;|WAD| Revisar todos os entregáveis do Artefato 1;Sprint 01;G02-A12;M;3;1.0;2026-04-22T21:15:26.599;2026-05-01T18:05:39.537;8.8682;8.868;mais que o dobro;0;0;0
+G02;13;|WAD| Criar personas na seção 2.2 - Parte I;Sprint 01;G02-A18;M;3;1.0;2026-04-23T08:59:59.821;2026-05-01T17:02:48.355;8.3353;8.335;mais que o dobro;0;0;0
+G02;15;|WAD| Fazer Matriz RF -> RN -> Endpoint;Sprint 01;G02-A16;M;3;1.0;2026-04-23T14:07:01.741;2026-05-01T15:24:47.104;8.054;8.054;mais que o dobro;1;1;16
+G02;16;|WAD| Início da Introdução (Seção 1);Sprint 01;G02-A15;M;3;1.0;2026-04-23T14:26:42.512;2026-04-23T15:53:44.616;0.0604;0.06;dentro do planejado;0;0;0
+G02;17;|WAD| Fazer 5 Forças de Porter (Seção 2.1.1) | pt.02;Sprint 01;G02-A13;M;3;1.0;2026-04-23T14:59:19.256;2026-04-28T10:07:57.617;4.7977;4.798;mais que o dobro;1;1;14
+G02;29;|WAD| Fazer modelos de templates de negócios (5 Forças de Porter, Matriz SWOT, Value Proposition Canvas, Matriz de Risco);Sprint 01;G02-A12;M;3;1.0;2026-04-26T21:21:58.594;2026-04-27T09:28:37.407;0.5046;0.505;dentro do planejado;0;0;0
+G02;31;|WAD| Remake da Análise Swot;Sprint 01;[externo];M;3;1.0;2026-04-27T09:31:33.944;2026-04-27T14:08:49.895;0.1925;0.193;dentro do planejado;4;1;7
+G02;32;|WAD| Fazer imagem 5 Forças de Porter e Resumo;Sprint 01;G02-A19;M;3;1.0;2026-04-27T14:08:47.510;2026-04-28T14:29:02.387;1.0141;1.014;até o dobro;1;1;20
+G02;33;|WAD| Criação das personas seção 2.2 - Parte II;Sprint 01;G02-A12;M;3;1.0;2026-04-27T14:25:50.926;2026-04-29T14:49:25.561;2.0164;2.016;mais que o dobro;0;0;0
+G02;35;!ERRO!;Sprint 01;[externo];M;3;1.0;2026-04-27T15:35:50.166;2026-04-28T15:05:38.409;0.979;0.979;dentro do planejado;0;0;0
+G02;36;|WAD| Criação das personas seção 2.2;Sprint 01;G02-A18;M;3;1.0;2026-04-27T15:38:26.883;2026-05-01T17:02:50.095;4.0586;4.059;mais que o dobro;0;0;0
+G02;37;|WAD| Criação das personas seção 2.2 - Parte III;Sprint 01;G02-A12;M;3;1.0;2026-04-27T22:46:55.968;2026-04-29T14:49:23.305;1.6684;1.668;até o dobro;0;0;0
+G02;40;|WAD| Desenvolvendo o desgin das personas;Sprint 01;G02-A18;M;3;1.0;2026-04-28T14:06:53.328;2026-05-01T17:02:52.460;3.1222;3.122;mais que o dobro;0;0;0
+G02;44;|WAD| Requisitos funcionais (Seção 3.1.1) parte 3;Sprint 01;G02-A19;M;3;1.0;2026-04-28T14:47:56.990;2026-04-28T19:37:51.535;0.2013;0.201;dentro do planejado;1;1;24
+G02;45;|WAD| Criação do texto da conclusão da seção 2.2;Sprint 01;G02-A12;M;3;1.0;2026-04-28T14:58:28.724;2026-04-29T14:49:19.489;0.9936;0.994;dentro do planejado;2;2;85
+G02;46;|WAD| Criar regras de negócio (Seção 3.1.2);Sprint 01;[externo];M;3;1.0;2026-04-28T15:06:09.313;2026-04-29T14:52:16.826;0.9904;0.99;dentro do planejado;3;1;28
+G02;48;|WAD| Criar requisitos não funcionais;Sprint 01;[externo];M;3;1.0;2026-04-29T14:07:06.847;2026-04-30T10:34:20.723;0.8522;0.852;dentro do planejado;1;1;27
+G02;49;|Apresentação| Fazer slide da Sprint 01;Sprint 01;G02-A15;M;3;1.0;2026-04-29T14:07:25.654;2026-04-30T08:56:53.694;0.7844;0.784;dentro do planejado;0;0;0
+G02;55;|WAD| Colocar fontes na seção 2.1.1 (5 Forças de Porter) no WAD;Sprint 01;G02-A12;M;3;1.0;2026-04-29T14:48:19.504;2026-04-30T08:56:48.136;0.7559;0.756;dentro do planejado;1;1;35
+G02;56;|WAD| Refinar regras de negócio (Seção 3.1.2);Sprint 01;[externo];M;3;1.0;2026-04-29T14:52:12.354;2026-05-01T18:17:38.805;2.1427;2.143;mais que o dobro;3;1;100
+G02;58;|WAD| Requisitos funcionais (Seção 3.1.1) parte 4;Sprint 01;G02-A19;M;3;1.0;2026-04-29T14:58:45.281;2026-05-01T14:15:12.060;1.9698;1.97;até o dobro;1;1;31
+G02;61;|WAD| Aprimorar seção personas (2.2) com base no feedback da [externo] (professora de Design UX);Sprint 01;G02-A12;M;3;1.0;2026-04-29T20:13:25.998;2026-05-01T16:51:03.361;1.8595;1.859;até o dobro;1;1;2
+G02;90;|WAD| atualizacao da seção diagrama de casos de usos;Sprint 01;G02-A12;M;3;1.0;2026-05-01T21:48:50.444;2026-05-01T21:58:26.373;0.0067;0.007;dentro do planejado;1;1;663
+G02;92;|WAD| Definição da priorização doS Users Stories;Sprint 02;G02-A14;M;3;1.0;2026-05-04T14:34:15.413;2026-05-13T15:17:41.069;9.0302;9.03;mais que o dobro;0;0;0
+G02;94;|WAD| Diagrama de classes do domínio;Sprint 02;[externo];M;3;1.0;2026-05-04T14:34:53.649;2026-05-12T10:18:07.113;7.8217;7.822;mais que o dobro;2;1;11
+G02;96;|Apresentação| Criar slides e idealizar roteiro;Sprint 02;G02-A13;M;3;1.0;2026-05-04T14:35:49.656;2026-05-15T15:21:45.580;11.0319;11.032;mais que o dobro;0;0;0
+G02;99;|FIGMA| Planejar o fluxo de navegação e listar telas necessarias;Sprint 02;G02-A12;M;3;1.0;2026-05-04T14:39:33.111;2026-05-15T21:38:09.442;11.2907;11.291;mais que o dobro;0;0;0
+G02;103;|Monitoria| Realizar uma reunião com a Monitora de Programação: [externo] Eduarda;Sprint 02;G02-A19;M;3;1.0;2026-05-04T14:53:25.498;2026-05-15T22:35:24.574;11.3208;11.321;mais que o dobro;0;0;0
+G02;106;|WAD|  Part.1 - Planejar o fluxo de navegação e listar telas necessarias;Sprint 02;G02-A15;M;3;1.0;2026-05-05T14:25:34.769;2026-05-15T22:40:16.388;10.3435;10.344;mais que o dobro;0;0;0
+G02;113;|WAD| Planejar o fluxo de navegação e listar telas necessarias;Sprint 02;G02-A14;M;3;1.0;2026-05-06T14:12:22.097;2026-05-13T15:17:40.310;7.0453;7.045;mais que o dobro;0;0;0
+G02;114;|WAD|  Part.2 - Planejar o fluxo de navegação e listar telas necessarias;Sprint 02;G02-A15;M;3;1.0;2026-05-06T14:18:47.937;2026-05-15T22:11:45.732;9.3284;9.328;mais que o dobro;0;0;0
+G02;115;|WAD| Estudar Diagrama Entidade-Relacionamento (seção 3.6.2);Sprint 02;G02-A18;M;3;1.0;2026-05-06T14:23:09.736;2026-05-06T19:34:40.843;0.2163;0.216;dentro do planejado;0;0;0
+G02;119;|FIGMA| Part.2 - Planejar o fluxo de navegação e listar telas necessarias;Sprint 02;G02-A15;M;3;1.0;2026-05-07T07:31:44.833;2026-05-15T22:11:35.000;8.611;8.611;mais que o dobro;0;0;0
+G02;120;|WAD| Modelo Relacional e Modelo Físico (Seção 3.6.3) parte 1;Sprint 02;G02-A19;M;3;1.0;2026-05-07T10:19:08.078;2026-05-08T00:03:08.701;0.5722;0.572;dentro do planejado;3;1;6
+G02;122;|WAD| Criar diagrama de sequencia UML PT3;Sprint 02;G02-A16;M;3;1.0;2026-05-07T14:24:16.915;2026-05-15T22:40:21.708;8.3445;8.344;mais que o dobro;1;1;3
+G02;123;|WAD| Criar modelo de diagrama de UML;Sprint 02;G02-A13;M;3;1.0;2026-05-07T14:31:10.722;2026-05-15T22:50:01.333;8.3464;8.346;mais que o dobro;0;0;0
+G02;125;|WAD| Criação de diagrama de classes do domínio parte 3;Sprint 02;[externo];M;3;1.0;2026-05-07T14:58:35.321;2026-05-12T10:18:08.493;4.8052;4.805;mais que o dobro;2;1;11
+G02;133;|WAD| Criar diagramas de fluxo de interação de cada grupo de User Stories prorizadas na seção 3.3 - parte 1;Sprint 02;G02-A12;M;3;1.0;2026-05-08T00:11:47.992;2026-05-15T21:38:13.116;7.8933;7.893;mais que o dobro;0;0;0
+G02;134;|WAD| Criar diagrama 1 da seção 3.2.4;Sprint 02;G02-A12;M;3;1.0;2026-05-10T20:16:43.272;2026-05-15T15:52:53.097;4.8168;4.817;mais que o dobro;0;0;0
+G02;138;|WAD| Atualizar tabela da seção 3.1.4;Sprint 02;G02-A12;M;3;1.0;2026-05-11T12:02:45.462;2026-05-15T21:38:17.330;4.3997;4.4;mais que o dobro;1;1;40
+G02;143;|WAD| Fazer diagrama de sequências 01 no Canva;Sprint 02;G02-A12;M;3;1.0;2026-05-12T00:24:10.438;2026-05-15T15:21:43.630;3.6233;3.623;mais que o dobro;1;1;14
+G02;144;|WAD| Fazer diagrama de sequências 02 no Canva;Sprint 02;G02-A12;M;3;1.0;2026-05-12T08:02:34.680;2026-05-15T15:21:48.913;3.305;3.305;mais que o dobro;1;1;13
+G02;146;|WAD| Fazer diagrama de sequências 04 no Canva;Sprint 02;G02-A12;M;3;1.0;2026-05-12T10:32:35.372;2026-05-15T15:21:50.514;3.2009;3.201;mais que o dobro;1;1;19
+G02;152;|G01-A26| Fazer análise dos artefatos da Sprint 3;Sprint 02;[externo];M;3;1.0;2026-05-12T14:47:47.329;2026-05-15T15:52:46.964;3.0451;3.045;mais que o dobro;0;0;0
+G02;153;|WAD| Fazer diagrama de sequências 05 no Canva;Sprint 02;G02-A12;M;3;1.0;2026-05-12T21:55:05.519;2026-05-15T15:21:41.647;2.7268;2.727;mais que o dobro;0;0;0
+G02;154;|WAD| Arrumar diagrama entidade relacionamento (seção 3.6.2);Sprint 02;G02-A18;M;3;1.0;2026-05-13T14:18:14.501;2026-05-15T22:49:55.961;2.3553;2.355;mais que o dobro;3;1;16
+G02;155;|WAD| Fazer diagrama de sequências 05/03 no Canva;Sprint 02;G02-A15;M;3;1.0;2026-05-13T14:19:09.558;2026-05-15T15:52:45.154;2.065;2.065;mais que o dobro;0;0;0
+G02;157;|Apresentação| Criar slides e idealizar roteiro;Sprint 03;G02-A19;M;3;1.0;2026-05-13T14:23:28.196;2026-05-28T22:29:44.662;15.3377;15.338;mais que o dobro;0;0;0
+G02;160;|WAD| Revisão geral artefato 5;Sprint 02;[externo];M;3;1.0;2026-05-13T14:27:13.995;2026-05-13T15:38:58.849;0.0498;0.05;dentro do planejado;2;1;20
+G02;162;|WAD| Correção do Modelo Relacional;Sprint 02;G02-A19;M;3;1.0;2026-05-13T15:43:42.192;2026-05-15T22:49:57.571;2.296;2.296;mais que o dobro;1;1;2
+G02;164;|WAD| Fazer diagrama de sequências 06 no Canva;Sprint 02;G02-A12;M;3;1.0;2026-05-13T22:03:26.632;2026-05-15T15:14:20.571;1.7159;1.716;até o dobro;1;1;37
+G02;165;|Apresentação| Criar slides da apresentação;Sprint 02;G02-A18;M;3;1.0;2026-05-14T09:34:45.337;2026-05-15T22:50:03.534;1.5523;1.552;até o dobro;0;0;0
+G02;167;|WAD| Revisão de quinta artefato 5;Sprint 02;[externo];M;3;1.0;2026-05-14T14:26:43.347;2026-05-15T07:58:46.904;0.7306;0.731;dentro do planejado;7;1;133
+G02;168;|WAD| Atualizar modelo relacional e fisico;Sprint 02;G02-A19;M;3;1.0;2026-05-14T15:20:15.470;2026-05-15T21:38:05.490;1.2624;1.262;até o dobro;4;1;268
+G02;169;|WAD| Fazer diagrama de sequências 07 no Canva;Sprint 02;G02-A12;M;3;1.0;2026-05-14T20:43:40.498;2026-05-15T21:48:20.431;1.0449;1.045;até o dobro;1;1;14
+G02;170;|WAD| Atualizar Use Cases;Sprint 02;G02-A13;M;3;1.0;2026-05-15T09:20:22.134;2026-05-15T22:49:59.278;0.5622;0.562;dentro do planejado;1;1;0
+G02;179;|Design| Fazer autoestudo relacionado ao artefato 07;Sprint 03;G02-A13;M;3;1.0;2026-05-18T14:24:10.123;2026-05-19T15:10:18.669;1.032;1.032;até o dobro;0;0;0
+G02;180;|Design| Fazer autoestudo relacionado ao artefato 07;Sprint 03;G02-A18;M;3;1.0;2026-05-18T14:25:39.189;2026-05-19T15:10:19.960;1.031;1.031;até o dobro;0;0;0
+G02;181;|WAD| Arquitetura em Camadas (Seção 3.2.1);Sprint 03;G02-A14;M;3;1.0;2026-05-18T14:41:55.931;2026-05-19T15:51:12.838;1.0481;1.048;até o dobro;2;1;201
+G02;183;|WAD| Atualização README - pt.01;Sprint 03;G02-A15;M;3;1.0;2026-05-18T14:42:41.089;2026-05-19T15:51:11.306;1.0476;1.048;até o dobro;1;1;47
+G02;192;|WAD| Diagrama Arquitetura em Camadas (Seção 3.2.1 e 3.2.3.1);Sprint 03;G02-A19;M;3;1.0;2026-05-18T14:49:10.027;2026-05-28T22:29:36.647;10.3198;10.32;mais que o dobro;2;1;25
+G02;194;|Formatação| Formatar imagens e arquivos;Sprint 03;G02-A19;M;3;1.0;2026-05-18T15:31:08.656;2026-05-19T10:09:51.549;0.7769;0.777;dentro do planejado;2;2;1043
+G02;195;|WAD| Refatoração das imagens;Sprint 03;G02-A19;M;3;1.0;2026-05-19T09:10:03.155;2026-05-28T22:29:40.101;9.5553;9.555;mais que o dobro;1;1;362
+G02;197;|DESIGN| Preencher guia de estilos (seção 3.4);Sprint 03;G02-A18;M;3;1.0;2026-05-19T14:32:36.118;2026-05-27T21:56:10.021;8.308;8.308;mais que o dobro;0;0;0
+G02;202;|CODE| Versão funcional Backend com WEB API operante - Diagrama 03 PT.02;Sprint 03;G02-A15;M;3;1.0;2026-05-20T13:52:28.967;2026-05-27T16:00:57.500;7.0892;7.089;mais que o dobro;0;0;0
+G02;211;|PONDERADA| Criando o esqueleto do repositório + testes - Diagrama de sequencias -1 (cadastrar parceiro);Sprint 03;G02-A12;M;3;1.0;2026-05-21T10:23:00.786;2026-05-29T22:38:11.716;8.5105;8.511;mais que o dobro;1;1;1039
+G02;212;|PONDERADA| Casos testes funcionando no repositório - Diagrama de sequencias -1 (cadastrar parceiro) + Arrumar seção do relatório de entrega;Sprint 03;G02-A12;M;3;1.0;2026-05-21T10:24:53.080;2026-05-29T22:38:13.596;8.5093;8.509;mais que o dobro;1;1;955
+G02;213;|CODE| Ponderada - Casos testes do diagrama 02;Sprint 03;G02-A19;M;3;1.0;2026-05-21T11:07:41.719;2026-05-27T14:29:40.251;6.1403;6.14;mais que o dobro;2;1;6566
+G02;215;|DESIGN| Aula de figma - [externo];Sprint 03;G02-A12;M;3;1.0;2026-05-21T13:59:13.320;2026-05-28T14:32:59.117;7.0234;7.023;mais que o dobro;0;0;0
+G02;216;|DESIGN| Aula de FIGMA para o ART 7;Sprint 03;G02-A19;M;3;1.0;2026-05-21T14:09:19.698;2026-05-27T21:56:07.603;6.3242;6.324;mais que o dobro;0;0;0
+G02;217;|WAD| Iniciar artefato 06;Sprint 03;G02-A12;M;3;1.0;2026-05-21T15:36:47.734;2026-05-27T14:30:43.756;5.9541;5.954;mais que o dobro;0;0;0
+G02;220;|DESIGN| Altera guia de estilo do canva para figma;Sprint 03;G02-A18;M;3;1.0;2026-05-21T15:42:15.992;2026-05-27T14:30:41.202;5.9503;5.95;mais que o dobro;0;0;0
+G02;221;|WAD| Preenchendo seção 3.6.4;Sprint 03;G02-A12;M;3;1.0;2026-05-24T18:25:26.919;2026-05-29T20:18:40.934;5.0786;5.079;mais que o dobro;1;1;10
+G02;235;|CODE| Versão funcional Backend com WEB API operante pt.4;Sprint 03;G02-A15;M;3;1.0;2026-05-25T14:28:40.387;2026-05-27T16:00:55.633;2.0641;2.064;mais que o dobro;0;0;0
+G02;237;|CODE| Backend do G01-A26;Sprint 03;G02-A14;M;3;1.0;2026-05-25T14:29:15.143;2026-05-27T09:03:52.215;1.774;1.774;até o dobro;1;1;29
+G02;240;|DESIGN| Finalizar wireframes - Tela 05;Sprint 03;G02-A12;M;3;1.0;2026-05-26T14:15:26.310;2026-05-27T14:30:45.647;1.0106;1.011;até o dobro;0;0;0
+G02;242;|DESIGN| Finalizar wireframes;Sprint 03;G02-A18;M;3;1.0;2026-05-26T14:16:13.019;2026-05-27T14:30:48.683;1.0101;1.01;até o dobro;0;0;0
+G02;243;|CODE| Versão funcional Backend com WEB API operante - Diagrama 06;Sprint 03;G02-A15;M;3;1.0;2026-05-26T14:16:39.296;2026-05-27T16:00:36.011;1.0722;1.072;até o dobro;1;1;397
+G02;244;|WAD| Construindo a matriz RN → Entidade → Tabela (item 4.1).;Sprint 03;G02-A16;M;3;1.0;2026-05-26T14:17:38.782;2026-06-11T12:19:11.254;15.9177;15.918;mais que o dobro;1;1;412
+G02;245;|CODE| Versão funcional Backend com WEB API operante - Diagrama 07;Sprint 03;G02-A14;M;3;1.0;2026-05-26T14:17:56.203;2026-05-29T14:44:26.905;3.0184;3.018;mais que o dobro;2;1;416
+G02;246;|WAD| Construindo a matriz RN → Entidade → Tabela (item 4.1).;Sprint 03;G02-A16;M;3;1.0;2026-05-26T14:18:43.705;2026-05-28T22:29:39.053;2.3409;2.341;mais que o dobro;1;1;20
+G02;247;|WAD| Criar as seções 3.6.1 (ER conceitual) e 3.6.2 (DER) separadas.;Sprint 03;G02-A16;M;3;1.0;2026-05-26T14:51:53.308;2026-05-28T14:33:07.580;1.987;1.987;até o dobro;1;1;44
+G02;248;|WAD| Criar as seções 3.6.1 (ER conceitual) e 3.6.2 (DER) separadas.;Sprint 03;G02-A16;M;3;1.0;2026-05-26T14:53:10.984;2026-05-28T14:33:07.631;1.9861;1.986;até o dobro;1;1;44
+G02;254;|DESIGN| Pesquisar guia de estilos para referência;Sprint 03;G02-A18;M;3;1.0;2026-05-27T14:58:59.485;2026-05-28T22:29:43.647;1.313;1.313;até o dobro;0;0;0
+G02;257;|CODE| Refatorando o backend;Sprint 03;G02-A15;M;3;1.0;2026-05-28T14:30:59.161;2026-05-29T15:38:47.712;1.0471;1.047;até o dobro;0;0;0
+G02;258;|CODE| Refatorando o backend;Sprint 03;G02-A15;M;3;1.0;2026-05-28T14:31:49.646;2026-05-29T15:38:48.688;1.0465;1.047;até o dobro;5;1;1441
+G02;262;|WAD| corrigir artefato 6 - consulta SQL e logica proposicional;Sprint 03;G02-A12;M;3;1.0;2026-05-28T14:58:49.123;2026-05-29T19:59:26.798;1.2088;1.209;até o dobro;3;1;138
+G02;264;|WAD| Colocar fotos das telas na seção 3.5;Sprint 03;G02-A12;M;3;1.0;2026-05-28T22:30:18.019;2026-05-29T11:40:09.054;0.5485;0.549;dentro do planejado;2;1;101
+G02;267;|WAD| Aprimoramento dos Diagramas;Sprint 03;G02-A15;M;3;1.0;2026-05-29T08:41:33.455;2026-05-29T15:38:46.472;0.2897;0.29;dentro do planejado;1;1;479
+G02;269;| WAD | Ajustes nas seções 3.2.1 e 3.2.3.1 de acordo com o feedback;Sprint 03;G02-A19;M;3;1.0;2026-05-29T14:31:24.882;2026-05-29T21:42:25.472;0.2993;0.299;dentro do planejado;2;1;4
+G02;271;|WAD| Fazer seção 4.1 Primeira versão da aplicação web;Sprint 03;G02-A19;M;3;1.0;2026-05-29T17:32:29.257;2026-05-29T21:42:12.042;0.1734;0.173;dentro do planejado;6;1;105
+G02;274;|WAD| Fazer seção 3.7 do WAD;Sprint 03;G02-A12;M;3;1.0;2026-05-29T21:43:03.146;2026-05-29T22:44:10.136;0.0424;0.042;dentro do planejado;4;1;1101
+G02;277;|CODE| Matriz de Rastreabilidade (RTM);Sprint 04;G02-A18;M;3;1.0;2026-06-01T14:26:50.609;2026-06-02T15:57:08.925;1.0627;1.063;até o dobro;0;0;0
+G02;278;|DESIGN| Refinamento das telas de alta fidelidade com base no feedback da sprint 3 e da Jessica (madrinha do grupo);Sprint 04;G02-A12;M;3;1.0;2026-06-01T14:28:13.728;2026-06-12T13:11:52.802;10.947;10.947;mais que o dobro;0;0;0
+G02;279;|DESIGN| Refinamento das telas de alta fidelidade com base no feedback da sprint 3 e da Jessica (madrinha do grupo);Sprint 04;G02-A19;M;3;1.0;2026-06-01T14:28:30.580;2026-06-01T15:52:12.170;0.0581;0.058;dentro do planejado;0;0;0
+G02;280;|DESIGN| Refinamento das telas de alta fidelidade com base no feedback da sprint 3 e da Jessica (madrinha do grupo);Sprint 04;G02-A13;M;3;1.0;2026-06-01T14:29:04.064;2026-06-10T10:13:19.193;8.8224;8.822;mais que o dobro;0;0;0
+G02;282;|OUTROS| Reunião com a professora Camila de inglês;Sprint 04;G02-A19;M;3;1.0;2026-06-01T15:04:57.128;2026-06-06T19:26:39.028;5.1817;5.182;mais que o dobro;0;0;0
+G02;287;|WAD| Resumo Executivo - Seção 6.1;Sprint 04;G02-A14;M;3;1.0;2026-06-02T14:16:44.141;2026-06-05T15:54:36.657;3.068;3.068;mais que o dobro;1;1;8
+G02;289;|CODE| Atualização critérios do escritório de projetos;Sprint 04;G02-A15;M;3;1.0;2026-06-02T14:20:21.103;2026-06-02T15:54:47.846;0.0656;0.066;dentro do planejado;3;1;9302
+G02;291;|CODE| Atualização critérios do escritório de projetos;Sprint 04;G02-A18;M;3;1.0;2026-06-02T14:21:30.056;2026-06-02T15:57:07.482;0.0664;0.066;dentro do planejado;2;1;6436
+G02;295;|WAD| Adequação aos critérios do escritório de projetos e boas práticas da monitoria;Sprint 04;G02-A15;M;3;1.0;2026-06-04T12:48:21.372;2026-06-08T14:28:14.289;4.0694;4.069;mais que o dobro;1;1;0
+G02;296;|WAD| Preenchendo seção 3.9 e 4.2;Sprint 04;G02-A15;M;3;1.0;2026-06-04T14:30:57.520;2026-06-08T14:30:20.582;3.9996;4.0;mais que o dobro;2;1;86
+G02;297;|WAD| Preenchendo seção 5.1 + seção 5.1.1 do WAD;Sprint 04;G02-A12;M;3;1.0;2026-06-05T10:59:44.736;2026-06-08T22:54:47.538;3.4966;3.497;mais que o dobro;1;1;26
+G02;300;|CODE| Iniciando a implementação do Front-End;Sprint 04;G02-A15;M;3;1.0;2026-06-08T14:26:55.109;2026-06-12T11:36:46.318;3.8818;3.882;mais que o dobro;0;0;0
+G02;301;|WAD| Aprimoramento de seção 3.9 e 4.2 do wad;Sprint 04;G02-A18;M;3;1.0;2026-06-08T14:27:18.058;2026-06-08T17:51:18.120;0.1417;0.142;dentro do planejado;4;1;116
+G02;302;|WAD| Revisão do artefato 12;Sprint 04;G02-A14;M;3;1.0;2026-06-08T14:32:01.380;2026-06-12T21:45:00.221;4.3007;4.301;mais que o dobro;6;1;108
+G02;303;|WAD| Revisão do artefato 12;Sprint 04;G02-A13;M;3;1.0;2026-06-08T14:33:54.821;2026-06-12T22:22:59.891;4.3258;4.326;mais que o dobro;1;1;25
+G02;305;|CODE| Limpeza de config Jest e consolidação de testes;(sem sprint);G02-A12;M;3;1.0;2026-06-08T16:04:02.642;2026-06-08T20:44:54.834;0.195;0.195;dentro do planejado;1;1;24
+G02;306;|CODE| Aumentar cobertura dos testes automatizados acima de 80%;Sprint 04;G02-A12;M;3;1.0;2026-06-08T19:17:20.821;2026-06-08T22:54:47.610;0.151;0.151;dentro do planejado;1;1;847
+G02;307;|CODE| Revisar conformidade do Artefato 11 e corrigir ajustes finais;Sprint 04;G02-A12;M;3;1.0;2026-06-08T19:31:26.624;2026-06-08T22:56:02.330;0.1421;0.142;dentro do planejado;2;1;484
+G02;310;|WAD| Documentar testes unitários da camada Service (seção 5.1.2);Sprint 04;G02-A19;M;3;1.0;2026-06-09T09:24:16.641;2026-06-09T13:59:45.669;0.1913;0.191;dentro do planejado;3;1;31
+G02;311;|DOCS| Preencher subseção 5.1.3 – Testes de Integração de Endpoints;Sprint 04;G02-A19;M;3;1.0;2026-06-09T09:57:29.902;2026-06-09T13:59:42.747;0.1682;0.168;dentro do planejado;2;1;21
+G02;313;|WAD| Preencher subseção 5.1.4 – Evidências de Execução;Sprint 04;G02-A19;M;3;1.0;2026-06-09T11:22:49.395;2026-06-09T13:59:44.068;0.109;0.109;dentro do planejado;2;1;59
+G02;322;|CODE| Implementar Tela 04 no Figma - PARTE 1 (ERROR);Sprint 04;G02-A19;M;3;1.0;2026-06-09T14:12:51.298;2026-06-12T07:56:15.659;2.7385;2.738;mais que o dobro;0;0;0
+G02;331;|WAD| Preencher seção 5.1 Relatório de testes de integração de endpoints automatizados;Sprint 04;G02-A16;M;3;1.0;2026-06-09T14:21:55.158;2026-06-09T15:36:55.961;0.0521;0.052;dentro do planejado;2;1;306
+G02;332;|DESIGN| Atualizar elementos do Figma com base no feedback da Madrinha do grupo - Parte 1;Sprint 04;G02-A12;M;3;1.0;2026-06-09T14:30:20.730;2026-06-12T13:12:33.784;2.946;2.946;mais que o dobro;0;0;0
+G02;333;|WAD| Atualizar seções do WAD para deixar todos Endpoints;Sprint 04;G02-A12;M;3;1.0;2026-06-09T14:36:21.622;2026-06-12T23:37:46.085;3.376;3.376;mais que o dobro;0;0;0
+G02;334;|CODE| Corrigir o consumo de JWT nas requisições do front-end EJS;Sprint 05;G02-A15;M;3;1.0;2026-06-09T14:39:20.920;2026-06-15T18:38:32.997;6.1661;6.166;mais que o dobro;0;0;0
+G02;335;|CODE| Implementar Tela 05 no Figma - PARTE 1;Sprint 04;G02-A18;M;3;1.0;2026-06-09T14:40:59.973;2026-06-11T01:20:36.554;1.4442;1.444;até o dobro;0;0;0
+G02;336;|CODE| Implementar Tela 04 no Figma - PARTE 1;Sprint 04;G02-A19;M;3;1.0;2026-06-09T14:41:06.344;2026-06-12T07:56:14.900;2.7188;2.719;mais que o dobro;0;0;0
+G02;337;|CODE| Ajusta erros de code smell;Sprint 04;G02-A18;M;3;1.0;2026-06-10T11:47:45.481;2026-06-11T01:20:35.138;0.5645;0.564;dentro do planejado;1;1;298
+G02;338;|WAD| Altera seção 4.2 do WAD;Sprint 04;G02-A18;M;3;1.0;2026-06-10T15:06:49.487;2026-06-11T01:20:37.358;0.4262;0.426;dentro do planejado;1;1;17
+G02;339;|FIX| Realizando melhorias ao backend;Sprint 04;G02-A15;M;3;1.0;2026-06-10T22:56:43.803;2026-06-12T07:56:05.368;1.3746;1.375;até o dobro;0;0;0
+G02;340;|CODE| Resolvendo a Duplicação de Código;Sprint 04;G02-A15;M;3;1.0;2026-06-10T22:58:26.897;2026-06-12T07:56:04.458;1.3734;1.373;até o dobro;2;1;3554
+G02;341;|CODE| Implementar Tela 04 no Figma - PARTE 2;Sprint 04;G02-A19;M;3;1.0;2026-06-11T14:29:22.856;2026-06-12T07:56:00.403;0.7268;0.727;dentro do planejado;0;0;0
+G02;342;|CODE| Implementação Front-End - Tela 06 - Parte 2;Sprint 04;G02-A12;M;3;1.0;2026-06-11T14:32:03.312;2026-06-12T13:09:14.514;0.9425;0.942;dentro do planejado;0;0;0
+G02;352;|WAD| Atualizar diagrama de arquitetura da aplicação;Sprint 04;G02-A19;M;3;1.0;2026-06-11T22:36:34.400;2026-06-12T11:33:32.053;0.5396;0.54;dentro do planejado;0;0;0
+G02;354;|WAD| Acrescentndo todas as fontes usadas na seção 6 (Negócios);Sprint 04;G02-A12;M;3;1.0;2026-06-12T08:25:07.472;2026-06-12T22:09:36.061;0.5726;0.573;dentro do planejado;2;1;52
+G02;355;|WAD| Atualizar documentação arquitetural da aplicação - PARTE 1;Sprint 04;G02-A19;M;3;1.0;2026-06-12T10:07:49.023;2026-06-12T20:47:14.358;0.444;0.444;dentro do planejado;6;1;65
+G02;358;|WAD| Atualizar seção 3.7 do WAD;Sprint 04;G02-A12;M;3;1.0;2026-06-12T12:52:10.689;2026-06-12T16:24:41.912;0.1476;0.148;dentro do planejado;4;1;47
+G02;360;|WAD| Atualizar documentação arquitetural da aplicação - PARTE 2;Sprint 04;G02-A19;M;3;1.0;2026-06-12T15:13:17.338;2026-06-12T20:47:13.294;0.2319;0.232;dentro do planejado;4;1;8
+G02;361;|WAD| Refinamento do artefato 10;Sprint 04;G02-A18;M;3;1.0;2026-06-12T15:45:39.712;2026-06-12T22:03:34.830;0.2624;0.262;dentro do planejado;2;1;28
+G02;362;|WAD| Corrigir a chave primária do DER para UUID (3.6.2);Sprint 04;G02-A16;M;3;1.0;2026-06-12T18:15:43.278;2026-06-12T22:23:00.990;0.1717;0.172;dentro do planejado;1;1;9
+G02;363;|WAD| Alinhar DER ao código: UUID, relacionamentos 3.6.2.1 e RTM;Sprint 05;G02-A16;M;3;1.0;2026-06-12T18:15:51.818;2026-06-17T19:14:00.192;5.0404;5.04;mais que o dobro;3;1;19
+G02;364;|WAD| Corrigir seção de Testes (5.1): header duplicado e ref de teste;Sprint 05;G02-A16;M;3;1.0;2026-06-12T18:16:00.620;2026-06-17T19:13:58.509;5.0403;5.04;mais que o dobro;1;1;6
+G02;365;|WAD| Corrigir notação do MER para Chen (3.6.1);Sprint 05;G02-A16;M;3;1.0;2026-06-12T18:16:08.110;2026-06-17T19:13:44.415;5.04;5.04;mais que o dobro;1;1;4
+G02;366;|WAD| Atualizar status dos Requisitos Funcionais (3.1.1);Sprint 05;G02-A16;M;3;1.0;2026-06-12T18:16:16.135;2026-06-17T19:13:32.562;5.0398;5.04;mais que o dobro;1;1;34
+G02;367;|WAD| Atualiza seção 3.2.7;Sprint 04;G02-A18;M;3;1.0;2026-06-12T18:35:36.214;2026-06-12T23:04:56.873;0.187;0.187;dentro do planejado;1;1;24
+G02;368;|WAD| Atualizar seção 3.6.1 - Modelo Entidade-Relacionamento;Sprint 04;G02-A13;M;3;1.0;2026-06-12T20:41:56.016;2026-06-12T22:22:58.620;0.0702;0.07;dentro do planejado;1;1;18
+G02;371;|CODE| Atualizando tabelas do migration.sql;Sprint 04;G02-A12;M;3;1.0;2026-06-12T21:18:33.854;2026-06-12T23:23:22.773;0.0867;0.087;dentro do planejado;2;1;41
+G02;375;|CODE| Corrigir erro 404 e criar o script /js/solicitacoes.js;Sprint 05;G02-A15;M;3;1.0;2026-06-15T13:25:46.344;2026-06-21T21:23:26.051;6.3317;6.332;mais que o dobro;2;1;866
+G02;379;|CODE| Corrigir o consumo de JWT nas requisições do front-end EJS;Sprint 05;G02-A15;M;3;1.0;2026-06-15T18:38:10.013;2026-06-21T21:00:22.857;6.0988;6.099;mais que o dobro;1;1;75
+G02;382;|CODE| Uniformizar o consumo de dados nas Views do diretório;Sprint 05;G02-A15;M;3;1.0;2026-06-15T18:42:59.214;2026-06-21T21:23:27.791;6.1114;6.111;mais que o dobro;2;1;810
+G02;383;|CODE| Implementar validação Regex para CPF e CNPJ no Front-end;Sprint 05;G02-A15;M;3;1.0;2026-06-15T18:44:13.656;2026-06-21T21:23:29.342;6.1106;6.111;mais que o dobro;2;1;70
+G02;386;|TEST| Realizar testes de carga (K6) para Capacidade e Desempenho;Sprint 05;G02-A15;M;3;1.0;2026-06-15T18:48:00.111;2026-06-22T10:09:12.520;6.6397;6.64;mais que o dobro;1;1;9419
+G02;387;|TEST| Escrever testes E2E para o fluxo de Cadastro e Aprovação;Sprint 05;G02-A15;M;3;1.0;2026-06-15T18:49:32.281;2026-06-22T10:09:13.831;6.6387;6.639;mais que o dobro;1;1;93
+G02;393;|DOCS| Padronizar a formatação de imagens e tabelas no WAD;Sprint 05;G02-A15;M;3;1.0;2026-06-15T18:57:15.992;2026-06-22T14:50:05.972;6.8284;6.828;mais que o dobro;4;1;996
+G02;395;|CODE| Garantir Tipagem Forte nos retornos dos Repositories;Sprint 05;G02-A15;M;3;1.0;2026-06-15T19:00:41.746;2026-06-22T14:26:15.569;6.8094;6.809;mais que o dobro;2;1;138
+G02;396;|CHORE| Remover códigos órfãos e arquivos fora do padrão de nomenclatura;Sprint 05;G02-A15;M;3;1.0;2026-06-15T19:01:59.412;2026-06-22T14:26:17.100;6.8085;6.809;mais que o dobro;2;1;138
+G02;401;|CODE| Corrigir aprovação de cadastro novo (pendente → ativo);Sprint 05;G02-A16;M;3;1.0;2026-06-21T12:06:50.571;2026-06-22T16:59:46.369;1.2034;1.203;até o dobro;4;1;286
+G02;402;|CODE| Implementar edição de vínculo e dados agrícolas (PATCH + transação);Sprint 05;G02-A16;M;3;1.0;2026-06-21T12:06:51.437;2026-06-22T16:59:47.706;1.2034;1.203;até o dobro;5;1;405
+G02;403;erro;Sprint 05;G02-A16;M;3;1.0;2026-06-21T12:06:52.219;2026-06-25T11:58:57.534;3.9945;3.995;mais que o dobro;0;0;0
+G02;404;erro;Sprint 05;G02-A16;M;3;1.0;2026-06-21T12:06:52.916;2026-06-25T11:59:19.931;3.9948;3.995;mais que o dobro;0;0;0
+G02;405;erro;Sprint 05;G02-A16;M;3;1.0;2026-06-21T12:06:53.619;2026-06-25T11:59:42.306;3.995;3.995;mais que o dobro;0;0;0
+G02;406;erro;Sprint 05;G02-A16;M;3;1.0;2026-06-21T12:06:54.289;2026-06-25T12:00:02.369;3.9952;3.995;mais que o dobro;0;0;0
+G02;407;erro;Sprint 05;G02-A16;M;3;1.0;2026-06-21T12:06:54.996;2026-06-25T12:01:37.946;3.9963;3.996;mais que o dobro;0;0;0
+G02;408;erro;Sprint 05;G02-A16;M;3;1.0;2026-06-21T12:06:55.682;2026-06-25T12:01:50.022;3.9965;3.996;mais que o dobro;0;0;0
+G02;409;erro;Sprint 05;G02-A16;M;3;1.0;2026-06-21T12:06:56.358;2026-06-25T12:01:51.462;3.9965;3.996;mais que o dobro;0;0;0
+G02;410;erro;Sprint 05;G02-A16;M;3;1.0;2026-06-21T12:06:57.024;2026-06-25T12:02:05.081;3.9966;3.997;mais que o dobro;0;0;0
+G02;411;erro;Sprint 05;G02-A16;M;3;1.0;2026-06-21T12:06:57.731;2026-06-25T12:02:10.655;3.9967;3.997;mais que o dobro;0;0;0
+G02;412;erro;Sprint 05;G02-A16;M;3;1.0;2026-06-21T12:06:58.409;2026-06-25T12:02:06.927;3.9966;3.997;mais que o dobro;0;0;0
+G02;413;|WAD| Verificar coerência geral do WAD;Sprint 05;G02-A18;M;3;1.0;2026-06-22T08:48:01.626;2026-06-22T21:15:01.378;0.5187;0.519;dentro do planejado;1;1;30
+G02;415;|APRESENTAÇÃO| Montar slides + roterio da apresentação da sprint 5 - Parte 1;Sprint 05;G02-A12;M;3;1.0;2026-06-22T09:36:23.896;2026-06-23T16:31:16.603;1.2881;1.288;até o dobro;0;0;0
+G02;418;|CODE| Trocar Região por seletor de usinas reais;Sprint 05;G02-A16;M;3;1.0;2026-06-22T14:44:41.055;2026-06-22T16:59:49.176;0.0938;0.094;dentro do planejado;8;1;241
+G02;419;|WAD| Finalizar a coerência do WAD;Sprint 05;G02-A18;M;3;1.0;2026-06-22T14:55:41.657;2026-06-24T15:02:04.562;2.0044;2.004;mais que o dobro;0;0;0
+G02;421;|WAD| Elaborar relatório de testes de usabilidade (seção 5.2);Sprint 05;G02-A19;M;3;1.0;2026-06-22T15:09:34.866;2026-06-24T07:48:39.730;1.6938;1.694;até o dobro;0;0;0
+G02;423;|APRESENTAÇÃO| Montar slides + roterio da apresentação da sprint 5 - Parte 2;Sprint 05;G02-A12;M;3;1.0;2026-06-22T20:39:23.405;2026-06-23T16:31:21.285;0.8278;0.828;dentro do planejado;0;0;0
+G02;428;|WAD| Refinar relatório de testes de usabilidade com base no feedback da professora;Sprint 05;G02-A19;M;3;1.0;2026-06-23T11:28:31.864;2026-06-24T07:48:41.707;0.8473;0.847;dentro do planejado;5;1;76
+G02;429;|CODE| Trocar Região por seletor de usinas reais;Sprint 05;G02-A16;M;3;1.0;2026-06-23T11:29:52.085;2026-06-23T13:10:13.793;0.0697;0.07;dentro do planejado;0;0;0
+G02;430;|CODE| Atualizar logins e autenticação;Sprint 05;G02-A12;M;3;1.0;2026-06-23T13:58:16.302;2026-06-24T15:43:05.739;1.0728;1.073;até o dobro;0;0;0
+G02;432;|DESIGN| Ajustar o guia de estilo versão final;Sprint 05;G02-A18;M;3;1.0;2026-06-23T14:32:26.010;2026-06-24T15:02:02.848;1.0206;1.021;até o dobro;0;0;0
+G02;433;|CODE| Persistir empresa, data de [externo] e endereço do parceiro;Sprint 05;G02-A16;M;3;1.0;2026-06-23T14:35:40.377;2026-06-24T15:47:27.163;1.0498;1.05;até o dobro;11;1;410
+G02;434;|WAD| Preencher seção 07 baseado no desenvolvimento ao longo das sprints;Sprint 05;G02-A13;M;3;1.0;2026-06-23T14:39:47.561;2026-06-25T10:51:30.523;1.8415;1.841;até o dobro;2;1;14
+G02;435;|FIX| Corrigir sidebar do site;Sprint 05;G02-A15;M;3;1.0;2026-06-23T14:49:24.911;2026-06-23T19:06:58.423;0.1789;0.179;dentro do planejado;1;1;8
+G02;437;|WAD| Atualizar seção de testes seção 5.1 (5.1.1, 5.1.2, 5.1.3 e 5.1.4) com base no estado atual do código;Sprint 05;G02-A12;M;3;1.0;2026-06-23T19:31:20.711;2026-06-24T14:04:51.343;0.7733;0.773;dentro do planejado;6;1;223
+G02;439;|CODE| Restaurar aprovarCadastro (service+controller+rota) quebrado pela regressão;Sprint 05;G02-A16;M;3;1.0;2026-06-23T22:03:17.888;2026-06-24T12:57:30.515;0.621;0.621;dentro do planejado;1;1;64
+G02;444;|WAD| Corrigir inconsistências na documentação do WAD;Sprint 05;G02-A19;M;3;1.0;2026-06-24T14:57:04.283;2026-06-25T20:03:40.342;1.2129;1.213;até o dobro;6;1;38
+G02;445;|WAD| Corrigir ajustes pontuais identificados na revisão;Sprint 05;G02-A12;M;3;1.0;2026-06-24T14:59:45.381;2026-06-24T18:09:02.336;0.1314;0.131;dentro do planejado;4;1;34
+G02;446;|WAD| Revisando o WAD;Sprint 05;G02-A13;M;3;1.0;2026-06-24T15:05:20.840;2026-06-25T10:51:35.551;0.8238;0.824;dentro do planejado;0;0;0
+G02;447;|CODE| Corrigir ciclo de vínculo e salvar fazendas/observações;(sem sprint);G02-A16;M;3;1.0;2026-06-24T17:35:21.676;2026-06-25T20:04:31.361;1.1036;1.104;até o dobro;11;1;2836
+G02;448;|CODE| Fazer cadastro criar vínculo e persistir área, fazendas e observações;Sprint 05;G02-A16;M;3;1.0;2026-06-24T17:35:30.173;2026-06-25T20:04:40.733;1.1036;1.104;até o dobro;4;1;2061
+G02;449;|CODE| Atualizar migration SQL com base no código atual do G01-A26;Sprint 05;G02-A12;M;3;1.0;2026-06-25T10:27:04.791;2026-06-25T20:54:36.523;0.4358;0.436;dentro do planejado;0;0;0
+G02;450;|PRESENTATION| treinar apresentação final - sprint 5;Sprint 05;G02-A12;M;3;1.0;2026-06-25T10:27:30.801;2026-06-25T20:54:38.281;0.4355;0.436;dentro do planejado;0;0;0
+G02;452;|WAD| Adiciona resultado dos testes da sprint 05 na seção 07;Sprint 05;G02-A13;M;3;1.0;2026-06-25T10:38:05.870;2026-06-25T14:14:29.616;0.1503;0.15;dentro do planejado;1;1;3
+G02;453;|WAD| Avaliar objetivos, pontos fortes e limitações na seção 07;Sprint 05;G02-A13;M;3;1.0;2026-06-25T10:42:31.208;2026-06-25T14:14:26.108;0.1472;0.147;dentro do planejado;2;1;6
+G02;454;|DOCS| Atualizar requisitos e regras de negócio conforme implementação atual;Sprint 05;G02-A19;M;3;1.0;2026-06-25T10:49:47.738;2026-06-25T14:37:49.533;0.1584;0.158;dentro do planejado;2;1;47
+G02;455;|DOCS| Atualizar end points conforme implementação atual;Sprint 05;G02-A18;M;3;1.0;2026-06-25T10:52:15.558;2026-06-25T12:37:30.394;0.0731;0.073;dentro do planejado;3;1;62
+G02;461;|PRESENTATION| treinar apresentação final - pitch;Sprint 05;G02-A13;M;3;1.0;2026-06-25T14:11:32.394;2026-06-25T23:16:11.793;0.3782;0.378;dentro do planejado;0;0;0
+G02;463;|DOCS| Alinhar requisitos funcionais à implementação atual do sistema;Sprint 05;G02-A19;M;3;1.0;2026-06-25T14:18:17.847;2026-06-25T15:16:18.334;0.0403;0.04;dentro do planejado;1;1;48
+G02;469;|CODE| Atualizar migrations conforme estrutura atual do banco de dados;Sprint 05;G02-A19;M;3;1.0;2026-06-25T14:55:00.402;2026-06-25T15:30:05.823;0.0244;0.024;dentro do planejado;9;1;83
+G02;471;|DOCS| Atualizar modelo físico e modelo relacional conforme migrations atuais;Sprint 05;G02-A19;M;3;1.0;2026-06-25T15:39:31.057;2026-06-25T21:27:25.414;0.2416;0.242;dentro do planejado;4;1;729
+G02;474;|DOCS| Atualizar arquitetura em camadas e diagrama de classes arquitetural;Sprint 05;G02-A19;M;3;1.0;2026-06-25T16:54:46.839;2026-06-25T23:22:01.536;0.2689;0.269;dentro do planejado;1;1;73
+G02;475;|DOCS| Verifica coerência de todo WAD;Sprint 05;G02-A18;M;3;1.0;2026-06-25T17:24:19.078;2026-06-25T23:56:02.880;0.272;0.272;dentro do planejado;0;0;0
+G02;476;|WAD| Preencher seção 4.3;Sprint 05;G02-A18;M;3;1.0;2026-06-25T17:35:40.918;2026-06-25T21:28:16.256;0.1615;0.162;dentro do planejado;2;1;52
+G02;477;|DOCS| Atualizar arquitetura em camadas e diagrama de classes arquitetural - PARTE 2;Sprint 05;G02-A19;M;3;1.0;2026-06-25T17:57:04.320;2026-06-25T22:21:39.632;0.1837;0.184;dentro do planejado;3;1;5
+G02;479;|EXTRA| Atualizar planilha de testes de usabilidade;Sprint 05;G02-A19;M;3;1.0;2026-06-25T19:39:45.655;2026-06-25T23:22:02.814;0.1544;0.154;dentro do planejado;0;0;0
+G02;484;|DOCS| Ajustar coerência de todo o WAD;Sprint 05;G02-A18;M;3;1.0;2026-06-25T20:58:17.875;2026-06-25T23:56:11.502;0.1235;0.124;dentro do planejado;3;1;63
+G02;39;|WAD| Users storys (Seção 2.3);(sem sprint);G02-A14;G;4;3.0;2026-04-28T14:05:52.547;2026-04-29T15:01:55.513;1.0389;0.346;dentro do planejado;3;1;116
+G02;42;|WAD| Users storys (Seção 2.3);(sem sprint);G02-A13;G;4;3.0;2026-04-28T14:21:14.549;2026-04-29T15:29:32.033;1.0474;0.349;dentro do planejado;0;0;0
+G02;50;|Apresentação| Fazer perguntas da sprint 01;Sprint 01;G02-A16;G;4;3.0;2026-04-29T14:14:38.983;2026-04-30T18:38:12.116;1.183;0.394;dentro do planejado;0;0;0
+G02;52;|WAD| Elaborar Use Cases 3.2.2;Sprint 01;G02-A13;G;4;3.0;2026-04-29T14:20:05.848;2026-05-01T16:35:01.534;2.0937;0.698;dentro do planejado;1;1;29
+G02;85;|WAD| Desenvolvimento dos use cases (3.2.2) pt.2;Sprint 01;G02-A13;G;4;3.0;2026-04-30T18:32:23.279;2026-05-01T16:35:02.774;0.9185;0.306;dentro do planejado;1;1;23
+G02;86;|WAD| User cases dos requisitos não funcionais;Sprint 01;G02-A18;G;4;3.0;2026-05-01T13:04:13.692;2026-05-01T15:54:35.780;0.1183;0.039;dentro do planejado;1;1;32
+G02;93;|WAD| Modelo Relacional e Modelo Físico (Seção 3.6.3) Parte 1;Sprint 02;G02-A19;G;4;3.0;2026-05-04T14:34:49.566;2026-05-13T15:41:46.710;9.0465;3.015;mais que o dobro;0;0;0
+G02;97;|WAD| Modelo de Entidade- Relacionamento Conceitual (ER) - seção 3.6.1;Sprint 02;G02-A13;G;4;3.0;2026-05-04T14:36:03.455;2026-05-15T22:49:59.931;11.343;3.781;mais que o dobro;2;1;53
+G02;100;|WAD| Criar Diagrama de sequências UML (seção 3.2.4) - parte I;Sprint 02;G02-A12;G;4;3.0;2026-05-04T14:41:30.958;2026-05-15T15:52:51.987;11.0495;3.683;mais que o dobro;0;0;0
+G02;104;|WAD| Revisão de erros (sprint 1);Sprint 02;G02-A19;G;4;3.0;2026-05-05T14:12:20.303;2026-05-05T17:24:43.094;0.1336;0.045;dentro do planejado;7;2;161
+G02;107;|WAD| Idealização dos Wireframes (Seção 3.3);Sprint 02;G02-A14;G;4;3.0;2026-05-05T14:26:21.728;2026-05-05T20:41:13.545;0.2603;0.087;dentro do planejado;0;0;0
+G02;110;|WAD| Diagrama de classes do domínio parte 2;Sprint 02;[externo];G;4;3.0;2026-05-05T15:25:25.803;2026-05-12T10:18:05.414;6.7866;2.262;mais que o dobro;2;1;11
+G02;112;|WAD| Criar diagrama de sequencia UML PT4;Sprint 02;G02-A16;G;4;3.0;2026-05-06T14:10:32.237;2026-05-15T21:38:07.246;9.3108;3.104;mais que o dobro;0;0;0
+G02;117;|WAD| Corrigir WAD baseado no feedback dado pela monitora G03-A25;Sprint 02;G02-A13;G;4;3.0;2026-05-06T14:52:13.319;2026-05-15T22:40:24.677;9.3251;3.108;mais que o dobro;3;1;269
+G02;118;|WAD| Ajustes na formatação;Sprint 02;G02-A19;G;4;3.0;2026-05-06T14:54:08.865;2026-05-12T09:51:22.576;5.7897;1.93;até o dobro;2;1;204
+G02;130;|Monitoria| Realizar uma reunião com a Monitora de Documentação: G03-A25;(sem sprint);G02-A12;G;4;3.0;2026-05-07T15:56:22.649;2026-05-15T15:52:50.890;7.9975;2.666;mais que o dobro;0;0;0
+G02;139;|WAD| Corrigir pontos de melhoria do artefato 2;Sprint 02;[externo];G;4;3.0;2026-05-11T15:13:21.886;2026-05-12T09:54:09.268;0.7783;0.259;dentro do planejado;11;1;196
+G02;141;|WAD| Refatoração do user stories;Sprint 02;G02-A14;G;4;3.0;2026-05-11T15:38:27.318;2026-05-13T15:17:39.496;1.9856;0.662;dentro do planejado;0;0;0
+G02;145;|WAD| Corrigir use cases baseado no feedback do artefato 2 pt.01;Sprint 02;G02-A13;G;4;3.0;2026-05-12T09:52:22.582;2026-05-13T15:44:00.531;1.2442;0.415;dentro do planejado;1;1;1137
+G02;147;|WAD| Modelo Relacional e Modelo Físico (Seção 3.6.3) Parte 2;Sprint 02;G02-A19;G;4;3.0;2026-05-12T14:01:32.675;2026-05-13T15:41:44.813;1.0696;0.357;dentro do planejado;5;1;40
+G02;148;|WAD| Corrigir use cases baseado no feedback do artefato 2 pt.02;Sprint 02;G02-A13;G;4;3.0;2026-05-12T14:08:26.759;2026-05-14T15:19:12.813;2.0491;0.683;dentro do planejado;1;1;61
+G02;149;|WAD| Criar diagrama de sequencia UML PT4;Sprint 02;G02-A16;G;4;3.0;2026-05-12T14:34:21.467;2026-05-15T22:40:23.113;3.3375;1.113;até o dobro;0;0;0
+G02;150;|WAD| Revisão das Users Stories;Sprint 02;G02-A14;G;4;3.0;2026-05-12T14:34:29.088;2026-05-13T15:17:38.204;1.03;0.343;dentro do planejado;2;1;544
+G02;151;|DESIGN| Part.4 - Criar as wireframes no programa;Sprint 02;G02-A15;G;4;3.0;2026-05-12T14:34:36.619;2026-05-15T15:21:53.636;3.0328;1.011;até o dobro;1;1;960
+G02;156;|WAD| Criar diagrama de sequencia UML PT 5;Sprint 02;G02-A16;G;4;3.0;2026-05-13T14:21:03.361;2026-05-15T21:37:39.989;2.3032;0.768;dentro do planejado;0;0;0
+G02;158;|WAD| Modelo Relacional e Modelo Físico (Seção 3.6.3) Parte 2;Sprint 02;G02-A19;G;4;3.0;2026-05-13T14:24:57.373;2026-05-13T20:50:24.464;0.2677;0.089;dentro do planejado;0;0;0
+G02;159;|WAD| Modelo Relacional e Modelo Físico (Seção 3.6.3) Parte 3;Sprint 02;G02-A19;G;4;3.0;2026-05-13T14:26:10.152;2026-05-13T20:50:26.462;0.2669;0.089;dentro do planejado;4;1;585
+G02;161;|WAD| Revisão do modelo relacional;Sprint 02;G02-A14;G;4;3.0;2026-05-13T14:27:19.071;2026-05-15T22:49:58.560;2.3491;0.783;dentro do planejado;0;0;0
+G02;171;|WAD| Revisão Geral Wireframes;Sprint 02;G02-A15;G;4;3.0;2026-05-15T14:52:56.943;2026-05-15T22:40:15.439;0.3245;0.108;dentro do planejado;0;0;0
+G02;172;|WAD| Fazer diagrama de sequências 08, 09 e 10na seção 3.2.4;Sprint 02;G02-A12;G;4;3.0;2026-05-15T15:52:33.164;2026-05-15T21:48:22.489;0.2471;0.082;dentro do planejado;1;1;68
+G02;182;|WAD| Diagrama de Classes Arquitetural (Seção 3.2.3.1);Sprint 03;G02-A19;G;4;3.0;2026-05-18T14:42:33.157;2026-05-29T10:14:18.555;10.8137;3.605;mais que o dobro;3;1;116
+G02;196;|WAD| Correção ART 5 com base nos feedbacks;Sprint 03;G02-A19;G;4;3.0;2026-05-19T14:32:08.818;2026-05-29T20:30:49.578;10.2491;3.416;mais que o dobro;0;0;0
+G02;198;|DESIGN| Preencher guia de estilos (seção 3.4);Sprint 03;G02-A13;G;4;3.0;2026-05-19T14:34:26.723;2026-05-27T21:56:05.192;8.3067;2.769;mais que o dobro;0;0;0
+G02;200;|WAD| Correção ART 5 com base nos feedbacks;Sprint 03;G02-A12;G;4;3.0;2026-05-19T14:35:44.276;2026-05-29T22:38:14.347;10.3351;3.445;mais que o dobro;0;0;0
+G02;203;|CODE| Versão funcional Backend com WEB API operante - Diagrama 02;Sprint 03;G02-A19;G;4;3.0;2026-05-20T14:14:26.998;2026-05-27T14:29:42.418;7.0106;2.337;mais que o dobro;0;0;0
+G02;204;|CODE| Versão funcional Backend com WEB API operante - Diagrama 01 PT.01;Sprint 03;G02-A12;G;4;3.0;2026-05-20T14:23:40.670;2026-05-29T22:38:12.755;9.3434;3.114;mais que o dobro;0;0;0
+G02;205;|CODE| Versão funcional Backend com WEB API operante - Diagrama 06;Sprint 03;G02-A14;G;4;3.0;2026-05-20T14:23:57.372;2026-05-27T09:03:40.741;6.7776;2.259;mais que o dobro;3;1;7125
+G02;206;|DESIGN| Preencher guia de estilos pt.2 (seção 3.4);Sprint 03;G02-A13;G;4;3.0;2026-05-20T14:29:01.205;2026-05-27T21:56:03.267;7.3104;2.437;mais que o dobro;1;1;9
+G02;207;|DESIGN| Preencher guia de estilos pt.2 (seção 3.4);Sprint 03;G02-A18;G;4;3.0;2026-05-20T14:39:44.888;2026-05-27T14:30:42.519;6.9937;2.331;mais que o dobro;0;0;0
+G02;209;|CODE| Ponderada [externo] - fluxo 07;Sprint 03;G02-A13;G;4;3.0;2026-05-21T10:02:30.201;2026-05-27T14:29:35.897;6.1855;2.062;mais que o dobro;0;0;0
+G02;210;|CODE| Versão funcional Backend com WEB API operante - Diagrama 03 PT.02;Sprint 03;G02-A15;G;4;3.0;2026-05-21T10:10:56.532;2026-05-27T16:00:38.212;6.2428;2.081;mais que o dobro;1;1;274
+G02;214;|CODE| Ponderada [externo] - fluxo 04;Sprint 03;G02-A18;G;4;3.0;2026-05-21T11:38:50.558;2026-05-27T14:29:37.877;6.1186;2.04;mais que o dobro;1;1;2
+G02;219;|WAD| Lógica Proposicional das consultas SQL;Sprint 03;G02-A16;G;4;3.0;2026-05-21T15:41:41.381;2026-05-25T07:36:30.886;3.6631;1.221;até o dobro;3;1;21
+G02;232;|DESIGN| Criar telas de alta fidelidade no Figma - Tela 05;Sprint 03;G02-A12;G;4;3.0;2026-05-25T10:39:24.138;2026-05-27T14:30:47.318;2.1607;0.72;dentro do planejado;0;0;0
+G02;234;|DESIGN| Começar a criar as telas de alta fidelidade no Figma;Sprint 03;G02-A18;G;4;3.0;2026-05-25T14:25:11.441;2026-05-27T14:30:46.550;2.0039;0.668;dentro do planejado;0;0;0
+G02;236;|DESIGN| Começar a criar as telas de alta fidelidade no Figma;Sprint 03;G02-A13;G;4;3.0;2026-05-25T14:28:52.355;2026-05-27T21:56:01.401;2.3105;0.77;dentro do planejado;1;1;34
+G02;238;|DESIGN| Finalizar as telas de alta fidelidade no Figma;Sprint 03;G02-A18;G;4;3.0;2026-05-26T09:21:04.456;2026-05-27T14:30:49.951;1.2151;0.405;dentro do planejado;0;0;0
+G02;239;|DESIGN| Finalizar as telas de alta fidelidade no Figma;Sprint 03;G02-A13;G;4;3.0;2026-05-26T10:01:22.946;2026-05-27T21:56:08.806;1.4964;0.499;dentro do planejado;1;1;6
+G02;241;|WAD| Diagrama de Classes Arquitetural (Seção 3.2.3.1) Parte 2;(sem sprint);G02-A19;G;4;3.0;2026-05-26T14:15:56.218;2026-05-29T20:30:47.887;3.2603;1.087;até o dobro;1;1;7
+G02;250;|WAD| Criação da tela 5, 6, 7 e 8 no Figma;Sprint 03;G02-A12;G;4;3.0;2026-05-27T13:51:26.509;2026-05-28T14:32:46.496;1.0287;0.343;dentro do planejado;0;0;0
+G02;252;|WAD| Criação da tela 5, 6, 7 e 8 no Figma;Sprint 03;G02-A13;G;4;3.0;2026-05-27T14:24:35.111;2026-05-28T22:29:42.552;1.3369;0.446;dentro do planejado;3;1;215
+G02;253;|CODE| Refatorando o backend;Sprint 03;G02-A15;G;4;3.0;2026-05-27T14:28:24.372;2026-05-29T15:39:33.186;2.0494;0.683;dentro do planejado;0;0;0
+G02;259;|WAD| Seção 3.2.3.1 - Documentação Diagrama de Classes Arquitetural;(sem sprint);G02-A13;G;4;3.0;2026-05-28T14:34:33.046;2026-05-29T22:18:17.698;1.322;0.441;dentro do planejado;1;1;2
+G02;260;| APRESENTAÇÃO | Organização do roteiro e dos slides;Sprint 03;G02-A19;G;4;3.0;2026-05-28T14:39:42.265;2026-05-29T10:14:03.091;0.8155;0.272;dentro do planejado;0;0;0
+G02;261;|WAD| corrige artefato 6 - consulta SQL e logica proposicional;Sprint 03;G02-A16;G;4;3.0;2026-05-28T14:46:37.743;2026-05-28T22:29:37.963;0.3215;0.107;dentro do planejado;0;0;0
+G02;263;|DESIGN| Finalização do guia de estilos;Sprint 03;G02-A18;G;4;3.0;2026-05-28T15:43:40.442;2026-05-29T11:13:27.701;0.8124;0.271;dentro do planejado;0;0;0
+G02;270;|DESIGN| Preenche a seção 3.4 completa no WAD;Sprint 03;G02-A18;G;4;3.0;2026-05-29T17:01:51.962;2026-05-29T23:51:49.289;0.2847;0.095;dentro do planejado;2;1;39
+G02;275;|Planning| Divisão das tarefas da sprint 4 entre os integrantes do grupo + Retrospectiva;Sprint 04;G02-A12;G;4;3.0;2026-06-01T11:47:07.303;2026-06-01T15:26:08.618;0.1521;0.051;dentro do planejado;0;0;0
+G02;281;|WAD| Análise de mercado - Seção 6.2;Sprint 04;G02-A14;G;4;3.0;2026-06-01T14:31:14.667;2026-06-05T15:54:39.673;4.0579;1.353;até o dobro;4;1;29
+G02;283;|WAD| Público-Alvo - seção 6.4 - negócios;Sprint 04;G02-A13;G;4;3.0;2026-06-01T15:05:11.267;2026-06-10T10:13:17.423;8.7973;2.932;mais que o dobro;3;1;3111
+G02;285;|WAD| Posicionamento e branding - seção 6.5 - negócios;Sprint 04;G02-A13;G;4;3.0;2026-06-02T14:11:13.907;2026-06-10T10:13:25.790;7.8349;2.612;mais que o dobro;2;1;22
+G02;286;|WAD| seção 6.7 -  Estratégia de Marketing - negócios;Sprint 04;G02-A13;G;4;3.0;2026-06-02T14:12:59.659;2026-06-10T10:13:20.990;7.8336;2.611;mais que o dobro;4;1;54
+G02;290;|WAD| Business Model Canvas - seção 6.6 - negócios;(sem sprint);G02-A13;G;4;3.0;2026-06-02T14:20:29.020;2026-06-10T10:13:22.602;7.8284;2.609;mais que o dobro;3;1;109
+G02;292;|CODE| Iniciar desenvolvimento do artefato 11;Sprint 04;G02-A19;G;4;3.0;2026-06-02T14:28:11.845;2026-06-06T19:26:38.057;4.2072;1.402;até o dobro;0;0;0
+G02;293;WAD| Iniciar desenvolvimento do artefato 11, preenchendo a seção 5 do WAD;Sprint 03;G02-A16;G;4;3.0;2026-06-02T15:55:50.515;2026-06-11T12:19:10.298;8.8495;2.95;mais que o dobro;0;0;0
+G02;321;|EXTRA| Fazer atividade desafio da análise de Usabilidade + Acessibiliade e Avaliação Heurística;Sprint 05;G02-A12;G;4;3.0;2026-06-09T11:49:37.357;2026-06-25T23:55:43.019;16.5042;5.501;mais que o dobro;0;0;0
+G02;343;|APRESENTATION| Preparação do roteiro e slides - part01;Sprint 04;G02-A15;G;4;3.0;2026-06-11T14:37:40.544;2026-06-12T07:55:20.492;0.7206;0.24;dentro do planejado;0;0;0
+G02;344;|WAD| Finaliza artefato 10;Sprint 04;G02-A18;G;4;3.0;2026-06-11T14:38:34.548;2026-06-12T22:03:35.519;1.309;0.436;dentro do planejado;1;1;121
+G02;345;|APRESENTATION| Fazer slides e roteiro para a apresentação;Sprint 04;G02-A16;G;4;3.0;2026-06-11T14:42:47.994;2026-06-12T07:55:30.187;0.7172;0.239;dentro do planejado;0;0;0
+G02;351;|APRESENTATION| Fazer slides e roteiro para a apresentação;(sem sprint);G02-A16;G;4;3.0;2026-06-11T18:02:51.133;2026-06-12T07:55:19.519;0.5781;0.193;dentro do planejado;0;0;0
+G02;353;|APRESENTAÇÃO| Fazer slides e roteiro para a apresentação;Sprint 04;G02-A12;G;4;3.0;2026-06-11T22:41:39.011;2026-06-12T11:33:00.493;0.5357;0.179;dentro do planejado;0;0;0
+G02;356;|WAD| Finaliza artefato 10 parte 2;Sprint 04;G02-A18;G;4;3.0;2026-06-12T10:37:39.827;2026-06-12T22:03:36.335;0.4763;0.159;dentro do planejado;2;1;94
+G02;359;|WAD + CODE| Atualização do código da documentação da seção 3.7 na pasta index.html;Sprint 04;G02-A12;G;4;3.0;2026-06-12T12:54:54.946;2026-06-12T16:24:41.949;0.1457;0.049;dentro do planejado;1;1;312
+G02;372;|WAD| Atualizar modelo relacional e modelo físico;Sprint 04;G02-A19;G;4;3.0;2026-06-12T22:46:59.994;2026-06-12T23:42:30.758;0.0386;0.013;dentro do planejado;5;1;360
+G02;376;|WAD| Elaborar enunciados de tarefas para testes de usabilidade (seção 5.2);Sprint 05;G02-A19;G;4;3.0;2026-06-15T14:07:01.110;2026-06-24T07:48:38.573;8.7372;2.912;mais que o dobro;0;0;0
+G02;377;|WAD| Elaborar enunciados de tarefas para testes de usabilidade (seção 5.2);Sprint 05;G02-A12;G;4;3.0;2026-06-15T14:08:08.702;2026-06-24T15:43:02.859;9.0659;3.022;mais que o dobro;0;0;0
+G02;384;|CODE| Desenvolver as views e fluxos da persona Coordenador;Sprint 05;G02-A15;G;4;3.0;2026-06-15T18:45:30.682;2026-06-21T21:37:09.067;6.1192;2.04;mais que o dobro;2;1;68
+G02;399;|WAD| Fazer análise de atingimento dos objetivos listado na seção 02;Sprint 05;G02-A13;G;4;3.0;2026-06-17T10:10:47.014;2026-06-23T08:44:36.051;5.9402;1.98;até o dobro;1;1;8
+G02;400;|WAD| Preencher na seção 07  pontos de melhoria + plano de ação futuro (baseado nos testes);Sprint 05;G02-A13;G;4;3.0;2026-06-17T10:12:54.500;2026-06-23T08:44:34.711;5.9387;1.98;até o dobro;0;0;0
+G02;417;|CODE| Casos de teste no código;Sprint 05;G02-A14;G;4;3.0;2026-06-22T14:21:13.851;2026-06-24T15:48:55.484;2.0609;0.687;dentro do planejado;6;1;178
+G02;420;|FIX| Correções de Code Review e Ajustes de Merge Request;Sprint 05;G02-A15;G;4;3.0;2026-06-22T15:03:50.750;2026-06-23T18:56:11.491;1.1614;0.387;dentro do planejado;12;1;812
+G02;422;|FIGMA| Altera cores do protótipo de alta fidelidade;Sprint 05;G02-A13;G;4;3.0;2026-06-22T15:36:51.888;2026-06-25T10:51:32.082;2.8019;0.934;dentro do planejado;0;0;0
+G02;424;|WAD| Elaborar relatório SUS e priorizar melhorias de usabilidade;Sprint 05;G02-A19;G;4;3.0;2026-06-23T10:38:52.464;2026-06-24T07:48:43.458;0.8818;0.294;dentro do planejado;0;0;0
+G02;425;|WAD| Priorizar melhorias identificadas nos testes de usabilidade;Sprint 05;G02-A19;G;4;3.0;2026-06-23T11:26:39.079;2026-06-24T07:48:40.752;0.8486;0.283;dentro do planejado;4;1;30
+G02;426;|WAD| Revisando o WAD;Sprint 05;G02-A14;G;4;3.0;2026-06-23T11:26:58.369;2026-06-24T15:48:54.381;1.1819;0.394;dentro do planejado;0;0;0
+G02;436;|WAD| Analisar coerência geral do WAD e código;Sprint 05;G02-A13;G;4;3.0;2026-06-23T16:37:04.353;2026-06-25T10:51:33.838;1.7601;0.587;dentro do planejado;1;1;8
+G02;438;|WAD| Preencher relatório SUS e subseções da seção 5.2.2;Sprint 05;G02-A12;G;4;3.0;2026-06-23T21:29:27.851;2026-06-24T12:44:46.211;0.6356;0.212;dentro do planejado;7;1;105
+G02;443;|WAD| Revisando o WAD;Sprint 05;G02-A14;G;4;3.0;2026-06-24T14:10:38.637;2026-06-25T14:13:07.171;1.0017;0.334;dentro do planejado;1;1;730
+G02;458;|CODE| Atualiza CSS baseado nas novas cores do figma;Sprint 05;G02-A13;G;4;3.0;2026-06-25T11:00:53.075;2026-06-25T15:08:13.688;0.1718;0.057;dentro do planejado;1;1;9
+G02;464;erro;Sprint 05;G02-A16;G;4;3.0;2026-06-25T14:31:29.774;2026-06-25T14:33:35.078;0.0015;0.0;dentro do planejado;0;0;0
+G02;466;|review|Revisar acessos e permissões dos perfis (Administrador, Coordenador, Analista);Sprint 05;G02-A16;G;4;3.0;2026-06-25T14:33:40.484;2026-06-25T23:16:14.791;0.3629;0.121;dentro do planejado;4;2;64
+G02;467;|WAD|Refatorar diagramas UML estáticos para sintaxe Mermaid no WAD;Sprint 05;G02-A15;G;4;3.0;2026-06-25T14:36:43.656;2026-06-25T17:13:40.783;0.109;0.036;dentro do planejado;17;1;3130
+G02;487;|CHORE| Revisar todo o repositório;Sprint 05;G02-A15;G;4;3.0;2026-06-25T21:48:10.256;2026-06-25T23:21:37.632;0.0649;0.022;dentro do planejado;3;1;15051
+G02;492;|CODE| Conectando o front com o back;Sprint 05;G02-A14;G;4;3.0;2026-06-26T09:06:29.148;2026-07-14T13:04:15.492;18.1651;6.055;mais que o dobro;1;1;11
+G02;23;|WAD| Desenvolvimento da Matriz de Riscos (seção 2.1.5) - Parte II;Sprint 01;G02-A12;GG;5;5.0;2026-04-26T10:19:13.829;2026-04-27T09:28:55.586;0.9651;0.193;dentro do planejado;0;0;0
+G02;101;|WAD| Revisão Geral Artefatos;Sprint 02;G02-A19;GG;5;5.0;2026-05-04T14:45:38.515;2026-05-15T22:49:51.905;11.3363;2.267;mais que o dobro;7;1;1017
+G02;132;|DESIGN| Part.3 - Criar as wireframes no programa;Sprint 02;G02-A15;GG;5;5.0;2026-05-08T00:04:40.130;2026-05-15T15:52:49.576;7.6584;1.532;até o dobro;0;0;0
+G02;140;|WAD| Fazer cada diagrama da seção 3.2.4 - parte I;Sprint 02;G02-A12;GG;5;5.0;2026-05-11T15:38:26.453;2026-05-15T15:52:54.158;4.01;0.802;dentro do planejado;0;0;0
+G02;166;|WAD| Revisão Geral Artefatos;Sprint 02;G02-A15;GG;5;5.0;2026-05-14T14:19:01.232;2026-05-15T22:40:14.131;1.3481;0.27;dentro do planejado;1;1;367
+G02;233;|WAD| Adicionar notificações nos diagramas e modelagens (ERRO);Sprint 03;G02-A19;GG;5;5.0;2026-05-25T14:14:01.942;2026-05-25T14:29:22.322;0.0107;0.002;dentro do planejado;0;0;0
+G02;251;|CODE| Refatorando o backend;Sprint 03;G02-A14;GG;5;5.0;2026-05-27T14:22:27.226;2026-05-29T14:30:23.285;2.0055;0.401;dentro do planejado;1;1;872
+G02;255;|WAD| Criação da tela 5, 6, 7 e 8 no Figma - parte II;Sprint 03;G02-A12;GG;5;5.0;2026-05-27T21:54:59.633;2026-05-28T14:32:37.881;0.6928;0.139;dentro do planejado;0;0;0
+G02;288;|WAD| Iniciar desenvolvimento do artefato 11, preenchendo a seção 5 do WAD - Parte 1;Sprint 04;G02-A12;GG;5;5.0;2026-06-02T14:20:08.531;2026-06-12T13:10:45.670;9.9518;1.99;até o dobro;0;0;0
+G02;298;|CODE| Desenvolver suíte de testes automatizados da WebAPI (Artefato 11).;Sprint 04;G02-A19;GG;5;5.0;2026-06-08T14:09:30.920;2026-06-08T16:01:26.010;0.0777;0.016;dentro do planejado;0;0;0
+G02;299;|CODE| Desenvolver suíte de testes automatizados da WebAPI (Artefato 11).;Sprint 04;G02-A12;GG;5;5.0;2026-06-08T14:12:55.614;2026-06-08T15:57:07.286;0.0724;0.014;dentro do planejado;1;1;1617
+G02;304;|CODE| Desenvolver suíte de testes automatizados da WebAPI (Artefato 11).;Sprint 04;G02-A16;GG;5;5.0;2026-06-08T14:35:56.723;2026-06-11T12:19:07.292;2.905;0.581;dentro do planejado;0;0;0
+G02;320;|CODE| Implementação Front-End e Conexão com Banco Completo;Sprint 04;G02-A15;GG;5;5.0;2026-06-09T11:49:07.865;2026-06-12T11:37:11.419;2.9917;0.598;dentro do planejado;6;1;5623
+G02;357;|CODE| Interligando o banco de dados ao Front-end;Sprint 04;G02-A15;GG;5;5.0;2026-06-12T11:37:21.333;2026-06-12T16:39:47.549;0.21;0.042;dentro do planejado;1;1;13128
+G02;378;|CODE| Refatoração do código pt1;Sprint 05;G02-A14;GG;5;5.0;2026-06-15T14:15:38.327;2026-06-22T16:50:29.423;7.1075;1.422;até o dobro;0;0;0
+G02;397;|CODE| Refatoração do codigo;Sprint 05;G02-A14;GG;5;5.0;2026-06-16T15:05:36.340;2026-06-22T16:50:30.243;6.0728;1.215;até o dobro;0;0;0
+G02;398;|CODE| Refazer o testes do código;Sprint 05;G02-A14;GG;5;5.0;2026-06-16T15:08:19.143;2026-06-22T16:47:38.426;6.069;1.214;até o dobro;0;0;0
+G02;451;|WAD| Introdução da seção 4.3;Sprint 05;G02-A14;GG;5;5.0;2026-06-25T10:27:55.842;2026-06-26T05:51:41.963;0.8082;0.162;dentro do planejado;0;0;0
+G02;456;|CODE| Revisando o codigo;Sprint 05;G02-A14;GG;5;5.0;2026-06-25T11:00:26.201;2026-06-25T23:16:13.370;0.511;0.102;dentro do planejado;14;2;507
+G03;48;|FIX| Correção da do tópico 2.1.5 (Matriz de Risco);Sprint 01;G03-A15;PP;1;0.25;2026-04-30T08:23:00.763;2026-04-30T19:35:35.514;0.4671;1.868;até o dobro;1;1;29
+G03;49;|FIX| Correção da do tópico 2.1.5 (Matriz de Risco);Sprint 01;G03-A15;PP;1;0.25;2026-04-30T08:37:56.086;2026-04-30T19:35:35.432;0.4567;1.827;até o dobro;1;1;8
+G03;56;|WAD| Revisão de Semântica e Coerência do WAD;Sprint 01;G03-A15;PP;1;0.25;2026-04-30T22:33:37.129;2026-05-01T20:16:34.420;0.9048;3.619;mais que o dobro;0;0;0
+G03;61;|G01-A26| Validar User Stories priorizadas com o(a) orientador(a);Sprint 02;G03-A15;PP;1;0.25;2026-05-04T13:16:06.420;2026-05-12T14:31:36.886;8.0524;32.21;mais que o dobro;0;0;0
+G03;65;|WAD| Definir cenário e mapear chamadas do fluxo;Sprint 02;G03-A15;PP;1;0.25;2026-05-04T14:11:44.411;2026-05-05T14:34:10.478;1.0156;4.062;mais que o dobro;0;0;0
+G03;70;|WAD| Preencher Seção 3.3 com imagens e link público;Sprint 02;G03-A15;PP;1;0.25;2026-05-04T14:37:26.914;2026-05-14T18:11:34.520;10.1487;40.595;mais que o dobro;1;1;5
+G03;78;|WAD| Redigir Documentação da Seção 3.2.3;Sprint 02;G03-A12;PP;1;0.25;2026-05-04T15:27:19.568;2026-05-15T19:52:54.511;11.1844;44.738;mais que o dobro;3;1;5855
+G03;90;|WAD| Corrigir imagens das personas;Sprint 02;G03-A19;PP;1;0.25;2026-05-06T15:10:51.082;2026-05-11T22:44:02.183;5.3147;21.259;mais que o dobro;1;1;2
+G03;91;| WAD | Adicionar textos de introdução e explicação das personas;Sprint 02;G03-A13;PP;1;0.25;2026-05-06T15:11:27.729;2026-05-13T22:02:46.723;7.2856;29.143;mais que o dobro;1;1;6
+G03;103;|DESIGN| Wireframe da tela de confirmação (Desktop);Sprint 02;G03-A15;PP;1;0.25;2026-05-11T14:22:01.347;2026-05-12T14:42:02.577;1.0139;4.056;mais que o dobro;0;0;0
+G03;104;|DESIGN| Wireframe da tela de formulário de edição de forn/parc (Desktop);Sprint 02;G03-A15;PP;1;0.25;2026-05-11T14:38:20.068;2026-05-12T14:45:24.959;1.0049;4.02;mais que o dobro;0;0;0
+G03;105;|DESIGN| Wireframe da tela de formulário de edição de contatos (Desktop);Sprint 02;G03-A15;PP;1;0.25;2026-05-11T14:45:26.034;2026-05-12T14:49:06.148;1.0025;4.01;mais que o dobro;0;0;0
+G03;106;|DESIGN| Wireframe da tela de usuários (Desktop);Sprint 02;G03-A15;PP;1;0.25;2026-05-11T14:56:12.776;2026-05-11T15:59:11.995;0.0437;0.175;dentro do planejado;0;0;0
+G03;107;|DESIGN| Wireframe da tela de nada consta (Desktop);Sprint 02;G03-A15;PP;1;0.25;2026-05-11T15:26:11.650;2026-05-12T14:51:34.508;0.976;3.904;mais que o dobro;0;0;0
+G03;109;|DESIGN| Wireframe da tela de visitas (Desktop);Sprint 02;G03-A15;PP;1;0.25;2026-05-11T15:39:52.579;2026-05-12T15:20:28.398;0.9865;3.946;mais que o dobro;0;0;0
+G03;110;|DESIGN| Wireframe da tela de formulário de cadastro de visitas (Desktop);Sprint 02;G03-A15;PP;1;0.25;2026-05-11T15:53:15.827;2026-05-12T15:24:49.696;0.9803;3.921;mais que o dobro;0;0;0
+G03;114;|DESIGN| Wireframe da tela de formulário de cadastro de usuarios (Desktop);Sprint 02;G03-A15;PP;1;0.25;2026-05-11T22:56:19.532;2026-05-12T14:23:41.613;0.644;2.576;mais que o dobro;0;0;0
+G03;120;|DESIGN| Criar task flow para busca/filtro;Sprint 02;G03-A15;PP;1;0.25;2026-05-12T15:06:40.987;2026-05-12T15:44:07.214;0.026;0.104;dentro do planejado;0;0;0
+G03;122;|DESIGN| Criar task flow para registro de visitas;Sprint 02;G03-A15;PP;1;0.25;2026-05-12T15:24:39.372;2026-05-12T15:45:10.789;0.0143;0.057;dentro do planejado;0;0;0
+G03;123;|DESIGN| Criar task flow de convite de usuário;Sprint 02;G03-A15;PP;1;0.25;2026-05-12T15:26:03.670;2026-05-12T19:47:46.197;0.1817;0.727;dentro do planejado;0;0;0
+G03;126;|WAD| corrigir diagrama de classes;Sprint 02;G03-A12;PP;1;0.25;2026-05-13T16:05:47.243;2026-05-13T21:45:56.962;0.2362;0.945;dentro do planejado;2;1;0
+G03;136;|SITE| Subir modelo fisico para o repositório;Sprint 02;G03-A15;PP;1;0.25;2026-05-15T21:23:45.023;2026-05-15T21:58:36.471;0.0242;0.097;dentro do planejado;1;1;155
+G03;147;|WAD| Correção da ordem dos integrantes do grupo;Sprint 03;G03-A19;PP;1;0.25;2026-05-18T15:05:42.904;2026-05-18T15:19:37.433;0.0097;0.039;dentro do planejado;1;1;3
+G03;216;|DESIGN| Correção da tela de visitas;Sprint 03;G03-A15;PP;1;0.25;2026-05-27T21:46:51.789;2026-05-28T15:20:44.422;0.7319;2.927;mais que o dobro;0;0;0
+G03;217;|DESIGN| Prototipação - Fluxo de pesquisa (Visitas);Sprint 03;G03-A15;PP;1;0.25;2026-05-27T22:14:52.882;2026-05-28T15:31:30.753;0.7199;2.88;mais que o dobro;0;0;0
+G03;224;|DESIGN| Desenha as telas para o fluxo de envio de convite;Sprint 03;G03-A15;PP;1;0.25;2026-05-28T09:20:15.850;2026-05-28T15:22:54.976;0.2518;1.007;até o dobro;0;0;0
+G03;225;|DESIGN| Prototipação - Fluxo de login;Sprint 03;G03-A15;PP;1;0.25;2026-05-28T09:33:02.063;2026-05-28T15:35:32.852;0.2517;1.007;até o dobro;0;0;0
+G03;229;|G01-A26| Deletar seção 3.2.5;Sprint 03;G03-A16;PP;1;0.25;2026-05-28T14:37:03.645;2026-05-29T10:19:11.294;0.8209;3.284;mais que o dobro;1;1;4
+G03;245;|FIX| ajusta seção 3.4.2;Sprint 03;G03-A16;PP;1;0.25;2026-05-29T20:06:35.572;2026-05-29T23:26:54.996;0.1391;0.556;dentro do planejado;2;1;21
+G03;252;|WAD e BDS| Atualiza o modelo físico do banco de dados;Sprint 04;G03-A15;PP;1;0.25;2026-06-01T14:06:49.899;2026-06-01T15:31:35.202;0.0589;0.235;dentro do planejado;4;1;567
+G03;258;|WAD| Corrigir imagem do modelo físico;Sprint 04;G03-A15;PP;1;0.25;2026-06-02T13:08:22.865;2026-06-12T22:18:09.021;10.3818;41.527;mais que o dobro;1;1;0
+G03;289;|WAD| Correção do merge request de requisitos não funcioanais;Sprint 04;G03-A15;PP;1;0.25;2026-06-08T13:40:01.086;2026-06-08T15:39:11.739;0.0828;0.331;dentro do planejado;1;1;6
+G03;299;|WEB| corrige a cor do texto do bullet de status;Sprint 04;G03-A15;PP;1;0.25;2026-06-09T09:41:44.835;2026-06-09T14:40:26.871;0.2074;0.83;dentro do planejado;1;1;2
+G03;302;|WAD| Adiciona as referências que estão em falta do ART.12;Sprint 04;G03-A16;PP;1;0.25;2026-06-09T14:13:25.000;2026-06-12T18:32:07.119;3.1797;12.719;mais que o dobro;3;1;88
+G03;306;|WAD| Atualizar user stories;Sprint 04;G03-A18;PP;1;0.25;2026-06-09T15:02:18.251;2026-06-13T00:00:17.690;3.3736;13.494;mais que o dobro;1;1;85
+G03;309;|FIX| corrige referencias de analise de concorrencias;Sprint 04;G03-A16;PP;1;0.25;2026-06-09T15:32:59.002;2026-06-09T20:50:37.612;0.2206;0.882;dentro do planejado;1;1;27
+G03;310;|WAD| Remover pasta duplicada de documentos;Sprint 04;G03-A15;PP;1;0.25;2026-06-09T21:00:42.233;2026-06-09T22:48:01.445;0.0745;0.298;dentro do planejado;2;1;1531
+G03;311;|WEB| Corrigir conflitos de merge entre as telas de fornecedores e fazendas;Sprint 04;G03-A15;PP;1;0.25;2026-06-09T21:24:11.255;2026-06-10T15:07:51.261;0.7387;2.955;mais que o dobro;0;0;0
+G03;322;|WEB| Adicionar modal de pesquisa sem resultados e tooltip na barra de busca;Sprint 04;G03-A15;PP;1;0.25;2026-06-11T09:29:07.501;2026-06-12T23:59:14.891;1.6043;6.417;mais que o dobro;3;1;295
+G03;327;|WAD| Correção dos apontamentos feitos no merge request dos diagramas de sequencia;Sprint 04;G03-A15;PP;1;0.25;2026-06-11T14:12:12.089;2026-06-11T15:15:55.313;0.0443;0.177;dentro do planejado;1;1;2
+G03;349;|WAD|Corrigir seção 3.1.0 com base na revisão;Sprint 04;G03-A18;PP;1;0.25;2026-06-12T16:26:12.548;2026-06-12T23:59:11.405;0.3146;1.258;até o dobro;1;1;2
+G03;374;|WAD| Remover instruções de preenchimento residuais do template;Sprint 05;G03-A15;PP;1;0.25;2026-06-23T09:02:59.740;2026-06-25T20:28:14.532;2.4759;9.903;mais que o dobro;1;1;100
+G03;375;|WAD| Corrigir âncora de navegação do sumário;Sprint 05;G03-A15;PP;1;0.25;2026-06-23T09:07:03.893;2026-06-25T20:28:07.621;2.473;9.892;mais que o dobro;1;1;2
+G03;376;|README| Atualizar título do G01-A26;Sprint 05;G03-A15;PP;1;0.25;2026-06-23T09:12:37.582;2026-06-25T20:28:16.520;2.4692;9.877;mais que o dobro;1;1;6
+G03;377;|README| Atualizar seção de estrutura de pastas;Sprint 05;G03-A15;PP;1;0.25;2026-06-23T09:15:31.997;2026-06-26T00:06:50.988;2.619;10.476;mais que o dobro;7;1;282
+G03;380;|README| Inserir link do vídeo de demonstração;Sprint 05;G03-A15;PP;1;0.25;2026-06-23T09:25:19.715;2026-06-26T00:06:47.925;2.6121;10.449;mais que o dobro;1;1;4
+G03;381;|G01-A26| Organizar e limpar estrutura de pastas do repositório;Sprint 05;G03-A15;PP;1;0.25;2026-06-23T09:30:47.099;2026-06-26T00:06:52.825;2.6084;10.434;mais que o dobro;2;1;9578
+G03;415;|WAD| Listar as melhorias priorizadas de interface;Sprint 05;G03-A15;PP;1;0.25;2026-06-25T09:41:22.371;2026-06-25T14:38:16.094;0.2062;0.825;dentro do planejado;1;1;19
+G03;416;|WAD| Escrever a Introdução do relatório de usabilidade;Sprint 05;G03-A15;PP;1;0.25;2026-06-25T10:01:23.163;2026-06-25T14:38:20.644;0.1923;0.769;dentro do planejado;2;1;18
+G03;421;|WAD| Corrigir apontamentos do merge request de atualização de modelagem;Sprint 05;G03-A18;PP;1;0.25;2026-06-25T11:41:33.940;2026-06-25T14:55:17.549;0.1345;0.538;dentro do planejado;1;1;2
+G03;427;|WAD| Corrige numeração da imagem de evidência dos testes;Sprint 05;G03-A15;PP;1;0.25;2026-06-25T14:39:24.849;2026-06-25T14:55:00.394;0.0108;0.043;dentro do planejado;1;1;2
+G03;432;|WAD| Corrigir os apontamentos levantados no merge resquest !157;Sprint 05;G03-A15;PP;1;0.25;2026-06-25T15:14:29.839;2026-06-25T15:49:18.735;0.0242;0.097;dentro do planejado;1;1;4
+G03;442;"Follow-up from ""Refactor/organiza migrations""";Sprint 05;G03-A12;PP;1;0.25;2026-06-25T19:39:49.198;2026-06-25T20:27:01.364;0.0328;0.131;dentro do planejado;1;1;30
+G03;444;"Follow-up from ""docs(#430): corrige secao 4.2 e adiciona prints""";Sprint 05;G03-A12;PP;1;0.25;2026-06-25T20:28:41.921;2026-06-25T20:45:13.867;0.0115;0.046;dentro do planejado;1;1;0
+G03;449;|README| Atualizar e documentar seção de instalação e execução no README.md;Sprint 05;G03-A15;PP;1;0.25;2026-06-25T21:21:42.382;2026-06-26T00:06:46.529;0.1146;0.459;dentro do planejado;1;1;89
+G03;451;|WEB| Corrige apontamentos feitos na correção do merge request !164;Sprint 05;G03-A15;PP;1;0.25;2026-06-25T21:59:24.622;2026-06-26T00:06:44.995;0.0884;0.354;dentro do planejado;1;1;87
+G03;1;|WAD| Definir metodologia e critérios de avaliação de riscos;Sprint 01;G03-A15;P;2;0.5;2026-04-22T15:25:09.315;2026-04-30T08:47:38.195;7.7239;15.448;mais que o dobro;0;0;0
+G03;4;|WAD| Validar matriz de riscos preliminar com o grupo;Sprint 01;G03-A15;P;2;0.5;2026-04-22T15:33:17.022;2026-04-30T08:47:37.171;7.7183;15.437;mais que o dobro;0;0;0
+G03;5;|WAD| Consolidar matriz final e atribuir responsáveis;Sprint 01;G03-A15;P;2;0.5;2026-04-22T15:40:09.649;2026-04-30T08:47:41.147;7.7136;15.427;mais que o dobro;1;1;30
+G03;6;Fazer análise SWOT - Forças;Sprint 01;G03-A14;P;2;0.5;2026-04-23T14:39:46.625;2026-04-28T09:03:28.575;4.7665;9.533;mais que o dobro;2;2;27
+G03;7;Fazer análise SWOT - Fraquezas;Sprint 01;G03-A14;P;2;0.5;2026-04-23T14:41:01.153;2026-04-28T09:03:31.936;4.7656;9.531;mais que o dobro;2;2;27
+G03;8;Fazer análise SWOT - Oportunidades;Sprint 01;G03-A14;P;2;0.5;2026-04-23T14:41:46.319;2026-04-28T09:03:29.793;4.7651;9.53;mais que o dobro;2;2;27
+G03;9;Fazer análise SWOT - Ameaças;Sprint 01;G03-A14;P;2;0.5;2026-04-23T14:42:59.303;2026-04-28T09:03:30.739;4.7643;9.529;mais que o dobro;2;2;27
+G03;10;Redigir perfil da Persona 1;Sprint 01;G03-A12;P;2;0.5;2026-04-23T14:45:59.257;2026-04-23T15:18:41.698;0.0227;0.045;dentro do planejado;0;0;0
+G03;11;Redigir perfil da Persona 2;Sprint 01;G03-A12;P;2;0.5;2026-04-23T14:50:23.420;2026-04-30T14:12:41.878;6.9738;13.948;mais que o dobro;0;0;0
+G03;12;|WAD| Redigir Perfil da Persona 3;Sprint 01;G03-A12;P;2;0.5;2026-04-23T14:51:41.182;2026-04-30T14:12:49.145;6.973;13.946;mais que o dobro;0;0;0
+G03;14;5 Forças de Porter - Ameaça de novos entrantes;Sprint 01;G03-A19;P;2;0.5;2026-04-23T15:03:42.813;2026-04-29T22:29:12.510;6.3094;12.619;mais que o dobro;4;1;46
+G03;15;5 Forças de Porter - Poder de barganha dos clientes;Sprint 01;G03-A19;P;2;0.5;2026-04-23T15:05:26.934;2026-04-29T22:29:05.487;6.3081;12.616;mais que o dobro;4;1;46
+G03;16;5 Forças de Porter - Ameaça de produtos substitutos;Sprint 01;G03-A19;P;2;0.5;2026-04-23T15:06:22.032;2026-04-29T22:29:03.921;6.3074;12.615;mais que o dobro;4;1;46
+G03;17;5 Forças de Porter - Rivalidade entre concorrentes;Sprint 01;G03-A19;P;2;0.5;2026-04-23T15:07:09.313;2026-04-29T22:29:14.521;6.307;12.614;mais que o dobro;4;1;46
+G03;31;Proposta de valor Canvas;Sprint 01;G03-A13;P;2;0.5;2026-04-28T10:06:18.598;2026-04-29T22:06:52.327;1.5004;3.001;mais que o dobro;1;1;11
+G03;32;|WAD| Fazer seção 1;Sprint 01;G03-A16;P;2;0.5;2026-04-28T10:11:35.703;2026-04-29T16:03:11.443;1.2442;2.488;mais que o dobro;1;1;9
+G03;44;|G01-A26| montar aprsentação da sprint;Sprint 01;G03-A16;P;2;0.5;2026-04-29T14:19:24.348;2026-04-29T22:21:42.656;0.3349;0.67;dentro do planejado;0;0;0
+G03;47;|FIX| ajustar introdução da seção 1;Sprint 01;G03-A16;P;2;0.5;2026-04-29T22:10:13.182;2026-04-30T19:36:16.477;0.8931;1.786;até o dobro;1;1;9
+G03;51;Correção do Canvas de Proposta de Valor;Sprint 01;G03-A13;P;2;0.5;2026-04-30T18:00:32.560;2026-04-30T20:03:33.276;0.0854;0.171;dentro do planejado;0;0;0
+G03;53;|WAD| Mapeamento de Atores e Casos de Uso a partir dos RFs;Sprint 01;G03-A15;P;2;0.5;2026-04-30T22:22:28.423;2026-05-01T20:16:35.483;0.9126;1.825;até o dobro;0;0;0
+G03;57;|WAD| Atualizar regras de negócio;Sprint 01;G03-A18;P;2;0.5;2026-05-01T16:27:41.737;2026-05-01T19:13:34.155;0.1152;0.23;dentro do planejado;1;1;29
+G03;60;|FIX| ajustar forças de porter;Sprint 01;G03-A16;P;2;0.5;2026-05-01T17:45:47.849;2026-05-01T19:13:33.664;0.0609;0.122;dentro do planejado;1;1;45
+G03;67;|WAD| Preencher Seção 3.2.4 com diagrama e explicação;Sprint 02;G03-A15;P;2;0.5;2026-05-04T14:13:56.718;2026-05-06T14:16:18.388;2.0016;4.003;mais que o dobro;3;1;19
+G03;69;|WAD| Redigir explicação do fluxo de navegação (Seção 3.3);Sprint 02;G03-A15;P;2;0.5;2026-05-04T14:37:04.764;2026-05-14T18:11:36.759;10.149;20.298;mais que o dobro;11;1;187
+G03;81;|G01-A26| Elaborar Classes e atributos;Sprint 02;G03-A12;P;2;0.5;2026-05-05T14:09:50.929;2026-05-06T09:53:02.152;0.8217;1.643;até o dobro;0;0;0
+G03;82;|G01-A26| entender estrutura da modelagem entidade relacionamento;Sprint 02;G03-A16;P;2;0.5;2026-05-05T14:27:24.201;2026-05-06T09:22:57.552;0.7886;1.577;até o dobro;0;0;0
+G03;87;|G01-A26| Montando esboço da estrutura da modelagem entidade relacionamento;Sprint 02;G03-A16;P;2;0.5;2026-05-06T14:16:46.322;2026-05-11T11:51:10.957;4.8989;9.798;mais que o dobro;0;0;0
+G03;88;|G01-A26| Corrigir Diagrama de classes;Sprint 02;G03-A12;P;2;0.5;2026-05-06T14:16:49.235;2026-05-13T21:45:55.804;7.3119;14.624;mais que o dobro;0;0;0
+G03;94;|WAD| Reconstruir relacionamentos conceituais (DER);Sprint 02;G03-A18;P;2;0.5;2026-05-06T15:54:21.673;2026-05-15T20:40:43.935;9.1989;18.398;mais que o dobro;0;0;0
+G03;95;|WAD| Definir cardinalidade e regras dos relacionamentos (DER);Sprint 02;G03-A18;P;2;0.5;2026-05-06T15:55:50.810;2026-05-15T20:40:44.904;9.1978;18.396;mais que o dobro;0;0;0
+G03;98;|DESIGN| Criar tela de LOGIN - Desktop;Sprint 02;G03-A13;P;2;0.5;2026-05-07T11:16:50.554;2026-05-11T22:54:31.491;4.4845;8.969;mais que o dobro;0;0;0
+G03;99;|DESIGN| Criar tela de PG FORM/PAC - Desktop;Sprint 02;G03-A19;P;2;0.5;2026-05-07T11:18:22.370;2026-05-11T22:48:35.641;4.4793;8.959;mais que o dobro;0;0;0
+G03;101;|DESIGN| Wireframe da tela de formulário de cadastro de forn/parc (Desktop);Sprint 02;G03-A15;P;2;0.5;2026-05-07T15:21:45.811;2026-05-12T14:39:31.460;4.9707;9.941;mais que o dobro;0;0;0
+G03;102;|DESIGN| Wireframe da tela de formulário de cadastro de contatos (Desktop);Sprint 02;G03-A15;P;2;0.5;2026-05-11T14:20:25.478;2026-05-12T14:41:25.936;1.0146;2.029;mais que o dobro;0;0;0
+G03;108;|DESIGN| Criar tela de Result - Desktop;Sprint 02;G03-A19;P;2;0.5;2026-05-11T15:34:33.113;2026-05-15T21:46:52.835;4.2586;8.517;mais que o dobro;0;0;0
+G03;111;|G01-A26| alinhando modelagens e diagramas;Sprint 02;G03-A16;P;2;0.5;2026-05-11T15:55:47.679;2026-05-15T20:36:34.468;4.195;8.39;mais que o dobro;0;0;0
+G03;115;|WAD| Correção do Artefato de Negócios / Sprint 1;Sprint 02;G03-A13;P;2;0.5;2026-05-12T10:18:36.639;2026-05-12T15:55:22.807;0.2339;0.468;dentro do planejado;5;1;14
+G03;116;|WAD| Modelo Relacional - Seção 3.6.3;Sprint 02;G03-A14;P;2;0.5;2026-05-12T14:06:15.383;2026-05-13T21:29:32.622;1.3078;2.616;mais que o dobro;2;1;170
+G03;117;|FIX| Corrigir modelo entidade relacionamento;Sprint 02;G03-A16;P;2;0.5;2026-05-12T14:10:11.180;2026-05-15T20:36:37.269;3.2684;6.537;mais que o dobro;1;1;11
+G03;119;|DESIGN| Criar task flow para edição de cadastos;Sprint 02;G03-A15;P;2;0.5;2026-05-12T15:00:22.301;2026-05-12T15:43:19.579;0.0298;0.06;dentro do planejado;0;0;0
+G03;121;|DESIGN| Definir o que cada slide da sprint deve conter;Sprint 02;G03-A16;P;2;0.5;2026-05-12T15:10:26.453;2026-05-15T10:51:34.230;2.8202;5.64;mais que o dobro;0;0;0
+G03;124;|WAD| Adicionar os wireframes na documentação;Sprint 02;G03-A15;P;2;0.5;2026-05-13T14:13:27.086;2026-05-14T18:11:35.650;1.1654;2.331;mais que o dobro;1;1;0
+G03;125;|DESIGN| Fazer slide da apresentação;Sprint 02;G03-A16;P;2;0.5;2026-05-13T14:14:06.383;2026-05-13T21:55:55.716;0.3207;0.641;dentro do planejado;0;0;0
+G03;128;|WAD| Atualizar diagrama de classes;Sprint 02;G03-A12;P;2;0.5;2026-05-14T14:25:01.845;2026-05-15T19:52:51.751;1.2277;2.455;mais que o dobro;3;1;4
+G03;129;|DESIGN| Ajuste do slide;Sprint 02;G03-A16;P;2;0.5;2026-05-14T14:32:36.155;2026-05-15T10:51:35.521;0.8465;1.693;até o dobro;0;0;0
+G03;130;|WAD| Correção do artefato 2 de Computação;Sprint 02;G03-A13;P;2;0.5;2026-05-14T15:43:38.070;2026-05-15T21:50:18.949;1.2546;2.509;mais que o dobro;1;1;10
+G03;131;|WAD| Correção do artefato 3 de UX Design;Sprint 02;G03-A13;P;2;0.5;2026-05-14T15:45:19.138;2026-05-15T21:50:20.650;1.2535;2.507;mais que o dobro;3;1;155
+G03;132;|FIX| ajeita modelagem entidade relacionamento;Sprint 02;G03-A16;P;2;0.5;2026-05-14T23:04:59.172;2026-05-15T20:36:40.818;0.897;1.794;até o dobro;1;1;28
+G03;133;|WAD| Atualizar modelo relacional com base na sprint review 2;Sprint 02;G03-A18;P;2;0.5;2026-05-15T18:38:14.275;2026-05-15T20:05:48.467;0.0608;0.122;dentro do planejado;1;1;5
+G03;134;|WAD| Corrigir modelo de entidade-relacionamento;Sprint 02;G03-A18;P;2;0.5;2026-05-15T19:53:48.853;2026-05-15T20:37:51.915;0.0306;0.061;dentro do planejado;1;1;54
+G03;135;|WAD| Acrescentar diagramas de sequencia;Sprint 02;G03-A15;P;2;0.5;2026-05-15T20:29:39.987;2026-05-15T21:39:01.473;0.0482;0.096;dentro do planejado;0;0;0
+G03;137;|WAD| Adiciona modelo físico na documentação;Sprint 02;G03-A18;P;2;0.5;2026-05-15T23:11:08.755;2026-05-15T23:59:12.425;0.0334;0.067;dentro do planejado;1;1;303
+G03;138;|WAD| Tabela de Lógica proposicional 1;Sprint 03;G03-A14;P;2;0.5;2026-05-18T14:05:16.990;2026-05-27T14:47:57.625;9.0296;18.059;mais que o dobro;2;1;13
+G03;139;|WAD| Tabela de Lógica proposicional 2;Sprint 03;G03-A19;P;2;0.5;2026-05-18T14:07:53.999;2026-05-27T14:47:55.404;9.0278;18.056;mais que o dobro;1;1;12
+G03;140;|WAD| Tabela de Lógica proposicional 3;Sprint 03;G03-A13;P;2;0.5;2026-05-18T14:08:58.320;2026-05-21T14:27:34.573;3.0129;6.026;mais que o dobro;7;1;90
+G03;159;|WAD| Construir Tabela Verdade do Acesso ;Sprint 03;G03-A12;P;2;0.5;2026-05-18T17:26:07.844;2026-05-29T18:16:31.804;11.035;22.07;mais que o dobro;0;0;0
+G03;160;|WAD| Elaborar Query SQL de Autenticação;Sprint 03;G03-A12;P;2;0.5;2026-05-18T17:27:15.444;2026-05-29T18:16:28.829;11.0342;22.068;mais que o dobro;3;1;42
+G03;161;|WAD| Redigir Explicação Técnica da Autenticação;Sprint 03;G03-A12;P;2;0.5;2026-05-18T17:28:09.943;2026-05-29T18:16:27.498;11.0335;22.067;mais que o dobro;3;1;42
+G03;162;|WAD| Definir Lógica Proposicional da Autenticação;Sprint 03;G03-A12;P;2;0.5;2026-05-18T17:29:38.454;2026-05-29T18:16:30.422;11.0325;22.065;mais que o dobro;3;1;42
+G03;163;|WAD| Elaborar Query SQL de Status de Convites;Sprint 03;G03-A12;P;2;0.5;2026-05-18T18:55:20.725;2026-05-27T14:48:00.612;8.8282;17.656;mais que o dobro;0;0;0
+G03;164;|WAD| Redigir Explicação da Gestão de Convites;Sprint 03;G03-A12;P;2;0.5;2026-05-18T18:55:22.422;2026-05-29T18:16:35.461;10.9731;21.946;mais que o dobro;0;0;0
+G03;165;|WAD| Definir Lógica Proposicional dos Convites;Sprint 03;G03-A12;P;2;0.5;2026-05-18T18:55:23.881;2026-05-29T18:16:33.461;10.973;21.946;mais que o dobro;0;0;0
+G03;183;|WAD| Corrigir MR;Sprint 03;G03-A12;P;2;0.5;2026-05-19T14:19:31.064;2026-05-29T13:38:11.764;9.9713;19.943;mais que o dobro;3;1;162
+G03;185;|DESIGN| Prototipação - tela Cadastros;Sprint 03;G03-A15;P;2;0.5;2026-05-19T14:29:59.137;2026-05-26T15:10:24.188;7.0281;14.056;mais que o dobro;0;0;0
+G03;187;|DESIGN| Completar informações sobre hierarquia e tipografia;Sprint 03;G03-A16;P;2;0.5;2026-05-19T14:41:50.228;2026-05-29T10:24:48.395;9.8215;19.643;mais que o dobro;0;0;0
+G03;189;|DESIGN| Prototipação - Tela Home;Sprint 03;G03-A15;P;2;0.5;2026-05-19T15:28:45.434;2026-05-26T15:06:19.053;6.9844;13.969;mais que o dobro;0;0;0
+G03;193;|WAD| Realinhamento MER;Sprint 03;G03-A14;P;2;0.5;2026-05-20T14:38:49.475;2026-05-21T20:35:28.689;1.2477;2.495;mais que o dobro;1;1;8
+G03;194;|WAD| Realinhamento Modelo Relacional;Sprint 03;G03-A14;P;2;0.5;2026-05-20T14:40:29.672;2026-05-29T13:38:09.841;8.9567;17.913;mais que o dobro;2;1;235
+G03;195;|DESIGN| Prototipação - tela Contratos;Sprint 03;G03-A15;P;2;0.5;2026-05-20T14:59:15.126;2026-05-26T15:18:01.958;6.013;12.026;mais que o dobro;0;0;0
+G03;196;|DESIGN| Prototipação - tela Formulário Parc/Forn;Sprint 03;G03-A15;P;2;0.5;2026-05-20T15:13:30.203;2026-05-26T15:18:33.642;6.0035;12.007;mais que o dobro;0;0;0
+G03;202;|WAD| Elaborar novos userstory;Sprint 03;G03-A12;P;2;0.5;2026-05-21T20:45:27.760;2026-05-26T14:57:11.268;4.7581;9.516;mais que o dobro;1;1;42
+G03;215;|DESIGN| Prototipação - Fluxo de pesquisa (Parceiros);Sprint 03;G03-A15;P;2;0.5;2026-05-27T21:37:43.998;2026-05-28T15:29:22.275;0.7442;1.488;até o dobro;0;0;0
+G03;220;|WAD|Atualizar seção 3.6.2 com o novo DER elaborado;Sprint 03;G03-A18;P;2;0.5;2026-05-28T08:26:14.250;2026-05-29T16:53:45.962;1.3525;2.705;mais que o dobro;1;1;23
+G03;221;|DESIGN| Desenha as telas para o fluxo de envio de convite;Sprint 03;G03-A15;P;2;0.5;2026-05-28T08:27:03.559;2026-05-28T15:25:03.061;0.2903;0.581;dentro do planejado;0;0;0
+G03;222;|WAD| Fazer seção 3.4.1;Sprint 03;G03-A16;P;2;0.5;2026-05-28T08:37:31.064;2026-05-29T19:45:58.791;1.4642;2.928;mais que o dobro;1;1;18
+G03;223;|DESIGN| Prototipação - Fluxo de convite (usuários);Sprint 03;G03-A15;P;2;0.5;2026-05-28T09:01:33.116;2026-05-28T15:33:31.219;0.2722;0.544;dentro do planejado;0;0;0
+G03;226;|WAD| Revisão dos Requisitos não Funcionais;Sprint 03;G03-A13;P;2;0.5;2026-05-28T12:31:30.425;2026-05-29T17:48:04.165;1.2198;2.44;mais que o dobro;1;1;1518
+G03;227;|DESIGN| Desenha as telas para o fluxo de cadastro de usuários;Sprint 03;G03-A15;P;2;0.5;2026-05-28T13:10:17.152;2026-05-28T15:52:14.243;0.1125;0.225;dentro do planejado;0;0;0
+G03;228;|DESIGN| Prototipação - Fluxo de cadastro de usuário;Sprint 03;G03-A15;P;2;0.5;2026-05-28T14:20:31.156;2026-05-28T15:59:04.126;0.0684;0.137;dentro do planejado;0;0;0
+G03;231;|WAD| Fazer seção 3.4.2;Sprint 03;G03-A16;P;2;0.5;2026-05-28T14:41:21.485;2026-05-29T19:54:59.409;1.2178;2.436;mais que o dobro;1;1;23
+G03;232;|WAD| Fazer seção 3.4.3;Sprint 03;G03-A16;P;2;0.5;2026-05-28T15:03:12.289;2026-05-29T19:58:56.390;1.2054;2.411;mais que o dobro;1;1;1
+G03;233;|WAD| Atualizar seção 3.6.1 — MER com base na nova modelagem;Sprint 03;G03-A18;P;2;0.5;2026-05-28T15:43:11.808;2026-05-29T16:53:41.011;1.0489;2.098;mais que o dobro;2;1;137
+G03;238;|FIX| Ajustar seção 3.4.3;Sprint 03;G03-A16;P;2;0.5;2026-05-29T17:09:13.894;2026-05-29T19:58:57.198;0.1179;0.236;dentro do planejado;1;1;88
+G03;240;|WAD| Ajusta requisitos funcionais;Sprint 03;G03-A16;P;2;0.5;2026-05-29T18:16:12.266;2026-05-29T23:32:01.290;0.2193;0.439;dentro do planejado;2;1;4
+G03;241;|WAD| 4.1 Relatório de Desenvolvimento;Sprint 03;G03-A19;P;2;0.5;2026-05-29T18:46:53.246;2026-05-29T19:35:38.919;0.0339;0.068;dentro do planejado;1;1;49
+G03;250;|FIX| Corrige seção 4.1;Sprint 03;G03-A16;P;2;0.5;2026-05-29T22:26:11.317;2026-05-29T23:37:31.694;0.0495;0.099;dentro do planejado;1;1;57
+G03;254;|WAD| 6.1. Implementa Resumo Executivo;Sprint 04;G03-A19;P;2;0.5;2026-06-01T14:53:45.502;2026-06-09T14:18:36.826;7.9756;15.951;mais que o dobro;3;1;16
+G03;256;|WAD| Atualizar diagrama de classes;Sprint 04;G03-A14;P;2;0.5;2026-06-01T15:16:56.748;2026-06-11T15:23:52.343;10.0048;20.01;mais que o dobro;1;1;2
+G03;259;|WAD| Atualizar código do modelo relacional e físico;Sprint 04;G03-A15;P;2;0.5;2026-06-02T13:24:44.286;2026-06-02T15:00:01.955;0.0662;0.132;dentro do planejado;5;1;26
+G03;260;|WAD| Revisar requisitos funcionais;Sprint 04;G03-A15;P;2;0.5;2026-06-02T13:42:38.048;2026-06-08T09:57:01.982;5.8433;11.687;mais que o dobro;2;1;68
+G03;261;|WAD| Revisar e padronizar requisitos não funcionais;Sprint 04;G03-A15;P;2;0.5;2026-06-02T14:17:37.729;2026-06-06T18:48:38.521;4.1882;8.376;mais que o dobro;1;1;28
+G03;263;|WAD| Definição do Público-Alvo / seção 6.4;Sprint 04;G03-A13;P;2;0.5;2026-06-02T15:14:00.572;2026-06-11T10:08:44.244;8.788;17.576;mais que o dobro;5;1;43
+G03;288;|WEB| Corrigir grid e variáveis globais de CSS;Sprint 04;G03-A15;P;2;0.5;2026-06-08T09:14:31.870;2026-06-08T15:43:47.222;0.2703;0.541;dentro do planejado;1;1;2
+G03;290;|README| Atualizar documentação do README;Sprint 04;G03-A15;P;2;0.5;2026-06-08T14:02:40.807;2026-06-09T15:16:17.157;1.0511;2.102;mais que o dobro;1;1;60
+G03;291;|WEB| Correções apontadas pelo merge request da configuração do front;Sprint 04;G03-A15;P;2;0.5;2026-06-08T14:53:02.430;2026-06-09T10:17:25.866;0.8086;1.617;até o dobro;1;1;2
+G03;296;|WAD| Corrigir guia de estilos baseado no CSS;Sprint 04;G03-A14;P;2;0.5;2026-06-08T15:41:51.173;2026-06-08T16:05:02.441;0.0161;0.032;dentro do planejado;2;1;27
+G03;303;|FIX| Corrige proposta de valor unica;Sprint 04;G03-A16;P;2;0.5;2026-06-09T14:25:36.535;2026-06-12T22:18:07.208;3.3281;6.656;mais que o dobro;1;1;4
+G03;304;|WAD| 6.1 e 6.2 Ajustes para evitar repetições;(sem sprint);G03-A19;P;2;0.5;2026-06-09T14:54:57.361;2026-06-09T15:22:37.302;0.0192;0.038;dentro do planejado;4;1;23
+G03;305;|WAD| Atualizar matriz de riscos;Sprint 04;G03-A18;P;2;0.5;2026-06-09T14:56:22.332;2026-06-13T00:00:20.929;3.3778;6.756;mais que o dobro;1;1;4
+G03;308;|WAD|Atualizar seção 3.1.0 de requisitos do sistema;Sprint 04;G03-A18;P;2;0.5;2026-06-09T15:10:17.419;2026-06-23T15:12:46.626;14.0017;28.003;mais que o dobro;1;1;7
+G03;324;|FIX| Corrige seção 4.1 com base nos feedbacks;Sprint 04;G03-A16;P;2;0.5;2026-06-11T10:23:27.769;2026-06-12T15:35:46.476;1.2169;2.434;mais que o dobro;1;1;25
+G03;333;|WAD| Correção do novo diagrama de classes;Sprint 04;G03-A14;P;2;0.5;2026-06-11T23:26:57.911;2026-06-12T15:57:13.076;0.6877;1.375;até o dobro;2;1;22
+G03;334;|WEB| Correções apontadas pelo merge request da tela de visitas;Sprint 04;G03-A15;P;2;0.5;2026-06-12T00:06:49.177;2026-06-12T01:31:34.340;0.0589;0.118;dentro do planejado;0;0;0
+G03;341;FIX| Corrige BMC;Sprint 04;G03-A16;P;2;0.5;2026-06-12T08:03:03.814;2026-06-12T22:05:07.055;0.5848;1.17;até o dobro;1;1;0
+G03;342;|WAD| Atualização da seção 3.2.7;Sprint 04;G03-A14;P;2;0.5;2026-06-12T14:57:42.048;2026-06-12T16:37:21.833;0.0692;0.138;dentro do planejado;2;1;77
+G03;343;|WAD| Atualizar seção 3.7;Sprint 04;G03-A14;P;2;0.5;2026-06-12T15:47:43.021;2026-06-12T17:08:01.302;0.0558;0.112;dentro do planejado;2;1;73
+G03;344;|CODE| Atualização do swagger.ts;Sprint 04;G03-A14;P;2;0.5;2026-06-12T15:50:16.681;2026-06-12T18:56:49.376;0.1295;0.259;dentro do planejado;1;1;160
+G03;355;|FIX| Corrige relatorio de desenvolvimento;Sprint 04;G03-A16;P;2;0.5;2026-06-12T19:04:22.407;2026-06-12T22:05:08.688;0.1255;0.251;dentro do planejado;2;1;79
+G03;357;|FIX| corrige referencias da documentação;Sprint 04;G03-A16;P;2;0.5;2026-06-12T20:29:39.960;2026-06-12T22:05:04.717;0.0663;0.133;dentro do planejado;1;1;48
+G03;358;|WEB| Implementar controle de acesso baseado em perfis (RBAC) no login;Sprint 04;G03-A15;P;2;0.5;2026-06-12T22:36:29.832;2026-06-12T23:59:08.652;0.0574;0.115;dentro do planejado;1;1;55
+G03;359;|WEB| Corrige apontamentos de Code Review do Login RBAC;Sprint 04;G03-A15;P;2;0.5;2026-06-12T23:26:18.597;2026-06-13T00:02:01.118;0.0248;0.05;dentro do planejado;0;0;0
+G03;362;|WAD| Definir seções para revisao do artefato 16;Sprint 05;G03-A16;P;2;0.5;2026-06-22T14:59:28.713;2026-06-23T15:20:04.277;1.0143;2.029;mais que o dobro;0;0;0
+G03;363;|WAD| 1. Atualizar Introdução;Sprint 05;G03-A16;P;2;0.5;2026-06-22T15:37:50.121;2026-06-23T15:15:58.690;0.9848;1.97;até o dobro;3;1;6125
+G03;365;Corrigir funcionalidade de edição;Sprint 05;G03-A12;P;2;0.5;2026-06-22T15:47:12.189;2026-06-23T14:12:15.348;0.9341;1.868;até o dobro;1;1;733
+G03;378;|README| Atualizar links de atribuição na licença;Sprint 05;G03-A15;P;2;0.5;2026-06-23T09:19:25.914;2026-06-25T20:28:19.038;2.4645;4.929;mais que o dobro;2;1;12
+G03;382;|WAD| 2.1.1 Atualização das forças de porter;Sprint 05;G03-A16;P;2;0.5;2026-06-23T10:37:37.048;2026-06-23T15:08:21.457;0.188;0.376;dentro do planejado;2;1;34
+G03;384;|WAD| 2.1.3 Atualização da solução;Sprint 05;G03-A16;P;2;0.5;2026-06-23T14:18:34.130;2026-06-23T15:39:58.697;0.0565;0.113;dentro do planejado;2;1;24
+G03;385;|G01-A26| Mapear principais funcionalidades para o pitch final;Sprint 05;G03-A15;P;2;0.5;2026-06-23T14:29:26.922;2026-06-25T20:28:42.010;2.2495;4.499;mais que o dobro;0;0;0
+G03;387;|WAD| 7. Conclusões do G01-A26;Sprint 05;G03-A16;P;2;0.5;2026-06-23T14:36:42.680;2026-06-23T22:14:21.710;0.3178;0.636;dentro do planejado;1;1;18
+G03;388;|WAD| Revisão do Art.05 Modelagem do Banco de Dados;Sprint 05;G03-A13;P;2;0.5;2026-06-23T14:48:58.532;2026-06-24T14:57:54.229;1.0062;2.012;mais que o dobro;1;1;14
+G03;389;|WAD| Verificar se as referências estão condizentes;Sprint 05;G03-A19;P;2;0.5;2026-06-23T14:53:16.464;2026-06-25T11:02:15.609;1.8396;3.679;mais que o dobro;4;1;39
+G03;393;|CODE| Ajustar campos do formulário de Fazenda;Sprint 05;G03-A12;P;2;0.5;2026-06-23T18:37:20.891;2026-06-24T14:50:56.288;0.8428;1.686;até o dobro;2;1;290
+G03;395;|WEB| Corrigir desaparecimento do navlink de usuários na tela de visitas;Sprint 05;G03-A15;P;2;0.5;2026-06-23T21:47:00.611;2026-06-24T17:31:44.048;0.8227;1.645;até o dobro;2;1;11
+G03;396;|WEB| Ajustar textos desalinhados com a tipografia padrão do G01-A26;Sprint 05;G03-A15;P;2;0.5;2026-06-23T22:20:41.924;2026-06-25T10:25:08.292;1.5031;3.006;mais que o dobro;2;1;26
+G03;397;|WEB| Implementar animação de deslize na barra de navegação (Nav-bar);Sprint 05;G03-A15;P;2;0.5;2026-06-23T22:24:07.199;2026-06-24T15:40:37.839;0.7198;1.44;até o dobro;1;1;109
+G03;398;|WAD| Atualizar diagrama e seção de casos de uso;Sprint 05;G03-A15;P;2;0.5;2026-06-23T23:18:04.575;2026-06-25T20:28:23.325;1.8822;3.764;mais que o dobro;2;1;39
+G03;399;|WAD| Corrigir diagrama de sequência de envio de convite;Sprint 05;G03-A15;P;2;0.5;2026-06-23T23:21:15.205;2026-06-25T20:28:12.143;1.8798;3.76;mais que o dobro;1;1;2
+G03;400;|WEB| Corrigir diagrama de sequência de reenvio de convite;Sprint 05;G03-A15;P;2;0.5;2026-06-24T09:58:23.770;2026-06-25T20:28:06.064;1.4373;2.875;mais que o dobro;1;1;2
+G03;401;|WAD| Correção da evolução das rnfs;Sprint 05;G03-A16;P;2;0.5;2026-06-24T14:02:21.102;2026-06-24T15:12:03.663;0.0484;0.097;dentro do planejado;1;1;35
+G03;403;|WAD| Refinamento das conclusões do G01-A26;Sprint 05;G03-A16;P;2;0.5;2026-06-24T14:23:39.337;2026-06-24T15:15:51.993;0.0363;0.073;dentro do planejado;1;1;3
+G03;406;|WAD| Correção do Art.6 - Lógica Proposicional das consultas SQL;Sprint 05;G03-A13;P;2;0.5;2026-06-24T14:50:54.394;2026-06-25T15:37:59.574;1.0327;2.065;mais que o dobro;1;1;261
+G03;407;|WAD| Correção da solução no wad;Sprint 05;G03-A16;P;2;0.5;2026-06-24T14:58:45.354;2026-06-24T15:37:50.305;0.0271;0.054;dentro do planejado;1;1;37
+G03;409;|WAD| Correção da introdução do G01-A26;Sprint 05;G03-A16;P;2;0.5;2026-06-24T15:23:07.641;2026-06-24T21:55:32.359;0.2725;0.545;dentro do planejado;1;1;7
+G03;410;|WAD| Escrever a Análise dos Resultados de usabilidade;Sprint 05;G03-A15;P;2;0.5;2026-06-24T15:52:49.454;2026-06-25T14:38:23.593;0.9483;1.897;até o dobro;2;1;38
+G03;411;|WAD| Montar o registro dos testes de usabilidade (tabelas);Sprint 05;G03-A15;P;2;0.5;2026-06-24T15:54:10.191;2026-06-25T14:38:25.061;0.9474;1.895;até o dobro;5;1;126
+G03;412;|WAD| Mapear ocorrências às heurísticas de Nielsen;Sprint 05;G03-A15;P;2;0.5;2026-06-24T15:55:12.132;2026-06-25T14:38:22.204;0.9466;1.893;até o dobro;2;1;46
+G03;413;|CODE| Follow-ups da revisão do MR de organização das migrations;(sem sprint);G03-A12;P;2;0.5;2026-06-24T17:34:17.042;2026-06-25T17:41:37.294;1.0051;2.01;mais que o dobro;1;1;159
+G03;417;|WAD| Anexar as fotos dos testes de usabilidade;Sprint 05;G03-A15;P;2;0.5;2026-06-25T10:13:06.566;2026-06-25T14:38:17.471;0.1842;0.368;dentro do planejado;1;1;28
+G03;419;|WAD| Correção da tabela de requisitos não funcionais;Sprint 05;G03-A16;P;2;0.5;2026-06-25T11:07:27.339;2026-06-25T15:07:26.595;0.1667;0.333;dentro do planejado;1;1;35
+G03;420;"Follow-up from ""Refactor/desacoplar arquivos""";Sprint 05;G03-A12;P;2;0.5;2026-06-25T11:37:30.438;2026-06-25T17:29:37.335;0.2445;0.489;dentro do planejado;1;1;8
+G03;422;|WAD|Atualizar diagrama de classes;Sprint 05;G03-A18;P;2;0.5;2026-06-25T12:02:05.873;2026-06-25T14:55:08.554;0.1202;0.24;dentro do planejado;1;1;4
+G03;423;|WAD|Atualizar modelo relacional;Sprint 05;G03-A18;P;2;0.5;2026-06-25T12:31:14.293;2026-06-25T14:55:12.122;0.1;0.2;dentro do planejado;1;1;0
+G03;424;|WAD| Documentar a implementação do front-end com a porta MCP do Figma;Sprint 05;G03-A15;P;2;0.5;2026-06-25T12:38:15.653;2026-06-25T15:03:58.998;0.1012;0.202;dentro do planejado;4;1;72
+G03;425;"Follow-up from ""Style/alterar inputs fazenda""";Sprint 05;G03-A12;P;2;0.5;2026-06-25T12:53:43.725;2026-06-25T17:29:34.682;0.1916;0.383;dentro do planejado;1;1;4
+G03;426;"Follow-up from ""Style/alterar inputs fazenda""";Sprint 05;G03-A12;P;2;0.5;2026-06-25T13:07:12.923;2026-06-25T17:29:33.674;0.1822;0.364;dentro do planejado;1;1;12
+G03;428;|WAD| Definir o que foi implementado na versão final da aplicação web;Sprint 05;G03-A16;P;2;0.5;2026-06-25T14:57:19.998;2026-06-25T21:04:16.927;0.2548;0.51;dentro do planejado;1;1;31
+G03;429;|WAD| Definir pendências remanescentes  na versão final da aplicação web;Sprint 05;G03-A16;P;2;0.5;2026-06-25T15:07:12.213;2026-06-25T21:04:14.483;0.2479;0.496;dentro do planejado;1;1;12
+G03;430;|DOCS| Corrigir seção 4.2 da documentação;Sprint 05;G03-A12;P;2;0.5;2026-06-25T15:09:07.941;2026-06-25T20:24:06.392;0.2187;0.437;dentro do planejado;1;1;47
+G03;431;|WAD| Definir dificuldades técnicas enfrentadas na versão final da aplicação web;Sprint 05;G03-A16;P;2;0.5;2026-06-25T15:13:13.377;2026-06-25T21:04:12.802;0.2437;0.487;dentro do planejado;2;1;28
+G03;434;|WAD| Corrigir e ajustar relatório de usabilidade;Sprint 05;G03-A15;P;2;0.5;2026-06-25T15:39:34.971;2026-06-25T20:28:39.774;0.2008;0.402;dentro do planejado;4;1;38
+G03;435;|WAD|  Atualizar conclusões e definir trabalhos futuros;Sprint 05;G03-A19;P;2;0.5;2026-06-25T15:39:41.042;2026-06-25T18:28:22.559;0.1171;0.234;dentro do planejado;9;1;24
+G03;436;|WAD| Atualizar os status das rfs;Sprint 05;G03-A16;P;2;0.5;2026-06-25T17:05:14.196;2026-06-25T20:20:25.905;0.1356;0.271;dentro do planejado;5;1;167
+G03;437;|FIX| Arruma funcionamento dos tokens de autenticação de usuários;Sprint 05;G03-A14;P;2;0.5;2026-06-25T17:15:37.659;2026-06-25T18:03:15.664;0.0331;0.066;dentro do planejado;2;1;365
+G03;439;|WAD| Completar a seção 7;Sprint 05;G03-A19;P;2;0.5;2026-06-25T18:28:45.503;2026-06-25T21:17:38.160;0.1173;0.235;dentro do planejado;2;1;14
+G03;440;|WEB| Integrar nome do usuário logado na mensagem de boas-vindas da Home;Sprint 05;G03-A15;P;2;0.5;2026-06-25T18:30:55.273;2026-06-25T23:06:43.207;0.1915;0.383;dentro do planejado;1;1;16
+G03;441;"Follow-up from ""Refactor/organiza migrations""";Sprint 05;G03-A12;P;2;0.5;2026-06-25T19:15:34.608;2026-06-25T20:30:21.605;0.0519;0.104;dentro do planejado;1;1;20
+G03;446;|WAD| Revisão Artefato 12;Sprint 05;G03-A19;P;2;0.5;2026-06-25T21:06:47.359;2026-06-25T22:34:16.041;0.0607;0.121;dentro do planejado;7;1;70
+G03;452;|WAD| Correção da seção 4.3;Sprint 05;G03-A16;P;2;0.5;2026-06-25T22:08:47.215;2026-06-25T22:27:43.561;0.0132;0.026;dentro do planejado;1;1;34
+G03;453;|WAD| Corrige seção 4.3 conforme os feedbakcs;Sprint 05;G03-A16;P;2;0.5;2026-06-25T22:36:16.290;2026-06-26T09:10:43.805;0.4406;0.881;dentro do planejado;2;1;126
+G03;454;|WAD| Revisar critérios de publicação;Sprint 05;G03-A15;P;2;0.5;2026-06-25T22:55:45.615;2026-06-26T00:06:43.137;0.0493;0.099;dentro do planejado;2;1;50
+G03;2;|WAD| Realizar levantamento e classificação prévia dos riscos;Sprint 01;G03-A15;M;3;1.0;2026-04-22T15:31:07.499;2026-04-30T08:47:39.124;7.7198;7.72;mais que o dobro;1;1;24
+G03;3;|WAD| Construir planos de ação mitigadora;Sprint 01;G03-A15;M;3;1.0;2026-04-22T15:32:14.061;2026-04-30T08:47:40.135;7.7191;7.719;mais que o dobro;1;1;47
+G03;13;|WAD| Consolidar Fichas das Personas;Sprint 01;G03-A12;M;3;1.0;2026-04-23T14:54:54.494;2026-04-30T14:12:40.225;6.9707;6.971;mais que o dobro;2;1;33
+G03;29;|WAD| Elaborar Requisitos Não Funcionais (RNF) - ISO/IEC 25010;Sprint 01;G03-A15;M;3;1.0;2026-04-28T09:53:49.912;2026-04-30T22:15:24.120;2.515;2.515;mais que o dobro;3;1;32
+G03;30;|WAD| Documentar Requisitos Funcionais (RF) e Contexto Inicial;Sprint 01;G03-A15;M;3;1.0;2026-04-28T09:54:44.569;2026-04-29T23:54:24.918;1.5831;1.583;até o dobro;2;1;72
+G03;35;|WAD| Estruturar Regras de Negócio (RN) associadas aos RFs;Sprint 01;G03-A18;M;3;1.0;2026-04-28T10:16:22.943;2026-04-29T22:40:26.397;1.5167;1.517;até o dobro;1;1;22
+G03;37;|WAD| Documentar Requisitos Funcionais (RF) e Contexto Inicial;Sprint 01;G03-A14;M;3;1.0;2026-04-28T10:18:09.071;2026-06-26T09:50:45.392;58.981;58.981;mais que o dobro;0;0;0
+G03;38;|WAD| Construir Matriz de Rastreabilidade e Critérios de Aceite;Sprint 01;G03-A18;M;3;1.0;2026-04-28T10:19:28.353;2026-05-01T20:37:06.258;3.4289;3.429;mais que o dobro;1;1;18
+G03;39;|WAD| User Stories - Coordenador;Sprint 01;G03-A14;M;3;1.0;2026-04-28T11:10:46.353;2026-04-29T15:26:35.351;1.1777;1.178;até o dobro;3;1;41
+G03;40;|WAD| User Stories - Gerente;Sprint 01;G03-A14;M;3;1.0;2026-04-28T11:11:30.429;2026-06-26T09:50:29.037;58.9437;58.944;mais que o dobro;0;0;0
+G03;41;|WAD| Reescrever personas;Sprint 01;G03-A12;M;3;1.0;2026-04-28T11:12:12.809;2026-04-30T18:05:56.538;2.2873;2.287;mais que o dobro;2;1;10
+G03;43;|WAD| Criar User story da persona embaixador;Sprint 01;G03-A12;M;3;1.0;2026-04-28T14:23:12.341;2026-04-29T14:37:17.261;1.0098;1.01;até o dobro;3;1;59
+G03;45;|WAD| Escrever seção 2.1.3: Solução;Sprint 01;G03-A14;M;3;1.0;2026-04-29T14:38:16.169;2026-04-30T08:58:58.432;0.7644;0.764;dentro do planejado;4;2;29
+G03;46;|WAD| Elaborar Requisitos Não Funcionais (RNF) - ISO/IEC 25010;Sprint 01;G03-A12;M;3;1.0;2026-04-29T14:39:11.319;2026-05-01T20:22:46.254;2.2386;2.239;mais que o dobro;0;0;0
+G03;50;|WAD| Elaborar Requisitos não Funcionais - 3.1.3;Sprint 01;G03-A14;M;3;1.0;2026-04-30T15:48:18.791;2026-04-30T22:34:19.341;0.282;0.282;dentro do planejado;6;1;37
+G03;55;|WAD| Redigir Especificação Textual dos Casos de Uso;Sprint 01;G03-A15;M;3;1.0;2026-04-30T22:32:46.185;2026-05-01T20:16:36.340;0.9054;0.905;dentro do planejado;1;1;24
+G03;58;|WAD| Corrigir formatação da documentação;Sprint 01;G03-A18;M;3;1.0;2026-05-01T17:01:54.083;2026-05-01T19:14:22.201;0.092;0.092;dentro do planejado;5;1;86
+G03;59;|WAD| Atualizar Requisitos Funcionais;Sprint 01;G03-A12;M;3;1.0;2026-05-01T17:02:32.345;2026-05-01T20:22:49.333;0.1391;0.139;dentro do planejado;1;1;70
+G03;66;|WAD| Desenhar Diagrama de Sequência UML (Seção 3.2.4);Sprint 02;G03-A15;M;3;1.0;2026-05-04T14:12:45.567;2026-05-06T14:16:21.877;2.0025;2.003;mais que o dobro;0;0;0
+G03;71;|WAD| Estruturar tabelas e tipos de dados (DDL Base);Sprint 02;G03-A14;M;3;1.0;2026-05-04T14:54:58.753;2026-05-11T22:39:28.092;7.3226;7.323;mais que o dobro;0;0;0
+G03;72;|WAD| Mapear relacionamentos e integridade (FKs);Sprint 02;G03-A14;M;3;1.0;2026-05-04T14:57:27.721;2026-05-11T14:19:56.018;6.9739;6.974;mais que o dobro;0;0;0
+G03;79;|WAD| Modelar Diagrama de Classes de Domínio;Sprint 02;G03-A12;M;3;1.0;2026-05-04T15:28:26.872;2026-05-06T09:53:00.593;1.7671;1.767;até o dobro;0;0;0
+G03;83;|G01-A26| Estudo prévio: estrutura de tabelas e chaves primárias;Sprint 02;G03-A18;M;3;1.0;2026-05-05T14:31:52.340;2026-05-12T09:04:54.421;6.7729;6.773;mais que o dobro;0;0;0
+G03;84;|G01-A26| Estudo prévio: estrutura de relacionamentos (FK e tabelas associativas);Sprint 02;G03-A18;M;3;1.0;2026-05-05T14:34:51.208;2026-05-12T15:55:25.008;7.0559;7.056;mais que o dobro;0;0;0
+G03;85;|G01-A26| Estudo prévio: estrutura de tabelas e chaves primárias;Sprint 02;G03-A13;M;3;1.0;2026-05-05T14:35:28.072;2026-05-14T09:17:57.030;8.7795;8.78;mais que o dobro;0;0;0
+G03;86;|G01-A26| Estudo prévio: estrutura de relacionamentos (FK e tabelas associativas);Sprint 02;G03-A13;M;3;1.0;2026-05-05T14:37:02.620;2026-05-14T09:17:54.990;8.7784;8.778;mais que o dobro;0;0;0
+G03;92;|DESIGN| Montar fluxo de telas;Sprint 02;G03-A15;M;3;1.0;2026-05-06T15:25:02.741;2026-05-11T10:06:11.501;4.7786;4.779;mais que o dobro;0;0;0
+G03;93;|WAD| Identificar entidades para o DER;Sprint 02;G03-A18;M;3;1.0;2026-05-06T15:52:45.609;2026-05-15T20:40:46.007;9.2;9.2;mais que o dobro;0;0;0
+G03;96;|WAD| Construção do DER visual;Sprint 02;G03-A18;M;3;1.0;2026-05-06T23:25:42.993;2026-05-15T20:40:46.878;8.8855;8.885;mais que o dobro;6;1;16
+G03;100;|DESIGN| Wireframe da tela Home (Desktop);Sprint 02;G03-A15;M;3;1.0;2026-05-07T14:31:27.591;2026-05-12T14:34:54.151;5.0024;5.002;mais que o dobro;0;0;0
+G03;112;|WAD| Fazer modelagem entidade relacionamento;Sprint 02;G03-A16;M;3;1.0;2026-05-11T21:31:12.589;2026-05-12T00:18:04.921;0.1159;0.116;dentro do planejado;1;1;32
+G03;113;|WAD| Atualizar diagrama de classes;Sprint 02;G03-A12;M;3;1.0;2026-05-11T22:18:51.117;2026-05-12T15:14:51.211;0.7056;0.706;dentro do planejado;0;0;0
+G03;118;|DESIGN| Criar task flow da tarefa de cadastro de forn/parc;Sprint 02;G03-A15;M;3;1.0;2026-05-12T14:41:30.232;2026-05-12T15:26:20.064;0.0311;0.031;dentro do planejado;0;0;0
+G03;127;|WAD| Correção Modelo Relacional;Sprint 02;G03-A14;M;3;1.0;2026-05-14T14:03:33.077;2026-05-19T09:39:29.340;4.8166;4.817;mais que o dobro;2;1;222
+G03;141;|DESIGN| Definição Semântica de Cores;Sprint 03;G03-A15;M;3;1.0;2026-05-18T14:19:41.571;2026-05-19T15:27:22.811;1.047;1.047;até o dobro;0;0;0
+G03;142;|DESIGN| Hierarquia Tipográfica;Sprint 03;G03-A16;M;3;1.0;2026-05-18T14:21:12.419;2026-05-19T09:39:10.651;0.8041;0.804;dentro do planejado;0;0;0
+G03;155;|WAD| 3.2.3.1. Revisar coerência do diagrama de classes do domínio;Sprint 03;G03-A18;M;3;1.0;2026-05-18T15:39:23.403;2026-05-29T23:10:20.540;11.3132;11.313;mais que o dobro;2;1;134
+G03;186;|G01-A26| Organizar feedback de computação da sprint 2;Sprint 03;G03-A18;M;3;1.0;2026-05-19T14:37:29.159;2026-05-26T14:57:16.038;7.0137;7.014;mais que o dobro;0;0;0
+G03;190;|DESIGN| Prototipagem de tela de pesquisa com resultado encontrado;Sprint 03;G03-A16;M;3;1.0;2026-05-20T14:18:47.763;2026-05-29T10:15:32.235;8.8311;8.831;mais que o dobro;0;0;0
+G03;191;|DESIGN| Prototipagem de tela de pesquisa com resultado não encontrado;Sprint 03;G03-A16;M;3;1.0;2026-05-20T14:21:06.073;2026-05-29T10:12:12.700;8.8272;8.827;mais que o dobro;0;0;0
+G03;192;|DESIGN| Prototipagem de tela de pesquisa com todos os fornecedores e parceiros cadastrados;Sprint 03;G03-A16;M;3;1.0;2026-05-20T14:23:54.917;2026-05-29T10:11:21.758;8.8246;8.825;mais que o dobro;0;0;0
+G03;197;|DESIGN| Prototipar tela inicial de visitas;Sprint 03;G03-A16;M;3;1.0;2026-05-20T15:36:33.531;2026-05-29T10:15:06.304;8.7768;8.777;mais que o dobro;0;0;0
+G03;198;|DESIGN| Fazer prototipagem de resultado encontrado na tela de visita;Sprint 03;G03-A16;M;3;1.0;2026-05-20T15:38:52.574;2026-05-29T10:13:05.296;8.7738;8.774;mais que o dobro;0;0;0
+G03;199;|DESIGN| Prototipar tela de registrar visita;Sprint 03;G03-A16;M;3;1.0;2026-05-20T15:40:36.051;2026-05-29T10:10:41.823;8.7709;8.771;mais que o dobro;0;0;0
+G03;203;|WAD| Alinhar Consultas SQL;Sprint 03;G03-A12;M;3;1.0;2026-05-25T14:36:49.068;2026-05-29T19:33:19.664;4.2059;4.206;mais que o dobro;0;0;0
+G03;204;|CODE| Corrigir testes;Sprint 03;G03-A12;M;3;1.0;2026-05-25T15:33:01.747;2026-05-29T15:58:12.083;4.0175;4.017;mais que o dobro;4;2;1307
+G03;205;|DESIGN| Prototipação - correção;Sprint 03;G03-A15;M;3;1.0;2026-05-25T17:31:49.517;2026-05-26T15:20:57.691;0.9091;0.909;dentro do planejado;0;0;0
+G03;206;|DESIGN| Prototipação - Fluxo de pesquisa (fornecedores);Sprint 03;G03-A15;M;3;1.0;2026-05-25T17:33:09.676;2026-05-28T15:58:36.165;2.9343;2.934;mais que o dobro;0;0;0
+G03;208;|DESIGN| Alinhar fluxo de telas do protótipo;Sprint 03;G03-A15;M;3;1.0;2026-05-26T14:17:53.791;2026-05-28T15:57:11.954;2.069;2.069;mais que o dobro;0;0;0
+G03;209;|DESIGN| Prototipar tela de convite de usuário;Sprint 03;G03-A16;M;3;1.0;2026-05-26T14:28:17.641;2026-05-29T10:09:33.027;2.8203;2.82;mais que o dobro;0;0;0
+G03;210;|DESIGN| Prototipar tela do usuario;Sprint 03;G03-A18;M;3;1.0;2026-05-26T14:56:01.159;2026-05-29T10:08:06.770;2.8001;2.8;mais que o dobro;0;0;0
+G03;211;|DESIGN| Prototipar tela de login;Sprint 03;G03-A18;M;3;1.0;2026-05-26T15:25:02.067;2026-05-29T10:06:55.342;2.7791;2.779;mais que o dobro;0;0;0
+G03;213;|WAD| Arquitetura em Camadas - seção 3.2.1;Sprint 03;G03-A19;M;3;1.0;2026-05-27T14:40:17.393;2026-05-29T22:46:13.698;2.3375;2.337;mais que o dobro;1;1;0
+G03;214;|DESIGN| Prototipação - Fluxo de pesquisa (fazendas);Sprint 03;G03-A15;M;3;1.0;2026-05-27T21:07:02.621;2026-05-28T15:27:16.198;0.764;0.764;dentro do planejado;0;0;0
+G03;218;|DESIGN| Correção da tela de formulário de visitas;Sprint 03;G03-A15;M;3;1.0;2026-05-27T22:37:14.726;2026-05-28T15:18:03.619;0.695;0.695;dentro do planejado;0;0;0
+G03;219;|WAD|Corrigir DER com base na atualização da modelagem pós-validação com madrinha;Sprint 03;G03-A18;M;3;1.0;2026-05-28T08:20:55.599;2026-05-29T23:10:25.449;1.6177;1.618;até o dobro;0;0;0
+G03;234;|DESIGN| Apresentação da sprint review 3;Sprint 03;G03-A15;M;3;1.0;2026-05-28T20:44:05.484;2026-05-29T08:15:53.745;0.4804;0.48;dentro do planejado;0;0;0
+G03;235;|WAD|Atualizar diagrama de classes da seção 3.2.3 com base na reunião com a madrinha da Atvos;Sprint 03;G03-A18;M;3;1.0;2026-05-28T20:55:53.329;2026-05-29T23:10:30.225;1.0935;1.093;até o dobro;1;1;31
+G03;239;Adicionar documentação WebAPI;Sprint 03;G03-A18;M;3;1.0;2026-05-29T17:35:24.478;2026-05-29T23:10:23.050;0.2326;0.233;dentro do planejado;1;1;64
+G03;242;|WAD| 3.9 - Matriz de Rastreabilidade;Sprint 03;G03-A14;M;3;1.0;2026-05-29T18:52:35.841;2026-05-29T21:22:32.440;0.1041;0.104;dentro do planejado;1;1;41
+G03;243;|WAD| Preencher seção 3.5 - Protótipo de Alta Fidelidade;Sprint 03;G03-A15;M;3;1.0;2026-05-29T18:56:38.374;2026-05-29T20:28:53.999;0.0641;0.064;dentro do planejado;11;1;99
+G03;244;|WAD| Versão com as personas 15 e 16 revisadas;Sprint 03;G03-A19;M;3;1.0;2026-05-29T19:39:25.808;2026-05-29T21:52:05.419;0.0921;0.092;dentro do planejado;1;1;1741
+G03;246;|WAD| Modelagem do Diagrama de Sequência: Login;Sprint 03;G03-A15;M;3;1.0;2026-05-29T21:18:04.974;2026-05-29T23:43:55.982;0.1013;0.101;dentro do planejado;0;0;0
+G03;247;|WAD| Modelagem do Diagrama de Sequência: Busca de Dados;Sprint 03;G03-A15;M;3;1.0;2026-05-29T21:19:54.614;2026-05-29T23:43:54.695;0.1;0.1;dentro do planejado;0;0;0
+G03;248;|WAD| Atualização da Seção 3.2.4 - Diagramas de Sequência UML;Sprint 03;G03-A15;M;3;1.0;2026-05-29T21:20:44.500;2026-06-01T15:18:38.978;2.7485;2.749;mais que o dobro;4;1;25
+G03;249;|WAD| Modelagem do Diagrama de Sequência: Recuperação de Senha;Sprint 03;G03-A15;M;3;1.0;2026-05-29T21:21:27.490;2026-05-29T23:37:26.366;0.0944;0.094;dentro do planejado;0;0;0
+G03;251;|WAD| Revisa o modelo físico do banco de dados;Sprint 04;G03-A15;M;3;1.0;2026-06-01T13:06:14.798;2026-06-01T15:32:00.768;0.1012;0.101;dentro do planejado;2;1;97
+G03;253;|WAD| Preencher seção 5.1.1;Sprint 04;G03-A12;M;3;1.0;2026-06-01T14:30:53.422;2026-06-06T18:07:02.116;5.1501;5.15;mais que o dobro;0;0;0
+G03;255;|WAD| Revisar personas da seção 2.2;Sprint 04;G03-A18;M;3;1.0;2026-06-01T15:14:06.729;2026-06-12T18:11:10.022;11.123;11.123;mais que o dobro;0;0;0
+G03;257;|WAD| 6.2.1.  Implementar Visão Geral do Setor;Sprint 04;G03-A19;M;3;1.0;2026-06-01T15:47:00.198;2026-06-08T14:36:02.181;6.9507;6.951;mais que o dobro;2;1;21
+G03;262;|WAD| Fazer analise de principais concorrentes da seção 6.3;Sprint 04;G03-A16;M;3;1.0;2026-06-02T15:04:30.926;2026-06-09T15:32:22.841;7.0194;7.019;mais que o dobro;1;1;24
+G03;264;|WAD| 6.2.2 Implementar Tamanho e Crescimento do Mercado;Sprint 04;G03-A19;M;3;1.0;2026-06-02T15:19:54.000;2026-06-08T15:31:31.045;6.0081;6.008;mais que o dobro;2;1;33
+G03;265;|WAD|Atualizar DER e seção 3.6.2 com base na nova modelagem;Sprint 04;G03-A18;M;3;1.0;2026-06-02T16:22:44.287;2026-06-04T00:19:58.860;1.3314;1.331;até o dobro;1;1;7
+G03;266;|WAD|Atualizar MER e seção 3.6.1 com base na nova modelagem;Sprint 04;G03-A18;M;3;1.0;2026-06-02T16:24:47.166;2026-06-08T14:53:33.998;5.9367;5.937;mais que o dobro;3;1;68
+G03;267;|WAD| 6.2.3. Implementar Tendências de Mercado;Sprint 04;G03-A19;M;3;1.0;2026-06-03T10:15:57.146;2026-06-08T14:31:32.219;5.1775;5.177;mais que o dobro;2;1;13
+G03;268;|WEB| Configurar variáveis globais de CSS;Sprint 04;G03-A15;M;3;1.0;2026-06-03T10:54:47.204;2026-06-08T15:43:49.610;5.2007;5.201;mais que o dobro;4;1;88
+G03;269;|WEB| Criar arquivo de grid CSS (12 colunas);Sprint 04;G03-A15;M;3;1.0;2026-06-03T11:28:06.394;2026-06-08T15:43:48.261;5.1776;5.178;mais que o dobro;1;1;20
+G03;270;|WEB| Criar partial da nav-bar;Sprint 04;G03-A15;M;3;1.0;2026-06-03T11:32:32.264;2026-06-08T15:43:46.068;5.1745;5.174;mais que o dobro;2;1;123
+G03;271;|WEB| Criar partial do header;Sprint 04;G03-A15;M;3;1.0;2026-06-03T11:33:31.911;2026-06-08T15:43:44.941;5.1738;5.174;mais que o dobro;2;1;75
+G03;272;|WAD Definir vantagens competitivas da seção 6.3;Sprint 04;G03-A16;M;3;1.0;2026-06-03T15:29:01.867;2026-06-12T22:18:14.769;9.2842;9.284;mais que o dobro;1;1;14
+G03;273;|WAD| Definir diferenciais da aplicação seção 6.6;Sprint 04;G03-A16;M;3;1.0;2026-06-03T15:57:31.685;2026-06-04T01:14:43.307;0.3869;0.387;dentro do planejado;2;1;43
+G03;274;|WAD| Definir precificação da aplicação seção 6.6;Sprint 04;G03-A16;M;3;1.0;2026-06-03T16:00:28.837;2026-06-04T01:14:41.225;0.3849;0.385;dentro do planejado;1;1;11
+G03;275;|WAD| Definir canais de distribuição da aplicação 6.6 seção 6.6;Sprint 04;G03-A16;M;3;1.0;2026-06-03T16:04:04.161;2026-06-04T01:14:40.299;0.3824;0.382;dentro do planejado;1;1;11
+G03;276;|WAD| Definir promoção da aplicação seção 6.6;Sprint 04;G03-A16;M;3;1.0;2026-06-03T16:06:32.327;2026-06-04T01:14:39.507;0.3806;0.381;dentro do planejado;1;1;12
+G03;277;Implementar rotas e testes de Produtores;(sem sprint);G03-A12;M;3;1.0;2026-06-04T15:27:46.371;2026-06-09T15:00:59.031;4.9814;4.981;mais que o dobro;4;1;2802
+G03;278;Implementar rotas e testes de Convites;(sem sprint);G03-A12;M;3;1.0;2026-06-04T15:27:47.733;2026-06-09T15:00:55.668;4.9813;4.981;mais que o dobro;1;1;976
+G03;279;Implementar rotas e testes de Parceiros;(sem sprint);G03-A12;M;3;1.0;2026-06-04T15:27:49.050;2026-06-09T15:00:56.784;4.9813;4.981;mais que o dobro;1;1;1167
+G03;280;Implementar rotas e testes de Fornecedores;(sem sprint);G03-A12;M;3;1.0;2026-06-04T15:27:50.359;2026-06-09T15:00:57.918;4.9813;4.981;mais que o dobro;2;1;1161
+G03;281;Implementar rotas e testes de Fazendas;(sem sprint);G03-A12;M;3;1.0;2026-06-04T15:27:51.564;2026-06-09T15:00:54.630;4.9813;4.981;mais que o dobro;1;1;20
+G03;283;Implementar rotas e testes de Usuários;(sem sprint);G03-A12;M;3;1.0;2026-06-04T15:27:53.939;2026-06-09T15:00:53.398;4.9812;4.981;mais que o dobro;1;1;951
+G03;284;|WAD| Definir proposta de valor única da aplicação;Sprint 04;G03-A16;M;3;1.0;2026-06-05T21:29:59.557;2026-06-09T17:21:32.115;3.8275;3.827;mais que o dobro;1;1;15
+G03;285;|WAD| Definir estratégia de diferenciação da aplicação;Sprint 04;G03-A16;M;3;1.0;2026-06-05T21:32:16.790;2026-06-12T22:18:26.653;7.0321;7.032;mais que o dobro;1;1;13
+G03;286;|WAD|Corrigir DER com base nos apontamentos da revisão;Sprint 04;G03-A18;M;3;1.0;2026-06-06T13:11:22.754;2026-06-08T13:44:38.448;2.0231;2.023;mais que o dobro;3;1;14
+G03;292;|WAD| Criar diagrama de sequência do fluxo de reenvio de convite expirado;Sprint 04;G03-A15;M;3;1.0;2026-06-08T15:16:02.177;2026-06-11T11:12:52.210;2.8311;2.831;mais que o dobro;1;1;8
+G03;293;|WAD| Criar diagrama de sequência do fluxo de atualização/edição de parceiro;Sprint 04;G03-A15;M;3;1.0;2026-06-08T15:18:21.718;2026-06-11T11:12:53.994;2.8295;2.83;mais que o dobro;1;1;8
+G03;295;|WAD| Criar diagrama de sequência do fluxo de logout;Sprint 04;G03-A15;M;3;1.0;2026-06-08T15:19:44.349;2026-06-11T11:12:45.318;2.8285;2.828;mais que o dobro;1;1;8
+G03;297;|WEB| Implementar front-end da tela home;Sprint 04;G03-A15;M;3;1.0;2026-06-08T20:33:53.936;2026-06-09T10:16:30.922;0.5713;0.571;dentro do planejado;1;1;356
+G03;298;|WEB| Implementar interface da tela de fornecedores;Sprint 04;G03-A15;M;3;1.0;2026-06-09T08:39:17.924;2026-06-09T09:38:07.152;0.0408;0.041;dentro do planejado;1;1;421
+G03;300;|WAD| 6.2.2 Tamanho e Crescimento de Mercado (correção);Sprint 04;G03-A19;M;3;1.0;2026-06-09T11:59:09.827;2026-06-11T10:08:55.531;1.9234;1.923;até o dobro;1;1;10
+G03;301;|WEB| Implementar interface da tela de fazendas;Sprint 04;G03-A15;M;3;1.0;2026-06-09T12:57:48.515;2026-06-10T15:07:56.933;1.0904;1.09;até o dobro;1;1;423
+G03;312;|WEB| Implementar interface da tela de parceiros;Sprint 04;G03-A15;M;3;1.0;2026-06-09T21:37:07.788;2026-06-13T00:00:23.537;3.0995;3.099;mais que o dobro;1;1;141
+G03;313;|WEB| Implementar interface da tela de visitas;Sprint 04;G03-A15;M;3;1.0;2026-06-09T22:23:18.675;2026-06-11T23:02:48.239;2.0274;2.027;mais que o dobro;2;1;361
+G03;314;|WAD|Revisar regras de negócio do sistema;Sprint 04;G03-A18;M;3;1.0;2026-06-09T22:45:48.602;2026-06-23T15:12:47.898;13.6854;13.685;mais que o dobro;1;1;38
+G03;315;|WEB| Implementar interface da tela de usuários;Sprint 04;G03-A15;M;3;1.0;2026-06-09T23:10:16.074;2026-06-12T14:18:54.420;2.631;2.631;mais que o dobro;1;1;227
+G03;316;|WEB| Implementar interface da tela de Login;Sprint 04;G03-A15;M;3;1.0;2026-06-10T00:02:49.656;2026-06-10T08:49:03.229;0.3654;0.365;dentro do planejado;1;1;223
+G03;317;|WEB| Implementar interface da tela de cadastro de parceiros e fornecedores;Sprint 04;G03-A15;M;3;1.0;2026-06-10T09:29:37.834;2026-06-10T15:03:07.663;0.2316;0.232;dentro do planejado;1;1;577
+G03;318;|WEB| Implementar interfaces de boas-vindas e cadastro de usuário;Sprint 04;G03-A15;M;3;1.0;2026-06-10T14:30:56.267;2026-06-11T01:40:29.369;0.465;0.465;dentro do planejado;1;1;363
+G03;319;|WEB| Correções apontadas pelo merge request da implementação da tela de visitas;Sprint 04;G03-A15;M;3;1.0;2026-06-10T15:38:26.416;2026-06-13T00:00:19.124;2.3485;2.349;mais que o dobro;3;1;544
+G03;320;Conectar tela de Fornecedores com o Back-end;Sprint 04;G03-A12;M;3;1.0;2026-06-10T19:14:39.144;2026-06-11T09:58:06.147;0.6135;0.614;dentro do planejado;1;1;327
+G03;321;Conectar tela de cad-user e boas-vindas com o Back-end;Sprint 04;G03-A12;M;3;1.0;2026-06-11T01:46:20.381;2026-06-12T00:00:37.743;0.9266;0.927;dentro do planejado;1;1;822
+G03;325;|WEB| Integrar tela de parceiros agrícolas com o back-end;Sprint 04;G03-A15;M;3;1.0;2026-06-11T10:31:57.342;2026-06-12T23:59:11.518;1.5606;1.561;até o dobro;4;1;678
+G03;326;|FIX| Corrigir estrategia de marketing;Sprint 04;G03-A16;M;3;1.0;2026-06-11T14:10:43.730;2026-06-12T22:05:10.494;1.3295;1.329;até o dobro;1;1;71
+G03;328;|WAD| Atualizar matriz de rastreabilidade;Sprint 04;G03-A14;M;3;1.0;2026-06-11T15:15:12.118;2026-06-13T00:00:52.187;1.365;1.365;até o dobro;0;0;0
+G03;329;|WEB| Corrigir apontamentos de Code Review no formulário de cadastros;Sprint 04;G03-A15;M;3;1.0;2026-06-11T15:34:53.807;2026-06-12T14:18:15.714;0.9468;0.947;dentro do planejado;5;1;444
+G03;330;|WAD| 3.2 Atualizar Diagrama de Arquitetura;Sprint 04;G03-A19;M;3;1.0;2026-06-11T15:41:30.689;2026-06-12T21:12:51.360;1.2301;1.23;até o dobro;2;1;8
+G03;332;|WAD| Fazer canva business model;Sprint 04;G03-A16;M;3;1.0;2026-06-11T21:53:19.692;2026-06-12T16:13:57.007;0.7643;0.764;dentro do planejado;1;1;16
+G03;335;"Follow-up from ""feat(convites#321): envia convite por e-mail com cargo e conclui cadastro via /cad-user""";Sprint 04;G03-A12;M;3;1.0;2026-06-12T00:24:18.320;2026-06-13T00:00:28.631;0.9835;0.983;dentro do planejado;1;1;276
+G03;336;|WEB| Corrigir conflitos de merge nos arquivos de documentação;Sprint 04;G03-A15;M;3;1.0;2026-06-12T01:58:57.368;2026-06-12T14:18:22.566;0.5135;0.513;dentro do planejado;0;0;0
+G03;337;|WEB| Correções apontadas no merge resquest do formulario de cadastro de fazendas;Sprint 04;G03-A15;M;3;1.0;2026-06-12T03:24:50.206;2026-06-12T14:18:28.128;0.4539;0.454;dentro do planejado;6;1;258
+G03;338;|WEB| Corrigir erro 500 por ausência da variável JWT_SECRET;Sprint 04;G03-A15;M;3;1.0;2026-06-12T05:13:43.300;2026-06-12T14:18:37.836;0.3784;0.378;dentro do planejado;3;1;25
+G03;339;|WEB| Corrige apontamentos de Code Reviem da interface de parceiros;Sprint 04;G03-A15;M;3;1.0;2026-06-12T06:11:30.223;2026-06-12T14:18:45.419;0.3384;0.338;dentro do planejado;1;1;199
+G03;346;Subseções 5.1;Sprint 04;G03-A12;M;3;1.0;2026-06-12T16:08:02.054;2026-06-12T23:59:04.924;0.3271;0.327;dentro do planejado;1;1;76
+G03;348;|CODE| Refatoração geral de código repetido;Sprint 04;G03-A14;M;3;1.0;2026-06-12T16:22:29.161;2026-06-12T18:40:06.123;0.0956;0.096;dentro do planejado;1;1;800
+G03;350;|WEB| Implementar tela de lista de contatos;Sprint 04;G03-A18;M;3;1.0;2026-06-12T17:51:39.630;2026-06-12T20:14:44.551;0.0994;0.099;dentro do planejado;3;1;597
+G03;351;|WEB| Implementar funcionalidade de expandir detalhes na listagem;Sprint 04;G03-A18;M;3;1.0;2026-06-12T17:55:54.855;2026-06-12T20:53:14.224;0.1231;0.123;dentro do planejado;5;1;682
+G03;352;|WEB| Implementar funcionalidade de edição de registros;Sprint 04;G03-A18;M;3;1.0;2026-06-12T17:57:28.309;2026-06-12T23:59:07.875;0.2512;0.251;dentro do planejado;6;2;1099
+G03;353;|WEB| Implementar funcionalidade de desativação de usuário;Sprint 04;G03-A18;M;3;1.0;2026-06-12T17:58:25.176;2026-06-12T21:54:06.931;0.1637;0.164;dentro do planejado;1;1;62
+G03;354;|WEB| Ocultar ícone de reenvio de convite para usuários já ativos;Sprint 04;G03-A18;M;3;1.0;2026-06-12T17:59:10.682;2026-06-12T21:54:05.097;0.1631;0.163;dentro do planejado;3;1;336
+G03;360;|WAD| Preenche seção 4.2;Sprint 04;G03-A15;M;3;1.0;2026-06-12T23:46:28.985;2026-06-13T00:01:17.013;0.0103;0.01;dentro do planejado;1;1;52
+G03;361;|CODE| Refatoração e revisão geral do repositório;Sprint 05;G03-A14;M;3;1.0;2026-06-22T14:58:57.837;2026-06-24T15:52:52.455;2.0374;2.037;mais que o dobro;3;1;1721
+G03;364;|G01-A26| Estruturar pitch da apresentação final;Sprint 05;G03-A18;M;3;1.0;2026-06-22T15:45:58.232;2026-06-25T23:49:07.367;3.3355;3.336;mais que o dobro;0;0;0
+G03;367;Numerar migrations;Sprint 05;G03-A12;M;3;1.0;2026-06-22T15:47:15.785;2026-06-24T15:49:57.408;2.0019;2.002;mais que o dobro;1;1;9
+G03;371;Ajustar suítes de testes;Sprint 05;G03-A12;M;3;1.0;2026-06-22T15:47:23.555;2026-06-25T20:27:10.657;3.1943;3.194;mais que o dobro;1;1;22
+G03;373;|G01-A26| Mapear e criar planilha de acompanhamento dos critérios de publicação;Sprint 05;G03-A15;M;3;1.0;2026-06-22T22:51:33.912;2026-06-25T20:28:09.919;2.9004;2.9;mais que o dobro;0;0;0
+G03;379;|G01-A26| Produzir vídeo de demonstração do G01-A26;Sprint 05;G03-A12;M;3;1.0;2026-06-23T09:22:35.360;2026-06-26T18:15:58.100;3.3704;3.37;mais que o dobro;0;0;0
+G03;383;|WAD| Correção de Endpoints em Matrizes de Rastreamento;Sprint 05;G03-A14;M;3;1.0;2026-06-23T14:14:49.659;2026-06-26T00:03:13.660;2.4086;2.409;mais que o dobro;1;1;47
+G03;386;|G01-A26| Estruturar benchmark do pitch final;Sprint 05;G03-A18;M;3;1.0;2026-06-23T14:31:50.279;2026-06-25T23:49:14.160;2.3871;2.387;mais que o dobro;0;0;0
+G03;390;Desacoplar formsFazenda.ejs;Sprint 05;G03-A12;M;3;1.0;2026-06-23T15:06:40.351;2026-06-24T14:49:15.587;0.9879;0.988;dentro do planejado;0;0;0
+G03;391;|WAD| 3.1.3 Evolução dos RNFS;Sprint 05;G03-A16;M;3;1.0;2026-06-23T15:10:35.944;2026-06-23T15:54:20.813;0.0304;0.03;dentro do planejado;2;1;70
+G03;392;|G01-A26| Montar slides de proposta de valor do pitch;Sprint 05;G03-A18;M;3;1.0;2026-06-23T15:31:28.486;2026-06-25T23:49:15.768;2.3457;2.346;mais que o dobro;0;0;0
+G03;404;|CODE| Ajustar campos do formulário de Cadastro;Sprint 05;G03-A12;M;3;1.0;2026-06-24T14:36:55.784;2026-06-24T16:01:30.799;0.0587;0.059;dentro do planejado;2;1;108
+G03;405;|G01-A26| Finalizar slides do pitch final;Sprint 05;G03-A18;M;3;1.0;2026-06-24T14:47:56.210;2026-06-25T23:49:05.943;1.3758;1.376;até o dobro;0;0;0
+G03;408;|CODE| Corrige branch de revisão geral para evitar retrabalh;Sprint 05;G03-A14;M;3;1.0;2026-06-24T15:06:52.052;2026-06-24T15:52:51.191;0.0319;0.032;dentro do planejado;0;0;0
+G03;414;|CODE| Padronizar formulários de edição de Fornecedor, Fazenda e Parceiro;(sem sprint);G03-A12;M;3;1.0;2026-06-24T20:05:11.283;2026-06-25T10:42:58.400;0.6096;0.61;dentro do planejado;1;1;256
+G03;418;|CODE| Alterar entidade Prioridade no banco de dados;Sprint 05;G03-A12;M;3;1.0;2026-06-25T11:05:39.309;2026-06-25T17:41:38.515;0.275;0.275;dentro do planejado;1;1;168
+G03;433;|WAD| Seção 3.8 sobre autenticação do G01-A26;Sprint 05;G03-A14;M;3;1.0;2026-06-25T15:15:43.711;2026-06-25T18:22:01.333;0.1294;0.129;dentro do planejado;4;1;102
+G03;438;|WAD|Corrigir user stories;Sprint 05;G03-A18;M;3;1.0;2026-06-25T17:52:28.180;2026-06-25T23:21:05.729;0.2282;0.228;dentro do planejado;0;0;0
+G03;443;|CODE| Implementar correções dos erros do teste de usabilidade;Sprint 05;G03-A12;M;3;1.0;2026-06-25T20:19:52.846;2026-06-25T21:58:21.649;0.0684;0.068;dentro do planejado;2;1;548
+G03;445;|WAD|Corrigir seção 7 de conclusão e melhorias futuras;Sprint 05;G03-A18;M;3;1.0;2026-06-25T20:39:36.090;2026-06-25T21:55:10.925;0.0525;0.052;dentro do planejado;7;2;303
+G03;447;|WAD|Corrigir tabela de requisitos funcionais;Sprint 05;G03-A18;M;3;1.0;2026-06-25T21:15:06.272;2026-06-25T23:21:03.668;0.0875;0.087;dentro do planejado;2;2;110
+G03;448;|WAD| Atualizar seção 3.9;Sprint 05;G03-A14;M;3;1.0;2026-06-25T21:18:51.453;2026-06-26T09:07:23.692;0.492;0.492;dentro do planejado;0;0;0
+G03;450;|WAD| Atualizar seção 3.9;Sprint 05;G03-A14;M;3;1.0;2026-06-25T21:25:18.693;2026-06-26T00:03:12.255;0.1096;0.11;dentro do planejado;5;2;228
+G03;21;|G01-A26| Brainstorm de grupo;Sprint 01;G03-A15;G;4;3.0;2026-04-27T10:11:45.541;2026-04-27T16:42:33.973;0.2714;0.09;dentro do planejado;0;0;0
+G03;22;|G01-A26| Brainstorm de grupo;Sprint 01;G03-A18;G;4;3.0;2026-04-27T10:11:53.845;2026-04-27T17:03:07.255;0.2856;0.095;dentro do planejado;0;0;0
+G03;23;|G01-A26| Brainstorm de grupo;Sprint 01;G03-A12;G;4;3.0;2026-04-27T10:12:07.793;2026-04-27T16:48:55.385;0.2756;0.092;dentro do planejado;0;0;0
+G03;24;|G01-A26| Brainstorm de grupo;Sprint 01;G03-A19;G;4;3.0;2026-04-27T10:14:22.722;2026-04-28T10:07:20.587;0.9951;0.332;dentro do planejado;0;0;0
+G03;25;|G01-A26| Brainstorm de grupo;Sprint 01;G03-A14;G;4;3.0;2026-04-27T10:14:44.282;2026-04-28T10:07:23.365;0.9949;0.332;dentro do planejado;0;0;0
+G03;26;|G01-A26| Brainstorm de grupo;Sprint 01;G03-A16;G;4;3.0;2026-04-27T10:15:02.947;2026-04-28T10:07:24.862;0.9947;0.332;dentro do planejado;0;0;0
+G03;36;|WAD| Elaborar User Story da persona Gerente;Sprint 01;G03-A12;G;4;3.0;2026-04-28T10:17:05.034;2026-05-01T13:20:34.125;3.1274;1.042;até o dobro;2;1;204
+G03;54;|WAD| Desenhar Diagrama de Casos de Uso (UML);Sprint 01;G03-A15;G;4;3.0;2026-04-30T22:31:49.779;2026-05-01T20:16:34.807;0.9061;0.302;dentro do planejado;1;1;9
+G03;184;|CODE| implementar swagger;Sprint 03;G03-A12;G;4;3.0;2026-05-19T14:21:16.549;2026-05-29T13:38:14.385;9.9701;3.323;mais que o dobro;1;1;751
+G03;200;|BDS| Cria teste do envio de convite;Sprint 03;G03-A15;G;4;3.0;2026-05-21T10:19:08.104;2026-05-28T15:01:44.518;7.1963;2.399;mais que o dobro;10;1;1410
+G03;201;|BDS| Cria teste de cadastro de parceiro;Sprint 03;G03-A18;G;4;3.0;2026-05-21T11:46:34.167;2026-05-29T23:10:18.487;8.4748;2.825;mais que o dobro;2;1;1240
+G03;207;|WAD| Correção do modelo físico do banco de dados;Sprint 03;G03-A15;G;4;3.0;2026-05-25T18:14:36.169;2026-05-28T15:01:46.825;2.8661;0.955;dentro do planejado;0;0;0
+G03;236;|WAD|revisao de consultas SQL;(sem sprint);G03-A12;G;4;3.0;2026-05-29T01:06:06.207;2026-05-29T13:40:21.487;0.5238;0.175;dentro do planejado;0;0;0
+G03;237;|CODE| Revisar back end;(sem sprint);G03-A12;G;4;3.0;2026-05-29T02:55:42.192;2026-05-29T15:58:10.854;0.5434;0.181;dentro do planejado;2;1;190
+G03;323;|BACKEND| Adicionar caminho de auth e cookies http0nly;Sprint 04;G03-A14;G;4;3.0;2026-06-11T09:56:05.110;2026-06-13T00:00:24.494;1.5863;0.529;dentro do planejado;1;1;657
+G03;331;|WEB| Implementar e integrar tela de cadastro de fazendas;Sprint 04;G03-A15;G;4;3.0;2026-06-11T21:36:51.025;2026-06-12T07:03:26.927;0.3935;0.131;dentro do planejado;3;1;303
+G03;340;|WEB| Implementar tela de cadastro de contatos e integrar todos os cadastros do sistema;Sprint 04;G03-A15;G;4;3.0;2026-06-12T07:00:52.350;2026-06-12T17:44:10.529;0.4467;0.149;dentro do planejado;8;1;1005
+G03;347;Correção de testes;Sprint 04;G03-A12;G;4;3.0;2026-06-12T16:08:03.393;2026-06-13T00:01:01.399;0.3284;0.109;dentro do planejado;0;0;0
+G03;394;|G01-A26| Estruturar e iniciar os slides de evolução e funcionalidades para o pitch final;Sprint 05;G03-A15;G;4;3.0;2026-06-23T20:02:41.073;2026-06-25T20:28:36.999;2.018;0.673;dentro do planejado;0;0;0
+G03;455;|CODE| Alinhar front-end, banco e documentação (4 divergências auditadas);Sprint 05;G03-A12;G;4;3.0;2026-06-26T16:55:58.246;2026-06-26T18:46:06.710;0.0765;0.025;dentro do planejado;0;0;0

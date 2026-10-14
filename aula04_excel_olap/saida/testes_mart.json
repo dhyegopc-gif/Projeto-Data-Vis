@@ -1,0 +1,226 @@
+{
+  "gerado_em": "2026-10-13T21:17:18-03:00",
+  "script": "src/04_criar_mart_olap.py",
+  "banco": "saida/olist.duckdb",
+  "sql_fato": "CREATE OR REPLACE TABLE fato_item_venda AS SELECT i.order_id, i.order_item_id, i.product_id, i.seller_id, o.customer_id, c.customer_unique_id, o.order_status, o.order_purchase_timestamp AS data_compra, CAST(date_trunc('month', o.order_purchase_timestamp) AS DATE) AS mes, c.customer_state AS estado_cliente, c.customer_city AS cidade_cliente, p.product_category_name AS categoria_original, t.product_category_name_english AS categoria_ingles, coalesce(p.product_category_name, '(sem categoria)') AS categoria, i.price, i.freight_value FROM olist_order_items AS i LEFT JOIN olist_orders AS o ON o.order_id = i.order_id LEFT JOIN olist_customers AS c ON c.customer_id = o.customer_id LEFT JOIN olist_products AS p ON p.product_id = i.product_id LEFT JOIN product_category_name_translation AS t ON t.product_category_name = p.product_category_name",
+  "sql_mart": "CREATE OR REPLACE TABLE mart_vendas_mensais AS SELECT mes, estado_cliente, categoria, sum(CAST(price AS DECIMAL(18,2))) AS receita_produtos, sum(CAST(freight_value AS DECIMAL(18,2))) AS frete, count(*) AS itens FROM fato_item_venda GROUP BY mes, estado_cliente, categoria",
+  "grao_fato": [
+    "order_id",
+    "order_item_id"
+  ],
+  "grao_mart": [
+    "mes",
+    "estado_cliente",
+    "categoria"
+  ],
+  "linhas_fato": 112650,
+  "linhas_mart": 11823,
+  "soma_price_itens": "13591643.70",
+  "soma_price_fato": "13591643.70",
+  "soma_receita_mart": "13591643.70",
+  "soma_frete_mart": "2251909.54",
+  "nao_aditividade": {
+    "pedidos_distintos_total": 98666,
+    "soma_de_pedidos_distintos_por_categoria": 99470,
+    "pedidos_com_mais_de_uma_categoria": 786
+  },
+  "fanout_evitado": {
+    "linhas_join_direto_itens_pagamentos": 117601,
+    "soma_price_join_direto_itens_pagamentos": "14209115.34",
+    "linhas_join_direto_itens_avaliacoes": 112372,
+    "pedidos_com_mais_de_uma_avaliacao": 547,
+    "linhas_fato_com_pagamentos_pre_agregados": 112650
+  },
+  "categorias_distintas_na_fato": 74,
+  "itens_sem_categoria": 1603,
+  "categorias_sem_traducao": [
+    {
+      "categoria": "portateis_cozinha_e_preparadores_de_alimentos",
+      "itens": 15
+    },
+    {
+      "categoria": "pc_gamer",
+      "itens": 9
+    }
+  ],
+  "periodo_mes": {
+    "primeiro": "2016-09-01",
+    "ultimo": "2018-09-01",
+    "meses_distintos": 24
+  },
+  "itens_por_status_do_pedido": [
+    {
+      "status": "delivered",
+      "itens": 110197
+    },
+    {
+      "status": "shipped",
+      "itens": 1185
+    },
+    {
+      "status": "canceled",
+      "itens": 542
+    },
+    {
+      "status": "invoiced",
+      "itens": 359
+    },
+    {
+      "status": "processing",
+      "itens": 357
+    },
+    {
+      "status": "unavailable",
+      "itens": 7
+    },
+    {
+      "status": "approved",
+      "itens": 3
+    }
+  ],
+  "plano_explain_analyze": "saida/plano_duckdb_estado.txt",
+  "segundos": {
+    "fato": 0.531,
+    "mart": 0.023,
+    "total": 0.914
+  },
+  "testes": [
+    {
+      "teste": "price e freight_value com no máximo 2 casas",
+      "obtido": 0,
+      "esperado": 0,
+      "passou": true,
+      "detalhe": "condição para reconciliar somas em DECIMAL(18,2) sem arredondar"
+    },
+    {
+      "teste": "fanout: linhas da fato = linhas de olist_order_items",
+      "obtido": 112650,
+      "esperado": 112650,
+      "passou": true,
+      "detalhe": ""
+    },
+    {
+      "teste": "unicidade de order_id + order_item_id na fato",
+      "obtido": 112650,
+      "esperado": 112650,
+      "passou": true,
+      "detalhe": ""
+    },
+    {
+      "teste": "itens sem pedido correspondente",
+      "obtido": 0,
+      "esperado": 0,
+      "passou": true,
+      "detalhe": ""
+    },
+    {
+      "teste": "itens sem cliente/estado",
+      "obtido": 0,
+      "esperado": 0,
+      "passou": true,
+      "detalhe": ""
+    },
+    {
+      "teste": "itens com categoria nula depois do rótulo",
+      "obtido": 0,
+      "esperado": 0,
+      "passou": true,
+      "detalhe": "produto sem categoria recebe o rótulo '(sem categoria)' e continua visível"
+    },
+    {
+      "teste": "itens sem mês",
+      "obtido": 0,
+      "esperado": 0,
+      "passou": true,
+      "detalhe": ""
+    },
+    {
+      "teste": "sum(price) antes dos joins = depois (fato)",
+      "obtido": "13591643.70",
+      "esperado": "13591643.70",
+      "passou": true,
+      "detalhe": ""
+    },
+    {
+      "teste": "sum(price) da fato = sum(receita_produtos) do mart",
+      "obtido": "13591643.70",
+      "esperado": "13591643.70",
+      "passou": true,
+      "detalhe": ""
+    },
+    {
+      "teste": "sum(freight_value) da fato = sum(frete) do mart",
+      "obtido": "2251909.54",
+      "esperado": "2251909.54",
+      "passou": true,
+      "detalhe": ""
+    },
+    {
+      "teste": "sum(itens) do mart = linhas da fato",
+      "obtido": 112650,
+      "esperado": 112650,
+      "passou": true,
+      "detalhe": ""
+    },
+    {
+      "teste": "sum(price) em DOUBLE arredondada = soma DECIMAL",
+      "obtido": "13591643.70",
+      "esperado": "13591643.70",
+      "passou": true,
+      "detalhe": ""
+    },
+    {
+      "teste": "unicidade de mes + estado_cliente + categoria no mart",
+      "obtido": 11823,
+      "esperado": 11823,
+      "passou": true,
+      "detalhe": ""
+    },
+    {
+      "teste": "colunas do mart (somente dimensões e medidas aditivas)",
+      "obtido": [
+        "mes",
+        "estado_cliente",
+        "categoria",
+        "receita_produtos",
+        "frete",
+        "itens"
+      ],
+      "esperado": [
+        "mes",
+        "estado_cliente",
+        "categoria",
+        "receita_produtos",
+        "frete",
+        "itens"
+      ],
+      "passou": true,
+      "detalhe": ""
+    },
+    {
+      "teste": "mart não armazena pedidos distintos nem ticket",
+      "obtido": [],
+      "esperado": [],
+      "passou": true,
+      "detalhe": ""
+    },
+    {
+      "teste": "join com pagamentos pré-agregados por pedido mantém o grão",
+      "obtido": 112650,
+      "esperado": 112650,
+      "passou": true,
+      "detalhe": ""
+    },
+    {
+      "teste": "join com pagamentos pré-agregados mantém sum(price)",
+      "obtido": "13591643.70",
+      "esperado": "13591643.70",
+      "passou": true,
+      "detalhe": ""
+    }
+  ],
+  "gate": {
+    "falhas": [],
+    "passou": true
+  }
+}

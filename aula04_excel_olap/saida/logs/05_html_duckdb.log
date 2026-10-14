@@ -1,0 +1,11 @@
+gravado saida\dashboard_duckdb.html
+  receita 13591643.70 | pedidos 98666 | ticket 137.75 | top 10 cobre 62.36%
+  [28.2 ms] KPIs
+  [34.1 ms] série mensal
+  [5.9 ms] top categorias com cobertura (mart)
+  [31.9 ms] pedidos e ticket do top 10 (fato)
+  [20.5 ms] cauda fora do top 10 (mart e fato)
+  [27.6 ms] estados (mart + fato)
+  [43.5 ms] reconciliação fato x mart
+  [28.1 ms] itens por status do pedido (fato)
+GATE F PASSOU

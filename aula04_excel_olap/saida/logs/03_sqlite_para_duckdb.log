@@ -1,0 +1,11 @@
+  olist_customers: SQLite 99441 | DuckDB 99441 | 0.077 s
+  olist_geolocation: SQLite 1000163 | DuckDB 1000163 | 0.777 s
+  olist_order_items: SQLite 112650 | DuckDB 112650 | 0.305 s
+  olist_order_payments: SQLite 103886 | DuckDB 103886 | 0.072 s
+  olist_order_reviews: SQLite 99224 | DuckDB 99224 | 0.105 s
+  olist_orders: SQLite 99441 | DuckDB 99441 | 0.379 s
+  olist_products: SQLite 32951 | DuckDB 32951 | 0.029 s
+  olist_sellers: SQLite 3095 | DuckDB 3095 | 0.004 s
+  product_category_name_translation: SQLite 71 | DuckDB 71 | 0.002 s
+gravado saida\reconciliacao_duckdb.json | tabelas nativas: 9 | DuckDB v1.5.5
+GATE D PASSOU

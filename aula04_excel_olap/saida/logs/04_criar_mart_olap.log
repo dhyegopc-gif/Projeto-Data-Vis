@@ -1,0 +1,19 @@
+  [ok] price e freight_value com no máximo 2 casas: 0
+  [ok] fanout: linhas da fato = linhas de olist_order_items: 112650
+  [ok] unicidade de order_id + order_item_id na fato: 112650
+  [ok] itens sem pedido correspondente: 0
+  [ok] itens sem cliente/estado: 0
+  [ok] itens com categoria nula depois do rótulo: 0
+  [ok] itens sem mês: 0
+  [ok] sum(price) antes dos joins = depois (fato): 13591643.70
+  [ok] sum(price) da fato = sum(receita_produtos) do mart: 13591643.70
+  [ok] sum(freight_value) da fato = sum(frete) do mart: 2251909.54
+  [ok] sum(itens) do mart = linhas da fato: 112650
+  [ok] sum(price) em DOUBLE arredondada = soma DECIMAL: 13591643.70
+  [ok] unicidade de mes + estado_cliente + categoria no mart: 11823
+  [ok] colunas do mart (somente dimensões e medidas aditivas): ['mes', 'estado_cliente', 'categoria', 'receita_produtos', 'frete', 'itens']
+  [ok] mart não armazena pedidos distintos nem ticket: []
+  [ok] join com pagamentos pré-agregados por pedido mantém o grão: 112650
+  [ok] join com pagamentos pré-agregados mantém sum(price): 13591643.70
+gravado saida\testes_mart.json e saida\plano_duckdb_estado.txt
+GATE E PASSOU

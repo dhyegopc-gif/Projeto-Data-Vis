@@ -1,0 +1,131 @@
+{
+  "gerado_em": "2026-10-13T21:17:24-03:00",
+  "script": "src/06_comparar_sqlite_duckdb.py",
+  "maquina": {
+    "sistema": "Windows-11-10.0.26300-SP0",
+    "arquitetura": "AMD64",
+    "processador": "Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz",
+    "nucleos_logicos": 16,
+    "python": "3.13.15",
+    "sqlite": "3.50.4",
+    "duckdb": "1.5.5",
+    "memoria_gib": 31.8
+  },
+  "consulta": {
+    "sqlite": "SELECT substr(o.order_purchase_timestamp, 1, 7) AS mes, sum(CAST(round(i.price * 100) AS INTEGER)) AS receita_centavos, count(DISTINCT i.order_id) AS pedidos, count(*) AS itens FROM olist_order_items AS i JOIN olist_orders AS o ON o.order_id = i.order_id GROUP BY mes ORDER BY mes",
+    "duckdb": "SELECT strftime(o.order_purchase_timestamp, '%Y-%m') AS mes, sum(CAST(round(i.price * 100) AS BIGINT)) AS receita_centavos, count(DISTINCT i.order_id) AS pedidos, count(*) AS itens FROM olist_order_items AS i JOIN olist_orders AS o ON o.order_id = i.order_id GROUP BY mes ORDER BY mes"
+  },
+  "protocolo": {
+    "execucoes": 5,
+    "fria": "processo Python novo por execução; mede só execute+fetchall, depois de abrir a conexão",
+    "aquecida": "mesma conexão; uma execução descartada e cinco medidas",
+    "cache_do_so": "não esvaziado; 'fria' significa processo e conexão novos, não disco frio",
+    "relogio": "time.perf_counter, em milissegundos"
+  },
+  "resultados": {
+    "sqlite": {
+      "fria": {
+        "execucoes_ms": [
+          193.195,
+          186.186,
+          185.284,
+          185.936,
+          184.213
+        ],
+        "mediana_ms": 185.936,
+        "min_ms": 184.213,
+        "max_ms": 193.195
+      },
+      "conexao_na_fria": {
+        "execucoes_ms": [
+          0.518,
+          0.468,
+          0.449,
+          0.444,
+          0.436
+        ],
+        "mediana_ms": 0.449,
+        "min_ms": 0.436,
+        "max_ms": 0.518
+      },
+      "aquecida": {
+        "execucoes_ms": [
+          207.427,
+          182.367,
+          180.567,
+          180.062,
+          179.123
+        ],
+        "mediana_ms": 180.567,
+        "min_ms": 179.123,
+        "max_ms": 207.427
+      },
+      "aquecimento_descartado_ms": 187.777,
+      "threads": 1,
+      "linhas_resultado": 24
+    },
+    "duckdb": {
+      "fria": {
+        "execucoes_ms": [
+          63.948,
+          61.88,
+          61.962,
+          63.267,
+          62.925
+        ],
+        "mediana_ms": 62.925,
+        "min_ms": 61.88,
+        "max_ms": 63.948
+      },
+      "conexao_na_fria": {
+        "execucoes_ms": [
+          15.442,
+          15.509,
+          15.732,
+          15.621,
+          15.336
+        ],
+        "mediana_ms": 15.509,
+        "min_ms": 15.336,
+        "max_ms": 15.732
+      },
+      "aquecida": {
+        "execucoes_ms": [
+          60.881,
+          68.394,
+          65.92,
+          59.159,
+          60.449
+        ],
+        "mediana_ms": 60.881,
+        "min_ms": 59.159,
+        "max_ms": 68.394
+      },
+      "aquecimento_descartado_ms": 67.946,
+      "threads": 16,
+      "linhas_resultado": 24
+    }
+  },
+  "mesmo_resultado_linha_a_linha": true,
+  "totais_por_motor": {
+    "sqlite": {
+      "meses": 24,
+      "receita_centavos": 1359164370,
+      "pedidos": 98666,
+      "itens": 112650
+    },
+    "duckdb": {
+      "meses": 24,
+      "receita_centavos": 1359164370,
+      "pedidos": 98666,
+      "itens": 112650
+    }
+  },
+  "segundos_por_etapa_do_pipeline": {
+    "00_perfil_excel": 68.708,
+    "01_excel_para_sqlite": 116.162,
+    "03_sqlite_para_duckdb": 2.267,
+    "04_criar_mart_olap": 0.914
+  },
+  "ressalva": "Os tempos descrevem esta consulta, nesta máquina, nesta execução; não provam superioridade geral de um mecanismo sobre o outro."
+}
